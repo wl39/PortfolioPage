@@ -1,0 +1,87 @@
+.mainContainer {
+  position: relative;
+}
+
+.firstContent {
+  position: relative;
+  padding: 160px 20px 0px;
+  height: 80vh;
+  opacity: 1;
+  transition: all 0.4s;
+}
+
+.firstContentMoved {
+  position: relative;
+  padding: 160px 20px 0px;
+  height: 80vh;
+  opacity: 0;
+  transition: all 0.4s;
+}
+
+.circle {
+  position: absolute;
+  top: -100px;
+  right: 0;
+  width: 50%;
+  height: 1000px;
+  border-radius: 1000px 0px 0px 1000px;
+  background-color: #397367;
+  z-index: 1;
+}
+
+.textContainer {
+  width: 40%;
+}
+
+.greeting {
+  margin: 0px;
+}
+
+.name {
+  margin: 0px;
+}
+
+.portrait {
+  position: absolute;
+  top: 150px;
+  left: 55%;
+  width: 500px;
+  height: 500px;
+  z-index: 3;
+  background-color: white;
+  border-radius: 500px;
+}
+
+.gitHubText {
+  margin-top: 180px;
+}
+
+.gitHubIcon {
+  width: 48px;
+  height: 48px;
+}
+
+.secondContentTrracker {
+  position: absolute;
+  top: 250px;
+}
+
+.secondContent {
+  position: relative;
+  padding: 0px 20px 0px;
+  height: 80vh;
+  opacity: 1;
+  transition: all 0.4s;
+}
+
+.secondContentMoved {
+  position: relative;
+  padding: 0px 20px 0px;
+  height: 80vh;
+  opacity: 0;
+  transition: all 0.4s;
+}
+
+.cardContainer {
+  display: flex;
+}

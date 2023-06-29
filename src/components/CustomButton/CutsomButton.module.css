@@ -1,0 +1,38 @@
+.normal {
+  height: 40px;
+  line-height: 40px;
+}
+
+.underline {
+  cursor: pointer;
+  position: relative;
+  color: white;
+  transition: height, line-height 0.3s ease-in;
+  height: 40px;
+  line-height: 40px;
+}
+
+.underline:hover {
+  height: 45px;
+  line-height: 35px;
+}
+
+.underlineBar {
+  position: absolute;
+  top: 0px;
+  width: 0px;
+  padding-top: 35px;
+  background-color: transparent;
+  transition: width 0.3s ease-out;
+  border-bottom: 3px solid white;
+}
+
+.underline:hover .underlineBar {
+  width: 100%;
+}
+
+.logoButton {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}

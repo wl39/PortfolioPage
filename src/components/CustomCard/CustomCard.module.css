@@ -1,0 +1,47 @@
+.card {
+  flex: 1;
+  color: white;
+  transition: all 0.4s;
+  font-size: 100px;
+  height: 500px;
+  background-color: #5da399;
+  box-shadow: 6px 6px #397367;
+  margin: 20px;
+  border-radius: 20px;
+}
+
+.cardMouseEnter {
+  flex: 1;
+  transition: all 0.4s;
+  font-size: 100px;
+  height: 520px;
+  background-color: #5da399;
+  box-shadow: 6px 6px #397367;
+  margin: 10px 10px 0px;
+  border-radius: 10px;
+}
+
+.title {
+  font-size: 40px;
+  text-align: center;
+  font-weight: 700;
+  margin-top: 20px;
+}
+
+.logo {
+  width: 150px;
+  height: 150px;
+  border-radius: 15px 15px;
+  display: block;
+  margin: 15px auto;
+}
+
+.description {
+  font-size: 24px;
+  padding: 10px 8%;
+  font-weight: 200;
+  text-align: center;
+}
+/* 
+.cardShadowOpened {
+} */
