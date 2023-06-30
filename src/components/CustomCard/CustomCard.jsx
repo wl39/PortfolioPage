@@ -5,18 +5,9 @@ class CustomCard extends React.Component {
   constructor(props) {
     super(props);
 
-    let divDescription;
-
-    console.log(props.description);
-
-    props.heighlight.forEach((value) => {
-      console.log(value);
-    });
-
     this.state = {
       open: false,
       cardStyle: styles.card,
-      description: null,
     };
   }
 

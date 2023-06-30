@@ -3,7 +3,7 @@
   color: white;
   transition: all 0.4s;
   font-size: 100px;
-  height: 500px;
+  height: 650px;
   background-color: #5da399;
   box-shadow: 6px 6px #397367;
   margin: 20px;
@@ -14,10 +14,10 @@
   flex: 1;
   transition: all 0.4s;
   font-size: 100px;
-  height: 520px;
+  height: 680px;
   background-color: #5da399;
   box-shadow: 6px 6px #397367;
-  margin: 10px 10px 0px;
+  margin: 5px 10px 0px;
   border-radius: 10px;
 }
 
@@ -42,6 +42,7 @@
   font-weight: 200;
   text-align: center;
 }
+
 /* 
 .cardShadowOpened {
 } */

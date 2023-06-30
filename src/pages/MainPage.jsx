@@ -7,6 +7,10 @@ import reactLogo from "../assets/React-icon.svg";
 import javascriptLogo from "../assets/JavaScript-logo.png";
 import springBootLogo from "../assets/spring-2.svg";
 
+import javaLogo from "../assets/java-icon.svg";
+import mariadbLogo from "../assets/MariaDB_colour_logo.svg";
+import nodejsLogo from "../assets/Node.js_logo.svg";
+
 // import gitHubLogo from "../assets/gitHub.png";
 // import { IconButton } from "@mui/material";
 
@@ -98,26 +102,94 @@ class MainPage extends React.Component {
             <CustomCard
               title="React"
               logo={reactLogo}
-              description="Since 2018, I have implemented a total of 5 large and small websites using React. Since I understand component structure well and know HTML5 and CSS, I can develop natural responsive websites in terms of UI/UX."
-              heighlight={[
-                "Since 2018",
-                "HTML 5",
-                "CSS",
-                "responsive",
-                "UI/UX",
-              ]}
+              description={
+                <div>
+                  <b className={styles.cardBold}>Since 2018</b>, I have
+                  implemented a total of 5 large and small websites using React.
+                  Since I understand component structure well and know{" "}
+                  <b className={styles.cardBold}>HTML5</b> and{" "}
+                  <b className={styles.cardBold}>CSS</b>, I can develop natural{" "}
+                  <b className={styles.cardBold}>responsive</b>
+                  websites in terms of <b className={styles.cardBold}>UI/UX</b>.
+                </div>
+              }
             />
             <CustomCard
               title="JavaScript"
               logo={javascriptLogo}
-              description=""
-              heighlight={["", ""]}
+              description={
+                <div>
+                  JavaScript is one of{" "}
+                  <b className={styles.cardBold}>
+                    my main programming language
+                  </b>
+                  . Since this language is using for the web application, this
+                  language updates frequently. Therefore, I{" "}
+                  <b className={styles.cardBold}>
+                    always study the cutting-edge technologies
+                  </b>{" "}
+                  via many different media. Escpecially, I get the information
+                  from <b className={styles.cardBold}>ECMA</b> and{" "}
+                  <b className={styles.cardBold}>MDN Web Docs</b>. Not only
+                  studying from the official website, I also check{" "}
+                  <b className={styles.cardBold}>JavaScript Weekly</b>,{" "}
+                  <b className={styles.cardBold}>GitHub Trending</b> and{" "}
+                  <b className={styles.cardBold}>Twitter</b> to follow up the
+                  trends.
+                </div>
+              }
             />
             <CustomCard
               title="Spring Boot"
               logo={springBootLogo}
-              description=""
-              heighlight={["", ""]}
+              description={<div></div>}
+            />
+          </div>
+          <div className={styles.cardContainer}>
+            <CustomCard
+              title="Java"
+              logo={javaLogo}
+              description={
+                <div>
+                  <b className={styles.cardBold}>Since 2018</b>, I have
+                  implemented a total of 5 large and small websites using React.
+                  Since I understand component structure well and know{" "}
+                  <b className={styles.cardBold}>HTML5</b> and{" "}
+                  <b className={styles.cardBold}>CSS</b>, I can develop natural{" "}
+                  <b className={styles.cardBold}>responsive</b>
+                  websites in terms of <b className={styles.cardBold}>UI/UX</b>.
+                </div>
+              }
+            />
+            <CustomCard
+              title="MariaDB"
+              logo={mariadbLogo}
+              description={
+                <div>
+                  JavaScript is one of{" "}
+                  <b className={styles.cardBold}>
+                    my main programming language
+                  </b>
+                  . Since this language is using for the web application, this
+                  language updates frequently. Therefore, I{" "}
+                  <b className={styles.cardBold}>
+                    always study the cutting-edge technologies
+                  </b>{" "}
+                  via many different media. Escpecially, I get the information
+                  from <b className={styles.cardBold}>ECMA</b> and{" "}
+                  <b className={styles.cardBold}>MDN Web Docs</b>. Not only
+                  studying from the official website, I also check{" "}
+                  <b className={styles.cardBold}>JavaScript Weekly</b>,{" "}
+                  <b className={styles.cardBold}>GitHub Trending</b> and{" "}
+                  <b className={styles.cardBold}>Twitter</b> to follow up the
+                  trends.
+                </div>
+              }
+            />
+            <CustomCard
+              title="Node.js"
+              logo={nodejsLogo}
+              description={<div></div>}
             />
           </div>
         </div>

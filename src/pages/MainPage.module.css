@@ -85,3 +85,7 @@
 .cardContainer {
   display: flex;
 }
+
+.cardBold {
+  font-weight: 400;
+}
