@@ -36,7 +36,7 @@ class CustomCard extends React.Component {
         <div>
           <img alt={"logo"} src={this.props.logo} className={styles.logo} />
         </div>
-        <p className={styles.description}>{this.props.description}</p>
+        <div className={styles.description}>{this.props.description}</div>
       </div>
     );
   }

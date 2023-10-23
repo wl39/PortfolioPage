@@ -1,0 +1,175 @@
+.mainContainer {
+  position: relative;
+}
+
+.firstContent {
+  position: relative;
+  padding: 160px 20px 0px;
+  height: 80vh;
+  opacity: 1;
+  transition: all 0.4s;
+}
+
+.firstContentMoved {
+  position: relative;
+  padding: 160px 20px 0px;
+  height: 80vh;
+  opacity: 0;
+  transition: all 0.4s;
+}
+
+.circle {
+  position: absolute;
+  top: -100px;
+  right: 0;
+  width: 50%;
+  height: 1000px;
+  border-radius: 1000px 0px 0px 1000px;
+  background-color: #397367;
+  z-index: 1;
+}
+
+.textContainer {
+  width: 40%;
+}
+
+.greeting {
+  margin: 0px;
+}
+
+.name {
+  margin: 0px;
+}
+
+.portrait {
+  position: absolute;
+  top: 150px;
+  left: 55%;
+  width: 500px;
+  height: 500px;
+  z-index: 3;
+  background-color: white;
+  border-radius: 500px;
+}
+
+.gitHubText {
+  margin-top: 180px;
+}
+
+.gitHubIcon {
+  width: 48px;
+  height: 48px;
+}
+
+.secondContentTracker {
+  position: absolute;
+  top: 250px;
+  height: 400px;
+}
+
+.leftCircle {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 500px;
+  left: -250px;
+  background: #42858c;
+  z-index: -1;
+}
+
+.rightCircle {
+  position: absolute;
+  width: 1000px;
+  height: 1000px;
+  border-radius: 1000px;
+  right: -300px;
+  top: 700px;
+  background: #42858c;
+  z-index: -1;
+}
+
+.secondContent {
+  position: relative;
+  padding: 0px 20px 0px;
+  opacity: 1;
+  transition: all 0.4s;
+  overflow-x: clip;
+  /* overflow-y: auto; */
+}
+
+.secondContentMoved {
+  position: relative;
+  padding: 0px 20px 0px;
+  opacity: 0;
+  transition: all 0.4s;
+  overflow-x: clip;
+  /* overflow-y: auto; */
+}
+
+.cardContainer {
+  display: flex;
+}
+
+.cardBold {
+  font-weight: 400;
+}
+
+.thirdContent {
+  position: relative;
+  padding: 0px 20px 0px;
+  opacity: 1;
+  transition: all 0.4s;
+}
+
+.thirdContentMoved {
+  position: relative;
+  padding: 0px 20px 0px;
+  opacity: 0;
+  transition: all 0.4s;
+}
+
+.thirdContentTracker {
+  position: absolute;
+  top: 0px;
+  height: 20px;
+}
+
+.fourthContent {
+  position: relative;
+  padding: 0px 20px 0px;
+  opacity: 1;
+  transition: all 0.4s;
+}
+
+.fourthContentMoved {
+  position: relative;
+  padding: 0px 20px 0px;
+  opacity: 0;
+  transition: all 0.4s;
+}
+
+.fourthContentTracker {
+  position: absolute;
+  top: 0px;
+  height: 20px;
+}
+
+.fifthContent {
+  position: relative;
+  padding: 0px 20px 0px;
+  opacity: 1;
+  transition: all 0.4s;
+}
+
+.fifthContentMoved {
+  position: relative;
+  padding: 0px 20px 0px;
+  opacity: 0;
+  transition: all 0.4s;
+}
+
+.fifthContentTracker {
+  position: absolute;
+  top: 0px;
+  height: 20px;
+}

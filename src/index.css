@@ -5,10 +5,120 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  padding-top: 80px;
-  background-color: #63ccca;
-  color: white;
+  margin: 40px 40px;
+  background-color: ivory;
+  color: black;
 }
+/* 
+@font-face {
+  font-family: "DM Sans";
+  src: url(./fonts/DM_Sans/static/DMSans-Black.ttf);
+  font-weight: 900;
+}
+
+@font-face {
+  font-family: "DM Sans";
+  src: url(./fonts/DM_Sans/static/DMSans-BlackItalic.ttf);
+  font-style: italic;
+  font-weight: 900;
+}
+
+@font-face {
+  font-family: "DM Sans";
+  src: url(./fonts/DM_Sans/static/DMSans-Bold.ttf);
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "DM Sans";
+  src: url(./fonts/DM_Sans/static/DMSans-BoldItalic.ttf);
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "DM Sans";
+  src: url(./fonts/DM_Sans/static/DMSans-ExtraBold.ttf);
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: "DM Sans";
+  src: url(./fonts/DM_Sans/static/DMSans-ExtraBoldItalic.ttf);
+  font-weight: 800;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "DM Sans";
+  src: url(./fonts/DM_Sans/static/DMSans-ExtraLight.ttf);
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: "DM Sans";
+  src: url(./fonts/DM_Sans/static/DMSans-ExtraLightItalic.ttf);
+  font-weight: 200;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "DM Sans";
+  src: url(./fonts/DM_Sans/static/DMSans-Italic.ttf);
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "DM Sans";
+  src: url(./fonts/DM_Sans/static/DMSans-Light.ttf);
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "DM Sans";
+  src: url(./fonts/DM_Sans/static/DMSans-LightItalic.ttf);
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "DM Sans";
+  src: url(./fonts/DM_Sans/static/DMSans-Medium.ttf);
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "DM Sans";
+  src: url(./fonts/DM_Sans/static/DMSans-MediumItalic.ttf);
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "DM Sans";
+  src: url(./fonts/DM_Sans/static/DMSans-SemiBold.ttf);
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "DM Sans";
+  src: url(./fonts/DM_Sans/static/DMSans-SemiBoldItalic.ttf);
+  font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "DM Sans";
+  src: url(./fonts/DM_Sans/static/DMSans-Thin.ttf);
+  font-weight: 100;
+}
+
+@font-face {
+  font-family: "DM Sans";
+  src: url(./fonts/DM_Sans/static/DMSans-ThinItalic.ttf);
+  font-weight: 100;
+  font-style: italic;
+} */
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
