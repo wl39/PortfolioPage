@@ -9,6 +9,84 @@ body {
   background-color: ivory;
   color: black;
 }
+
+@font-face {
+  font-family: "Playfair Display";
+  src: url(./fonts/Playfair_Display/static/PlayfairDisplay-Black.ttf);
+  font-weight: 900;
+}
+
+@font-face {
+  font-family: "Playfair Display";
+  src: url(./fonts/Playfair_Display/static/PlayfairDisplay-BlackItalic.ttf);
+  font-style: italic;
+  font-weight: 900;
+}
+
+@font-face {
+  font-family: "Playfair Display";
+  src: url(./fonts/Playfair_Display/static/PlayfairDisplay-Bold.ttf);
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Playfair Display";
+  src: url(./fonts/Playfair_Display/static/PlayfairDisplay-BoldItalic.ttf);
+  font-style: italic;
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Playfair Display";
+  src: url(./fonts/Playfair_Display/static/PlayfairDisplay-ExtraBold.ttf);
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: "Playfair Display";
+  src: url(./fonts/Playfair_Display/static/PlayfairDisplay-ExtraBoldItalic.ttf);
+  font-style: italic;
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: "Playfair Display";
+  src: url(./fonts/Playfair_Display/static/PlayfairDisplay-SemiBold.ttf);
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Playfair Display";
+  src: url(./fonts/Playfair_Display/static/PlayfairDisplay-SemiBoldItalic.ttf);
+  font-style: italic;
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Playfair Display";
+  src: url(./fonts/Playfair_Display/static/PlayfairDisplay-Medium.ttf);
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Playfair Display";
+  src: url(./fonts/Playfair_Display/static/PlayfairDisplay-MediumItalic.ttf);
+  font-style: italic;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Playfair Display";
+  src: url(./fonts/Playfair_Display/static/PlayfairDisplay-Regular.ttf);
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Playfair Display";
+  src: url(./fonts/Playfair_Display/static/PlayfairDisplay-Italic.ttf);
+  font-style: italic;
+  font-weight: 400;
+}
 /* 
 @font-face {
   font-family: "DM Sans";
@@ -136,4 +214,25 @@ h3 {
 p {
   font-size: 24px;
   font-weight: 300;
+}
+
+input {
+  position: relative;
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid gray;
+  height: 32px;
+  font-size: 18px;
+}
+
+input:focus {
+  outline: none;
+  border-bottom: 2px solid black;
+}
+
+input:has(div) {
+  position: absolute;
+  width: 20px;
+  height: 2px;
+  background-color: red;
 }
