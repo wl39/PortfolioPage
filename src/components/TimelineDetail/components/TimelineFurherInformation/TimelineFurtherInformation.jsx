@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./TimelineFurtherInformation.module.css";
+import PropTypes from "prop-types";
 
 class TimelineFurtherInformation extends React.Component {
   constructor(props) {
@@ -27,5 +28,10 @@ class TimelineFurtherInformation extends React.Component {
     );
   }
 }
+
+TimelineFurtherInformation.propTypes = {
+  title: PropTypes.string.isRequired,
+  contents: PropTypes.array.isRequired,
+};
 
 export default TimelineFurtherInformation;

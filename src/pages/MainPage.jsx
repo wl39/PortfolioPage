@@ -13,6 +13,7 @@ import CircleAnimation from "../components/CircleAnimation/CircleAnimation";
 // import TimelineDetailBox from "../components/TimelineDetailBox/TimelineDetailBox";
 // import TimelineFurtherInformation from "../components/TimelineFurherInformation/TimelineFurtherInformation";
 import TimelineDetail from "../components/TimelineDetail/TimelineDetail";
+import SkillDetail from "../components/SkillDetail/SkillDetail";
 
 class MainPage extends React.Component {
   constructor(props) {
@@ -867,6 +868,12 @@ class MainPage extends React.Component {
               onClick={() => this.skillsDetailHandler(1)}
             >
               <div className={styles.skillsTitle}>React</div>
+              <SkillDetail
+                isActive={this.state.skillsTitle === "React"}
+                images={[image1, image2, image3, image4, image5, image6]}
+                height="calc(100% - 242px)"
+                time={4000}
+              />
             </div>
             <div
               className={this.state.skills2}

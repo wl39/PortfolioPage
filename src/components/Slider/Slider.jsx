@@ -1,5 +1,6 @@
 import React from "react";
 import style from "./Slider.module.css";
+import PropTypes from "prop-types";
 
 class Slider extends React.Component {
   constructor(props) {
@@ -58,5 +59,12 @@ class Slider extends React.Component {
     );
   }
 }
+
+Slider.propTypes = {
+  images: PropTypes.array.isRequired,
+  height: PropTypes.string.isRequired,
+  time: PropTypes.number.isRequired,
+  width: PropTypes.string.isRequired,
+};
 
 export default Slider;

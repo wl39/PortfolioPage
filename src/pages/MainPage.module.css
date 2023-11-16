@@ -1241,7 +1241,7 @@
 }
 
 .skills1Focused {
-  height: 720px;
+  height: calc(100% - 214px);
   border: 2px solid black;
   position: fixed;
   background: ivory;
@@ -1258,7 +1258,7 @@
 
 .skillsLeftFocused {
   left: 40px;
-  height: 720px;
+  height: calc(100% - 214px);
   border: 2px solid black;
   position: fixed;
   background: ivory;
@@ -1275,7 +1275,7 @@
 
 .skillsRightFocused {
   right: 36px;
-  height: 720px;
+  height: calc(100% - 214px);
   border: 2px solid black;
   position: fixed;
   background: ivory;
@@ -1292,7 +1292,7 @@
 
 .skillsRightBelowFocused {
   right: 36px;
-  height: 720px;
+  height: calc(100% - 214px);
   border: 2px solid black;
   position: fixed;
   background: ivory;

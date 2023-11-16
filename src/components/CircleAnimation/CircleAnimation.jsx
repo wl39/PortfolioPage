@@ -1,5 +1,7 @@
 import React from "react";
 import styles from "./CircleAnimation.module.css";
+import PropTypes from "prop-types";
+
 class CircleAnimation extends React.Component {
   render() {
     return (
@@ -28,5 +30,10 @@ class CircleAnimation extends React.Component {
     );
   }
 }
+
+CircleAnimation.propTypes = {
+  active: PropTypes.bool.isRequired,
+  delay: PropTypes.string.isRequired,
+};
 
 export default CircleAnimation;

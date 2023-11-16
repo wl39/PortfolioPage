@@ -3,6 +3,7 @@ import styles from "./TimelineDetail.module.css";
 import TimelineFurtherInformation from "./components/TimelineFurherInformation/TimelineFurtherInformation";
 import TimelineDetailBox from "./components/TimelineDetailBox/TimelineDetailBox";
 import EndofContents from "./components/EndofContents/EndofContents";
+import PropTypes from "prop-types";
 
 class TimelineDetail extends React.Component {
   constructor(props) {
@@ -48,5 +49,10 @@ class TimelineDetail extends React.Component {
     return <div>{this.state.contents}</div>;
   }
 }
+
+TimelineDetail.propTypes = {
+  details: PropTypes.array.isRequired,
+  furtherInformation: PropTypes.array.isRequired,
+};
 
 export default TimelineDetail;

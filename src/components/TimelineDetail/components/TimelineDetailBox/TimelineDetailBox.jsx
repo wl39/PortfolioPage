@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./TimelineDetailBox.module.css";
+import PropTypes from "prop-types";
 
 class TimelineDetailBox extends React.Component {
   render() {
@@ -15,5 +16,11 @@ class TimelineDetailBox extends React.Component {
     );
   }
 }
+
+TimelineDetailBox.propTypes = {
+  period: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  paragraph: PropTypes.string.isRequired,
+};
 
 export default TimelineDetailBox;

@@ -1,0 +1,9 @@
+.container {
+  height: 100%;
+}
+
+.isActive {
+  height: 100%;
+  margin-right: 60px;
+  border-right: 2px solid black;
+}
