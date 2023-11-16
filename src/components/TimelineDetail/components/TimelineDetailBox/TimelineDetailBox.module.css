@@ -1,0 +1,24 @@
+.container {
+  position: relative;
+}
+
+.period {
+  position: absolute;
+  top: 32px;
+  right: 0px;
+  font-weight: 900;
+  letter-spacing: -0.4px;
+  line-height: 32px;
+}
+
+.title {
+  font-weight: 800;
+  font-size: 48px;
+  line-height: 64px;
+}
+
+.paragraph {
+  font-size: 22px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}

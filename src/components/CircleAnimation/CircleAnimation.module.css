@@ -1,0 +1,95 @@
+.container {
+  cursor: pointer;
+}
+
+.timelineInnerCircleWrapperRight {
+  width: 30px;
+  height: 15px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  overflow: hidden;
+  background-color: ivory;
+  z-index: 1;
+}
+
+.timelineInnerCircleWrapperLeft {
+  width: 30px;
+  height: 15px;
+  position: absolute;
+  top: 15px;
+  overflow: hidden;
+  right: 0;
+  background-color: ivory;
+  z-index: 1;
+}
+
+.circleWholeRight {
+  width: 26px;
+  height: 26px;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  transform: rotate(-135deg);
+  border-top: 2px solid black;
+  border-left: 2px solid black;
+  animation: circleRight 0.8s linear forwards;
+  background-color: ivory;
+}
+
+.circleWholeLeft {
+  width: 26px;
+  height: 26px;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  position: absolute;
+  top: -15px;
+  transform: rotate(-135deg);
+  border-bottom: 2px solid black;
+  border-right: 2px solid black;
+  animation: circleLeft 0.8s linear forwards;
+  background-color: ivory;
+}
+
+.circleWholeNoneRight {
+  width: 26px;
+  height: 26px;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  transform: rotate(-135deg);
+  background-color: transparent;
+}
+
+.circleWholeNoneLeft {
+  width: 26px;
+  height: 26px;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  position: absolute;
+  top: -15px;
+  transform: rotate(-135deg);
+  background-color: transparent;
+}
+
+@keyframes circleRight {
+  0% {
+    transform: rotate(-135deg);
+  }
+  50%,
+  100% {
+    transform: rotate(45deg);
+  }
+}
+
+@keyframes circleLeft {
+  0% {
+    transform: rotate(225deg);
+  }
+  50%,
+  100% {
+    -webkit-transform: rotate(45deg);
+  }
+}
