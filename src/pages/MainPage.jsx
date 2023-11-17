@@ -20,6 +20,7 @@ class MainPage extends React.Component {
     super(props);
 
     this.state = {
+      firstActive: false,
       firstContentStyles: styles.mainContainer,
       secondContentStyles: styles.detailsContainer,
       secondActive: false,
@@ -69,6 +70,7 @@ class MainPage extends React.Component {
             case "firstContent":
               this.setState({
                 firstContentStyles: styles.mainContainer,
+                firstActive: true,
               });
               break;
             case "secondContent":
@@ -128,6 +130,7 @@ class MainPage extends React.Component {
             case "firstContent":
               this.setState({
                 firstContentStyles: styles.mainContainerMoved,
+                firstActive: false,
               });
               break;
             case "secondContent":
@@ -691,6 +694,7 @@ class MainPage extends React.Component {
             images={[image1, image2, image3, image4, image5, image6]}
             height="calc(100% - 242px)"
             time={4000}
+            isActive={this.state.firstActive}
           />
         </div>
         <div className={this.state.secondContentStyles}>
@@ -871,7 +875,7 @@ class MainPage extends React.Component {
               <SkillDetail
                 isActive={this.state.skillsTitle === "React"}
                 images={[image1, image2, image3, image4, image5, image6]}
-                height="calc(100% - 242px)"
+                height="100%"
                 time={4000}
               />
             </div>
@@ -880,42 +884,84 @@ class MainPage extends React.Component {
               onClick={() => this.skillsDetailHandler(2)}
             >
               <div className={styles.skillsTitle}>Java</div>
+              <SkillDetail
+                isActive={this.state.skillsTitle === "Java"}
+                images={[image1, image2, image3, image4, image5, image6]}
+                height="100%"
+                time={4000}
+              />
             </div>
             <div
               className={this.state.skills3}
               onClick={() => this.skillsDetailHandler(3)}
             >
               <div className={styles.skillsTitle}>Javascript</div>
+              <SkillDetail
+                isActive={this.state.skillsTitle === "Javascript"}
+                images={[image1, image2, image3, image4, image5, image6]}
+                height="100%"
+                time={4000}
+              />
             </div>
             <div
               className={this.state.skills4}
               onClick={() => this.skillsDetailHandler(4)}
             >
               <div className={styles.skillsTitle}>MariaDB</div>
+              <SkillDetail
+                isActive={this.state.skillsTitle === "MariaDB"}
+                images={[image1, image2, image3, image4, image5, image6]}
+                height="100%"
+                time={4000}
+              />
             </div>
             <div
               className={this.state.skills5}
               onClick={() => this.skillsDetailHandler(5)}
             >
               <div className={styles.skillsTitle}>Git</div>
+              <SkillDetail
+                isActive={this.state.skillsTitle === "Git"}
+                images={[image1, image2, image3, image4, image5, image6]}
+                height="100%"
+                time={4000}
+              />
             </div>
             <div
               className={this.state.skills6}
               onClick={() => this.skillsDetailHandler(6)}
             >
               <div className={styles.skillsTitle}>Spring</div>
+              <SkillDetail
+                isActive={this.state.skillsTitle === "Spring"}
+                images={[image1, image2, image3, image4, image5, image6]}
+                height="100%"
+                time={4000}
+              />
             </div>
             <div
               className={this.state.skills7}
               onClick={() => this.skillsDetailHandler(7)}
             >
               <div className={styles.skillsTitle}>Node.js</div>
+              <SkillDetail
+                isActive={this.state.skillsTitle === "Node.js"}
+                images={[image1, image2, image3, image4, image5, image6]}
+                height="100%"
+                time={4000}
+              />
             </div>
             <div
               className={this.state.skills8}
               onClick={() => this.skillsDetailHandler(8)}
             >
               <div className={styles.skillsTitle}>Processing4</div>
+              <SkillDetail
+                isActive={this.state.skillsTitle === "Processing4"}
+                images={[image1, image2, image3, image4, image5, image6]}
+                height="100%"
+                time={4000}
+              />
             </div>
           </div>
         </div>

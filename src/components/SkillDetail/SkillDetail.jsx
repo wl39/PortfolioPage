@@ -12,20 +12,64 @@ class SkillDetail extends React.Component {
   render() {
     return (
       <div className={styles.container}>
-        {this.props.isActive ? (
-          <div className={styles.isActive}>
-            <div>
+        <div className={this.props.isActive ? styles.active : styles.deactive}>
+          <div
+            className={
+              this.props.isActive
+                ? styles.detailsContainerActive
+                : styles.detailsContainerDeactive
+            }
+          >
+            <div className={styles.sliderContainer}>
               <Slider
                 images={this.props.images}
                 height={this.props.height}
                 time={this.props.time}
+                isActive={this.props.isActive}
               />
             </div>
-            <div></div>
+            <div className={styles.titleContainer}>
+              <div className={styles.emptyBox} />
+              <div className={styles.textContainer}>
+                <div className={styles.title}>Title</div>
+                <div>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                  irure dolor in reprehenderit in voluptate velit esse cillum
+                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                  cupidatat non proident, sunt in culpa qui officia deserunt
+                  mollit anim id est laborum. Lorem ipsum dolor sit amet,
+                  consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                  ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                  quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+                  ea commodo consequat. Duis aute irure dolor in reprehenderit
+                  in voluptate velit esse cillum dolore eu fugiat nulla
+                  pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+                  in culpa qui officia deserunt mollit anim id est laborum.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                  irure dolor in reprehenderit in voluptate velit esse cillum
+                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                  cupidatat non proident, sunt in culpa qui officia deserunt
+                  mollit anim id est laborum.
+                </div>
+              </div>
+            </div>
           </div>
-        ) : (
-          <div>World</div>
-        )}
+          <div
+            className={
+              !this.props.isActive
+                ? styles.infoContainerActive
+                : styles.infoContainerDeactive
+            }
+          >
+            <div>HELLO?</div>
+          </div>
+        </div>
       </div>
     );
   }

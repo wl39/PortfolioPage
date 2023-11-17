@@ -6,22 +6,23 @@ class Slider extends React.Component {
   constructor(props) {
     super(props);
     // props.images.map((image) => {});
+    this.timer = null;
     this.state = {
       timerValue: 0,
     };
   }
-
-  componentDidMount() {
-    // Set up a timer when the component mounts
-    this.timer = setInterval(() => {
-      this.setState((prevState) => ({
-        timerValue: prevState.timerValue + 1,
-      }));
-    }, this.props.time); // Set the interval to 1000ms (1 second)
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.timer);
+  componentDidUpdate(prevProps) {
+    if (prevProps.isActive !== this.props.isActive) {
+      if (this.props.isActive) {
+        this.timer = setInterval(() => {
+          this.setState((prevState) => ({
+            timerValue: prevState.timerValue + 1,
+          }));
+        }, this.props.time); // Set the interval to 1000ms (1 second)
+      } else {
+        clearInterval(this.timer);
+      }
+    }
   }
 
   render() {
@@ -54,7 +55,7 @@ class Slider extends React.Component {
           }}
           className={style.image}
         />
-        <div>{this.state.timerValue % this.props.images.length}</div>
+        {/* <div>{this.state.timerValue % this.props.images.length}</div> */}
       </div>
     );
   }
@@ -64,7 +65,7 @@ Slider.propTypes = {
   images: PropTypes.array.isRequired,
   height: PropTypes.string.isRequired,
   time: PropTypes.number.isRequired,
-  width: PropTypes.string.isRequired,
+  isActive: PropTypes.bool.isRequired,
 };
 
 export default Slider;
