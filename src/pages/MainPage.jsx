@@ -3,6 +3,8 @@ import styles from "./MainPage.module.css";
 import logo from "../assets/logo512.png";
 import Slider from "../components/Slider/Slider";
 
+import image0 from "../images/under_construction.png";
+
 import image1 from "../images/1651807930774_Original-modified.jpg";
 import image2 from "../images/1645053171211_Original-modified.jpg";
 import image3 from "../images/1600685054178_Original-modified.jpg";
@@ -131,6 +133,7 @@ class MainPage extends React.Component {
     super(props);
 
     this.state = {
+      underConsturction: true,
       firstActive: false,
       firstContentStyles: styles.mainContainer,
       secondContentStyles: styles.detailsContainer,
@@ -906,6 +909,16 @@ class MainPage extends React.Component {
   render() {
     return (
       <div className={styles.container}>
+        {this.state.underConsturction ? (
+          <div
+            style={{ backgroundImage: `url(${image0})` }}
+            className={styles.underConsturction}
+          >
+            <div className={styles.underConsturctionText}>
+              Under Construction
+            </div>
+          </div>
+        ) : null}
         <div className={this.state.firstContentStyles}>
           <div className={styles.top}>
             <div className={styles.logoContainer}>
