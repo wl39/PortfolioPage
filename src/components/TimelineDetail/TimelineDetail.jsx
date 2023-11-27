@@ -4,6 +4,7 @@ import TimelineFurtherInformation from "./components/TimelineFurherInformation/T
 import TimelineDetailBox from "./components/TimelineDetailBox/TimelineDetailBox";
 import EndofContents from "./components/EndofContents/EndofContents";
 import PropTypes from "prop-types";
+import TLDR from "./components/TLDR/TLDR";
 
 class TimelineDetail extends React.Component {
   constructor(props) {
@@ -12,13 +13,15 @@ class TimelineDetail extends React.Component {
     let details = [];
     let furtherInformation = [];
 
+    details.push(<TLDR key={this.props.tldr} contents={this.props.tldr} />);
+
     this.props.details.forEach((value) => {
       details.push(
         <TimelineDetailBox
-          key={value.title}
+          key={"tdb." + value.title}
           title={value.title}
           period={value.period}
-          paragraph={value.paragraph}
+          contents={value.contents}
         />
       );
     });
@@ -26,7 +29,7 @@ class TimelineDetail extends React.Component {
     this.props.furtherInformation.forEach((value) => {
       furtherInformation.push(
         <TimelineFurtherInformation
-          key={value.title}
+          key={"tfi." + value.title}
           title={value.title}
           contents={value.contents}
         />
@@ -44,6 +47,48 @@ class TimelineDetail extends React.Component {
     this.state = {
       contents: contents,
     };
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.details !== this.props.details) {
+      let details = [];
+      let furtherInformation = [];
+
+      details.push(<TLDR key={this.props.tldr} contents={this.props.tldr} />);
+
+      this.props.details.forEach((value) => {
+        details.push(
+          <TimelineDetailBox
+            key={value.title}
+            title={value.title}
+            period={value.period}
+            contents={value.contents}
+          />
+        );
+      });
+
+      this.props.furtherInformation.forEach((value) => {
+        furtherInformation.push(
+          <TimelineFurtherInformation
+            key={value.title}
+            title={value.title}
+            contents={value.contents}
+          />
+        );
+      });
+
+      let contents = (
+        <div className={styles.TimelineDetailBox}>
+          {details}
+          {furtherInformation}
+          <EndofContents />
+        </div>
+      );
+
+      this.setState({
+        contents: contents,
+      });
+    }
   }
   render() {
     return <div>{this.state.contents}</div>;

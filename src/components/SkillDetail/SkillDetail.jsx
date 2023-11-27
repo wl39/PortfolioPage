@@ -29,34 +29,9 @@ class SkillDetail extends React.Component {
               />
             </div>
             <div className={styles.titleContainer}>
-              <div className={styles.emptyBox} />
               <div className={styles.textContainer}>
-                <div className={styles.title}>Title</div>
-                <div>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                  irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                  cupidatat non proident, sunt in culpa qui officia deserunt
-                  mollit anim id est laborum. Lorem ipsum dolor sit amet,
-                  consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                  ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                  quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-                  ea commodo consequat. Duis aute irure dolor in reprehenderit
-                  in voluptate velit esse cillum dolore eu fugiat nulla
-                  pariatur. Excepteur sint occaecat cupidatat non proident, sunt
-                  in culpa qui officia deserunt mollit anim id est laborum.
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                  irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                  cupidatat non proident, sunt in culpa qui officia deserunt
-                  mollit anim id est laborum.
-                </div>
+                <div className={styles.title}>{this.props.title}</div>
+                <div>{this.props.paragraph}</div>
               </div>
             </div>
           </div>
@@ -67,7 +42,15 @@ class SkillDetail extends React.Component {
                 : styles.infoContainerDeactive
             }
           >
-            <div>HELLO?</div>
+            <div className={styles.logoContainer}>
+              <div
+                className={styles.logo}
+                style={{
+                  backgroundImage: `url(${this.props.logo})`,
+                }}
+              />
+            </div>
+            <div>Logo details</div>
           </div>
         </div>
       </div>
@@ -79,6 +62,10 @@ SkillDetail.propTypes = {
   images: PropTypes.array.isRequired,
   height: PropTypes.string.isRequired,
   time: PropTypes.number.isRequired,
+  isActive: PropTypes.bool.isRequired,
+  title: PropTypes.string.isRequired,
+  paragraph: PropTypes.string.isRequired,
+  logo: PropTypes.string.isRequired,
 };
 
 export default SkillDetail;

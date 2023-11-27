@@ -9,11 +9,122 @@ import image3 from "../images/1600685054178_Original-modified.jpg";
 import image4 from "../images/20191018_2120280_Original-modified.jpg";
 import image5 from "../images/IMG_1339-modified.JPG";
 import image6 from "../images/IMG_2131-modified.JPG";
+
+import first1 from "../images/firstYear/First_Year_1.jpg";
+import first2 from "../images/firstYear/First_Year_2.jpg";
+import first3 from "../images/firstYear/First_Year_3.jpg";
+import first4 from "../images/firstYear/First_Year_4.jpg";
+import first5 from "../images/firstYear/First_Year_5.jpg";
+import first6 from "../images/firstYear/First_Year_6.jpg";
+import first7 from "../images/firstYear/First_Year_7.jpg";
+import first9 from "../images/firstYear/First_Year_9.jpg";
+import first11 from "../images/firstYear/First_Year_11.jpg";
+import bono1 from "../images/firstYear/Bonoware_1.jpg";
+import bono2 from "../images/firstYear/Bonoware_2.jpg";
+import bono3 from "../images/firstYear/Bonoware_3.jpg";
+import bono4 from "../images/firstYear/Bonoware_4.jpg";
+import bono5 from "../images/firstYear/Bonoware_5.jpg";
+import bono6 from "../images/firstYear/Bonoware_6.jpg";
+import bono7 from "../images/firstYear/Bonoware_7.jpg";
+
+import second1 from "../images/secondYear/Second_Year_1.jpg";
+import second2 from "../images/secondYear/Second_Year_2.jpg";
+import second3 from "../images/secondYear/Second_Year_3.jpg";
+import second4 from "../images/secondYear/Second_Year_4.jpg";
+import second5 from "../images/secondYear/Second_Year_5.jpg";
+import second6 from "../images/secondYear/Second_Year_6.jpg";
+import second7 from "../images/secondYear/Second_Year_7.jpg";
+import second8 from "../images/secondYear/Second_Year_8.jpg";
+import second9 from "../images/secondYear/Second_Year_9.jpg";
+import second10 from "../images/secondYear/Second_Year_10.jpg";
+import second11 from "../images/secondYear/Second_Year_11.jpg";
+import second12 from "../images/secondYear/Second_Year_12.jpg";
+import second13 from "../images/secondYear/Second_Year_13.jpg";
+import second14 from "../images/secondYear/Second_Year_14.jpg";
+import second15 from "../images/secondYear/Second_Year_15.gif";
+import second16 from "../images/secondYear/Second_Year_16.gif";
+import s_bono1 from "../images/secondYear/Bonoware_1.jpg";
+import s_bono2 from "../images/secondYear/Bonoware_2.png";
+import s_bono3 from "../images/secondYear/Bonoware_3.png";
+import s_bono4 from "../images/secondYear/Bonoware_4.jpg";
+import s_bono5 from "../images/secondYear/Bonoware_5.jpg";
+import s_bono6 from "../images/secondYear/Bonoware_6.gif";
+
+import holiday1 from "../images/army/holiday_1.jpg";
+import holiday2 from "../images/army/holiday_2.jpg";
+import holiday3 from "../images/army/holiday_3.jpg";
+import army1 from "../images/army/army_1.jpg";
+import army2 from "../images/army/army_2.jpg";
+import army3 from "../images/army/army_3.jpg";
+import army4 from "../images/army/army_4.jpg";
+import army5 from "../images/army/army_5.jpg";
+import army6 from "../images/army/army_6.jpg";
+import army7 from "../images/army/army_7.jpg";
+import army8 from "../images/army/army_8.jpg";
+import army9 from "../images/army/army_9.jpg";
+import army10 from "../images/army/army_10.jpg";
+import army11 from "../images/army/army_11.jpg";
+import army12 from "../images/army/army_12.jpg";
+import army13 from "../images/army/army_13.jpg";
+import army14 from "../images/army/army_14.jpg";
+
+import third1 from "../images/thirdYear/third_1.jpg";
+import third2 from "../images/thirdYear/third_2.jpg";
+import third3 from "../images/thirdYear/third_3.jpg";
+import third4 from "../images/thirdYear/third_4.jpg";
+import third5 from "../images/thirdYear/third_5.jpg";
+import third6 from "../images/thirdYear/third_6.gif";
+import third7 from "../images/thirdYear/third_7.jpg";
+import third8 from "../images/thirdYear/third_8.jpg";
+import third9 from "../images/thirdYear/third_9.jpg";
+import third10 from "../images/thirdYear/third_10.jpg";
+import third11 from "../images/thirdYear/third_11.jpg";
+import third12 from "../images/thirdYear/third_12.jpg";
+import third13 from "../images/thirdYear/third_13.gif";
+
+import fourth1 from "../images/fourthYear/fourth_1.jpg";
+import fourth2 from "../images/fourthYear/fourth_2.jpg";
+import fourth3 from "../images/fourthYear/fourth_3.jpg";
+import fourth4 from "../images/fourthYear/fourth_4.jpg";
+import fourth5 from "../images/fourthYear/fourth_5.jpg";
+import fourth6 from "../images/fourthYear/fourth_6.jpg";
+
+import graduate1 from "../images/graduate/graduate_1.gif";
+import graduate2 from "../images/graduate/graduate_2.jpg";
+import graduate3 from "../images/graduate/graduate_3.JPG";
+import graduate4 from "../images/graduate/graduate_4.JPG";
+import graduate5 from "../images/graduate/graduate_5.jpg";
+import graduate6 from "../images/graduate/graduate_6.jpg";
+import graduate7 from "../images/graduate/graduate_7.JPG";
+import graduate8 from "../images/graduate/graduate_8.jpg";
+import graduate9 from "../images/graduate/graduate_9.jpg";
+import graduate10 from "../images/graduate/graduate_10.jpg";
+
+import present1 from "../images/present/present_1.jpg";
+import present2 from "../images/present/present_2.jpg";
+import present3 from "../images/present/present_3.jpg";
+import present4 from "../images/present/present_4.JPG";
+import present5 from "../images/present/present_5.JPG";
+import present6 from "../images/present/present_6.JPG";
+import present7 from "../images/present/present_7.JPG";
+import present8 from "../images/present/present_8.JPG";
+import present9 from "../images/present/present_9.jpg";
+import present10 from "../images/present/present_10.JPG";
+import present11 from "../images/present/present_11.JPG";
+import present12 from "../images/present/present_12.jpeg";
+
 import CircleAnimation from "../components/CircleAnimation/CircleAnimation";
-// import TimelineDetailBox from "../components/TimelineDetailBox/TimelineDetailBox";
-// import TimelineFurtherInformation from "../components/TimelineFurherInformation/TimelineFurtherInformation";
 import TimelineDetail from "../components/TimelineDetail/TimelineDetail";
 import SkillDetail from "../components/SkillDetail/SkillDetail";
+
+import java from "../assets/logo/Java-icon.svg";
+import javascript from "../assets/logo/Javascript-icon.svg";
+import react from "../assets/logo/React-icon.svg";
+import mariaDB from "../assets/logo/MariaDB-icon.svg";
+import git from "../assets/logo/Git-icon.svg";
+import spring from "../assets/logo/Spring-icon.svg";
+import nodejs from "../assets/logo/Node.js-icon.svg";
+import processing4 from "../assets/logo/Processing-icon.svg";
 
 class MainPage extends React.Component {
   constructor(props) {
@@ -58,7 +169,6 @@ class MainPage extends React.Component {
       timelineTitle: "Timeline",
       timelineImages: [],
       timelineDetails: null,
-      // timelineDetailContaier:
     };
   }
 
@@ -205,22 +315,59 @@ class MainPage extends React.Component {
 
   timelineDetailHandler = (contentsTitle) => {
     let details;
+    let images;
     switch (contentsTitle) {
       case "First year in University of St Andrews":
+        images = [
+          first1,
+          first2,
+          first3,
+          first4,
+          first5,
+          first6,
+          first7,
+          first9,
+          first11,
+          bono1,
+          bono2,
+          bono3,
+          bono4,
+          bono5,
+          bono6,
+          bono7,
+        ];
         details = (
           <TimelineDetail
+            tldr={[
+              "Solid Foundation in Computer Science Fundamentals:Established a robust groundwork in the fundamental principles of computer science.",
+              "Basic Understanding of Fundamental Database Concepts (JDBC and SQL):Developed a foundational understanding of essential database concepts, including JDBC and SQL, for proficient data management.",
+              "Co-founded Bonoware, Contributing to Establishment and Growth:Played a pivotal role in the establishment and growth of Bonoware, an IT-based company, as a co-founder.",
+            ]}
             details={[
               {
                 title: "Freshman",
                 period: "September 2017 - June 2018",
-                paragraph:
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                contents: [
+                  "Acheived a solid foundation in computer science fundamentals.",
+                  "Learned the principles of object-oriented programming.",
+                  "Developed skills in handling extensive datasets efficiently.",
+                  "Proficient in fundamental database concepts including JDBC and SQL.",
+                  "Cultivated collaboration, teamwork, and patience through engaging group projects.",
+                  "Learned essential mathematical concepts crucial for computer science.",
+                ],
               },
               {
                 title: "Co-found the company: Bonoware",
-                period: "September 2017 - June 2018",
-                paragraph:
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                period: "June 2018 - August 2018",
+                contents: [
+                  "Co-founded Bonoware, an IT-based company, contributing to its establishment and growth.",
+                  "Designed and developed the website 'Probe.gg,' dedicated to facilitating the trading of limited edition shoes.",
+                  "Gained proficiency in building dynamic web pages using React.",
+                  "Acquired foundational knowledge in AWS S3 for cloud storage.",
+                  "Explored the basics of UI/UX design for an enhanced user experience.",
+                  "Familiarized myself with Agile methodology for efficient project management.",
+                  "Actively participated in the development of a mid-sized project, showcasing practical application of skills and teamwork.",
+                ],
               },
             ]}
             furtherInformation={[
@@ -233,18 +380,6 @@ class MainPage extends React.Component {
                   "CS1006: Programming Projects",
                   "MT1002: Mathematics",
                   "MT1003: Pure and Applied Mathematics",
-                ],
-              },
-              {
-                title: "Learned Skills during the period",
-                contents: [
-                  "Java",
-                  "React",
-                  "Javascript",
-                  "HTML",
-                  "CSS",
-                  "AWS S3",
-                  "Version Controlling: Git, Mercurial",
                 ],
               },
               {
@@ -264,44 +399,84 @@ class MainPage extends React.Component {
         );
         break;
       case "Second year in University of St Andrews":
+        images = [
+          second1,
+          second2,
+          second3,
+          second4,
+          second5,
+          second6,
+          second7,
+          second8,
+          second9,
+          second10,
+          second11,
+          second12,
+          second13,
+          second14,
+          second15,
+          second16,
+          s_bono1,
+          s_bono2,
+          s_bono3,
+          s_bono4,
+          s_bono5,
+          s_bono6,
+        ];
         details = (
           <TimelineDetail
+            tldr={[
+              "Embraced Test Driven Development (TDD) for Robust Software Development:Adopted Test Driven Development (TDD) as a foundational practice to enhance the robustness of software development.",
+              "Developed Proficiency in Various Algorithms for Code Optimization:Attained proficiency in a variety of algorithms to optimize code performance and efficiency.",
+              "Explored Computer Architectures and Formal Logic:Explored the intricacies of computer architectures, including storage systems and CPU functionality, while delving into the nuanced relationship between formal logic and computer operations.",
+            ]}
             details={[
               {
-                title: "Freshman",
-                period: "September 2017 - June 2018",
-                paragraph:
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                title: "Sophomore",
+                period: "September 2018 - June 2019",
+                contents: [
+                  "Embraced Test Driven Development (TDD) as a best practice for robust software development.",
+                  "Mastered abstract data structures, laying a solid foundation for efficient problem-solving.",
+                  "Acquired proficiency in various algorithms to optimize code performance.",
+                  "Studied Finite State Machines (FSM) for modeling and solving complex problems.",
+                  "Demonstrated effective collaboration skills through group projects and teamwork.",
+                  "Explored computer architectures, delving into storage systems, CPU functionality, and I/O devices.",
+                  "Explored the intricate relationship between formal logic and computer operations.",
+                  "Gained a comprehensive understanding of computer networks and web-based computing essentials.",
+                ],
               },
               {
-                title: "Co-found the company: Bonoware",
-                period: "September 2017 - June 2018",
-                paragraph:
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                title: "Web site published: Probe.gg",
+                period: "September 2018 - October 2019",
+                contents: [
+                  "Published the web page 'probe.gg' (site now closed), utilizing AWS Amplify for hosting.",
+                  "Acquired foundational knowledge about serverless web applications, optimizing efficiency.",
+                  "Implemented NFC tags for streamlined inspection of shoes, enhancing traceability.",
+                  "Developed an automated inspection system using machine learning image recognition techniques for efficient and accurate assessment.",
+                ],
               },
             ]}
             furtherInformation={[
               {
                 title: "Modules took in First Year",
                 contents: [
-                  "CS1002: Object-Oriented Programming",
-                  "CS1003: Programming with Data",
-                  "CS1005: Computer Science in Everyday Life",
-                  "CS1006: Programming Projects",
-                  "MT1002: Mathematics",
-                  "MT1003: Pure and Applied Mathematics",
+                  "CS2001: Foundations of Computation",
+                  "CS2002: Computer Systems",
+                  "CS2003: The Internet and the Web",
+                  "CS2006: Advanced Programming Projects",
                 ],
               },
               {
                 title: "Learned Skills during the period",
                 contents: [
-                  "Java",
-                  "React",
-                  "Javascript",
-                  "HTML",
-                  "CSS",
-                  "AWS S3",
-                  "Version Controlling: Git, Mercurial",
+                  "Haskell",
+                  "Python",
+                  "PHP",
+                  "C",
+                  "CMake",
+                  "Assembly (x86-64)",
+                  "Data Structures",
+                  "Alogrithms",
                 ],
               },
             ]}
@@ -309,44 +484,60 @@ class MainPage extends React.Component {
         );
         break;
       case "Served for National Duty":
+        images = [
+          holiday1,
+          holiday2,
+          holiday3,
+          army1,
+          army2,
+          army3,
+          army4,
+          army5,
+          army6,
+          army7,
+          army8,
+          army9,
+          army10,
+          army11,
+          army12,
+          army13,
+          army14,
+        ];
         details = (
           <TimelineDetail
+            tldr={[
+              "Embraced Test Driven Development (TDD) for Robust Software Development:Adopted Test Driven Development (TDD) as a foundational practice to enhance the robustness of software development.",
+              "Developed Proficiency in Various Algorithms for Code Optimization:Attained proficiency in a variety of algorithms to optimize code performance and efficiency.",
+              "Explored Computer Architectures and Formal Logic:Explored the intricacies of computer architectures, including storage systems and CPU functionality, while delving into the nuanced relationship between formal logic and computer operations.",
+            ]}
             details={[
               {
-                title: "Freshman",
-                period: "September 2017 - June 2018",
-                paragraph:
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-              },
-              {
-                title: "Co-found the company: Bonoware",
-                period: "September 2017 - June 2018",
-                paragraph:
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                title: "Enlisted in the Army",
+                period: "November 2019 - May 2021",
+                contents: [
+                  "Embraced Test Driven Development (TDD) as a best practice for robust software development.",
+                  "Mastered abstract data structures, laying a solid foundation for efficient problem-solving.",
+                  "Acquired proficiency in various algorithms to optimize code performance.",
+                  "Studied Finite State Machines (FSM) for modeling and solving complex problems.",
+                  "Demonstrated effective collaboration skills through group projects and teamwork.",
+                  "Explored computer architectures, delving into storage systems, CPU functionality, and I/O devices.",
+                  "Explored the intricate relationship between formal logic and computer operations.",
+                  "Gained a comprehensive understanding of computer networks and web-based computing essentials.",
+                ],
               },
             ]}
             furtherInformation={[
               {
-                title: "Modules took in First Year",
-                contents: [
-                  "CS1002: Object-Oriented Programming",
-                  "CS1003: Programming with Data",
-                  "CS1005: Computer Science in Everyday Life",
-                  "CS1006: Programming Projects",
-                  "MT1002: Mathematics",
-                  "MT1003: Pure and Applied Mathematics",
-                ],
-              },
-              {
                 title: "Learned Skills during the period",
                 contents: [
-                  "Java",
-                  "React",
-                  "Javascript",
-                  "HTML",
-                  "CSS",
-                  "AWS S3",
-                  "Version Controlling: Git, Mercurial",
+                  "Leadership",
+                  "Python",
+                  "PHP",
+                  "C",
+                  "CMake",
+                  "Assembly (x86-64)",
+                  "Data Structures",
+                  "Alogrithms",
                 ],
               },
             ]}
@@ -354,6 +545,21 @@ class MainPage extends React.Component {
         );
         break;
       case "Third year in University of St Andrews":
+        images = [
+          third1,
+          third2,
+          third3,
+          third4,
+          third5,
+          third6,
+          third7,
+          third8,
+          third9,
+          third10,
+          third11,
+          third12,
+          third13,
+        ];
         details = (
           <TimelineDetail
             details={[
@@ -399,6 +605,7 @@ class MainPage extends React.Component {
         );
         break;
       case "Fourth year in University of St Andrews":
+        images = [fourth1, fourth2, fourth3, fourth4, fourth5, fourth6];
         details = (
           <TimelineDetail
             details={[
@@ -444,6 +651,18 @@ class MainPage extends React.Component {
         );
         break;
       case "Graduate Unviersity of St Andrews":
+        images = [
+          graduate1,
+          graduate2,
+          graduate3,
+          graduate4,
+          graduate5,
+          graduate6,
+          graduate7,
+          graduate8,
+          graduate9,
+          graduate10,
+        ];
         details = (
           <TimelineDetail
             details={[
@@ -489,6 +708,20 @@ class MainPage extends React.Component {
         );
         break;
       case "Contract ends for Mercedes Benz":
+        images = [
+          present1,
+          present2,
+          present3,
+          present4,
+          present5,
+          present6,
+          present7,
+          present8,
+          present9,
+          present10,
+          present11,
+          present12,
+        ];
         details = (
           <TimelineDetail
             details={[
@@ -540,6 +773,7 @@ class MainPage extends React.Component {
     this.setState({
       timelineTitle: contentsTitle,
       timelineDetails: details,
+      timelineImages: images,
     });
   };
 
@@ -712,11 +946,12 @@ class MainPage extends React.Component {
             }
           >
             <div className={styles.timelineImageContainer}>
-              {/* <Slider
-                images={[image1, image2, image3, image4, image5, image6]}
+              <Slider
+                images={this.state.timelineImages}
                 height="100%"
                 time={4000}
-              /> */}
+                isActive={this.state.timelineTitle !== "Timeline"}
+              />
             </div>
             <div className={styles.timelineDetailContainer}>
               {this.state.timelineDetails}
@@ -877,6 +1112,31 @@ class MainPage extends React.Component {
                 images={[image1, image2, image3, image4, image5, image6]}
                 height="100%"
                 time={4000}
+                title="React"
+                paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                irure dolor in reprehenderit in voluptate velit esse cillum
+                dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum. Lorem ipsum dolor sit amet,
+                consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+                ea commodo consequat. Duis aute irure dolor in reprehenderit
+                in voluptate velit esse cillum dolore eu fugiat nulla
+                pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+                in culpa qui officia deserunt mollit anim id est laborum.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                irure dolor in reprehenderit in voluptate velit esse cillum
+                dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum."
+                logo={react}
               />
             </div>
             <div
@@ -889,6 +1149,31 @@ class MainPage extends React.Component {
                 images={[image1, image2, image3, image4, image5, image6]}
                 height="100%"
                 time={4000}
+                title="Java"
+                paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                irure dolor in reprehenderit in voluptate velit esse cillum
+                dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum. Lorem ipsum dolor sit amet,
+                consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+                ea commodo consequat. Duis aute irure dolor in reprehenderit
+                in voluptate velit esse cillum dolore eu fugiat nulla
+                pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+                in culpa qui officia deserunt mollit anim id est laborum.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                irure dolor in reprehenderit in voluptate velit esse cillum
+                dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum."
+                logo={java}
               />
             </div>
             <div
@@ -901,6 +1186,31 @@ class MainPage extends React.Component {
                 images={[image1, image2, image3, image4, image5, image6]}
                 height="100%"
                 time={4000}
+                title="Java"
+                paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                irure dolor in reprehenderit in voluptate velit esse cillum
+                dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum. Lorem ipsum dolor sit amet,
+                consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+                ea commodo consequat. Duis aute irure dolor in reprehenderit
+                in voluptate velit esse cillum dolore eu fugiat nulla
+                pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+                in culpa qui officia deserunt mollit anim id est laborum.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                irure dolor in reprehenderit in voluptate velit esse cillum
+                dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum."
+                logo={javascript}
               />
             </div>
             <div
@@ -913,6 +1223,31 @@ class MainPage extends React.Component {
                 images={[image1, image2, image3, image4, image5, image6]}
                 height="100%"
                 time={4000}
+                title="Java"
+                paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                irure dolor in reprehenderit in voluptate velit esse cillum
+                dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum. Lorem ipsum dolor sit amet,
+                consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+                ea commodo consequat. Duis aute irure dolor in reprehenderit
+                in voluptate velit esse cillum dolore eu fugiat nulla
+                pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+                in culpa qui officia deserunt mollit anim id est laborum.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                irure dolor in reprehenderit in voluptate velit esse cillum
+                dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum."
+                logo={mariaDB}
               />
             </div>
             <div
@@ -925,6 +1260,31 @@ class MainPage extends React.Component {
                 images={[image1, image2, image3, image4, image5, image6]}
                 height="100%"
                 time={4000}
+                title="Java"
+                paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                irure dolor in reprehenderit in voluptate velit esse cillum
+                dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum. Lorem ipsum dolor sit amet,
+                consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+                ea commodo consequat. Duis aute irure dolor in reprehenderit
+                in voluptate velit esse cillum dolore eu fugiat nulla
+                pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+                in culpa qui officia deserunt mollit anim id est laborum.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                irure dolor in reprehenderit in voluptate velit esse cillum
+                dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum."
+                logo={git}
               />
             </div>
             <div
@@ -937,6 +1297,31 @@ class MainPage extends React.Component {
                 images={[image1, image2, image3, image4, image5, image6]}
                 height="100%"
                 time={4000}
+                title="Java"
+                paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                irure dolor in reprehenderit in voluptate velit esse cillum
+                dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum. Lorem ipsum dolor sit amet,
+                consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+                ea commodo consequat. Duis aute irure dolor in reprehenderit
+                in voluptate velit esse cillum dolore eu fugiat nulla
+                pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+                in culpa qui officia deserunt mollit anim id est laborum.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                irure dolor in reprehenderit in voluptate velit esse cillum
+                dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum."
+                logo={spring}
               />
             </div>
             <div
@@ -949,6 +1334,31 @@ class MainPage extends React.Component {
                 images={[image1, image2, image3, image4, image5, image6]}
                 height="100%"
                 time={4000}
+                title="Java"
+                paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                irure dolor in reprehenderit in voluptate velit esse cillum
+                dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum. Lorem ipsum dolor sit amet,
+                consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+                ea commodo consequat. Duis aute irure dolor in reprehenderit
+                in voluptate velit esse cillum dolore eu fugiat nulla
+                pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+                in culpa qui officia deserunt mollit anim id est laborum.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                irure dolor in reprehenderit in voluptate velit esse cillum
+                dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum."
+                logo={nodejs}
               />
             </div>
             <div
@@ -961,6 +1371,31 @@ class MainPage extends React.Component {
                 images={[image1, image2, image3, image4, image5, image6]}
                 height="100%"
                 time={4000}
+                title="Java"
+                paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                irure dolor in reprehenderit in voluptate velit esse cillum
+                dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum. Lorem ipsum dolor sit amet,
+                consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+                ea commodo consequat. Duis aute irure dolor in reprehenderit
+                in voluptate velit esse cillum dolore eu fugiat nulla
+                pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+                in culpa qui officia deserunt mollit anim id est laborum.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                irure dolor in reprehenderit in voluptate velit esse cillum
+                dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum."
+                logo={processing4}
               />
             </div>
           </div>

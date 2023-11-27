@@ -19,6 +19,22 @@ class TimelineFurtherInformation extends React.Component {
     };
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.contents !== this.props.contents) {
+      let contents = [];
+
+      this.props.contents.forEach((value) => {
+        contents.push(<li key={value}>{value}</li>);
+      });
+
+      let container = <ul>{contents}</ul>;
+
+      this.setState({
+        contents: container,
+      });
+    }
+  }
+
   render() {
     return (
       <div>

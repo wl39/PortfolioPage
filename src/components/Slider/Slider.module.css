@@ -1,4 +1,7 @@
 .image {
+  -webkit-filter: grayscale(1);
+  -moz-filter: grayscale(1);
+  filter: grayscale(1);
   position: absolute;
   inset: 0;
   background-repeat: no-repeat;
@@ -18,10 +21,10 @@
   right: -25px;
   top: -25px;
   bottom: -25px;
-  background-color: ivory;
-  -webkit-filter: blur(3px);
-  -moz-filter: blur(3px);
-  filter: blur(3px);
+  background-color: transparent;
+  -webkit-filter: blur(3px) grayscale(1);
+  -moz-filter: blur(3px) grayscale(1);
+  filter: blur(3px) grayscale(1);
   transform: scale(1.8);
   background-size: contain;
   background-repeat: no-repeat;
