@@ -518,14 +518,11 @@ class MainPage extends React.Component {
                 title: "Enlisted in the Army",
                 period: "November 2019 - May 2021",
                 contents: [
-                  "Embraced Test Driven Development (TDD) as a best practice for robust software development.",
-                  "Mastered abstract data structures, laying a solid foundation for efficient problem-solving.",
-                  "Acquired proficiency in various algorithms to optimize code performance.",
-                  "Studied Finite State Machines (FSM) for modeling and solving complex problems.",
-                  "Demonstrated effective collaboration skills through group projects and teamwork.",
-                  "Explored computer architectures, delving into storage systems, CPU functionality, and I/O devices.",
-                  "Explored the intricate relationship between formal logic and computer operations.",
-                  "Gained a comprehensive understanding of computer networks and web-based computing essentials.",
+                  "Discharged as a Sergent",
+                  "Worked as a Squad Leader",
+                  "Led the CBRN reconnaissance team, achieving 1st place in performance.",
+                  "Made simple games such as Chess, 2048 and Tetris via Microsoft VBA.",
+                  "Partecapated on variety of trainings, can withstand in extreme situation",
                 ],
               },
             ]}
@@ -565,42 +562,36 @@ class MainPage extends React.Component {
         ];
         details = (
           <TimelineDetail
+            tldr={[
+              "Embraced Test Driven Development (TDD) for Robust Software Development:Adopted Test Driven Development (TDD) as a foundational practice to enhance the robustness of software development.",
+              "Developed Proficiency in Various Algorithms for Code Optimization:Attained proficiency in a variety of algorithms to optimize code performance and efficiency.",
+              "Explored Computer Architectures and Formal Logic:Explored the intricacies of computer architectures, including storage systems and CPU functionality, while delving into the nuanced relationship between formal logic and computer operations.",
+            ]}
             details={[
               {
-                title: "Freshman",
-                period: "September 2017 - June 2018",
-                paragraph:
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-              },
-              {
-                title: "Co-found the company: Bonoware",
-                period: "September 2017 - June 2018",
-                paragraph:
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                title: "Enlisted in the Army",
+                period: "November 2019 - May 2021",
+                contents: [
+                  "Discharged as a Sergent",
+                  "Worked as a Squad Leader",
+                  "Led the CBRN reconnaissance team, achieving 1st place in performance.",
+                  "Made simple games such as Chess, 2048 and Tetris via Microsoft VBA.",
+                  "Partecapated on variety of trainings, can withstand in extreme situation",
+                ],
               },
             ]}
             furtherInformation={[
               {
-                title: "Modules took in First Year",
-                contents: [
-                  "CS1002: Object-Oriented Programming",
-                  "CS1003: Programming with Data",
-                  "CS1005: Computer Science in Everyday Life",
-                  "CS1006: Programming Projects",
-                  "MT1002: Mathematics",
-                  "MT1003: Pure and Applied Mathematics",
-                ],
-              },
-              {
                 title: "Learned Skills during the period",
                 contents: [
-                  "Java",
-                  "React",
-                  "Javascript",
-                  "HTML",
-                  "CSS",
-                  "AWS S3",
-                  "Version Controlling: Git, Mercurial",
+                  "Leadership",
+                  "Python",
+                  "PHP",
+                  "C",
+                  "CMake",
+                  "Assembly (x86-64)",
+                  "Data Structures",
+                  "Alogrithms",
                 ],
               },
             ]}
@@ -611,42 +602,36 @@ class MainPage extends React.Component {
         images = [fourth1, fourth2, fourth3, fourth4, fourth5, fourth6];
         details = (
           <TimelineDetail
+            tldr={[
+              "Embraced Test Driven Development (TDD) for Robust Software Development:Adopted Test Driven Development (TDD) as a foundational practice to enhance the robustness of software development.",
+              "Developed Proficiency in Various Algorithms for Code Optimization:Attained proficiency in a variety of algorithms to optimize code performance and efficiency.",
+              "Explored Computer Architectures and Formal Logic:Explored the intricacies of computer architectures, including storage systems and CPU functionality, while delving into the nuanced relationship between formal logic and computer operations.",
+            ]}
             details={[
               {
-                title: "Freshman",
-                period: "September 2017 - June 2018",
-                paragraph:
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-              },
-              {
-                title: "Co-found the company: Bonoware",
-                period: "September 2017 - June 2018",
-                paragraph:
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                title: "Enlisted in the Army",
+                period: "November 2019 - May 2021",
+                contents: [
+                  "Discharged as a Sergent",
+                  "Worked as a Squad Leader",
+                  "Led the CBRN reconnaissance team, achieving 1st place in performance.",
+                  "Made simple games such as Chess, 2048 and Tetris via Microsoft VBA.",
+                  "Partecapated on variety of trainings, can withstand in extreme situation",
+                ],
               },
             ]}
             furtherInformation={[
               {
-                title: "Modules took in First Year",
-                contents: [
-                  "CS1002: Object-Oriented Programming",
-                  "CS1003: Programming with Data",
-                  "CS1005: Computer Science in Everyday Life",
-                  "CS1006: Programming Projects",
-                  "MT1002: Mathematics",
-                  "MT1003: Pure and Applied Mathematics",
-                ],
-              },
-              {
                 title: "Learned Skills during the period",
                 contents: [
-                  "Java",
-                  "React",
-                  "Javascript",
-                  "HTML",
-                  "CSS",
-                  "AWS S3",
-                  "Version Controlling: Git, Mercurial",
+                  "Leadership",
+                  "Python",
+                  "PHP",
+                  "C",
+                  "CMake",
+                  "Assembly (x86-64)",
+                  "Data Structures",
+                  "Alogrithms",
                 ],
               },
             ]}
@@ -668,42 +653,36 @@ class MainPage extends React.Component {
         ];
         details = (
           <TimelineDetail
+            tldr={[
+              "Embraced Test Driven Development (TDD) for Robust Software Development:Adopted Test Driven Development (TDD) as a foundational practice to enhance the robustness of software development.",
+              "Developed Proficiency in Various Algorithms for Code Optimization:Attained proficiency in a variety of algorithms to optimize code performance and efficiency.",
+              "Explored Computer Architectures and Formal Logic:Explored the intricacies of computer architectures, including storage systems and CPU functionality, while delving into the nuanced relationship between formal logic and computer operations.",
+            ]}
             details={[
               {
-                title: "Freshman",
-                period: "September 2017 - June 2018",
-                paragraph:
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-              },
-              {
-                title: "Co-found the company: Bonoware",
-                period: "September 2017 - June 2018",
-                paragraph:
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                title: "Enlisted in the Army",
+                period: "November 2019 - May 2021",
+                contents: [
+                  "Discharged as a Sergent",
+                  "Worked as a Squad Leader",
+                  "Led the CBRN reconnaissance team, achieving 1st place in performance.",
+                  "Made simple games such as Chess, 2048 and Tetris via Microsoft VBA.",
+                  "Partecapated on variety of trainings, can withstand in extreme situation",
+                ],
               },
             ]}
             furtherInformation={[
               {
-                title: "Modules took in First Year",
-                contents: [
-                  "CS1002: Object-Oriented Programming",
-                  "CS1003: Programming with Data",
-                  "CS1005: Computer Science in Everyday Life",
-                  "CS1006: Programming Projects",
-                  "MT1002: Mathematics",
-                  "MT1003: Pure and Applied Mathematics",
-                ],
-              },
-              {
                 title: "Learned Skills during the period",
                 contents: [
-                  "Java",
-                  "React",
-                  "Javascript",
-                  "HTML",
-                  "CSS",
-                  "AWS S3",
-                  "Version Controlling: Git, Mercurial",
+                  "Leadership",
+                  "Python",
+                  "PHP",
+                  "C",
+                  "CMake",
+                  "Assembly (x86-64)",
+                  "Data Structures",
+                  "Alogrithms",
                 ],
               },
             ]}
@@ -727,42 +706,36 @@ class MainPage extends React.Component {
         ];
         details = (
           <TimelineDetail
+            tldr={[
+              "Embraced Test Driven Development (TDD) for Robust Software Development:Adopted Test Driven Development (TDD) as a foundational practice to enhance the robustness of software development.",
+              "Developed Proficiency in Various Algorithms for Code Optimization:Attained proficiency in a variety of algorithms to optimize code performance and efficiency.",
+              "Explored Computer Architectures and Formal Logic:Explored the intricacies of computer architectures, including storage systems and CPU functionality, while delving into the nuanced relationship between formal logic and computer operations.",
+            ]}
             details={[
               {
-                title: "Freshman",
-                period: "September 2017 - June 2018",
-                paragraph:
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-              },
-              {
-                title: "Co-found the company: Bonoware",
-                period: "September 2017 - June 2018",
-                paragraph:
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                title: "Enlisted in the Army",
+                period: "November 2019 - May 2021",
+                contents: [
+                  "Discharged as a Sergent",
+                  "Worked as a Squad Leader",
+                  "Led the CBRN reconnaissance team, achieving 1st place in performance.",
+                  "Made simple games such as Chess, 2048 and Tetris via Microsoft VBA.",
+                  "Partecapated on variety of trainings, can withstand in extreme situation",
+                ],
               },
             ]}
             furtherInformation={[
               {
-                title: "Modules took in First Year",
-                contents: [
-                  "CS1002: Object-Oriented Programming",
-                  "CS1003: Programming with Data",
-                  "CS1005: Computer Science in Everyday Life",
-                  "CS1006: Programming Projects",
-                  "MT1002: Mathematics",
-                  "MT1003: Pure and Applied Mathematics",
-                ],
-              },
-              {
                 title: "Learned Skills during the period",
                 contents: [
-                  "Java",
-                  "React",
-                  "Javascript",
-                  "HTML",
-                  "CSS",
-                  "AWS S3",
-                  "Version Controlling: Git, Mercurial",
+                  "Leadership",
+                  "Python",
+                  "PHP",
+                  "C",
+                  "CMake",
+                  "Assembly (x86-64)",
+                  "Data Structures",
+                  "Alogrithms",
                 ],
               },
             ]}
