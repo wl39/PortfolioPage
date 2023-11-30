@@ -133,7 +133,7 @@ class MainPage extends React.Component {
     super(props);
 
     this.state = {
-      underConsturction: true,
+      underConsturction: false,
       firstActive: false,
       firstContentStyles: styles.mainContainer,
       secondContentStyles: styles.detailsContainer,
@@ -461,7 +461,7 @@ class MainPage extends React.Component {
             ]}
             furtherInformation={[
               {
-                title: "Modules took in First Year",
+                title: "Modules took in Secnd Year",
                 contents: [
                   "CS2001: Foundations of Computation",
                   "CS2002: Computer Systems",
@@ -509,20 +509,20 @@ class MainPage extends React.Component {
         details = (
           <TimelineDetail
             tldr={[
-              "Embraced Test Driven Development (TDD) for Robust Software Development:Adopted Test Driven Development (TDD) as a foundational practice to enhance the robustness of software development.",
-              "Developed Proficiency in Various Algorithms for Code Optimization:Attained proficiency in a variety of algorithms to optimize code performance and efficiency.",
-              "Explored Computer Architectures and Formal Logic:Explored the intricacies of computer architectures, including storage systems and CPU functionality, while delving into the nuanced relationship between formal logic and computer operations.",
+              "Served as a Sergeant:Completed duties as a Sergeant within the military.",
+              "Experience as a Squad Leader:Functioned in the role of a Squad Leader during military service.",
+              "Led CBRN Reconnaissance Team to Top Performance:Guided the CBRN reconnaissance team, achieving 1st place in overall performance.",
             ]}
             details={[
               {
                 title: "Enlisted in the Army",
                 period: "November 2019 - May 2021",
                 contents: [
-                  "Discharged as a Sergent",
-                  "Worked as a Squad Leader",
-                  "Led the CBRN reconnaissance team, achieving 1st place in performance.",
-                  "Made simple games such as Chess, 2048 and Tetris via Microsoft VBA.",
-                  "Partecapated on variety of trainings, can withstand in extreme situation",
+                  "Honorable discharge as a Sergeant, showcasing dedication and commitment to service.",
+                  "Served as a Squad Leader, demonstrating leadership skills in managing and coordinating team activities.",
+                  "Led the CBRN (Chemical, Biological, Radiological, Nuclear) reconnaissance team to a 1st place performance, highlighting effective tactical and strategic capabilities.",
+                  "Created simple yet engaging games, including Chess, 2048, and Tetris, using Microsoft VBA.",
+                  "Actively participated in a variety of training programs, demonstrating the ability to withstand and perform well in extreme situations.",
                 ],
               },
             ]}
@@ -531,13 +531,10 @@ class MainPage extends React.Component {
                 title: "Learned Skills during the period",
                 contents: [
                   "Leadership",
-                  "Python",
-                  "PHP",
-                  "C",
-                  "CMake",
-                  "Assembly (x86-64)",
-                  "Data Structures",
-                  "Alogrithms",
+                  "Team Coordination",
+                  "Commitment and Dedication",
+                  "Adaptability and Resilience",
+                  "VBA",
                 ],
               },
             ]}
@@ -563,35 +560,61 @@ class MainPage extends React.Component {
         details = (
           <TimelineDetail
             tldr={[
-              "Embraced Test Driven Development (TDD) for Robust Software Development:Adopted Test Driven Development (TDD) as a foundational practice to enhance the robustness of software development.",
-              "Developed Proficiency in Various Algorithms for Code Optimization:Attained proficiency in a variety of algorithms to optimize code performance and efficiency.",
-              "Explored Computer Architectures and Formal Logic:Explored the intricacies of computer architectures, including storage systems and CPU functionality, while delving into the nuanced relationship between formal logic and computer operations.",
+              "Group Project in Full-Stack Development with React and Spring Boot:Collaborated on a team project focusing on full-stack development, utilizing React for the frontend, Spring Boot for the backend, and Nginx as the web server.",
+              "In-Depth Exploration of Operating Systems Fundamentals:Explored the essentials of operating systems, enhancing a thorough understanding of their fundamental principles.",
+              "Emphasis on Database Design and Visualization with ER Diagrams:Strengthened skills in database design, particularly in expressing information effectively through visualization, including the creation of Entity-Relationship (ER) diagrams.",
             ]}
             details={[
               {
-                title: "Enlisted in the Army",
-                period: "November 2019 - May 2021",
+                title: "Junior",
+                period: "September 2021 - May 2022",
                 contents: [
-                  "Discharged as a Sergent",
-                  "Worked as a Squad Leader",
-                  "Led the CBRN reconnaissance team, achieving 1st place in performance.",
-                  "Made simple games such as Chess, 2048 and Tetris via Microsoft VBA.",
-                  "Partecapated on variety of trainings, can withstand in extreme situation",
+                  "Collaborated on a group project involving full-stack development using React for the frontend, Spring Boot for the backend, and Nginx as the web server.",
+                  "Delved into the fundamentals of operating systems, enhancing a comprehensive understanding.",
+                  "Strengthened knowledge in logic and time complexity, reinforcing core computer science principles.",
+                  "Explored database design, emphasizing proper information expression through visualization, including the creation of Entity-Relationship (ER) diagrams.",
+                  "Gained insights into the basic concepts of Artificial Intelligence, contributing to a broader technological skill set.",
+                  "Developed a deep understanding of networking, covering the ISO 7 layers and various protocols to ensure a robust comprehension of network architecture and communication.",
+                ],
+              },
+              {
+                title: "Freelance Tutor",
+                period: "May 2021 - Present",
+                contents: [
+                  "Acquired an in-depth understanding of computer engineering, encompassing both hardware and software aspects.",
+                  "Developed the ability to articulate complex concepts in a clear and accessible manner, facilitating effective knowledge transfer.",
+                  "Cultivated flexibility in teaching approaches, tailoring methods to accommodate diverse learning styles.",
+                  "Acknowledged and respected the individual pace and levels of understanding among students, fostering an inclusive learning environment.",
+                  "Promoted critical thinking and independent problem-solving skills, empowering students to analyze and solve challenges autonomously.",
                 ],
               },
             ]}
             furtherInformation={[
               {
+                title: "Modules took in Third Year",
+                contents: [
+                  "CS3050: Logic and Reasoning",
+                  "CS3052 Computational Complexity",
+                  "CS3099: Software Engineering Team Project",
+                  "CS3101 Databases",
+                  "CS3102 Data Communications and Networks",
+                  "CS3104: Operating Systems",
+                  "CS3105: Artificial Intelligence",
+                ],
+              },
+              {
                 title: "Learned Skills during the period",
                 contents: [
-                  "Leadership",
-                  "Python",
-                  "PHP",
-                  "C",
-                  "CMake",
-                  "Assembly (x86-64)",
-                  "Data Structures",
-                  "Alogrithms",
+                  "Prolog (Logical Programming)",
+                  "Propositional Logic",
+                  "Complexity",
+                  "Computability",
+                  "Nginx",
+                  "Spring Boot",
+                  "React (Functional Component)",
+                  "MariaDB",
+                  "AI (Algorithms & Deep Learning)",
+                  "Operating Systems",
                 ],
               },
             ]}
@@ -603,35 +626,47 @@ class MainPage extends React.Component {
         details = (
           <TimelineDetail
             tldr={[
-              "Embraced Test Driven Development (TDD) for Robust Software Development:Adopted Test Driven Development (TDD) as a foundational practice to enhance the robustness of software development.",
-              "Developed Proficiency in Various Algorithms for Code Optimization:Attained proficiency in a variety of algorithms to optimize code performance and efficiency.",
-              "Explored Computer Architectures and Formal Logic:Explored the intricacies of computer architectures, including storage systems and CPU functionality, while delving into the nuanced relationship between formal logic and computer operations.",
+              "Comprehensive Web Application Development with React:Developed a thorough web application for my dissertation, utilizing the React framework for a robust and effective solution.",
+              "Proficient in Explaining Computer Graphics Algorithms, Emphasizing WebGL:Proficiently articulate basic algorithms in computer graphics, highlighting their advantages and limitations, particularly in the context of WebGL.",
+              "Awareness of Programming Language Paradigms, Semantics, and Signal Processing:Acquired awareness of diverse programming language paradigms, emphasizing semantics, along with familiarity in signal processing, including Fourier Transforms for frequency analysis.",
             ]}
             details={[
               {
-                title: "Enlisted in the Army",
-                period: "November 2019 - May 2021",
+                title: "Senior",
+                period: "September 2022 - June 2023",
                 contents: [
-                  "Discharged as a Sergent",
-                  "Worked as a Squad Leader",
-                  "Led the CBRN reconnaissance team, achieving 1st place in performance.",
-                  "Made simple games such as Chess, 2048 and Tetris via Microsoft VBA.",
-                  "Partecapated on variety of trainings, can withstand in extreme situation",
+                  "Developed a comprehensive web application for my dissertation utilizing the React framework.",
+                  "Proficient in explaining basic algorithms employed in computer graphics, emphasizing advantages and limitations, particularly in the context of WebGL.",
+                  "Acquired awareness of a diverse range of concepts within various programming language paradigms, including semantics.",
+                  "Familiar with signal processing concepts, including frequency analysis using Fourier Transforms.",
+                  "Possess a working knowledge of the techniques utilized in modern constraint solvers.",
+                  "Demonstrate an understanding of the technical aspects of gaming, contributing to a well-rounded skill set.",
+                  "Capable of implementing fundamental optimization techniques, reasoning with uncertainty, logic and knowledge representation, and AI search methodologies.",
                 ],
               },
             ]}
             furtherInformation={[
               {
+                title: "Modules took in Third Year",
+                contents: [
+                  "CS4099: Major Software Project",
+                  "CS4102: Computer Graphics",
+                  "CS4201: Programming Language Design and Implementation",
+                  "CS4302: Signal Processing: Sound, Image, Video",
+                  "CS4303: Video Games",
+                  "CS4402: Constraint Programming",
+                  "CS5011: Artificial Intelligence Practice",
+                ],
+              },
+              {
                 title: "Learned Skills during the period",
                 contents: [
-                  "Leadership",
+                  "WebGL",
+                  "LLVM",
+                  "MATLAB",
+                  "Processing 4",
+                  "Conjure",
                   "Python",
-                  "PHP",
-                  "C",
-                  "CMake",
-                  "Assembly (x86-64)",
-                  "Data Structures",
-                  "Alogrithms",
                 ],
               },
             ]}
@@ -654,20 +689,26 @@ class MainPage extends React.Component {
         details = (
           <TimelineDetail
             tldr={[
-              "Embraced Test Driven Development (TDD) for Robust Software Development:Adopted Test Driven Development (TDD) as a foundational practice to enhance the robustness of software development.",
-              "Developed Proficiency in Various Algorithms for Code Optimization:Attained proficiency in a variety of algorithms to optimize code performance and efficiency.",
-              "Explored Computer Architectures and Formal Logic:Explored the intricacies of computer architectures, including storage systems and CPU functionality, while delving into the nuanced relationship between formal logic and computer operations.",
+              "University Graduation with Commendable II.1 Grade:Successfully completed studies at the University of St Andrews, achieving a commendable II.1 grade.",
+              "Service Request Management at MBK:Served as the first-level service request manager at MBK, showcasing proficiency in handling user inquiries and requests.",
+              "Facilitation of Effective Communication Between Users and Developers:Effectively facilitated communication between end-users and developers, ensuring a seamless exchange of information to enhance problem resolution and software improvement.",
             ]}
             details={[
               {
-                title: "Enlisted in the Army",
-                period: "November 2019 - May 2021",
+                title: "Graduate",
+                period: "June 2023",
                 contents: [
-                  "Discharged as a Sergent",
-                  "Worked as a Squad Leader",
-                  "Led the CBRN reconnaissance team, achieving 1st place in performance.",
-                  "Made simple games such as Chess, 2048 and Tetris via Microsoft VBA.",
-                  "Partecapated on variety of trainings, can withstand in extreme situation",
+                  "Graduated from the University of St Andrews with a commendable II.1 grade.",
+                ],
+              },
+              {
+                title: "Mercedes-Benz Korea",
+                period: "July 2023 - Oct 2023",
+                contents: [
+                  "Served as the first-level service request manager at MBK, demonstrating proficiency in managing user inquiries and requests.",
+                  "Effectively facilitated communication between end-users and developers, ensuring a smooth exchange of information.",
+                  "Gained valuable insights into organizational culture, particularly within a vertical hierarchy structure.",
+                  "Skillfully analyzed and conveyed user-reported problems to developers, contributing to efficient problem resolution and software improvement.",
                 ],
               },
             ]}
@@ -675,14 +716,10 @@ class MainPage extends React.Component {
               {
                 title: "Learned Skills during the period",
                 contents: [
-                  "Leadership",
-                  "Python",
-                  "PHP",
-                  "C",
-                  "CMake",
-                  "Assembly (x86-64)",
-                  "Data Structures",
-                  "Alogrithms",
+                  "Communication",
+                  "Microsoft 365 Products",
+                  "Organizational Insight",
+                  "Problem Analysis and Resolution",
                 ],
               },
             ]}
@@ -706,39 +743,21 @@ class MainPage extends React.Component {
         ];
         details = (
           <TimelineDetail
-            tldr={[
-              "Embraced Test Driven Development (TDD) for Robust Software Development:Adopted Test Driven Development (TDD) as a foundational practice to enhance the robustness of software development.",
-              "Developed Proficiency in Various Algorithms for Code Optimization:Attained proficiency in a variety of algorithms to optimize code performance and efficiency.",
-              "Explored Computer Architectures and Formal Logic:Explored the intricacies of computer architectures, including storage systems and CPU functionality, while delving into the nuanced relationship between formal logic and computer operations.",
-            ]}
+            tldr={[]}
             details={[
               {
-                title: "Enlisted in the Army",
-                period: "November 2019 - May 2021",
+                title: "Present",
+                period: "",
                 contents: [
-                  "Discharged as a Sergent",
-                  "Worked as a Squad Leader",
-                  "Led the CBRN reconnaissance team, achieving 1st place in performance.",
-                  "Made simple games such as Chess, 2048 and Tetris via Microsoft VBA.",
-                  "Partecapated on variety of trainings, can withstand in extreme situation",
+                  "Actively seeking employment opportunities in the field to apply and further develop acquired skills.",
+                  "Focused on skill enhancement through continuous learning and hands-on experience in relevant technologies.",
+                  "Aspiring to assemble a programming crew to collaboratively work on the development of a game project.",
+                  "Dedicated to studying algorithms and data structures to deepen technical proficiency and problem-solving abilities.",
+                  "Working on the creation of a comprehensive portfolio website to showcase skills, projects, and professional achievements.",
                 ],
               },
             ]}
-            furtherInformation={[
-              {
-                title: "Learned Skills during the period",
-                contents: [
-                  "Leadership",
-                  "Python",
-                  "PHP",
-                  "C",
-                  "CMake",
-                  "Assembly (x86-64)",
-                  "Data Structures",
-                  "Alogrithms",
-                ],
-              },
-            ]}
+            furtherInformation={[]}
           />
         );
         break;
@@ -881,225 +900,252 @@ class MainPage extends React.Component {
 
   render() {
     return (
-      <div className={styles.container}>
-        {this.state.underConsturction ? (
-          <div
-            style={{ backgroundImage: `url(${image0})` }}
-            className={styles.underConsturction}
-          >
-            <div className={styles.underConsturctionText}>
-              Under Construction
-            </div>
-          </div>
-        ) : null}
-        <div className={this.state.firstContentStyles}>
-          <div className={styles.top}>
-            <div className={styles.logoContainer}>
-              <img alt="logo" className={styles.logo} src={logo} />
-            </div>
-            <div className={styles.nameContainer}>
-              <div className={styles.name}>WANKYU LIM </div>
-              <div className={styles.job}>SOFTWARE ENGINEER</div>
-            </div>
-            <div className={styles.personalInfo}>
-              <div className={styles.personalInfoContact}>CONTACT ME</div>
-              <div className={styles.personalInfoTextBox}>
-                iwg6852@gmail.com
+      <div>
+        <div className={styles.container}>
+          {this.state.underConsturction ? (
+            <div
+              style={{ backgroundImage: `url(${image0})` }}
+              className={styles.underConsturction}
+            >
+              <div className={styles.underConsturctionText}>
+                Under Construction
               </div>
-              <div className={styles.personalInfoTextBox}>linked.in/wl39</div>
-              <div className={styles.personalInfoTextBox}>+44 7707 903700</div>
             </div>
-          </div>
-          <Slider
-            images={[image1, image2, image3, image4, image5, image6]}
-            height="calc(100% - 242px)"
-            time={4000}
-            isActive={this.state.firstActive}
-          />
-        </div>
-        <div className={this.state.secondContentStyles}>
-          <div
-            className={
-              this.state.secondActive ? styles.curtainOpen : styles.curtainClose
-            }
-          />
-          <div className={styles.title}>{this.state.timelineTitle}</div>
-          <div
-            className={
-              this.state.timelineTitle === "Timeline"
-                ? styles.timelineDefault
-                : styles.timelineFocused
-            }
-          >
-            <div className={styles.timelineImageContainer}>
+          ) : null}
+          <div className={this.state.firstContentStyles}>
+            <div className={styles.top}>
+              <div className={styles.logoContainer}>
+                <img alt="logo" className={styles.logo} src={logo} />
+              </div>
+              <div className={styles.nameContainer}>
+                <div className={styles.name}>WANKYU LIM </div>
+                <div className={styles.job}>SOFTWARE ENGINEER</div>
+              </div>
+              <div className={styles.personalInfo}>
+                <div className={styles.personalInfoContact}>CONTACT ME</div>
+                <div className={styles.personalInfoTextBox}>
+                  iwg6852@gmail.com
+                </div>
+                <div className={styles.personalInfoTextBox}>linked.in/wl39</div>
+                <div className={styles.personalInfoTextBox}>
+                  +44 7707 903700
+                </div>
+              </div>
+            </div>
+            <div className={styles.slider}>
               <Slider
-                images={this.state.timelineImages}
+                images={[image1, image2, image3, image4, image5, image6]}
                 height="100%"
                 time={4000}
-                isActive={this.state.timelineTitle !== "Timeline"}
+                isActive={this.state.firstActive}
               />
             </div>
-            <div className={styles.timelineDetailContainer}>
-              {this.state.timelineDetails}
-            </div>
           </div>
-          <div className={styles.timeline}>
-            <div className={this.state.timelineStyles} />
-            <div className={styles.timelineGrid}>
-              <div
-                className={styles.timelineCircle1}
-                onClick={() =>
-                  this.timelineDetailHandler(
-                    "First year in University of St Andrews"
-                  )
-                }
-              >
-                <CircleAnimation delay="0s" active={this.state.secondActive} />
-                <div className={styles.timelineInnerCircle1} />
-                <div className={this.state.timelineBorder1} />
-                <div className={this.state.timelineDetails1}>
-                  First year in University of St Andrews
-                </div>
-              </div>
-              <div
-                className={styles.timelineCircle2}
-                onClick={() =>
-                  this.timelineDetailHandler(
-                    "Second year in University of St Andrews"
-                  )
-                }
-              >
-                <CircleAnimation delay="2s" active={this.state.secondActive} />
-                {/* <div className={styles.timelineInnerCircle2} /> */}
-                <div className={this.state.timelineBorder2} />
-                <div className={this.state.timelineDetails2}>
-                  Second year in University of St Andrews
-                </div>
-              </div>
-              <div
-                className={styles.timelineCircle3}
-                onClick={() =>
-                  this.timelineDetailHandler("Served for National Duty")
-                }
-              >
-                <CircleAnimation delay="4s" active={this.state.secondActive} />
-                <div className={styles.timelineInnerCircle3} />
-                <div className={this.state.timelineBorder3} />
-                <div className={this.state.timelineDetails3}>
-                  Served for National Duty
-                </div>
-              </div>
-              <div
-                className={styles.timelineCircle4}
-                onClick={() =>
-                  this.timelineDetailHandler(
-                    "Third year in University of St Andrews"
-                  )
-                }
-              >
-                <CircleAnimation delay="7s" active={this.state.secondActive} />
-                <div className={styles.timelineInnerCircle4} />
-                <div className={this.state.timelineBorder4} />
-                <div className={this.state.timelineDetails4}>
-                  Start Freelance Tutoring as a Job
-                </div>
-                <div className={this.state.timelineDetails4Bottom}>
-                  Third year in University of St Andrews
-                </div>
-              </div>
-              <div
-                className={styles.timelineCircle5}
-                onClick={() =>
-                  this.timelineDetailHandler(
-                    "Fourth year in University of St Andrews"
-                  )
-                }
-              >
-                <CircleAnimation delay="9s" active={this.state.secondActive} />
-                <div className={styles.timelineInnerCircle5} />
-                <div className={this.state.timelineBorder5} />
-                <div className={this.state.timelineDetails5}>
-                  Fourth year in University of St Andrews
-                </div>
-              </div>
-              <div
-                className={styles.timelineCircle6}
-                onClick={() =>
-                  this.timelineDetailHandler(
-                    "Graduate Unviersity of St Andrews"
-                  )
-                }
-              >
-                <CircleAnimation delay="11s" active={this.state.secondActive} />
-                <div className={this.state.timelineBorder6}>
-                  <div className={this.state.timelineBorder6Helper} />
-                </div>
-                <div className={this.state.timelineDetails6}>
-                  Graduate Unviersity of St Andrews
-                </div>
-                <div className={this.state.timelineDetails6Bottom}>
-                  Work for Mercedes Benz Korea
-                </div>
-              </div>
-              <div
-                className={styles.timelineCircle7}
-                onClick={() =>
-                  this.timelineDetailHandler("Contract ends for Mercedes Benz")
-                }
-              >
-                <CircleAnimation
-                  delay="11.5s"
-                  active={this.state.secondActive}
-                />
-                <div className={this.state.timelineBorder7}>
-                  <div className={this.state.timelineBorder7Helper} />
-                </div>
-                <div className={this.state.timelineDetails7}>
-                  Contract ends for Mercedes Benz
-                </div>
-              </div>
-            </div>
-            <div className={styles.presentFlag}>
-              <div className={styles.flagTriangle} />
-            </div>
-          </div>
-        </div>
-        <div className={this.state.thirdContentStyles}>
-          <div
-            onClick={() => this.skillsDetailHandler(0)}
-            className={styles.title}
-          >
+          <div className={this.state.secondContentStyles}>
             <div
               className={
-                this.state.skillsTitle === "Skills"
-                  ? styles.skillTitle
-                  : styles.skillTitleClicked
-              }
-            >
-              {this.state.skillsTitle}
-            </div>
-            <div
-              className={
-                this.state.skillsTitle === "Skills"
-                  ? styles.hideDeco
-                  : styles.deco
+                this.state.secondActive
+                  ? styles.curtainOpen
+                  : styles.curtainClose
               }
             />
+            <div className={styles.title}>{this.state.timelineTitle}</div>
+            <div
+              className={
+                this.state.timelineTitle === "Timeline"
+                  ? styles.timelineDefault
+                  : styles.timelineFocused
+              }
+            >
+              <div className={styles.timelineImageContainer}>
+                <Slider
+                  images={this.state.timelineImages}
+                  height="100%"
+                  time={4000}
+                  isActive={this.state.timelineTitle !== "Timeline"}
+                />
+              </div>
+              <div className={styles.timelineDetailContainer}>
+                {this.state.timelineDetails}
+              </div>
+            </div>
+            <div className={styles.timeline}>
+              <div className={this.state.timelineStyles} />
+              <div className={styles.timelineGrid}>
+                <div
+                  className={styles.timelineCircle1}
+                  onClick={() =>
+                    this.timelineDetailHandler(
+                      "First year in University of St Andrews"
+                    )
+                  }
+                >
+                  <CircleAnimation
+                    delay="0s"
+                    active={this.state.secondActive}
+                  />
+                  <div className={styles.timelineInnerCircle1} />
+                  <div className={this.state.timelineBorder1} />
+                  <div className={this.state.timelineDetails1}>
+                    First year in University of St Andrews
+                  </div>
+                </div>
+                <div
+                  className={styles.timelineCircle2}
+                  onClick={() =>
+                    this.timelineDetailHandler(
+                      "Second year in University of St Andrews"
+                    )
+                  }
+                >
+                  <CircleAnimation
+                    delay="2s"
+                    active={this.state.secondActive}
+                  />
+                  {/* <div className={styles.timelineInnerCircle2} /> */}
+                  <div className={this.state.timelineBorder2} />
+                  <div className={this.state.timelineDetails2}>
+                    Second year in University of St Andrews
+                  </div>
+                </div>
+                <div
+                  className={styles.timelineCircle3}
+                  onClick={() =>
+                    this.timelineDetailHandler("Served for National Duty")
+                  }
+                >
+                  <CircleAnimation
+                    delay="4s"
+                    active={this.state.secondActive}
+                  />
+                  <div className={styles.timelineInnerCircle3} />
+                  <div className={this.state.timelineBorder3} />
+                  <div className={this.state.timelineDetails3}>
+                    Served for National Duty
+                  </div>
+                </div>
+                <div
+                  className={styles.timelineCircle4}
+                  onClick={() =>
+                    this.timelineDetailHandler(
+                      "Third year in University of St Andrews"
+                    )
+                  }
+                >
+                  <CircleAnimation
+                    delay="7s"
+                    active={this.state.secondActive}
+                  />
+                  <div className={styles.timelineInnerCircle4} />
+                  <div className={this.state.timelineBorder4} />
+                  <div className={this.state.timelineDetails4}>
+                    Start Freelance Tutoring as a Job
+                  </div>
+                  <div className={this.state.timelineDetails4Bottom}>
+                    Third year in University of St Andrews
+                  </div>
+                </div>
+                <div
+                  className={styles.timelineCircle5}
+                  onClick={() =>
+                    this.timelineDetailHandler(
+                      "Fourth year in University of St Andrews"
+                    )
+                  }
+                >
+                  <CircleAnimation
+                    delay="9s"
+                    active={this.state.secondActive}
+                  />
+                  <div className={styles.timelineInnerCircle5} />
+                  <div className={this.state.timelineBorder5} />
+                  <div className={this.state.timelineDetails5}>
+                    Fourth year in University of St Andrews
+                  </div>
+                </div>
+                <div
+                  className={styles.timelineCircle6}
+                  onClick={() =>
+                    this.timelineDetailHandler(
+                      "Graduate Unviersity of St Andrews"
+                    )
+                  }
+                >
+                  <CircleAnimation
+                    delay="11s"
+                    active={this.state.secondActive}
+                  />
+                  <div className={this.state.timelineBorder6}>
+                    <div className={this.state.timelineBorder6Helper} />
+                  </div>
+                  <div className={this.state.timelineDetails6}>
+                    Graduate Unviersity of St Andrews
+                  </div>
+                  <div className={this.state.timelineDetails6Bottom}>
+                    Work for Mercedes Benz Korea
+                  </div>
+                </div>
+                <div
+                  className={styles.timelineCircle7}
+                  onClick={() =>
+                    this.timelineDetailHandler(
+                      "Contract ends for Mercedes Benz"
+                    )
+                  }
+                >
+                  <CircleAnimation
+                    delay="11.5s"
+                    active={this.state.secondActive}
+                  />
+                  <div className={this.state.timelineBorder7}>
+                    <div className={this.state.timelineBorder7Helper} />
+                  </div>
+                  <div className={this.state.timelineDetails7}>
+                    Contract ends for Mercedes Benz
+                  </div>
+                </div>
+              </div>
+              <div className={styles.presentFlag}>
+                <div className={styles.flagTriangle} />
+              </div>
+            </div>
           </div>
+          <div className={this.state.thirdContentStyles}>
+            <div
+              onClick={() => this.skillsDetailHandler(0)}
+              className={styles.title}
+            >
+              <div
+                className={
+                  this.state.skillsTitle === "Skills"
+                    ? styles.skillTitle
+                    : styles.skillTitleClicked
+                }
+              >
+                {this.state.skillsTitle}
+              </div>
+              <div
+                className={
+                  this.state.skillsTitle === "Skills"
+                    ? styles.hideDeco
+                    : styles.deco
+                }
+              />
+            </div>
 
-          <div className={styles.skillsContainer}>
-            <div
-              className={this.state.skills1}
-              onClick={() => this.skillsDetailHandler(1)}
-            >
-              <div className={styles.skillsTitle}>React</div>
-              <SkillDetail
-                isActive={this.state.skillsTitle === "React"}
-                images={[image1, image2, image3, image4, image5, image6]}
-                height="100%"
-                time={4000}
-                title="React"
-                paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+            <div className={styles.skillsContainer}>
+              <div
+                className={this.state.skills1}
+                onClick={() => this.skillsDetailHandler(1)}
+              >
+                <div className={styles.skillsTitle}>React</div>
+                <SkillDetail
+                  isActive={this.state.skillsTitle === "React"}
+                  images={[image1, image2, image3, image4, image5, image6]}
+                  height="100%"
+                  time={4000}
+                  title="React"
+                  paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                 do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 Ut enim ad minim veniam, quis nostrud exercitation ullamco
                 laboris nisi ut aliquip ex ea commodo consequat. Duis aute
@@ -1122,21 +1168,21 @@ class MainPage extends React.Component {
                 dolore eu fugiat nulla pariatur. Excepteur sint occaecat
                 cupidatat non proident, sunt in culpa qui officia deserunt
                 mollit anim id est laborum."
-                logo={react}
-              />
-            </div>
-            <div
-              className={this.state.skills2}
-              onClick={() => this.skillsDetailHandler(2)}
-            >
-              <div className={styles.skillsTitle}>Java</div>
-              <SkillDetail
-                isActive={this.state.skillsTitle === "Java"}
-                images={[image1, image2, image3, image4, image5, image6]}
-                height="100%"
-                time={4000}
-                title="Java"
-                paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  logo={react}
+                />
+              </div>
+              <div
+                className={this.state.skills2}
+                onClick={() => this.skillsDetailHandler(2)}
+              >
+                <div className={styles.skillsTitle}>Java</div>
+                <SkillDetail
+                  isActive={this.state.skillsTitle === "Java"}
+                  images={[image1, image2, image3, image4, image5, image6]}
+                  height="100%"
+                  time={4000}
+                  title="Java"
+                  paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                 do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 Ut enim ad minim veniam, quis nostrud exercitation ullamco
                 laboris nisi ut aliquip ex ea commodo consequat. Duis aute
@@ -1159,21 +1205,21 @@ class MainPage extends React.Component {
                 dolore eu fugiat nulla pariatur. Excepteur sint occaecat
                 cupidatat non proident, sunt in culpa qui officia deserunt
                 mollit anim id est laborum."
-                logo={java}
-              />
-            </div>
-            <div
-              className={this.state.skills3}
-              onClick={() => this.skillsDetailHandler(3)}
-            >
-              <div className={styles.skillsTitle}>Javascript</div>
-              <SkillDetail
-                isActive={this.state.skillsTitle === "Javascript"}
-                images={[image1, image2, image3, image4, image5, image6]}
-                height="100%"
-                time={4000}
-                title="Java"
-                paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  logo={java}
+                />
+              </div>
+              <div
+                className={this.state.skills3}
+                onClick={() => this.skillsDetailHandler(3)}
+              >
+                <div className={styles.skillsTitle}>Javascript</div>
+                <SkillDetail
+                  isActive={this.state.skillsTitle === "Javascript"}
+                  images={[image1, image2, image3, image4, image5, image6]}
+                  height="100%"
+                  time={4000}
+                  title="Java"
+                  paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                 do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 Ut enim ad minim veniam, quis nostrud exercitation ullamco
                 laboris nisi ut aliquip ex ea commodo consequat. Duis aute
@@ -1196,21 +1242,21 @@ class MainPage extends React.Component {
                 dolore eu fugiat nulla pariatur. Excepteur sint occaecat
                 cupidatat non proident, sunt in culpa qui officia deserunt
                 mollit anim id est laborum."
-                logo={javascript}
-              />
-            </div>
-            <div
-              className={this.state.skills4}
-              onClick={() => this.skillsDetailHandler(4)}
-            >
-              <div className={styles.skillsTitle}>MariaDB</div>
-              <SkillDetail
-                isActive={this.state.skillsTitle === "MariaDB"}
-                images={[image1, image2, image3, image4, image5, image6]}
-                height="100%"
-                time={4000}
-                title="Java"
-                paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  logo={javascript}
+                />
+              </div>
+              <div
+                className={this.state.skills4}
+                onClick={() => this.skillsDetailHandler(4)}
+              >
+                <div className={styles.skillsTitle}>MariaDB</div>
+                <SkillDetail
+                  isActive={this.state.skillsTitle === "MariaDB"}
+                  images={[image1, image2, image3, image4, image5, image6]}
+                  height="100%"
+                  time={4000}
+                  title="Java"
+                  paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                 do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 Ut enim ad minim veniam, quis nostrud exercitation ullamco
                 laboris nisi ut aliquip ex ea commodo consequat. Duis aute
@@ -1233,21 +1279,21 @@ class MainPage extends React.Component {
                 dolore eu fugiat nulla pariatur. Excepteur sint occaecat
                 cupidatat non proident, sunt in culpa qui officia deserunt
                 mollit anim id est laborum."
-                logo={mariaDB}
-              />
-            </div>
-            <div
-              className={this.state.skills5}
-              onClick={() => this.skillsDetailHandler(5)}
-            >
-              <div className={styles.skillsTitle}>Git</div>
-              <SkillDetail
-                isActive={this.state.skillsTitle === "Git"}
-                images={[image1, image2, image3, image4, image5, image6]}
-                height="100%"
-                time={4000}
-                title="Java"
-                paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  logo={mariaDB}
+                />
+              </div>
+              <div
+                className={this.state.skills5}
+                onClick={() => this.skillsDetailHandler(5)}
+              >
+                <div className={styles.skillsTitle}>Git</div>
+                <SkillDetail
+                  isActive={this.state.skillsTitle === "Git"}
+                  images={[image1, image2, image3, image4, image5, image6]}
+                  height="100%"
+                  time={4000}
+                  title="Java"
+                  paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                 do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 Ut enim ad minim veniam, quis nostrud exercitation ullamco
                 laboris nisi ut aliquip ex ea commodo consequat. Duis aute
@@ -1270,21 +1316,21 @@ class MainPage extends React.Component {
                 dolore eu fugiat nulla pariatur. Excepteur sint occaecat
                 cupidatat non proident, sunt in culpa qui officia deserunt
                 mollit anim id est laborum."
-                logo={git}
-              />
-            </div>
-            <div
-              className={this.state.skills6}
-              onClick={() => this.skillsDetailHandler(6)}
-            >
-              <div className={styles.skillsTitle}>Spring</div>
-              <SkillDetail
-                isActive={this.state.skillsTitle === "Spring"}
-                images={[image1, image2, image3, image4, image5, image6]}
-                height="100%"
-                time={4000}
-                title="Java"
-                paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  logo={git}
+                />
+              </div>
+              <div
+                className={this.state.skills6}
+                onClick={() => this.skillsDetailHandler(6)}
+              >
+                <div className={styles.skillsTitle}>Spring</div>
+                <SkillDetail
+                  isActive={this.state.skillsTitle === "Spring"}
+                  images={[image1, image2, image3, image4, image5, image6]}
+                  height="100%"
+                  time={4000}
+                  title="Java"
+                  paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                 do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 Ut enim ad minim veniam, quis nostrud exercitation ullamco
                 laboris nisi ut aliquip ex ea commodo consequat. Duis aute
@@ -1307,21 +1353,21 @@ class MainPage extends React.Component {
                 dolore eu fugiat nulla pariatur. Excepteur sint occaecat
                 cupidatat non proident, sunt in culpa qui officia deserunt
                 mollit anim id est laborum."
-                logo={spring}
-              />
-            </div>
-            <div
-              className={this.state.skills7}
-              onClick={() => this.skillsDetailHandler(7)}
-            >
-              <div className={styles.skillsTitle}>Node.js</div>
-              <SkillDetail
-                isActive={this.state.skillsTitle === "Node.js"}
-                images={[image1, image2, image3, image4, image5, image6]}
-                height="100%"
-                time={4000}
-                title="Java"
-                paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  logo={spring}
+                />
+              </div>
+              <div
+                className={this.state.skills7}
+                onClick={() => this.skillsDetailHandler(7)}
+              >
+                <div className={styles.skillsTitle}>Node.js</div>
+                <SkillDetail
+                  isActive={this.state.skillsTitle === "Node.js"}
+                  images={[image1, image2, image3, image4, image5, image6]}
+                  height="100%"
+                  time={4000}
+                  title="Java"
+                  paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                 do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 Ut enim ad minim veniam, quis nostrud exercitation ullamco
                 laboris nisi ut aliquip ex ea commodo consequat. Duis aute
@@ -1344,21 +1390,21 @@ class MainPage extends React.Component {
                 dolore eu fugiat nulla pariatur. Excepteur sint occaecat
                 cupidatat non proident, sunt in culpa qui officia deserunt
                 mollit anim id est laborum."
-                logo={nodejs}
-              />
-            </div>
-            <div
-              className={this.state.skills8}
-              onClick={() => this.skillsDetailHandler(8)}
-            >
-              <div className={styles.skillsTitle}>Processing4</div>
-              <SkillDetail
-                isActive={this.state.skillsTitle === "Processing4"}
-                images={[image1, image2, image3, image4, image5, image6]}
-                height="100%"
-                time={4000}
-                title="Java"
-                paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  logo={nodejs}
+                />
+              </div>
+              <div
+                className={this.state.skills8}
+                onClick={() => this.skillsDetailHandler(8)}
+              >
+                <div className={styles.skillsTitle}>Processing4</div>
+                <SkillDetail
+                  isActive={this.state.skillsTitle === "Processing4"}
+                  images={[image1, image2, image3, image4, image5, image6]}
+                  height="100%"
+                  time={4000}
+                  title="Java"
+                  paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                 do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 Ut enim ad minim veniam, quis nostrud exercitation ullamco
                 laboris nisi ut aliquip ex ea commodo consequat. Duis aute
@@ -1381,16 +1427,19 @@ class MainPage extends React.Component {
                 dolore eu fugiat nulla pariatur. Excepteur sint occaecat
                 cupidatat non proident, sunt in culpa qui officia deserunt
                 mollit anim id est laborum."
-                logo={processing4}
-              />
+                  logo={processing4}
+                />
+              </div>
             </div>
           </div>
+          <div id="firstContent" className={styles.bar} />
+          <div id="secondContent" className={styles.bar} />
+          <div id="thirdContent" className={styles.bar} />
+
+          <div />
         </div>
-        <div id="firstContent" className={styles.bar} />
-        <div id="secondContent" className={styles.bar} />
-        <div id="thirdContent" className={styles.bar} />
-
-        <div />
+        <div className={styles.tablet}></div>
+        <div className={styles.mobile}></div>
       </div>
     );
   }

@@ -28,6 +28,7 @@ class Slider extends React.Component {
   render() {
     return (
       <div
+        className={this.props.styles}
         style={{
           height: this.props.height,
           position: "relative",

@@ -1,5 +1,4 @@
 body {
-  margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -235,4 +234,31 @@ input:has(div) {
   width: 20px;
   height: 2px;
   background-color: red;
+}
+
+/* Extra Small Devices (phones) */
+@media (max-width: 575.98px) {
+  body {
+    margin: 0px;
+  }
+}
+
+/* Small Devices (tablets) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  /* Styles for small devices */
+}
+
+/* Medium Devices (laptops and small desktops) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  /* Styles for medium devices */
+}
+
+/* Large Devices (desktops) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  /* Styles for large devices */
+}
+
+/* Extra Large Devices (large desktops) */
+@media (min-width: 1200px) {
+  /* Styles for extra large devices */
 }

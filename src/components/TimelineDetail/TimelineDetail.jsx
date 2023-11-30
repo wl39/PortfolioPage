@@ -13,7 +13,8 @@ class TimelineDetail extends React.Component {
     let details = [];
     let furtherInformation = [];
 
-    details.push(<TLDR key={this.props.tldr} contents={this.props.tldr} />);
+    if (this.props.tldr.length > 0)
+      details.push(<TLDR key={this.props.tldr} contents={this.props.tldr} />);
 
     this.props.details.forEach((value) => {
       details.push(
@@ -26,15 +27,16 @@ class TimelineDetail extends React.Component {
       );
     });
 
-    this.props.furtherInformation.forEach((value) => {
-      furtherInformation.push(
-        <TimelineFurtherInformation
-          key={"tfi." + value.title}
-          title={value.title}
-          contents={value.contents}
-        />
-      );
-    });
+    if (this.props.furtherInformation.length > 0)
+      this.props.furtherInformation.forEach((value) => {
+        furtherInformation.push(
+          <TimelineFurtherInformation
+            key={"tfi." + value.title}
+            title={value.title}
+            contents={value.contents}
+          />
+        );
+      });
 
     let contents = (
       <div className={styles.TimelineDetailBox}>
@@ -54,7 +56,8 @@ class TimelineDetail extends React.Component {
       let details = [];
       let furtherInformation = [];
 
-      details.push(<TLDR key={this.props.tldr} contents={this.props.tldr} />);
+      if (this.props.tldr.length > 0)
+        details.push(<TLDR key={this.props.tldr} contents={this.props.tldr} />);
 
       this.props.details.forEach((value) => {
         details.push(
@@ -67,15 +70,16 @@ class TimelineDetail extends React.Component {
         );
       });
 
-      this.props.furtherInformation.forEach((value) => {
-        furtherInformation.push(
-          <TimelineFurtherInformation
-            key={value.title}
-            title={value.title}
-            contents={value.contents}
-          />
-        );
-      });
+      if (this.props.furtherInformation.length > 0)
+        this.props.furtherInformation.forEach((value) => {
+          furtherInformation.push(
+            <TimelineFurtherInformation
+              key={value.title}
+              title={value.title}
+              contents={value.contents}
+            />
+          );
+        });
 
       let contents = (
         <div className={styles.TimelineDetailBox}>
