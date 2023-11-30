@@ -17,6 +17,8 @@
 .underConsturctionText {
   position: fixed;
   top: 280px;
+  text-align: center;
+  width: 100%;
 }
 
 .mainContainer {

@@ -133,7 +133,7 @@ class MainPage extends React.Component {
     super(props);
 
     this.state = {
-      underConsturction: false,
+      underConsturction: true,
       firstActive: false,
       firstContentStyles: styles.mainContainer,
       secondContentStyles: styles.detailsContainer,
