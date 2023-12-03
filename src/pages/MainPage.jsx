@@ -115,8 +115,8 @@ import present10 from "../images/present/present_10.JPG";
 import present11 from "../images/present/present_11.JPG";
 import present12 from "../images/present/present_12.jpeg";
 
-import CircleAnimation from "../components/CircleAnimation/CircleAnimation";
-import TimelineDetail from "../components/TimelineDetail/TimelineDetail";
+import CircleAnimation from "../components/Timeline/CircleAnimation/CircleAnimation";
+import TimelineDetail from "../components/Timeline/TimelineDetail/TimelineDetail";
 import SkillDetail from "../components/SkillDetail/SkillDetail";
 
 import java from "../assets/logo/Java-icon.svg";
@@ -127,6 +127,7 @@ import git from "../assets/logo/Git-icon.svg";
 import spring from "../assets/logo/Spring-icon.svg";
 import nodejs from "../assets/logo/Node.js-icon.svg";
 import processing4 from "../assets/logo/Processing-icon.svg";
+import Timeline from "../components/Timeline/Timeline";
 
 class MainPage extends React.Component {
   constructor(props) {
@@ -150,7 +151,7 @@ class MainPage extends React.Component {
       skills7: styles.skills7,
       skills8: styles.skills8,
       skillsTitle: "Skills",
-      timelineStyles: styles.timelineLine,
+      timelineStyles: styles.timelineLineMoved,
       timelineDetails1: styles.timelineDetails1,
       timelineDetails2: styles.timelineDetails2,
       timelineDetails3: styles.timelineDetails3,
@@ -160,18 +161,27 @@ class MainPage extends React.Component {
       timelineDetails6: styles.timelineDetails6,
       timelineDetails6Bottom: styles.timelineDetails6Bottom,
       timelineDetails7: styles.timelineDetails7,
-      timelineBorder1: styles.timelineBorder1,
-      timelineBorder2: styles.timelineBorder2,
-      timelineBorder3: styles.timelineBorder3,
-      timelineBorder4: styles.timelineBorder4,
-      timelineBorder5: styles.timelineBorder5,
-      timelineBorder6: styles.timelineBorder6,
-      timelineBorder6Helper: styles.timelineBorder6Helper,
-      timelineBorder7: styles.timelineBorder7,
-      timelineBorder7Helper: styles.timelineBorder7Helper,
+      timelineBorder1: styles.timelineBorder1Moved,
+      timelineBorder2: styles.timelineBorder2Moved,
+      timelineBorder3: styles.timelineBorder3Moved,
+      timelineBorder4: styles.timelineBorder4Moved,
+      timelineBorder5: styles.timelineBorder5Moved,
+      timelineBorder6: styles.timelineBorder6Moved,
+      timelineBorder6Helper: styles.timelineBorder6HelperMoved,
+      timelineBorder7: styles.timelineBorder7Moved,
+      timelineBorder7Helper: styles.timelineBorder7HelperMoved,
       timelineTitle: "Timeline",
       timelineImages: [],
       timelineDetails: null,
+      timelineTransition: false,
+      timelineClicked: {
+        1: false,
+        2: false,
+        3: false,
+        4: false,
+        6: false,
+        7: false,
+      },
     };
   }
 
@@ -247,30 +257,56 @@ class MainPage extends React.Component {
               });
               break;
             case "secondContent":
-              this.setState({
-                secondContentStyles: styles.timelineContainerMoved,
-                secondActive: false,
-                timelineStyles: styles.timelineLineMoved,
-                timelineBorder1: styles.timelineBorder1Moved,
-                timelineBorder2: styles.timelineBorder2Moved,
-                timelineBorder3: styles.timelineBorder3Moved,
-                timelineBorder4: styles.timelineBorder4Moved,
-                timelineBorder5: styles.timelineBorder5Moved,
-                timelineBorder6: styles.timelineBorder6Moved,
-                timelineBorder6Helper: styles.timelineBorder6HelperMoved,
-                timelineBorder7: styles.timelineBorder7Moved,
-                timelineDetails1: styles.timelineDetails1Moved,
-                timelineDetails2: styles.timelineDetails2Moved,
-                timelineDetails3: styles.timelineDetails3Moved,
-                timelineDetails4: styles.timelineDetails4Moved,
-                timelineDetails4Bottom: styles.timelineDetails4BottomMoved,
-                timelineDetails5: styles.timelineDetails5Moved,
-                timelineDetails6: styles.timelineDetails6Moved,
-                timelineDetails6Bottom: styles.timelineDetails6BottomMoved,
-                timelineDetails7: styles.timelineDetails7Moved,
-                timelineBorder7Helper: styles.timelineBorder7HelperMoved,
-                timelineTitle: "Timeline",
-              });
+              if (this.state.timelineTransition) {
+                this.setState({
+                  secondContentStyles: styles.timelineContainerMoved,
+                  secondActive: false,
+                  timelineStyles: styles.timelineLine,
+                  timelineBorder1: styles.timelineBorder1,
+                  timelineBorder2: styles.timelineBorder2,
+                  timelineBorder3: styles.timelineBorder3,
+                  timelineBorder4: styles.timelineBorder4,
+                  timelineBorder5: styles.timelineBorder5,
+                  timelineBorder6: styles.timelineBorder6,
+                  timelineBorder6Helper: styles.timelineBorder6Helper,
+                  timelineBorder7: styles.timelineBorder7,
+                  timelineDetails1: styles.timelineDetails1,
+                  timelineDetails2: styles.timelineDetails2,
+                  timelineDetails3: styles.timelineDetails3,
+                  timelineDetails4: styles.timelineDetails4,
+                  timelineDetails4Bottom: styles.timelineDetails4Bottom,
+                  timelineDetails5: styles.timelineDetails5,
+                  timelineDetails6: styles.timelineDetails6,
+                  timelineDetails6Bottom: styles.timelineDetails6Bottom,
+                  timelineDetails7: styles.timelineDetails7,
+                  timelineBorder7Helper: styles.timelineBorder7Helper,
+                });
+              } else {
+                this.setState({
+                  secondContentStyles: styles.timelineContainerMoved,
+                  secondActive: false,
+                  timelineStyles: styles.timelineLineMoved,
+                  timelineBorder1: styles.timelineBorder1Moved,
+                  timelineBorder2: styles.timelineBorder2Moved,
+                  timelineBorder3: styles.timelineBorder3Moved,
+                  timelineBorder4: styles.timelineBorder4Moved,
+                  timelineBorder5: styles.timelineBorder5Moved,
+                  timelineBorder6: styles.timelineBorder6Moved,
+                  timelineBorder6Helper: styles.timelineBorder6HelperMoved,
+                  timelineBorder7: styles.timelineBorder7Moved,
+                  timelineDetails1: styles.timelineDetails1Moved,
+                  timelineDetails2: styles.timelineDetails2Moved,
+                  timelineDetails3: styles.timelineDetails3Moved,
+                  timelineDetails4: styles.timelineDetails4Moved,
+                  timelineDetails4Bottom: styles.timelineDetails4BottomMoved,
+                  timelineDetails5: styles.timelineDetails5Moved,
+                  timelineDetails6: styles.timelineDetails6Moved,
+                  timelineDetails6Bottom: styles.timelineDetails6BottomMoved,
+                  timelineDetails7: styles.timelineDetails7Moved,
+                  timelineBorder7Helper: styles.timelineBorder7HelperMoved,
+                  timelineTitle: "Timeline",
+                });
+              }
               break;
             case "thirdContent":
               this.setState({
@@ -316,11 +352,19 @@ class MainPage extends React.Component {
     // observer.observe(fifthContent);
   }
 
+  transitionEndHandler = () => {
+    this.setState({
+      timelineTransition: true,
+    });
+  };
+
   timelineDetailHandler = (contentsTitle) => {
     let details;
     let images;
+    let number;
     switch (contentsTitle) {
       case "First year in University of St Andrews":
+        number = 1;
         images = [
           first1,
           first2,
@@ -402,6 +446,7 @@ class MainPage extends React.Component {
         );
         break;
       case "Second year in University of St Andrews":
+        number = 2;
         images = [
           second1,
           second2,
@@ -487,6 +532,7 @@ class MainPage extends React.Component {
         );
         break;
       case "Served for National Duty":
+        number = 3;
         images = [
           holiday1,
           holiday2,
@@ -542,6 +588,7 @@ class MainPage extends React.Component {
         );
         break;
       case "Third year in University of St Andrews":
+        number = 4;
         images = [
           third1,
           third2,
@@ -622,6 +669,7 @@ class MainPage extends React.Component {
         );
         break;
       case "Fourth year in University of St Andrews":
+        number = 5;
         images = [fourth1, fourth2, fourth3, fourth4, fourth5, fourth6];
         details = (
           <TimelineDetail
@@ -674,6 +722,7 @@ class MainPage extends React.Component {
         );
         break;
       case "Graduate Unviersity of St Andrews":
+        number = 6;
         images = [
           graduate1,
           graduate2,
@@ -727,6 +776,7 @@ class MainPage extends React.Component {
         );
         break;
       case "Contract ends for Mercedes Benz":
+        number = 7;
         images = [
           present1,
           present2,
@@ -766,6 +816,10 @@ class MainPage extends React.Component {
     }
 
     this.setState({
+      timelineClicked: {
+        ...this.state.timelineClicked,
+        [number]: true,
+      },
       timelineTitle: contentsTitle,
       timelineDetails: details,
       timelineImages: images,
@@ -970,7 +1024,10 @@ class MainPage extends React.Component {
               </div>
             </div>
             <div className={styles.timeline}>
-              <div className={this.state.timelineStyles} />
+              <Timeline
+                transitionEndHandler={this.transitionEndHandler}
+                className={this.state.timelineStyles}
+              />
               <div className={styles.timelineGrid}>
                 <div
                   className={styles.timelineCircle1}
@@ -983,6 +1040,8 @@ class MainPage extends React.Component {
                   <CircleAnimation
                     delay="0s"
                     active={this.state.secondActive}
+                    end={this.state.timelineTransition}
+                    clicked={this.state.timelineClicked[1]}
                   />
                   <div className={styles.timelineInnerCircle1} />
                   <div className={this.state.timelineBorder1} />
@@ -1001,6 +1060,8 @@ class MainPage extends React.Component {
                   <CircleAnimation
                     delay="2s"
                     active={this.state.secondActive}
+                    end={this.state.timelineTransition}
+                    clicked={this.state.timelineClicked[2]}
                   />
                   {/* <div className={styles.timelineInnerCircle2} /> */}
                   <div className={this.state.timelineBorder2} />
@@ -1017,6 +1078,8 @@ class MainPage extends React.Component {
                   <CircleAnimation
                     delay="4s"
                     active={this.state.secondActive}
+                    end={this.state.timelineTransition}
+                    clicked={this.state.timelineClicked[3]}
                   />
                   <div className={styles.timelineInnerCircle3} />
                   <div className={this.state.timelineBorder3} />
@@ -1035,6 +1098,8 @@ class MainPage extends React.Component {
                   <CircleAnimation
                     delay="7s"
                     active={this.state.secondActive}
+                    end={this.state.timelineTransition}
+                    clicked={this.state.timelineClicked[4]}
                   />
                   <div className={styles.timelineInnerCircle4} />
                   <div className={this.state.timelineBorder4} />
@@ -1056,6 +1121,8 @@ class MainPage extends React.Component {
                   <CircleAnimation
                     delay="9s"
                     active={this.state.secondActive}
+                    end={this.state.timelineTransition}
+                    clicked={this.state.timelineClicked[5]}
                   />
                   <div className={styles.timelineInnerCircle5} />
                   <div className={this.state.timelineBorder5} />
@@ -1074,6 +1141,8 @@ class MainPage extends React.Component {
                   <CircleAnimation
                     delay="11s"
                     active={this.state.secondActive}
+                    end={this.state.timelineTransition}
+                    clicked={this.state.timelineClicked[6]}
                   />
                   <div className={this.state.timelineBorder6}>
                     <div className={this.state.timelineBorder6Helper} />
@@ -1096,6 +1165,8 @@ class MainPage extends React.Component {
                   <CircleAnimation
                     delay="11.5s"
                     active={this.state.secondActive}
+                    end={this.state.timelineTransition}
+                    clicked={this.state.timelineClicked[7]}
                   />
                   <div className={this.state.timelineBorder7}>
                     <div className={this.state.timelineBorder7Helper} />

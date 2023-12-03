@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 class Slider extends React.Component {
   constructor(props) {
     super(props);
-    // props.images.map((image) => {});
     this.timer = null;
     this.state = {
       timerValue: 0,

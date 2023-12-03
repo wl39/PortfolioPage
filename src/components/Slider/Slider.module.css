@@ -14,6 +14,7 @@
   height: inherit;
   -webkit-transition: background-image 0.8s ease;
   transition: background-image 0.8s ease;
+  transform: translate3d(0, 0, 0);
 }
 .blur {
   position: absolute;
@@ -25,14 +26,25 @@
   -webkit-filter: blur(3px) grayscale(1);
   -moz-filter: blur(3px) grayscale(1);
   filter: blur(3px) grayscale(1);
-  transform: scale(1.8);
+  transform: scale(1.8) translate3d(0, 0, 0);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  background-image: none;
+  /* background-image: none; */
 
   margin: auto;
   height: inherit;
   -webkit-transition: background-image 0.8s ease;
   transition: background-image 0.8s ease;
+}
+
+@keyframes nextImage {
+  0% {
+    opacity: 0;
+    width: 100%;
+  }
+  100% {
+    opacity: 1;
+    width: 100%;
+  }
 }
