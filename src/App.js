@@ -4,6 +4,7 @@ import MainPage from "./pages/MainPage";
 import MainPagePrev from "./pages/MainPagePrev";
 import LoginPage from "./pages/LoginPage";
 import WallPage from "./pages/WallPage";
+import StopwatchPage from "./pages/StopwatchPage";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route exact path="/" element={<MainPage />} />
         <Route path="/prev" element={<MainPagePrev />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/stopwatch" element={<StopwatchPage />} />
         <Route path="/wall" element={<WallPage />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
