@@ -1,0 +1,15 @@
+.stopwatch {
+  font-family: monospace;
+  font-size: 80px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  width: 180px;
+  margin: auto;
+  height: 185px;
+  justify-content: space-between;
+}

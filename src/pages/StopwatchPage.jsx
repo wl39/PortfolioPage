@@ -1,11 +1,21 @@
 import React, { Component } from "react";
 import axios from "axios";
 
+import styles from "./StopwatchPage.module.css";
+
+import WorkerBuilder from "./worker/workerBuilder";
+import stopwatchWorker from "./worker/stopwatchWorker";
+
+const instance = new WorkerBuilder(stopwatchWorker);
+
+const localUrl = "http://localhost:8080/api/v1/stopwatch";
+// const localUrl = "https://91b.co.uk/api/v1/stopwatch";
 class StopwatchPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       id: -1,
+      intervalID: null,
       elapsedTime: 0,
       isRunning: false,
     };
@@ -14,19 +24,23 @@ class StopwatchPage extends Component {
   componentDidMount() {
     window.addEventListener("beforeunload", this.handleBeforeUnload);
 
-    this.interval = setInterval(() => {
+    instance.onmessage = (message) => {
       if (this.state.isRunning) {
-        document.title = this.formatTimeTitle(this.state.elapsedTime);
+        document.title = this.formatTimeTitle(message.data.elapsedTime);
         this.setState({
-          elapsedTime: this.state.elapsedTime + 1,
+          elapsedTime: message.data.elapsedTime,
+          intervalID: message.data.intervalID,
         });
       }
-    }, 10);
+    };
   }
 
   componentWillUnmount() {
     window.removeEventListener("beforeunload", this.handleBeforeUnload);
-    clearInterval(this.interval);
+    instance.postMessage({
+      elapsedTime: 0,
+      intervalID: this.state.intervalID,
+    });
   }
 
   handleBeforeUnload = (event) => {
@@ -40,9 +54,8 @@ class StopwatchPage extends Component {
 
   startStopwatch = () => {
     let id = -1;
-
     axios
-      .post("http://localhost:8080/api/v1/stopwatch", {
+      .post(localUrl, {
         name: "Lim",
         generatedDate: new Date(Date.now()).toISOString().slice(0, 19),
         elapsedTime: this.state.elapsedTime,
@@ -54,63 +67,81 @@ class StopwatchPage extends Component {
       .catch((error) => {
         console.log(error);
       })
-      .then(() => {
+      .finally(() => {
+        instance.postMessage({
+          elapsedTime: this.state.elapsedTime,
+          intervalID: null,
+        });
         this.setState({ isRunning: true, id: id });
       });
   };
 
   pauseStopwatch = () => {
-    if (this.state.id > 0) {
-      axios
-        .post("http://localhost:8080/api/v1/stopwatch", {
-          name: "Lim",
-          relatedID: this.state.id,
-          generatedDate: new Date(Date.now()).toISOString().slice(0, 19),
+    // if (this.state.id > 0) {
+    axios
+      .post(localUrl, {
+        name: "Lim",
+        relatedID: this.state.id,
+        generatedDate: new Date(Date.now()).toISOString().slice(0, 19),
+        elapsedTime: this.state.elapsedTime,
+        type: "p",
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        instance.postMessage({
           elapsedTime: this.state.elapsedTime,
-          type: "p",
-        })
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((error) => {
-          console.log(error);
+          intervalID: this.state.intervalID,
         });
-    }
-    this.setState({ isRunning: false });
+        this.setState({ isRunning: false });
+      });
+    // }
   };
 
   resetStopwatch = () => {
     document.title = "Lim's portfolio";
-    if (this.state.id > 0) {
-      axios
-        .post("http://localhost:8080/api/v1/stopwatch", {
-          name: "Lim",
-          relatedID: this.state.id,
-          generatedDate: new Date(Date.now()).toISOString().slice(0, 19),
-          elapsedTime: this.state.elapsedTime,
-          type: "d",
-        })
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((error) => {
-          console.log(error);
+    // if (this.state.id > 0) {
+    axios
+      .post(localUrl, {
+        name: "Lim",
+        relatedID: this.state.id,
+        generatedDate: new Date(Date.now()).toISOString().slice(0, 19),
+        elapsedTime: this.state.elapsedTime,
+        type: "d",
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        instance.postMessage({
+          elapsedTime: 0,
+          intervalID: this.state.intervalID,
         });
-    }
-    this.setState({ elapsedTime: 0, isRunning: false });
+        this.setState({ elapsedTime: 0, isRunning: false });
+      });
+    // }
   };
 
-  pressEnter = (event) => {
+  startStopwatchHandler = (event) => {
     if (event.key === "Enter") {
       if (event.target.value.toLowerCase() === "start") {
         this.startStopwatch();
         this.setState({ isRunning: true });
         event.target.value = "";
-      } else if (event.target.value.toLowerCase() === "reset") {
-        this.setState({ isRunning: false });
-        this.resetStopwatch();
-        event.target.value = "";
-      } else if (event.target.value.toLowerCase() === "pause") {
+      }
+    }
+  };
+
+  pauseStopwatchHandler = (event) => {
+    if (event.key === "Enter") {
+      if (event.target.value.toLowerCase() === "pause") {
         this.pauseStopwatch();
         this.setState({ isRunning: false });
         event.target.value = "";
@@ -118,10 +149,20 @@ class StopwatchPage extends Component {
     }
   };
 
+  resetStopwatchHandler = (event) => {
+    if (event.key === "Enter") {
+      if (event.target.value.toLowerCase() === "reset") {
+        this.setState({ isRunning: false });
+        this.resetStopwatch();
+        event.target.value = "";
+      }
+    }
+  };
+
   formatTime = (time) => {
     return `${String(parseInt(time / 360000)).padStart(2, "0")}:${String(
-      parseInt(time / 6000)
-    ).padStart(2, "0")}:${String(parseInt(time / 100)).padStart(
+      parseInt((time / 6000) % 60)
+    ).padStart(2, "0")}:${String(parseInt((time / 100) % 60)).padStart(
       2,
       "0"
     )}.${String(time % 100).padStart(2, "0")}`;
@@ -130,11 +171,14 @@ class StopwatchPage extends Component {
   formatTimeTitle = (time) => {
     if (time / 360000 >= 1) {
       return `${String(parseInt(time / 360000)).padStart(2, "0")}:${String(
-        parseInt(time / 6000)
-      ).padStart(2, "0")}:${String(parseInt(time / 100)).padStart(2, "0")}`;
+        parseInt((time / 6000) % 60)
+      ).padStart(2, "0")}:${String(parseInt((time / 100) % 60)).padStart(
+        2,
+        "0"
+      )}`;
     } else {
-      return `${String(parseInt(time / 6000)).padStart(2, "0")}:${String(
-        parseInt(time / 100)
+      return `${String(parseInt((time / 6000) % 60)).padStart(2, "0")}:${String(
+        parseInt((time / 100) % 60)
       ).padStart(2, "0")}`;
     }
   };
@@ -142,20 +186,27 @@ class StopwatchPage extends Component {
   render() {
     return (
       <div>
-        <div>{this.formatTime(this.state.elapsedTime)}</div>
-
-        {this.state.isRunning ? (
+        <div className={styles.stopwatch}>
+          {this.formatTime(this.state.elapsedTime)}
+        </div>
+        <div className={styles.inputContainer}>
+          <input placeholder="Type your name" onChange={this.nameHandler} />
+          {this.state.isRunning ? (
+            <input
+              placeholder="Type 'PAUSE' to pause"
+              onKeyUp={this.pauseStopwatchHandler}
+            />
+          ) : (
+            <input
+              placeholder="Type 'START' to start"
+              onKeyUp={this.startStopwatchHandler}
+            />
+          )}
           <input
-            placeholder="Type 'PAUSE' to pause"
-            onKeyUp={this.pressEnter}
+            placeholder="Type 'RESET' to start"
+            onKeyUp={this.resetStopwatchHandler}
           />
-        ) : (
-          <input
-            placeholder="Type 'START' to start"
-            onKeyUp={this.pressEnter}
-          />
-        )}
-        <input placeholder="Type 'RESET' to start" onKeyUp={this.pressEnter} />
+        </div>
       </div>
     );
   }
