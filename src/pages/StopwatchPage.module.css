@@ -13,3 +13,120 @@
   height: 185px;
   justify-content: space-between;
 }
+
+.recordContainer {
+  display: flex;
+  padding-bottom: 8px;
+  border-bottom: 1px solid gray;
+  margin-top: 15px;
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.start {
+  background-color: palegreen;
+  width: 10px;
+  height: 80px;
+  margin-right: 10px;
+}
+
+.pause {
+  background-color: lightgray;
+  width: 10px;
+  height: 80px;
+  margin-right: 10px;
+}
+
+.reset {
+  background-color: lightcoral;
+  width: 10px;
+  height: 80px;
+  margin-right: 10px;
+}
+
+.name {
+  color: black;
+  font-family: "monospace";
+  font-size: 32px;
+  letter-spacing: -0.4px;
+}
+
+.agos {
+  color: darkgray;
+  font-family: "monospace";
+  font-size: 18px;
+  letter-spacing: -0.4px;
+  margin-top: auto;
+}
+
+.leftContainer {
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
+}
+
+.rightContainer {
+  height: 80px;
+  line-height: 80px;
+  margin-left: auto;
+  margin-right: 10px;
+  font-family: monospace;
+}
+
+.iconContainer {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.sandClockIcon {
+  width: 30px;
+  height: 30px;
+}
+
+.records {
+  margin-top: 80px;
+}
+
+.pageContainerSelected {
+  font-weight: 800;
+  border: 2px solid black;
+  padding: 4px;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  margin: 0 4px;
+  margin-top: -1px;
+}
+
+.pageContainer {
+  font-weight: 400;
+  cursor: pointer;
+  border: 1px solid black;
+  padding: 4px;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  margin: 0 4px;
+}
+
+.dot {
+  font-weight: 400;
+  padding: 4px;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  margin: 0 4px;
+}
+
+.pages {
+  display: flex;
+  margin-top: 50px;
+  width: min-content;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+}

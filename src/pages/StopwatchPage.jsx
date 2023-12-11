@@ -6,6 +6,10 @@ import styles from "./StopwatchPage.module.css";
 import WorkerBuilder from "./worker/workerBuilder";
 import stopwatchWorker from "./worker/stopwatchWorker";
 
+import start from "../assets/svgs/SandClockStart.svg";
+import pause from "../assets/svgs/SandClockPause.svg";
+import end from "../assets/svgs/SandClockEnd.svg";
+
 const instance = new WorkerBuilder(stopwatchWorker);
 
 const localUrl = "http://localhost:8080/api/v1/stopwatch";
@@ -15,9 +19,23 @@ class StopwatchPage extends Component {
     super(props);
     this.state = {
       id: -1,
+      name: "",
+      start: false,
       intervalID: null,
       elapsedTime: 0,
       isRunning: false,
+      records: [
+        <div className={styles.recordContainer} key="none">
+          No record found.
+        </div>,
+      ],
+      pages: [
+        <div className={styles.pageContainer} key="none">
+          1
+        </div>,
+      ],
+      page: 1,
+      size: 10,
     };
   }
 
@@ -33,7 +51,249 @@ class StopwatchPage extends Component {
         });
       }
     };
+
+    this.getRecentStopwatch();
   }
+
+  getRecentStopwatch = () => {
+    axios
+      .get(localUrl + "?page=0&size=" + this.state.size + "&sort=id,desc")
+      .then((response) => {
+        this.makeRecord(response.data.content);
+        this.makePage(response.data.pageable, response.data.totalPages);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  getRecentStopwatchByPage = (page) => {
+    axios
+      .get(
+        localUrl +
+          "?page=" +
+          page +
+          "&size=" +
+          this.state.size +
+          "&sort=id,desc"
+      )
+      .then((response) => {
+        this.makeRecord(response.data.content);
+        this.makePage(response.data.pageable, response.data.totalPages);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  makeRecord = (record) => {
+    let records = [];
+
+    let ago;
+    let text;
+
+    record.forEach((record) => {
+      if (record.yearAgo > 0) {
+        ago = record.yearAgo;
+        text = record.yearAgo > 1 ? " years ago" : " year ago";
+      } else if (record.monthAgo > 0) {
+        ago = record.monthAgo;
+        text = record.monthAgo > 1 ? " months ago" : " month ago";
+      } else if (record.dayAgo > 0) {
+        ago = record.dayAgo;
+        text = record.dayAgo > 1 ? " days ago" : " day ago";
+      } else if (record.hourAgo > 0) {
+        ago = record.hourAgo;
+        text = record.hourAgo > 1 ? " hours ago" : " hour ago";
+      } else if (record.minAgo >= 0) {
+        ago = record.minAgo;
+        text = record.minAgo > 1 ? " minutes ago" : " minute ago";
+      }
+
+      records.push(
+        <div className={styles.recordContainer} key={record.id}>
+          <div
+            className={
+              record.type === "s"
+                ? styles.start
+                : record.type === "p"
+                ? styles.pause
+                : styles.reset
+            }
+          />
+          <div className={styles.leftContainer}>
+            <div className={styles.name}>{record.name}</div>
+            <div className={styles.agos}>{ago + text}</div>
+          </div>
+          <div className={styles.rightContainer}>
+            {record.type === "s" ? "" : this.formatTimeText(record.elapsedTime)}
+          </div>
+          <div className={styles.iconContainer}>
+            <img
+              className={styles.sandClockIcon}
+              alt="icon"
+              src={
+                record.type === "s" ? start : record.type === "p" ? pause : end
+              }
+            />
+          </div>
+        </div>
+      );
+    });
+
+    this.setState({ records: records });
+  };
+
+  makePage = (pageable, totalPages) => {
+    let pages = [];
+
+    if (totalPages < 7) {
+      for (let i = 0; i < totalPages; i++) {
+        pages.push(
+          <div
+            className={
+              pageable.pageNumber === i
+                ? styles.pageContainerSelected
+                : styles.pageContainer
+            }
+            key={i}
+            onClick={() => {
+              this.getRecentStopwatchByPage(i);
+            }}
+          >
+            {i + 1}
+          </div>
+        );
+      }
+    } else {
+      if (pageable.pageNumber < 4) {
+        for (let i = 0; i < 5; i++) {
+          pages.push(
+            <div
+              className={
+                pageable.pageNumber === i
+                  ? styles.pageContainerSelected
+                  : styles.pageContainer
+              }
+              key={i}
+              onClick={() => {
+                this.getRecentStopwatchByPage(i);
+              }}
+            >
+              {i + 1}
+            </div>
+          );
+        }
+
+        pages.push(
+          <div className={styles.dot} key={5}>
+            ...
+          </div>
+        );
+        pages.push(
+          <div
+            className={styles.pageContainer}
+            key={totalPages - 1}
+            onClick={() => {
+              this.getRecentStopwatchByPage(totalPages - 1);
+            }}
+          >
+            {totalPages}
+          </div>
+        );
+      } else if (totalPages - pageable.pageNumber < 5) {
+        pages.push(
+          <div
+            className={styles.pageContainer}
+            key={0}
+            onClick={() => {
+              this.getRecentStopwatchByPage(0);
+            }}
+          >
+            1
+          </div>
+        );
+        pages.push(
+          <div className={styles.dot} key={1}>
+            ...
+          </div>
+        );
+        for (let i = totalPages - 5; i < totalPages; i++) {
+          pages.push(
+            <div
+              className={
+                pageable.pageNumber === i
+                  ? styles.pageContainerSelected
+                  : styles.pageContainer
+              }
+              key={i}
+              onClick={() => {
+                this.getRecentStopwatchByPage(i);
+              }}
+            >
+              {i + 1}
+            </div>
+          );
+        }
+      } else {
+        pages.push(
+          <div
+            className={styles.pageContainer}
+            key={0}
+            onClick={() => {
+              this.getRecentStopwatchByPage(0);
+            }}
+          >
+            1
+          </div>
+        );
+        pages.push(
+          <div className={styles.dot} key={1}>
+            ...
+          </div>
+        );
+        for (
+          let i = pageable.pageNumber - 2;
+          i < pageable.pageNumber + 3;
+          i++
+        ) {
+          pages.push(
+            <div
+              className={
+                pageable.pageNumber === i
+                  ? styles.pageContainerSelected
+                  : styles.pageContainer
+              }
+              key={i}
+              onClick={() => {
+                this.getRecentStopwatchByPage(i);
+              }}
+            >
+              {i + 1}
+            </div>
+          );
+        }
+        pages.push(
+          <div className={styles.dot} key={totalPages - 2}>
+            ...
+          </div>
+        );
+        pages.push(
+          <div
+            className={styles.pageContainer}
+            key={totalPages - 1}
+            onClick={() => {
+              this.getRecentStopwatchByPage(totalPages - 1);
+            }}
+          >
+            {totalPages}
+          </div>
+        );
+      }
+    }
+
+    this.setState({ page: pageable.pageNumber + 1, pages: pages });
+  };
 
   componentWillUnmount() {
     window.removeEventListener("beforeunload", this.handleBeforeUnload);
@@ -56,13 +316,14 @@ class StopwatchPage extends Component {
     let id = -1;
     axios
       .post(localUrl, {
-        name: "Lim",
+        name: this.state.name ? this.state.name : "Anonymous",
         generatedDate: new Date(Date.now()).toISOString().slice(0, 19),
         elapsedTime: this.state.elapsedTime,
         type: this.state.elapsedTime > 0 ? "r" : "s",
+        relatedID: this.state.elapsedTime > 0 ? this.state.id : null,
       })
       .then((response) => {
-        id = response.data;
+        id = this.state.elapsedTime > 0 ? this.state.id : response.data;
       })
       .catch((error) => {
         console.log(error);
@@ -71,8 +332,10 @@ class StopwatchPage extends Component {
         instance.postMessage({
           elapsedTime: this.state.elapsedTime,
           intervalID: null,
+          start: true,
         });
         this.setState({ isRunning: true, id: id });
+        this.getRecentStopwatch();
       });
   };
 
@@ -80,7 +343,7 @@ class StopwatchPage extends Component {
     // if (this.state.id > 0) {
     axios
       .post(localUrl, {
-        name: "Lim",
+        name: this.state.name ? this.state.name : "Anonymous",
         relatedID: this.state.id,
         generatedDate: new Date(Date.now()).toISOString().slice(0, 19),
         elapsedTime: this.state.elapsedTime,
@@ -98,6 +361,7 @@ class StopwatchPage extends Component {
           intervalID: this.state.intervalID,
         });
         this.setState({ isRunning: false });
+        this.getRecentStopwatch();
       });
     // }
   };
@@ -107,7 +371,7 @@ class StopwatchPage extends Component {
     // if (this.state.id > 0) {
     axios
       .post(localUrl, {
-        name: "Lim",
+        name: this.state.name ? this.state.name : "Anonymous",
         relatedID: this.state.id,
         generatedDate: new Date(Date.now()).toISOString().slice(0, 19),
         elapsedTime: this.state.elapsedTime,
@@ -123,8 +387,10 @@ class StopwatchPage extends Component {
         instance.postMessage({
           elapsedTime: 0,
           intervalID: this.state.intervalID,
+          start: false,
         });
         this.setState({ elapsedTime: 0, isRunning: false });
+        this.getRecentStopwatch();
       });
     // }
   };
@@ -168,6 +434,30 @@ class StopwatchPage extends Component {
     )}.${String(time % 100).padStart(2, "0")}`;
   };
 
+  formatTimeText = (time) => {
+    let text = "";
+
+    if (time / 360000 >= 1) {
+      text += `${String(parseInt(time / 360000))} `;
+      if (time / 360000 >= 2) {
+        text += "hours ";
+      } else {
+        text += "hour ";
+      }
+    }
+
+    if ((time / 6000) % 60 >= 1) {
+      text += `${String(parseInt((time / 6000) % 60))} `;
+      if ((time / 6000) % 60 >= 2) {
+        text += "minutes ";
+      } else {
+        text += "minute ";
+      }
+    }
+
+    return text;
+  };
+
   formatTimeTitle = (time) => {
     if (time / 360000 >= 1) {
       return `${String(parseInt(time / 360000)).padStart(2, "0")}:${String(
@@ -183,6 +473,10 @@ class StopwatchPage extends Component {
     }
   };
 
+  nameHandler = (event) => {
+    this.setState({ name: event.target.value });
+  };
+
   render() {
     return (
       <div>
@@ -190,7 +484,11 @@ class StopwatchPage extends Component {
           {this.formatTime(this.state.elapsedTime)}
         </div>
         <div className={styles.inputContainer}>
-          <input placeholder="Type your name" onChange={this.nameHandler} />
+          <input
+            disabled={this.state.start}
+            placeholder="Type your name"
+            onChange={this.nameHandler}
+          />
           {this.state.isRunning ? (
             <input
               placeholder="Type 'PAUSE' to pause"
@@ -206,6 +504,16 @@ class StopwatchPage extends Component {
             placeholder="Type 'RESET' to start"
             onKeyUp={this.resetStopwatchHandler}
           />
+        </div>
+        <div className={styles.records}>
+          {this.state.records.map((record) => {
+            return record;
+          })}
+        </div>
+        <div className={styles.pages}>
+          {this.state.pages.map((page) => {
+            return page;
+          })}
         </div>
       </div>
     );
