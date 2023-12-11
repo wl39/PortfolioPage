@@ -114,7 +114,7 @@ class StopwatchPage extends Component {
         <div className={styles.recordContainer} key={record.id}>
           <div
             className={
-              record.type === "s"
+              record.type === "s" || record.type === "r"
                 ? styles.start
                 : record.type === "p"
                 ? styles.pause
@@ -126,14 +126,20 @@ class StopwatchPage extends Component {
             <div className={styles.agos}>{ago + text}</div>
           </div>
           <div className={styles.rightContainer}>
-            {record.type === "s" ? "" : this.formatTimeText(record.elapsedTime)}
+            {record.type === "s" || record.type === "r"
+              ? ""
+              : this.formatTimeText(record.elapsedTime)}
           </div>
           <div className={styles.iconContainer}>
             <img
               className={styles.sandClockIcon}
               alt="icon"
               src={
-                record.type === "s" ? start : record.type === "p" ? pause : end
+                record.type === "s" || record.type === "r"
+                  ? start
+                  : record.type === "p"
+                  ? pause
+                  : end
               }
             />
           </div>
