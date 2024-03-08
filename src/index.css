@@ -224,6 +224,11 @@ input {
   font-size: 18px;
 }
 
+input:hover {
+  outline: none;
+  border-bottom: 2px solid rgb(70, 70, 70);
+}
+
 input:focus {
   outline: none;
   border-bottom: 2px solid black;

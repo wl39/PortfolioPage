@@ -1,0 +1,50 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-right: 10px;
+}
+.titleContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.type {
+  margin-top: auto;
+  width: 40px;
+}
+.title {
+  height: 48px;
+  font-size: 36px;
+}
+
+.textfield {
+  height: 400px;
+  margin: 8px 0px;
+}
+
+.input {
+  margin: 8px 0px;
+}
+
+.candidateContainer {
+  display: flex;
+}
+
+.checkbox {
+  height: inherit;
+}
+
+.label {
+  margin: auto 0px;
+  padding-right: 10px;
+}
+
+.label:hover {
+  font-weight: 700;
+}
+
+.candidateInput {
+  width: 100%;
+  margin: 8px 0px;
+}

@@ -1,0 +1,23 @@
+.keyword {
+  color: rgb(241, 167, 254);
+}
+.string {
+  color: rgb(137, 255, 137);
+}
+.comment {
+  color: gray;
+}
+
+.method {
+  color: rgb(118, 253, 248);
+}
+
+.type {
+  color: rgb(250, 199, 105);
+}
+
+.codeContainer {
+  background-color: rgb(40, 40, 40);
+  color: white;
+  padding: 15px 10px;
+}
