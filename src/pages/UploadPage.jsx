@@ -135,15 +135,29 @@ function UploadPage() {
   };
 
   const uploadQuestions = () => {
-    console.log(questions);
-    axios
-      .post(localUrl, questions)
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (window.confirm("This will be the question info: " + questions)) {
+      axios
+        .post(localUrl, questions)
+        .then((response) => {
+          window.alert("Successfully uploaded!");
+          console.log(response.data);
+          setQuestion({
+            title: "",
+            question: "",
+            type: "",
+            candidates: [],
+            hint: "",
+            studentsFor: [],
+            answer: "",
+            explanation: "",
+            generatedDate: new Date(Date.now()).toISOString().slice(0, 19),
+            targetDate: "",
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
 
   return (

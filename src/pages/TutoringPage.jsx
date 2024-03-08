@@ -18,11 +18,12 @@ function TutoringPage() {
 
   const mockQuestion = {
     id: 0,
-    title: "There is no question today!!",
-    question: "Lim is hardworking for making a new question...!",
+    title: "Oops! It seems there's no question for today's session.",
+    question:
+      "Looks like Lim is really putting in the effort to come up with a new one!",
     type: "m",
     candidates: [],
-    hint: "You found somthing!",
+    hint: "You've stumbled upon something interesting!",
     studentsFor: [],
     answer: "a",
     explanation: "",

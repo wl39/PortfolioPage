@@ -17,11 +17,11 @@ function SubmissionPage() {
 
   const emptyQuestion = {
     id: 0,
-    title: "There is no submission!",
-    question: "Comeback after you finished to answer the questions.",
+    title: "Oops! It appears there are no submissions at the moment.",
+    question: "Please come back after you've finished answering the questions.",
     type: "m",
     candidates: [],
-    hint: "Please, comeback after you finished to answer the questions.",
+    hint: "Remember to return after completing the questions!",
     studentsFor: [],
     answer: "a",
     explanation: "",
