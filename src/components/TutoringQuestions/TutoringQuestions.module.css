@@ -46,7 +46,7 @@
   display: flex;
   cursor: pointer;
   font-weight: 600;
-  justify-content: end;
+  justify-content: flex-end;
 }
 .hintButtonContainer:hover {
   font-weight: 800;

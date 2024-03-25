@@ -1,19 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import styles from "./SubmissionPage.module.css";
 import axios from "axios";
 import Submission from "../components/Submission/Submission";
 
+// Once pageParams needs to change it suppose to change to state.
+const pageParams = {
+  page: 0,
+  size: 100,
+  sortType: "desc",
+  sortParam: "id",
+};
+
 function SubmissionPage() {
   const { studentsName } = useParams();
   const [submissions, setSubmissions] = useState([]);
-  const pageParams = {
-    page: 0,
-    size: 100,
-    sortType: "desc",
-    sortParam: "id",
-  };
 
   const emptyQuestion = {
     id: 0,
@@ -38,12 +40,33 @@ function SubmissionPage() {
   const [totalQuestions, setTotalQuestions] = useState(1);
   const [totalCorrectQuestions, setTotalCorrectQuestions] = useState(1);
 
-  //   const localUrl =
-  //     "http://localhost:8080/api/v1/submissions?studentName=" +
-  //     studentsName +
-  //     "&";
   const localUrl =
-    "http://91b.co.uk/api/v1/submissions?studentName=" + studentsName + "&";
+    "http://localhost:8080/api/v1/submissions?studentName=" +
+    studentsName +
+    "&";
+  // const localUrl =
+  //   "https://91b.co.uk/api/v1/submissions?studentName=" + studentsName + "&";
+
+  const setSubmissionComponents = useCallback((data) => {
+    let submissionComponents = [];
+    let correctQuestions = 0;
+    data.map((value, index) => {
+      if (value.studentAnswer === value.question.answer) correctQuestions++;
+      submissionComponents = [
+        ...submissionComponents,
+        <Submission
+          key={index}
+          question={value.question}
+          studentAnswer={value.studentAnswer}
+          submitDate={value.submitDate}
+          id={value.id}
+        />,
+      ];
+      return null;
+    });
+    setTotalCorrectQuestions(correctQuestions);
+    setSubmissions(submissionComponents);
+  }, []);
 
   useEffect(() => {
     const pageParam =
@@ -59,27 +82,8 @@ function SubmissionPage() {
       setTotalQuestions(response.data.numberOfElements);
       setSubmissionComponents(response.data.content);
     });
-  }, []);
+  }, [localUrl, setSubmissionComponents]);
 
-  const setSubmissionComponents = (data) => {
-    let submissionComponents = [];
-    let correctQuestions = 0;
-    data.map((value, index) => {
-      if (value.studentAnswer === value.question.answer) correctQuestions++;
-      submissionComponents = [
-        ...submissionComponents,
-        <Submission
-          key={index}
-          question={value.question}
-          studentAnswer={value.studentAnswer}
-          submitDate={value.submitDate}
-          id={value.id}
-        />,
-      ];
-    });
-    setTotalCorrectQuestions(correctQuestions);
-    setSubmissions(submissionComponents);
-  };
   return (
     <div className={styles.page}>
       <div className={styles.header}>

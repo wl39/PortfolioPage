@@ -23,7 +23,7 @@ function UploadPage() {
   const [candidates, setCandidates] = useState([]);
   const [isAnswerCode, setIsAnswerCode] = useState(false);
   // const localUrl = "http://localhost:8080/api/v1/questions";
-  const localUrl = "http://91b.co.uk/api/v1/questions";
+  const localUrl = "https://91b.co.uk/api/v1/questions";
 
   const today = new Date(Date.now());
   today.setDate(today.getDate() + 14);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import styles from "./TutoringPage.module.css";
@@ -6,15 +6,16 @@ import styles from "./TutoringPage.module.css";
 import TutoringQuestions from "../components/TutoringQuestions/TutoringQuestions";
 import axios from "axios";
 
+// Once pageParams needs to change it suppose to change to state.
+const pageParams = {
+  page: 0,
+  size: 100,
+  sortType: "desc",
+  sortParam: "id",
+};
+
 function TutoringPage() {
   const [questions, setQuestions] = useState([]);
-
-  const pageParams = {
-    page: 0,
-    size: 5,
-    sortType: "desc",
-    sortParam: "id",
-  };
 
   const mockQuestion = {
     id: 0,
@@ -40,12 +41,54 @@ function TutoringPage() {
   const [answers, setAnswers] = useState({});
 
   const { studentsName } = useParams();
-  // const localUrl = "http://localhost:8080/api/v1/questions/page/";
-  const localUrl = "http://91b.co.uk/api/v1/questions/page/";
+  const localUrl = "http://localhost:8080/api/v1/questions/page/";
+  // const localUrl = "https://91b.co.uk/api/v1/questions/page/";
 
-  // const answerUrl = "http://localhost:8080/api/v1/submission/multiples";
-  const answerUrl = "http://91b.co.uk/api/v1/submission/multiples";
+  const answerUrl = "http://localhost:8080/api/v1/submission/multiples";
+  // const answerUrl = "https://91b.co.uk/api/v1/submission/multiples";
 
+  const selectAnswer = useCallback(
+    (questionID, answer) => {
+      const newAnswer = answers;
+
+      newAnswer[questionID] = {
+        answer: "",
+        studentsName: "",
+        submitDate: "",
+      };
+      newAnswer[questionID].answer = answer;
+      newAnswer[questionID].studentName = studentsName;
+      newAnswer[questionID].submitDate = new Date(Date.now())
+        .toISOString()
+        .slice(0, 19);
+
+      setAnswers(newAnswer);
+    },
+    [answers, studentsName]
+  );
+
+  const setQuestionComponents = useCallback(
+    (data) => {
+      let questionComponents = [];
+      data.map((value, index) => {
+        questionComponents = [
+          ...questionComponents,
+          <TutoringQuestions
+            key={index}
+            question={value}
+            selectAnswer={selectAnswer}
+          />,
+        ];
+
+        return null;
+      });
+
+      setQuestions(questionComponents);
+    },
+    [selectAnswer]
+  );
+
+  // const setQuestionComponents = (data) => {};
   useEffect(() => {
     const pageParam =
       "?page=" +
@@ -59,40 +102,7 @@ function TutoringPage() {
     axios.get(localUrl + studentsName + pageParam).then((response) => {
       setQuestionComponents(response.data.content);
     });
-  }, []);
-
-  const setQuestionComponents = (data) => {
-    let questionComponents = [];
-    data.map((value, index) => {
-      questionComponents = [
-        ...questionComponents,
-        <TutoringQuestions
-          key={index}
-          question={value}
-          selectAnswer={selectAnswer}
-        />,
-      ];
-    });
-
-    setQuestions(questionComponents);
-  };
-
-  const selectAnswer = (questionID, answer) => {
-    const newAnswer = answers;
-
-    newAnswer[questionID] = {
-      answer: "",
-      studentsName: "",
-      submitDate: "",
-    };
-    newAnswer[questionID].answer = answer;
-    newAnswer[questionID].studentName = studentsName;
-    newAnswer[questionID].submitDate = new Date(Date.now())
-      .toISOString()
-      .slice(0, 19);
-
-    setAnswers(newAnswer);
-  };
+  }, [studentsName, setQuestionComponents]);
 
   const submit = () => {
     if (window.confirm("Are you sure to submit?")) {
