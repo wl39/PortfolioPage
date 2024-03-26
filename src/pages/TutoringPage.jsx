@@ -44,8 +44,8 @@ function TutoringPage() {
   const localUrl = "http://localhost:8080/api/v1/questions/page/";
   // const localUrl = "https://91b.co.uk/api/v1/questions/page/";
 
-  const answerUrl = "http://localhost:8080/api/v1/submission/multiples";
-  // const answerUrl = "https://91b.co.uk/api/v1/submission/multiples";
+  const answerUrl = "http://localhost:8080/api/v1/submissions/multiples";
+  // const answerUrl = "https://91b.co.uk/api/v1/submissions/multiples";
 
   const selectAnswer = useCallback(
     (questionID, answer) => {

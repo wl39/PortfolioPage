@@ -51,6 +51,8 @@ function SubmissionPage() {
     let submissionComponents = [];
     let correctQuestions = 0;
     data.map((value, index) => {
+      console.log(value);
+
       if (value.studentAnswer === value.question.answer) correctQuestions++;
       submissionComponents = [
         ...submissionComponents,
