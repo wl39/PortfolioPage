@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
-import styles from "./TutoringArchive.module.css";
+import styles from "./TutoringArchivePage.module.css";
 import SelectableTutoringQuestions from "../components/SelectableTutoringQuestions/SelectableTutoringQuestions";
 
 // Once pageParams needs to change it suppose to change to state.
@@ -46,7 +46,7 @@ function TutoringArchivePage() {
     });
   }, [setQuestionComponents]);
   return (
-    <div>
+    <div className={styles.main}>
       <h1>Archive</h1>
       {questions}
     </div>
