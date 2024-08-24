@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 class Timeline extends Component {
   componentDidMount() {
+    console.log("?");
     const animatedElement = document.getElementById("timeline");
     animatedElement.addEventListener("transitionend", this.handleAnimationEnd);
   }
 
   componentWillUnmount() {
+    console.log("!");
     const animatedElement = document.getElementById("timeline");
     animatedElement.removeEventListener(
       "transitionend",

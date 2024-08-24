@@ -1,0 +1,732 @@
+import React from "react";
+import styles from "./MainPage.module.css";
+
+import image0 from "../../images/under_construction.png";
+
+import image1 from "../../images/1651807930774_Original-modified.jpg";
+import image2 from "../../images/1645053171211_Original-modified.jpg";
+import image3 from "../../images/1600685054178_Original-modified.jpg";
+import image4 from "../../images/20191018_2120280_Original-modified.jpg";
+import image5 from "../../images/IMG_1339-modified.JPG";
+import image6 from "../../images/IMG_2131-modified.JPG";
+
+import first1 from "../../images/firstYear/First_Year_1.jpg";
+import first2 from "../../images/firstYear/First_Year_2.jpg";
+import first3 from "../../images/firstYear/First_Year_3.jpg";
+import first4 from "../../images/firstYear/First_Year_4.jpg";
+import first5 from "../../images/firstYear/First_Year_5.jpg";
+import first6 from "../../images/firstYear/First_Year_6.jpg";
+import first7 from "../../images/firstYear/First_Year_7.jpg";
+import first9 from "../../images/firstYear/First_Year_9.jpg";
+import first11 from "../../images/firstYear/First_Year_11.jpg";
+import bono1 from "../../images/firstYear/Bonoware_1.jpg";
+import bono2 from "../../images/firstYear/Bonoware_2.jpg";
+import bono3 from "../../images/firstYear/Bonoware_3.jpg";
+import bono4 from "../../images/firstYear/Bonoware_4.jpg";
+import bono5 from "../../images/firstYear/Bonoware_5.jpg";
+import bono6 from "../../images/firstYear/Bonoware_6.jpg";
+import bono7 from "../../images/firstYear/Bonoware_7.jpg";
+
+import second1 from "../../images/secondYear/Second_Year_1.jpg";
+import second2 from "../../images/secondYear/Second_Year_2.jpg";
+import second3 from "../../images/secondYear/Second_Year_3.jpg";
+import second4 from "../../images/secondYear/Second_Year_4.jpg";
+import second5 from "../../images/secondYear/Second_Year_5.jpg";
+import second6 from "../../images/secondYear/Second_Year_6.jpg";
+import second7 from "../../images/secondYear/Second_Year_7.jpg";
+import second8 from "../../images/secondYear/Second_Year_8.jpg";
+import second9 from "../../images/secondYear/Second_Year_9.jpg";
+import second10 from "../../images/secondYear/Second_Year_10.jpg";
+import second11 from "../../images/secondYear/Second_Year_11.jpg";
+import second12 from "../../images/secondYear/Second_Year_12.jpg";
+import second13 from "../../images/secondYear/Second_Year_13.jpg";
+import second14 from "../../images/secondYear/Second_Year_14.jpg";
+import second15 from "../../images/secondYear/Second_Year_15.gif";
+import second16 from "../../images/secondYear/Second_Year_16.gif";
+import s_bono1 from "../../images/secondYear/Bonoware_1.jpg";
+import s_bono2 from "../../images/secondYear/Bonoware_2.png";
+import s_bono3 from "../../images/secondYear/Bonoware_3.png";
+import s_bono4 from "../../images/secondYear/Bonoware_4.jpg";
+import s_bono5 from "../../images/secondYear/Bonoware_5.jpg";
+import s_bono6 from "../../images/secondYear/Bonoware_6.gif";
+
+import holiday1 from "../../images/army/holiday_1.jpg";
+import holiday2 from "../../images/army/holiday_2.jpg";
+import holiday3 from "../../images/army/holiday_3.jpg";
+import army1 from "../../images/army/army_1.jpg";
+import army2 from "../../images/army/army_2.jpg";
+import army3 from "../../images/army/army_3.jpg";
+import army4 from "../../images/army/army_4.jpg";
+import army5 from "../../images/army/army_5.jpg";
+import army6 from "../../images/army/army_6.jpg";
+import army7 from "../../images/army/army_7.jpg";
+import army8 from "../../images/army/army_8.jpg";
+import army9 from "../../images/army/army_9.jpg";
+import army10 from "../../images/army/army_10.jpg";
+import army11 from "../../images/army/army_11.jpg";
+import army12 from "../../images/army/army_12.jpg";
+import army13 from "../../images/army/army_13.jpg";
+import army14 from "../../images/army/army_14.jpg";
+
+import third1 from "../../images/thirdYear/third_1.jpg";
+import third2 from "../../images/thirdYear/third_2.jpg";
+import third3 from "../../images/thirdYear/third_3.jpg";
+import third4 from "../../images/thirdYear/third_4.jpg";
+import third5 from "../../images/thirdYear/third_5.jpg";
+import third6 from "../../images/thirdYear/third_6.gif";
+import third7 from "../../images/thirdYear/third_7.jpg";
+import third8 from "../../images/thirdYear/third_8.jpg";
+import third9 from "../../images/thirdYear/third_9.jpg";
+import third10 from "../../images/thirdYear/third_10.jpg";
+import third11 from "../../images/thirdYear/third_11.jpg";
+import third12 from "../../images/thirdYear/third_12.jpg";
+import third13 from "../../images/thirdYear/third_13.gif";
+
+import fourth1 from "../../images/fourthYear/fourth_1.jpg";
+import fourth2 from "../../images/fourthYear/fourth_2.jpg";
+import fourth3 from "../../images/fourthYear/fourth_3.jpg";
+import fourth4 from "../../images/fourthYear/fourth_4.jpg";
+import fourth5 from "../../images/fourthYear/fourth_5.jpg";
+import fourth6 from "../../images/fourthYear/fourth_6.jpg";
+
+import graduate1 from "../../images/graduate/graduate_1.gif";
+import graduate2 from "../../images/graduate/graduate_2.jpg";
+import graduate3 from "../../images/graduate/graduate_3.JPG";
+import graduate4 from "../../images/graduate/graduate_4.JPG";
+import graduate5 from "../../images/graduate/graduate_5.jpg";
+import graduate6 from "../../images/graduate/graduate_6.jpg";
+import graduate7 from "../../images/graduate/graduate_7.JPG";
+import graduate8 from "../../images/graduate/graduate_8.jpg";
+import graduate9 from "../../images/graduate/graduate_9.jpg";
+import graduate10 from "../../images/graduate/graduate_10.jpg";
+
+import present1 from "../../images/present/present_1.jpg";
+import present2 from "../../images/present/present_2.jpg";
+import present3 from "../../images/present/present_3.jpg";
+import present4 from "../../images/present/present_4.JPG";
+import present5 from "../../images/present/present_5.JPG";
+import present6 from "../../images/present/present_6.JPG";
+import present7 from "../../images/present/present_7.JPG";
+import present8 from "../../images/present/present_8.JPG";
+import present9 from "../../images/present/present_9.jpg";
+import present10 from "../../images/present/present_10.JPG";
+import present11 from "../../images/present/present_11.JPG";
+import present12 from "../../images/present/present_12.jpeg";
+
+import SkillDetail from "../../components/SkillDetail/SkillDetail";
+
+import java from "../../assets/logo/Java-icon.svg";
+import javascript from "../../assets/logo/Javascript-icon.svg";
+import react from "../../assets/logo/React-icon.svg";
+import mariaDB from "../../assets/logo/MariaDB-icon.svg";
+import git from "../../assets/logo/Git-icon.svg";
+import spring from "../../assets/logo/Spring-icon.svg";
+import nodejs from "../../assets/logo/Node.js-icon.svg";
+import processing4 from "../../assets/logo/Processing-icon.svg";
+import Main from "./components/Main/Main";
+import TimelinePage from "./components/Timeline/TimelinePage";
+
+class MainPage extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      underConsturction: false,
+      firstActive: false,
+      secondActive: false,
+      thirdContentStyles: styles.thirdContent,
+      fourthContentStyles: styles.fourthContent,
+      fifthContentStyles: styles.fifthContent,
+      skills1: styles.skills1,
+      skills2: styles.skills2,
+      skills3: styles.skills3,
+      skills4: styles.skills4,
+      skills5: styles.skills5,
+      skills6: styles.skills6,
+      skills7: styles.skills7,
+      skills8: styles.skills8,
+    };
+  }
+
+  componentDidMount() {
+    let observer = new IntersectionObserver((e) => {
+      e.forEach((components) => {
+        if (components.isIntersecting) {
+          switch (components.target.id) {
+            case "firstContent":
+              this.setState({
+                firstActive: true,
+              });
+              break;
+            case "secondContent":
+              this.setState({
+                secondActive: true,
+              });
+              break;
+            case "thirdContent":
+              this.setState({
+                thirdContentStyles: styles.detailsContainer,
+                skills1: styles.skills1,
+                skills2: styles.skills2,
+                skills3: styles.skills3,
+                skills4: styles.skills4,
+                skills5: styles.skills5,
+                skills6: styles.skills6,
+                skills7: styles.skills7,
+                skills8: styles.skills8,
+                skillsTitle: "Skills",
+              });
+              break;
+            case "fourthContent":
+              this.setState({
+                fourthContentStyles: styles.fourthContent,
+              });
+              break;
+            case "fifthContent":
+              this.setState({
+                fifthContentStyles: styles.fifthContent,
+              });
+              break;
+            default:
+              break;
+          }
+        } else {
+          switch (components.target.id) {
+            case "firstContent":
+              this.setState({
+                firstActive: false,
+              });
+              break;
+            case "secondContent":
+              if (this.state.timelineTransition) {
+                this.setState({
+                  secondActive: false,
+                });
+              } else {
+                this.setState({
+                  secondActive: false,
+                });
+              }
+              break;
+            case "thirdContent":
+              this.setState({
+                thirdContentStyles: styles.detailsContainerMoved,
+                skills1: styles.skills1Moved,
+                skills2: styles.skills2Moved,
+                skills3: styles.skills3Moved,
+                skills4: styles.skills4Moved,
+                skills5: styles.skills5Moved,
+                skills6: styles.skills6Moved,
+                skills7: styles.skills7Moved,
+                skills8: styles.skills8Moved,
+                skillsTitle: "Skills",
+              });
+              break;
+            case "fourthContent":
+              this.setState({
+                fourthContentStyles: styles.fourthContentMoved,
+              });
+              break;
+            case "fifthContent":
+              this.setState({
+                fifthContentStyles: styles.fifthContentMoved,
+              });
+              break;
+            default:
+              break;
+          }
+        }
+      });
+    });
+
+    let firstContent = document.getElementById("firstContent");
+    let secondContent = document.getElementById("secondContent");
+    let thirdContent = document.getElementById("thirdContent");
+    // let fourthContent = document.getElementById("fourthContent");
+    // let fifthContent = document.getElementById("fifthContent");
+
+    observer.observe(firstContent);
+    observer.observe(secondContent);
+    observer.observe(thirdContent);
+    // observer.observe(fourthContent);
+    // observer.observe(fifthContent);
+  }
+
+  skillsDetailHandler = (contentsNo) => {
+    if (this.state.thirdContentStyles === styles.detailsContainerMoved) {
+      return;
+    }
+
+    switch (contentsNo) {
+      case 1:
+        this.setState({
+          skillsTitle: "React",
+          skills1: styles.skills1Focused,
+          skills2: styles.skills2,
+          skills3: styles.skills3,
+          skills4: styles.skills4,
+          skills5: styles.skills5,
+          skills6: styles.skills6,
+          skills7: styles.skills7,
+          skills8: styles.skills8,
+        });
+        break;
+      case 2:
+        this.setState({
+          skillsTitle: "Java",
+          skills1: styles.skills1,
+          skills2: styles.skillsLeftFocused,
+          skills3: styles.skills3,
+          skills4: styles.skills4,
+          skills5: styles.skills5,
+          skills6: styles.skills6,
+          skills7: styles.skills7,
+          skills8: styles.skills8,
+        });
+        break;
+      case 3:
+        this.setState({
+          skillsTitle: "Javascript",
+          skills1: styles.skills1,
+          skills2: styles.skills2,
+          skills3: styles.skillsLeftFocused,
+          skills4: styles.skills4,
+          skills5: styles.skills5,
+          skills6: styles.skills6,
+          skills7: styles.skills7,
+          skills8: styles.skills8,
+        });
+        break;
+      case 4:
+        this.setState({
+          skillsTitle: "MariaDB",
+          skills1: styles.skills1,
+          skills2: styles.skills2,
+          skills3: styles.skills3,
+          skills4: styles.skillsLeftFocused,
+          skills5: styles.skills5,
+          skills6: styles.skills6,
+          skills7: styles.skills7,
+          skills8: styles.skills8,
+        });
+        break;
+      case 5:
+        this.setState({
+          skillsTitle: "Git",
+          skills1: styles.skills1,
+          skills2: styles.skills2,
+          skills3: styles.skills3,
+          skills4: styles.skills4,
+          skills5: styles.skillsRightFocused,
+          skills6: styles.skills6,
+          skills7: styles.skills7,
+          skills8: styles.skills8,
+        });
+        break;
+      case 6:
+        this.setState({
+          skillsTitle: "Spring",
+          skills1: styles.skills1,
+          skills2: styles.skills2,
+          skills3: styles.skills3,
+          skills4: styles.skills4,
+          skills5: styles.skills5,
+          skills6: styles.skillsRightBelowFocused,
+          skills7: styles.skills7,
+          skills8: styles.skills8,
+        });
+        break;
+      case 7:
+        this.setState({
+          skillsTitle: "Node.js",
+          skills1: styles.skills1,
+          skills2: styles.skills2,
+          skills3: styles.skills3,
+          skills4: styles.skills4,
+          skills5: styles.skills5,
+          skills6: styles.skills6,
+          skills7: styles.skillsRightBelowFocused,
+          skills8: styles.skills8,
+        });
+        break;
+      case 8:
+        this.setState({
+          skillsTitle: "Processing4",
+          skills1: styles.skills1,
+          skills2: styles.skills2,
+          skills3: styles.skills3,
+          skills4: styles.skills4,
+          skills5: styles.skills5,
+          skills6: styles.skills6,
+          skills7: styles.skills7,
+          skills8: styles.skillsRightBelowFocused,
+        });
+        break;
+      default:
+        this.setState({
+          skillsTitle: "Skills",
+          skills1: styles.skills1,
+          skills2: styles.skills2,
+          skills3: styles.skills3,
+          skills4: styles.skills4,
+          skills5: styles.skills5,
+          skills6: styles.skills6,
+          skills7: styles.skills7,
+          skills8: styles.skills8,
+        });
+        break;
+    }
+  };
+
+  render() {
+    return (
+      <div>
+        <div className={styles.container}>
+          {this.state.underConsturction ? (
+            <div
+              style={{ backgroundImage: `url(${image0})` }}
+              className={styles.underConsturction}
+            >
+              <div className={styles.underConsturctionText}>
+                Under Construction
+              </div>
+            </div>
+          ) : null}
+          <Main isActive={this.state.firstActive} />
+          <TimelinePage isActive={this.state.secondActive} />
+          <div className={this.state.thirdContentStyles}>
+            <div
+              onClick={() => this.skillsDetailHandler(0)}
+              className={styles.title}
+            >
+              <div
+                className={
+                  this.state.skillsTitle === "Skills"
+                    ? styles.skillTitle
+                    : styles.skillTitleClicked
+                }
+              >
+                {this.state.skillsTitle}
+              </div>
+              <div
+                className={
+                  this.state.skillsTitle === "Skills"
+                    ? styles.hideDeco
+                    : styles.deco
+                }
+              />
+            </div>
+
+            <div className={styles.skillsContainer}>
+              <div
+                className={this.state.skills1}
+                onClick={() => this.skillsDetailHandler(1)}
+              >
+                <div className={styles.skillsTitle}>React</div>
+                <SkillDetail
+                  isActive={this.state.skillsTitle === "React"}
+                  images={[image1, image2, image3, image4, image5, image6]}
+                  height="100%"
+                  time={4000}
+                  title="React"
+                  paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                irure dolor in reprehenderit in voluptate velit esse cillum
+                dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum. Lorem ipsum dolor sit amet,
+                consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+                ea commodo consequat. Duis aute irure dolor in reprehenderit
+                in voluptate velit esse cillum dolore eu fugiat nulla
+                pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+                in culpa qui officia deserunt mollit anim id est laborum.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                irure dolor in reprehenderit in voluptate velit esse cillum
+                dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum."
+                  logo={react}
+                />
+              </div>
+              <div
+                className={this.state.skills2}
+                onClick={() => this.skillsDetailHandler(2)}
+              >
+                <div className={styles.skillsTitle}>Java</div>
+                <SkillDetail
+                  isActive={this.state.skillsTitle === "Java"}
+                  images={[image1, image2, image3, image4, image5, image6]}
+                  height="100%"
+                  time={4000}
+                  title="Java"
+                  paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                irure dolor in reprehenderit in voluptate velit esse cillum
+                dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum. Lorem ipsum dolor sit amet,
+                consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+                ea commodo consequat. Duis aute irure dolor in reprehenderit
+                in voluptate velit esse cillum dolore eu fugiat nulla
+                pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+                in culpa qui officia deserunt mollit anim id est laborum.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                irure dolor in reprehenderit in voluptate velit esse cillum
+                dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum."
+                  logo={java}
+                />
+              </div>
+              <div
+                className={this.state.skills3}
+                onClick={() => this.skillsDetailHandler(3)}
+              >
+                <div className={styles.skillsTitle}>Javascript</div>
+                <SkillDetail
+                  isActive={this.state.skillsTitle === "Javascript"}
+                  images={[image1, image2, image3, image4, image5, image6]}
+                  height="100%"
+                  time={4000}
+                  title="Java"
+                  paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                irure dolor in reprehenderit in voluptate velit esse cillum
+                dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum. Lorem ipsum dolor sit amet,
+                consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+                ea commodo consequat. Duis aute irure dolor in reprehenderit
+                in voluptate velit esse cillum dolore eu fugiat nulla
+                pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+                in culpa qui officia deserunt mollit anim id est laborum.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                irure dolor in reprehenderit in voluptate velit esse cillum
+                dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum."
+                  logo={javascript}
+                />
+              </div>
+              <div
+                className={this.state.skills4}
+                onClick={() => this.skillsDetailHandler(4)}
+              >
+                <div className={styles.skillsTitle}>MariaDB</div>
+                <SkillDetail
+                  isActive={this.state.skillsTitle === "MariaDB"}
+                  images={[image1, image2, image3, image4, image5, image6]}
+                  height="100%"
+                  time={4000}
+                  title="Java"
+                  paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                irure dolor in reprehenderit in voluptate velit esse cillum
+                dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum. Lorem ipsum dolor sit amet,
+                consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+                ea commodo consequat. Duis aute irure dolor in reprehenderit
+                in voluptate velit esse cillum dolore eu fugiat nulla
+                pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+                in culpa qui officia deserunt mollit anim id est laborum.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                irure dolor in reprehenderit in voluptate velit esse cillum
+                dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum."
+                  logo={mariaDB}
+                />
+              </div>
+              <div
+                className={this.state.skills5}
+                onClick={() => this.skillsDetailHandler(5)}
+              >
+                <div className={styles.skillsTitle}>Git</div>
+                <SkillDetail
+                  isActive={this.state.skillsTitle === "Git"}
+                  images={[image1, image2, image3, image4, image5, image6]}
+                  height="100%"
+                  time={4000}
+                  title="Java"
+                  paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                irure dolor in reprehenderit in voluptate velit esse cillum
+                dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum. Lorem ipsum dolor sit amet,
+                consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+                ea commodo consequat. Duis aute irure dolor in reprehenderit
+                in voluptate velit esse cillum dolore eu fugiat nulla
+                pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+                in culpa qui officia deserunt mollit anim id est laborum.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                irure dolor in reprehenderit in voluptate velit esse cillum
+                dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum."
+                  logo={git}
+                />
+              </div>
+              <div
+                className={this.state.skills6}
+                onClick={() => this.skillsDetailHandler(6)}
+              >
+                <div className={styles.skillsTitle}>Spring</div>
+                <SkillDetail
+                  isActive={this.state.skillsTitle === "Spring"}
+                  images={[image1, image2, image3, image4, image5, image6]}
+                  height="100%"
+                  time={4000}
+                  title="Java"
+                  paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                irure dolor in reprehenderit in voluptate velit esse cillum
+                dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum. Lorem ipsum dolor sit amet,
+                consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+                ea commodo consequat. Duis aute irure dolor in reprehenderit
+                in voluptate velit esse cillum dolore eu fugiat nulla
+                pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+                in culpa qui officia deserunt mollit anim id est laborum.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                irure dolor in reprehenderit in voluptate velit esse cillum
+                dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum."
+                  logo={spring}
+                />
+              </div>
+              <div
+                className={this.state.skills7}
+                onClick={() => this.skillsDetailHandler(7)}
+              >
+                <div className={styles.skillsTitle}>Node.js</div>
+                <SkillDetail
+                  isActive={this.state.skillsTitle === "Node.js"}
+                  images={[image1, image2, image3, image4, image5, image6]}
+                  height="100%"
+                  time={4000}
+                  title="Java"
+                  paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                irure dolor in reprehenderit in voluptate velit esse cillum
+                dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum. Lorem ipsum dolor sit amet,
+                consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+                ea commodo consequat. Duis aute irure dolor in reprehenderit
+                in voluptate velit esse cillum dolore eu fugiat nulla
+                pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+                in culpa qui officia deserunt mollit anim id est laborum.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                irure dolor in reprehenderit in voluptate velit esse cillum
+                dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum."
+                  logo={nodejs}
+                />
+              </div>
+              <div
+                className={this.state.skills8}
+                onClick={() => this.skillsDetailHandler(8)}
+              >
+                <div className={styles.skillsTitle}>Processing4</div>
+                <SkillDetail
+                  isActive={this.state.skillsTitle === "Processing4"}
+                  images={[image1, image2, image3, image4, image5, image6]}
+                  height="100%"
+                  time={4000}
+                  title="Java"
+                  paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                irure dolor in reprehenderit in voluptate velit esse cillum
+                dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum. Lorem ipsum dolor sit amet,
+                consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+                ea commodo consequat. Duis aute irure dolor in reprehenderit
+                in voluptate velit esse cillum dolore eu fugiat nulla
+                pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+                in culpa qui officia deserunt mollit anim id est laborum.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                irure dolor in reprehenderit in voluptate velit esse cillum
+                dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum."
+                  logo={processing4}
+                />
+              </div>
+            </div>
+          </div>
+          <div id="firstContent" className={styles.bar} />
+          <div id="secondContent" className={styles.bar} />
+          <div id="thirdContent" className={styles.bar} />
+
+          <div />
+        </div>
+        <div className={styles.tablet}></div>
+        <div className={styles.mobile}></div>
+      </div>
+    );
+  }
+}
+
+export default MainPage;
