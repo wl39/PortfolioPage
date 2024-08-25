@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Slider from "../../../../components/Slider/Slider";
 import Timeline from "../../../../components/Timeline/Timeline";
 import CircleAnimation from "../../../../components/Timeline/CircleAnimation/CircleAnimation";
@@ -111,6 +111,7 @@ import TimelineDetail from "../../../../components/Timeline/TimelineDetail/Timel
 import styles from "../../MainPage.module.css";
 
 function TimelinePage(props) {
+  const ref = useRef(null);
   const [clicked, setClicked] = useState({
     1: false,
     2: false,
@@ -126,6 +127,10 @@ function TimelinePage(props) {
   const [transition, setTransition] = useState(false);
 
   const timelineDetailHandler = (contentsTitle) => {
+    if (ref.current) {
+      ref.current.scrollTop = 0;
+    }
+
     let details;
     let images;
     let number;
@@ -618,7 +623,9 @@ function TimelinePage(props) {
             isActive={title !== "Timeline"}
           />
         </div>
-        <div className={styles.timelineDetailContainer}>{details}</div>
+        <div ref={ref} className={styles.timelineDetailContainer}>
+          {details}
+        </div>
       </div>
       <div className={styles.timeline}>
         <Timeline
