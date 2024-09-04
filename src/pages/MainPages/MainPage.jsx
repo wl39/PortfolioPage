@@ -5,7 +5,7 @@ import image0 from "../../images/under_construction.png";
 
 import Main from "./components/Main/Main";
 import TimelinePage from "./components/Timeline/TimelinePage";
-import Skills from "./components/Skills/Skills";
+// import Skills from "./components/Skills/Skills";
 
 class MainPage extends React.Component {
   constructor(props) {
@@ -16,17 +16,8 @@ class MainPage extends React.Component {
       firstActive: false,
       secondActive: false,
       thirdActive: false,
-      thirdContentStyles: styles.thirdContent,
       fourthContentStyles: styles.fourthContent,
       fifthContentStyles: styles.fifthContent,
-      skills1: styles.skills1,
-      skills2: styles.skills2,
-      skills3: styles.skills3,
-      skills4: styles.skills4,
-      skills5: styles.skills5,
-      skills6: styles.skills6,
-      skills7: styles.skills7,
-      skills8: styles.skills8,
     };
   }
 
@@ -48,16 +39,6 @@ class MainPage extends React.Component {
             case "thirdContent":
               this.setState({
                 thirdActive: true,
-                thirdContentStyles: styles.detailsContainer,
-                skills1: styles.skills1,
-                skills2: styles.skills2,
-                skills3: styles.skills3,
-                skills4: styles.skills4,
-                skills5: styles.skills5,
-                skills6: styles.skills6,
-                skills7: styles.skills7,
-                skills8: styles.skills8,
-                skillsTitle: "Skills",
               });
               break;
             case "fourthContent":
@@ -89,15 +70,6 @@ class MainPage extends React.Component {
               this.setState({
                 thirdActive: false,
                 thirdContentStyles: styles.detailsContainerMoved,
-                skills1: styles.skills1Moved,
-                skills2: styles.skills2Moved,
-                skills3: styles.skills3Moved,
-                skills4: styles.skills4Moved,
-                skills5: styles.skills5Moved,
-                skills6: styles.skills6Moved,
-                skills7: styles.skills7Moved,
-                skills8: styles.skills8Moved,
-                skillsTitle: "Skills",
               });
               break;
             case "fourthContent":
@@ -142,7 +114,25 @@ class MainPage extends React.Component {
           ) : null}
           <Main isActive={this.state.firstActive} />
           <TimelinePage isActive={this.state.secondActive} />
-          <Skills isActive={this.state.thirdActive} />
+          {/* <Skills isActive={this.state.thirdActive} /> */}
+
+          {/* <div> TEMP STARTS </div> */}
+          <div
+            className={
+              this.state.thirdActive
+                ? styles.detailsContainer
+                : styles.detailsContainerMoved
+            }
+          >
+            <div className={styles.portfolioPageTitle}>Projects (Korean)</div>
+            <a
+              href="https://c-lime.tistory.com/14"
+              className={styles.portfoliPageLink}
+            >
+              Clike here
+            </a>
+          </div>
+          {/* <div>TEMP ENDS </div> */}
           <div id="firstContent" className={styles.bar} />
           <div id="secondContent" className={styles.bar} />
           <div id="thirdContent" className={styles.bar} />
