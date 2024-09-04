@@ -120,14 +120,10 @@ class MainPage extends React.Component {
     let firstContent = document.getElementById("firstContent");
     let secondContent = document.getElementById("secondContent");
     let thirdContent = document.getElementById("thirdContent");
-    // let fourthContent = document.getElementById("fourthContent");
-    // let fifthContent = document.getElementById("fifthContent");
 
     observer.observe(firstContent);
     observer.observe(secondContent);
     observer.observe(thirdContent);
-    // observer.observe(fourthContent);
-    // observer.observe(fifthContent);
   }
 
   render() {
