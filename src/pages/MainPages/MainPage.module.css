@@ -1377,6 +1377,7 @@
   right: 50%;
   top: 45%;
   bottom: 50%;
+  transform: translate(-50%, -50%);
 }
 
 @keyframes typewriter1 {
