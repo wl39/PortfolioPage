@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import styles from "./SeamCarving.module.css";
+import React from // ,  { useState }
+"react";
+// import styles from "./SeamCarving.module.css";
 
 function SeamCarving() {
-  const [imageSrc, setImageSrc] = useState("");
-  const [pixels, setPixels] = useState([]);
+  // const [imageSrc, setImageSrc] = useState("");
+  // const [pixels, setPixels] = useState([]);
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];

@@ -70,9 +70,6 @@ function Submission({ question, studentAnswer, submitDate, id }) {
               }
               key={"D:" + index}
             >
-              {console.log(
-                (value === question.answer) + " : " + (value === studentAnswer)
-              )}
               <input
                 style={{ margin: "auto 4px" }}
                 type="radio"
@@ -106,7 +103,12 @@ function Submission({ question, studentAnswer, submitDate, id }) {
               </label>
             </div>
           ))}
-          <div>{question.explanation}</div>
+          <div className={styles.explanationContainer}>
+            <div className={styles.explanationHeader}>Explanation</div>
+            <div className={styles.explanationDetails}>
+              {question.explanation}
+            </div>
+          </div>
         </fieldset>
       </div>
     </>

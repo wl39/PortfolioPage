@@ -37,21 +37,27 @@ function SubmissionPage() {
     dayLeft: 0,
   };
 
+  const [searchParameter, setSearchParameter] = useState("Question");
+  const [isSearchParamterClicked, setIsSearchParamterClicked] = useState(false);
+  const [searchedQuestionsData, setSearchedQuestionsData] = useState([]);
+  const [questionsData, setQuestionsData] = useState([]);
   const [totalQuestions, setTotalQuestions] = useState(1);
   const [totalCorrectQuestions, setTotalCorrectQuestions] = useState(1);
 
-  // const localUrl =
-  //   "http://localhost:8080/api/v1/submissions?studentName=" +
-  //   studentsName +
-  //   "&";
   const localUrl =
-    "https://91b.co.uk/api/v1/submissions?studentName=" + studentsName + "&";
+    "http://localhost:8080/api/v1/submissions?studentName=" +
+    studentsName +
+    "&";
+  // const localUrl =
+  //   "https://91b.co.uk/api/v1/submissions?studentName=" + studentsName + "&";
 
-  const setSubmissionComponents = useCallback((data) => {
+  const setSubmissionComponents = useCallback((data, searched) => {
     let submissionComponents = [];
     let correctQuestions = 0;
+    let localQuestions = [];
+
     data.map((value, index) => {
-      console.log(value);
+      localQuestions = [...localQuestions, value];
 
       if (value.studentAnswer === value.question.answer) correctQuestions++;
       submissionComponents = [
@@ -66,6 +72,13 @@ function SubmissionPage() {
       ];
       return null;
     });
+
+    if (!searched) {
+      setQuestionsData(localQuestions);
+    }
+
+    console.log(localQuestions);
+    setSearchedQuestionsData(localQuestions);
     setTotalCorrectQuestions(correctQuestions);
     setSubmissions(submissionComponents);
   }, []);
@@ -82,9 +95,38 @@ function SubmissionPage() {
       pageParams.sortType;
     axios.get(localUrl + pageParam).then((response) => {
       setTotalQuestions(response.data.numberOfElements);
-      setSubmissionComponents(response.data.content);
+      setSubmissionComponents(response.data.content, false);
     });
   }, [localUrl, setSubmissionComponents]);
+
+  const inputHandler = (event) => {
+    if (event.target.value === null || event.target.value === "") {
+      setSubmissionComponents(questionsData, false);
+    } else {
+      search(event.target.value);
+    }
+  };
+
+  const search = (text, type) => {
+    let localQuestions = [];
+
+    searchedQuestionsData.map((value) => {
+      console.log(value);
+    });
+  };
+
+  const changeDropdown = () => {
+    setIsSearchParamterClicked(!isSearchParamterClicked);
+  };
+
+  const closeDropdown = () => {
+    setIsSearchParamterClicked(false);
+  };
+
+  const selectSearchParameter = (paramter) => {
+    closeDropdown();
+    setSearchParameter(paramter);
+  };
 
   return (
     <div className={styles.page}>
@@ -103,6 +145,50 @@ function SubmissionPage() {
           {totalCorrectQuestions} / {totalQuestions}){" "}
         </div>
       )}
+      <div className={styles.searchContainer}>
+        <div className={styles.searchDropdownContainer}>
+          <button
+            className={styles.searchDropdownButton}
+            onClick={changeDropdown}
+          >
+            {searchParameter}
+          </button>
+          {isSearchParamterClicked ? (
+            <div className={styles.upward} />
+          ) : (
+            <div className={styles.downward} />
+          )}
+          {isSearchParamterClicked ? (
+            <div className={styles.searchDropdown}>
+              <button onClick={() => selectSearchParameter("Question")}>
+                Question
+              </button>
+              <button onClick={() => selectSearchParameter("Answer")}>
+                Answer
+              </button>
+              <button onClick={() => selectSearchParameter("Title")}>
+                Title
+              </button>
+              <button onClick={() => selectSearchParameter("Explanation")}>
+                Explanation
+              </button>
+              <button onClick={() => selectSearchParameter("Choice")}>
+                Choice
+              </button>
+              <button onClick={() => selectSearchParameter("Hint")}>
+                Hint
+              </button>
+              <button onClick={() => selectSearchParameter("All")}>All</button>
+            </div>
+          ) : null}
+        </div>
+        <input
+          placeholder="Search"
+          className={styles.input}
+          onChange={(e) => inputHandler(e)}
+        />
+      </div>
+
       {submissions.length === 0 ? (
         <Submission
           question={emptyQuestion}
