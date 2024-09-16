@@ -53,10 +53,13 @@ function SubmissionPage() {
 
   const setSubmissionComponents = useCallback((data, searched) => {
     let submissionComponents = [];
+    let totalQuestions = 0;
     let correctQuestions = 0;
     let localQuestions = [];
 
     data.map((value, index) => {
+      console.log(value);
+      totalQuestions++;
       localQuestions = [...localQuestions, value];
 
       if (value.studentAnswer === value.question.answer) correctQuestions++;
@@ -77,8 +80,8 @@ function SubmissionPage() {
       setQuestionsData(localQuestions);
     }
 
-    console.log(localQuestions);
     setSearchedQuestionsData(localQuestions);
+    setTotalQuestions(totalQuestions);
     setTotalCorrectQuestions(correctQuestions);
     setSubmissions(submissionComponents);
   }, []);
@@ -107,12 +110,88 @@ function SubmissionPage() {
     }
   };
 
-  const search = (text, type) => {
+  const search = (text) => {
     let localQuestions = [];
 
-    searchedQuestionsData.map((value) => {
-      console.log(value);
+    questionsData.forEach((value) => {
+      switch (searchParameter) {
+        case "Question":
+          if (
+            value.question.question.toLowerCase().includes(text.toLowerCase())
+          ) {
+            localQuestions = [...localQuestions, value];
+          }
+          break;
+        case "Answer":
+          if (
+            value.question.answer.toLowerCase().includes(text.toLowerCase())
+          ) {
+            localQuestions = [...localQuestions, value];
+          }
+          break;
+        case "Title":
+          if (value.question.title.toLowerCase().includes(text.toLowerCase())) {
+            localQuestions = [...localQuestions, value];
+          }
+          break;
+        case "Explanation":
+          if (
+            value.question.explanation
+              .toLowerCase()
+              .includes(text.toLowerCase())
+          ) {
+            localQuestions = [...localQuestions, value];
+          }
+          break;
+        case "Choice":
+          for (let choice of value.question.candidates) {
+            if (choice.toLowerCase().includes(text.toLowerCase())) {
+              localQuestions = [...localQuestions, value];
+              break;
+            }
+          }
+          break;
+        case "Hint":
+          if (value.question.hint.toLowerCase().includes(text.toLowerCase())) {
+            localQuestions = [...localQuestions, value];
+          }
+          break;
+        default:
+          if (
+            value.question.question.toLowerCase().includes(text.toLowerCase())
+          ) {
+            localQuestions = [...localQuestions, value];
+          } else if (
+            value.question.answer.toLowerCase().includes(text.toLowerCase())
+          ) {
+            localQuestions = [...localQuestions, value];
+          } else if (
+            value.question.title.toLowerCase().includes(text.toLowerCase())
+          ) {
+            localQuestions = [...localQuestions, value];
+          } else if (
+            value.question.explanation
+              .toLowerCase()
+              .includes(text.toLowerCase())
+          ) {
+            localQuestions = [...localQuestions, value];
+          } else if (
+            value.question.hint.toLowerCase().includes(text.toLowerCase())
+          ) {
+            localQuestions = [...localQuestions, value];
+          } else {
+            for (let choice of value.question.candidates) {
+              if (choice.toLowerCase().includes(text.toLowerCase())) {
+                localQuestions = [...localQuestions, value];
+                break;
+              }
+            }
+          }
+          break;
+      }
     });
+
+    setSubmissionComponents(localQuestions, true);
   };
 
   const changeDropdown = () => {
