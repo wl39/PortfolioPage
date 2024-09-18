@@ -225,6 +225,11 @@ function SubmissionPage() {
         </div>
       )}
       <div className={styles.searchContainer}>
+        <input
+          placeholder="Search"
+          className={styles.input}
+          onChange={(e) => inputHandler(e)}
+        />
         <div className={styles.searchDropdownContainer}>
           <button
             className={styles.searchDropdownButton}
@@ -261,11 +266,6 @@ function SubmissionPage() {
             </div>
           ) : null}
         </div>
-        <input
-          placeholder="Search"
-          className={styles.input}
-          onChange={(e) => inputHandler(e)}
-        />
       </div>
 
       {submissions.length === 0 ? (
