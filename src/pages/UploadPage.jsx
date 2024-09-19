@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CustomSelect from "../components/CustomSelect/CustomSelect";
 
 import axios from "axios";
@@ -29,16 +29,41 @@ function UploadPage() {
   today.setDate(today.getDate() + 14);
   const target = today.toISOString().slice(0, 19);
 
+  useEffect(() => {
+    // Reset input value when component mounts
+    resetQuestions();
+  }, []); // The empty array ensures this only runs once when the component mounts
+
+  const resetQuestions = () => {
+    setQuestions({
+      title: "",
+      question: "",
+      type: "",
+      candidates: [],
+      hint: "",
+      studentsFor: [],
+      answer: "",
+      explanation: "",
+      generatedDate: new Date(Date.now()).toISOString().slice(0, 19),
+      targetDate: "",
+    });
+  };
+
   const inputHandler = (event, type) => {
     switch (type) {
       case "title":
         setQuestions({ ...questions, title: event.target.value });
         break;
       case "question":
+        let code = "";
+        if (questions.question.includes("&code:")) {
+          console.log("hi");
+          code = "&code:" + questions.question.split("&code:")[1];
+        }
         setQuestion(event.target.value);
         setQuestions({
           ...questions,
-          question: event.target.value,
+          question: event.target.value + code,
         });
         break;
       case "code":
@@ -135,28 +160,48 @@ function UploadPage() {
   };
 
   const uploadQuestions = () => {
+    if (!questions.answer) {
+      window.alert("Answer is missing.");
+      return;
+    }
+
+    if (!questions.title) {
+      window.alert("Title is missing.");
+      return;
+    }
+
+    if (!questions.type) {
+      window.alert("Type is missing.");
+      return;
+    }
+
+    if (!questions.explanation) {
+      window.alert("Explanation is missing.");
+      return;
+    }
+
+    if (!questions.question) {
+      window.alert("Question is missing.");
+      return;
+    }
+
+    if (!questions.targetDate) {
+      window.alert("Target Date is missing.");
+      return;
+    }
+
     if (window.confirm("This will be the question info: " + questions)) {
-      axios
-        .post(localUrl, questions)
-        .then((response) => {
-          window.alert("Successfully uploaded!");
-          console.log(response.data);
-          setQuestion({
-            title: "",
-            question: "",
-            type: "",
-            candidates: [],
-            hint: "",
-            studentsFor: [],
-            answer: "",
-            explanation: "",
-            generatedDate: new Date(Date.now()).toISOString().slice(0, 19),
-            targetDate: "",
+      if (questions)
+        axios
+          .post(localUrl, questions)
+          .then((response) => {
+            window.alert("Successfully uploaded!");
+            console.log(response.data);
+            resetQuestions();
+          })
+          .catch((error) => {
+            console.log(error);
           });
-        })
-        .catch((error) => {
-          console.log(error);
-        });
     }
   };
 
@@ -170,6 +215,7 @@ function UploadPage() {
                 className={styles.title}
                 placeholder="Title"
                 onChange={(e) => inputHandler(e, "title")}
+                value={questions.title}
               />
               <div style={{ marginTop: "auto" }}>
                 <CustomSelect
@@ -187,11 +233,17 @@ function UploadPage() {
               placeholder="Question"
               onChange={(e) => inputHandler(e, "question")}
               className={styles.input}
+              value={questions.question.split("&code:")[0]}
             />
             <textarea
               className={styles.textfield}
               placeholder="Code for the question?"
               onChange={(e) => inputHandler(e, "code")}
+              value={
+                questions.question.includes("&code:")
+                  ? questions.question.split("&code:")[1]
+                  : ""
+              }
             />
             {questions.type === "m" && (
               <input
@@ -217,6 +269,11 @@ function UploadPage() {
                 <input
                   className={styles.candidateInput}
                   placeholder={"Candidate " + (index + 1)}
+                  value={
+                    questions.candidates[index].includes("&code:")
+                      ? questions.candidates[index].split("&code:")[1]
+                      : questions.candidates[index]
+                  }
                   onChange={(e) => {
                     const updatedCandidates = [...questions.candidates];
                     updatedCandidates[index] = candidates[index]
@@ -234,11 +291,13 @@ function UploadPage() {
               placeholder="Hints"
               className={styles.input}
               onChange={(e) => inputHandler(e, "hint")}
+              value={questions.hint}
             />
             <input
               placeholder="Students For"
               className={styles.input}
               onChange={(e) => inputHandler(e, "for")}
+              value={questions.studentsFor}
             />
 
             <div className={styles.candidateContainer}>
@@ -264,6 +323,11 @@ function UploadPage() {
               <input
                 className={styles.candidateInput}
                 placeholder={"Answer"}
+                value={
+                  questions.answer.includes("&code:")
+                    ? questions.answer.split("&code:")[1]
+                    : questions.answer
+                }
                 onChange={(e) => {
                   setQuestions({
                     ...questions,
@@ -278,6 +342,7 @@ function UploadPage() {
               placeholder="Explanation"
               className={styles.input}
               onChange={(e) => inputHandler(e, "exp")}
+              value={questions.explanation}
             />
             <input
               placeholder="Target Date"
@@ -286,6 +351,7 @@ function UploadPage() {
               min={new Date(Date.now()).toISOString().slice(0, 16)}
               max={target}
               onChange={(e) => inputHandler(e, "target")}
+              value={questions.targetDate}
             />
           </div>
           <div
@@ -304,6 +370,10 @@ function UploadPage() {
         </div>
         <button className={styles.input} onClick={uploadQuestions}>
           SUBMIT
+        </button>
+
+        <button className={styles.input} onClick={resetQuestions}>
+          Remove all
         </button>
       </div>
     </>

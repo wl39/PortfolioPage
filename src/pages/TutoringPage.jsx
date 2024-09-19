@@ -108,6 +108,7 @@ function TutoringPage() {
     if (window.confirm("Are you sure to submit?")) {
       const finalized = [];
 
+      console.log(answers);
       Object.keys(answers).forEach((key) => {
         const answer = {
           questionId: key,
@@ -121,18 +122,18 @@ function TutoringPage() {
 
       console.log(finalized);
 
-      axios
-        .post(answerUrl, finalized)
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((err) => {
-          console.log(err);
-          window.alert("There is an issue...");
-        })
-        .finally(() => {
-          window.location.reload();
-        });
+      // axios
+      //   .post(answerUrl, finalized)
+      //   .then((response) => {
+      //     console.log(response);
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //     window.alert("There is an issue...");
+      //   })
+      //   .finally(() => {
+      //     window.location.reload();
+      //   });
     }
   };
 

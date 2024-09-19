@@ -26,7 +26,7 @@ function App() {
         <Route path="/archive/tutoring" element={<TutoringArchivePage />} />
         <Route path="/submission/:studentsName" element={<SubmissionPage />} />
         <Route path="/tutoring/:studentsName" element={<TutoringPage />} />
-        <Route path="/uploadD" element={<UploadPage />} />
+        <Route path="/upload" element={<UploadPage />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </BrowserRouter>

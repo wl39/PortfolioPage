@@ -67,40 +67,44 @@ function TutoringQuestions({ question, selectAnswer }) {
               </div>
             )
           )}
-          {question.candidates.map((value, index) => (
-            <div className={styles.inputContainer} key={"D:" + index}>
-              <input
-                style={{ margin: "auto 4px" }}
-                type="radio"
-                id={
-                  question.id
-                    ? question.id + ":" + index + ":" + value
-                    : "test:" + index + ":" + value
-                }
-                name={question.id ? question.id : "test"}
-                value={value}
-                onChange={() => selectAnswer(question.id, value)}
-              />
-              <label
-                className={styles.candidates}
-                htmlFor={
-                  question.id
-                    ? question.id + ":" + index + ":" + value
-                    : "test:" + index + ":" + value
-                }
-              >
-                {value
-                  .split("&code:")
-                  .map((value, index) =>
-                    index === 1 ? (
-                      <SyntaxHighlight code={value} key={"syntax" + index} />
-                    ) : (
-                      <div key={value + ":" + index}> {value} </div>
-                    )
-                  )}
-              </label>
-            </div>
-          ))}
+          {question.type === "m" ? (
+            question.candidates.map((value, index) => (
+              <div className={styles.inputContainer} key={"D:" + index}>
+                <input
+                  style={{ margin: "auto 4px" }}
+                  type="radio"
+                  id={
+                    question.id
+                      ? question.id + ":" + index + ":" + value
+                      : "test:" + index + ":" + value
+                  }
+                  name={question.id ? question.id : "test"}
+                  value={value}
+                  onChange={() => selectAnswer(question.id, value)}
+                />
+                <label
+                  className={styles.candidates}
+                  htmlFor={
+                    question.id
+                      ? question.id + ":" + index + ":" + value
+                      : "test:" + index + ":" + value
+                  }
+                >
+                  {value
+                    .split("&code:")
+                    .map((value, index) =>
+                      index === 1 ? (
+                        <SyntaxHighlight code={value} key={"syntax" + index} />
+                      ) : (
+                        <div key={value + ":" + index}> {value} </div>
+                      )
+                    )}
+                </label>
+              </div>
+            ))
+          ) : (
+            <div>TEMP</div>
+          )}
         </fieldset>
       </div>
     </>
