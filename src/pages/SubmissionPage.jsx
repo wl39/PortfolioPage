@@ -13,6 +13,9 @@ const pageParams = {
   sortParam: "id",
 };
 
+const getAll = "&getAll=true";
+const notGetAll = "&getAll=false";
+
 function SubmissionPage() {
   const { studentsName } = useParams();
   const [submissions, setSubmissions] = useState([]);
@@ -37,6 +40,7 @@ function SubmissionPage() {
     dayLeft: 0,
   };
 
+  const [isGettingAll, setIsGettingAll] = useState(false);
   const [searchParameter, setSearchParameter] = useState("Question");
   const [isSearchParamterClicked, setIsSearchParamterClicked] = useState(false);
   const [searchedQuestionsData, setSearchedQuestionsData] = useState([]);
@@ -47,9 +51,13 @@ function SubmissionPage() {
   const localUrl =
     "http://localhost:8080/api/v1/submissions?studentName=" +
     studentsName +
+    (isGettingAll ? getAll : notGetAll) +
     "&";
   // const localUrl =
-  //   "https://91b.co.uk/api/v1/submissions?studentName=" + studentsName + "&";
+  //   "https://91b.co.uk/api/v1/submissions?studentName=" +
+  //   studentsName +
+  //   (isGettingAll ? getAll : notGetAll) +
+  //   "&";
 
   const setSubmissionComponents = useCallback((data, searched) => {
     let submissionComponents = [];
@@ -70,6 +78,7 @@ function SubmissionPage() {
           question={value.question}
           studentAnswer={value.studentAnswer}
           submitDate={value.submitDate}
+          isMarked={value.marked}
           id={value.id}
         />,
       ];
@@ -207,8 +216,13 @@ function SubmissionPage() {
     setSearchParameter(paramter);
   };
 
+  const showGetAll = () => {
+    setIsGettingAll(!isGettingAll);
+  };
+
   return (
     <div className={styles.page}>
+      <button onClick={showGetAll}>TEMP</button>
       <div className={styles.header}>
         <h1 className={styles.h1}>
           {studentsName[0].toUpperCase() + studentsName.slice(1)}
@@ -273,6 +287,7 @@ function SubmissionPage() {
           question={emptyQuestion}
           studentAnswer={""}
           submitDate={""}
+          isMarked={true}
           id={0}
         />
       ) : (

@@ -11,6 +11,7 @@ import TutoringPage from "./pages/TutoringPage";
 import UploadPage from "./pages/UploadPage";
 import SubmissionPage from "./pages/SubmissionPage";
 import TutoringArchivePage from "./pages/TutoringArchivePage";
+import TeacherPage from "./pages/TeacherPage";
 
 function App() {
   return (
@@ -26,6 +27,8 @@ function App() {
         <Route path="/archive/tutoring" element={<TutoringArchivePage />} />
         <Route path="/submission/:studentsName" element={<SubmissionPage />} />
         <Route path="/tutoring/:studentsName" element={<TutoringPage />} />
+        <Route path="/teacher" element={<TeacherPage />} />
+        <Route path="/upload/:studentName" element={<UploadPage />} />
         <Route path="/upload" element={<UploadPage />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

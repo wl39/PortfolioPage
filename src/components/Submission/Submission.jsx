@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./Submission.module.css";
 import SyntaxHighlight from "../SyntaxHighlight/SyntaxHighlight";
 
-function Submission({ question, studentAnswer, submitDate, id }) {
+function Submission({ question, studentAnswer, submitDate, isMarked, id }) {
   const [showHint, setShowHint] = useState(false);
   return (
     <>
@@ -12,9 +12,11 @@ function Submission({ question, studentAnswer, submitDate, id }) {
         </h1>
         <fieldset
           className={
-            studentAnswer === question.answer
-              ? styles.correctQuestionContainer
-              : styles.wrongQuestionContainer
+            isMarked
+              ? studentAnswer === question.answer
+                ? styles.correctQuestionContainer
+                : styles.wrongQuestionContainer
+              : styles.unMarkedContainer
           }
         >
           {question.question.split("&code:").map((value, index) =>

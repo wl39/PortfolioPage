@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import CustomSelect from "../components/CustomSelect/CustomSelect";
 
 import axios from "axios";
 
@@ -13,7 +12,7 @@ function UploadPage() {
     type: "",
     candidates: [],
     hint: "",
-    studentsFor: [],
+    studentsFor: "",
     answer: "",
     explanation: "",
     generatedDate: new Date(Date.now()).toISOString().slice(0, 19),
@@ -41,7 +40,7 @@ function UploadPage() {
       type: "",
       candidates: [],
       hint: "",
-      studentsFor: [],
+      studentsFor: "",
       answer: "",
       explanation: "",
       generatedDate: new Date(Date.now()).toISOString().slice(0, 19),
@@ -113,7 +112,7 @@ function UploadPage() {
         }
         break;
       case "for":
-        setQuestions({ ...questions, studentsFor: [event.target.value] });
+        setQuestions({ ...questions, studentsFor: event.target.value });
         break;
       default:
         break;
@@ -145,17 +144,8 @@ function UploadPage() {
   };
 
   const select = (value) => {
-    switch (value) {
-      case "Multiple Answers":
-        setQuestions({ ...questions, type: "M" });
-        break;
-      case "Multiple Choice Question":
-        setQuestions({ ...questions, type: "m" });
-        break;
-      case "Short Answer":
-      default:
-        setQuestions({ ...questions, type: "s" });
-        break;
+    if (value && value.target && value.target.value) {
+      setQuestions({ ...questions, type: value.target.value });
     }
   };
 
@@ -205,9 +195,44 @@ function UploadPage() {
     }
   };
 
+  const getStudents = () => {
+    let students = localStorage.getItem("students");
+    console.log(students);
+  };
+
+  const setStudents = () => {
+    let storageStudents = localStorage.getItem("students");
+
+    let pageStudents = [];
+
+    pageStudents = questions.studentsFor
+      .trimStart()
+      .replace(/,\s+/g, ",")
+      .split(",");
+
+    if (storageStudents) {
+      let array = storageStudents.split(",");
+      pageStudents.forEach((element) => {
+        if (!array.includes(element)) {
+          array.push(element);
+        }
+      });
+
+      pageStudents = array;
+
+      console.log(pageStudents);
+    }
+    pageStudents = pageStudents.filter((value) => value);
+    console.log(pageStudents);
+
+    localStorage.setItem("students", pageStudents);
+  };
+
   return (
     <>
       <div>
+        <button onClick={getStudents}>GET</button>
+        <button onClick={setStudents}>SET</button>
         <div style={{ display: "flex" }}>
           <div className={styles.container}>
             <div className={styles.titleContainer}>
@@ -217,17 +242,32 @@ function UploadPage() {
                 onChange={(e) => inputHandler(e, "title")}
                 value={questions.title}
               />
-              <div style={{ marginTop: "auto" }}>
-                <CustomSelect
-                  title={"Type"}
-                  select={select}
-                  candidates={[
-                    "Short Answer",
-                    "Multiple Answers",
-                    "Multiple Choice Question",
-                  ]}
-                />
-              </div>
+            </div>
+            <div className={styles.radioContainer}>
+              <input
+                id="SAQ"
+                type="radio"
+                name="type"
+                value="s"
+                onChange={(e) => select(e)}
+              />
+              <label htmlFor="SAQ">Short Answer Question</label>
+              <input
+                id="MAQ"
+                type="radio"
+                name="type"
+                value="M"
+                onChange={(e) => select(e)}
+              />
+              <label htmlFor="MAQ">Multiple Answers Question</label>
+              <input
+                id="MCQ"
+                type="radio"
+                name="type"
+                value="m"
+                onChange={(e) => select(e)}
+              />
+              <label htmlFor="MCQ">Multiple Choice Question</label>
             </div>
             <input
               placeholder="Question"

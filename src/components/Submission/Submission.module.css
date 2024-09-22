@@ -13,6 +13,11 @@
   box-shadow: 5px 5px green;
 }
 
+.unMarkedContainer {
+  border: 2px dashed black;
+  box-shadow: 5px 5px black;
+}
+
 .question {
   margin-top: 15px;
   font-size: 30px;
@@ -105,19 +110,18 @@
 
 .explanationContainer {
   background: #2d2d2d;
-    color: white;
-    padding: 10px 5px;
-
+  color: white;
+  padding: 10px 5px;
 }
 
 .explanationHeader {
   font-size: 24px;
-    font-weight: 600;
-    height: 32px;
-    line-height: 32px;
-    padding-bottom: 6px;
-    margin-bottom: 4px;
-    border-bottom: 1px solid gray;
+  font-weight: 600;
+  height: 32px;
+  line-height: 32px;
+  padding-bottom: 6px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid gray;
 }
 
 .explanationDetails {

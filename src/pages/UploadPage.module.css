@@ -48,3 +48,9 @@
   width: 100%;
   margin: 8px 0px;
 }
+
+.radioContainer {
+  display: flex;
+  margin: 32px 0px 12px;
+  justify-content: space-between;
+}

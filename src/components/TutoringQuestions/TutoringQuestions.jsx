@@ -38,7 +38,6 @@ function TutoringQuestions({ question, selectAnswer }) {
                       {")"}
                     </div>
                   )}
-                  <div></div>
                 </div>
                 <hr
                   style={{
@@ -102,9 +101,13 @@ function TutoringQuestions({ question, selectAnswer }) {
                 </label>
               </div>
             ))
-          ) : (
-            <div>TEMP</div>
-          )}
+          ) : question.type === "s" ? (
+            <div>
+              <textarea
+                onChange={(e) => selectAnswer(question.id, e.target.value)}
+              />
+            </div>
+          ) : null}
         </fieldset>
       </div>
     </>
