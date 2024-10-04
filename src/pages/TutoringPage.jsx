@@ -113,7 +113,7 @@ function TutoringPage() {
         const answer = {
           questionId: key,
           studentAnswer: answers[key].answer,
-          studentName: answers[key].studentName,
+          studentName: answers[key].studentName.toLowerCase(),
           submitDate: answers[key].submitDate,
         };
 
@@ -132,7 +132,7 @@ function TutoringPage() {
           window.alert("There is an issue...");
         })
         .finally(() => {
-          window.location.reload();
+          // window.location.reload();
         });
     }
   };

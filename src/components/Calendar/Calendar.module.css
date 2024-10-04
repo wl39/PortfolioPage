@@ -1,0 +1,33 @@
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+}
+
+.day-name {
+  font-weight: bold;
+  text-align: center;
+}
+
+.day {
+  min-height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ccc;
+}
+
+.day.clickable {
+  cursor: pointer;
+  background-color: #f9f9f9;
+}
+
+.day.clickable:hover {
+  background-color: #eee;
+}

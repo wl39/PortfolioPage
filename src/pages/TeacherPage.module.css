@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+}
+
+.studentContainer {
+  width: 50%;
+}
+
+.studentsTitle {
+  font-size: 40px;
+  font-weight: 700;
+  height: 48px;
+  line-height: 40px;
+  margin-right: 180px;
+  border-bottom: 1px solid black;
+  margin-bottom: 24px;
+}
+
+.studentsContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.studentLink {
+  color: black;
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+
+.calendarContainer {
+  width: 50%;
+}

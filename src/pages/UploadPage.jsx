@@ -12,7 +12,8 @@ function UploadPage() {
     type: "",
     candidates: [],
     hint: "",
-    studentsFor: "",
+    studentsFor: [],
+    studentsForString: "",
     answer: "",
     explanation: "",
     generatedDate: new Date(Date.now()).toISOString().slice(0, 19),
@@ -40,7 +41,8 @@ function UploadPage() {
       type: "",
       candidates: [],
       hint: "",
-      studentsFor: "",
+      studentsFor: [],
+      studentsForString: "",
       answer: "",
       explanation: "",
       generatedDate: new Date(Date.now()).toISOString().slice(0, 19),
@@ -112,7 +114,21 @@ function UploadPage() {
         }
         break;
       case "for":
-        setQuestions({ ...questions, studentsFor: event.target.value });
+        let pageStudents = [];
+        let string = event.target.value;
+
+        pageStudents = string
+          .toLowerCase()
+          .trimStart()
+          .replace(/,\s+/g, ",")
+          .split(",");
+        pageStudents = pageStudents.filter((value) => value);
+
+        setQuestions({
+          ...questions,
+          studentsFor: pageStudents,
+          studentsForString: event.target.value,
+        });
         break;
       default:
         break;
@@ -186,6 +202,7 @@ function UploadPage() {
           .post(localUrl, questions)
           .then((response) => {
             window.alert("Successfully uploaded!");
+            setStudents();
             console.log(response.data);
             resetQuestions();
           })
@@ -205,7 +222,8 @@ function UploadPage() {
 
     let pageStudents = [];
 
-    pageStudents = questions.studentsFor
+    pageStudents = questions.studentsForString
+      .toLowerCase()
       .trimStart()
       .replace(/,\s+/g, ",")
       .split(",");
@@ -337,7 +355,7 @@ function UploadPage() {
               placeholder="Students For"
               className={styles.input}
               onChange={(e) => inputHandler(e, "for")}
-              value={questions.studentsFor}
+              value={questions.studentsForString}
             />
 
             <div className={styles.candidateContainer}>
