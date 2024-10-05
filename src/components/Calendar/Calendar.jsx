@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Calendar.module.css";
+import axios from "axios";
+
 // Utility to generate the days for a month
-const generateCalendarDays = (year, month) => {
+const generateCalendarDays = (year, month, data) => {
   const daysInMonth = new Date(year, month + 1, 0).getDate(); // Get number of days in the month
   const firstDayOfMonth = new Date(year, month, 1).getDay(); // Get the first day of the month (0 = Sunday, 6 = Saturday)
 
@@ -14,21 +16,94 @@ const generateCalendarDays = (year, month) => {
 
   // Add the days of the current month
   for (let i = 1; i <= daysInMonth; i++) {
-    daysArray.push(i);
+    if (data[i]) {
+      let div = [
+        <div key={`${i}-header`} className={styles.dayText}>
+          {i}
+        </div>,
+      ];
+      data[i].forEach((e, j) => {
+        let name = Object.keys(e)[0];
+
+        div.push(
+          <div key={`${i}-${j}`} className={styles.mark}>
+            {" "}
+            {/* Use i and j to create a unique key */}
+            <div>{name}</div>{" "}
+            <div
+              className={
+                e[name]["solved"] / e[name]["questions"] >= 0.9
+                  ? styles.green
+                  : styles.red
+              }
+            >
+              {e[name]["solved"]}/{e[name]["questions"]}
+              {e[name]["unmarked"] > 0 ? (
+                <div className={styles.unmarked}>{e[name]["unmarked"]}*</div>
+              ) : null}
+            </div>
+          </div>
+        );
+      });
+      daysArray.push(div);
+    } else {
+      daysArray.push(
+        <div key={`${i}-empty`} className={styles.dayText}>
+          {i}
+        </div>
+      ); // Added a unique key for empty days as well
+    }
   }
 
   return daysArray;
 };
 
-const Calendar = ({ data }) => {
+const Calendar = ({ students }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [calendarDays, setCalendarDays] = useState([]);
 
   useEffect(() => {
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth();
-    setCalendarDays(generateCalendarDays(year, month));
-  }, [currentDate]);
+    setCalendarDays(generateCalendarDays(year, month, {}));
+
+    let localUrl =
+      "http://localhost:8080/api/v1/calendar/" +
+      year +
+      "/" +
+      (month + 1) +
+      "?students=" +
+      students;
+
+    if (students) {
+      const transformedData = {};
+
+      axios.get(localUrl).then((res) => {
+        res.data.forEach((element) => {
+          const date = new Date(element.calendarID.date).getDate();
+          const studentName = element.calendarID.studentName;
+
+          const studentEntry = {
+            [studentName]: {
+              solved: element.solved,
+              unmarked: element.unmarked, // Change this if you want to use a different value for "marked"
+              questions: element.questions,
+            },
+          };
+
+          // Initialize the date entry if it doesn't exist
+          if (!transformedData[date]) {
+            transformedData[date] = [];
+          }
+
+          // Push the student entry into the corresponding date array
+          transformedData[date].push(studentEntry);
+        });
+
+        setCalendarDays(generateCalendarDays(year, month, transformedData));
+      });
+    }
+  }, [currentDate, students]);
 
   const handlePreviousMonth = () => {
     setCurrentDate(
@@ -63,11 +138,15 @@ const Calendar = ({ data }) => {
   return (
     <div>
       <div className={styles["calendar-header"]}>
-        <button onClick={handlePreviousMonth}>{"<"}</button>
-        <span>
-          {getMonthName(currentDate.getMonth())} {currentDate.getFullYear()}
+        <button className={styles.button} onClick={handlePreviousMonth}>
+          {"⯇"}
+        </button>
+        <span className={styles.span}>
+          {currentDate.getFullYear()} {getMonthName(currentDate.getMonth())}
         </span>
-        <button onClick={handleNextMonth}>{">"}</button>
+        <button className={styles.button} onClick={handleNextMonth}>
+          {"⯈"}
+        </button>
       </div>
       <div className={styles["calendar-grid"]}>
         <div className={styles["day-name"]}>Sun</div>
@@ -79,8 +158,10 @@ const Calendar = ({ data }) => {
         <div className={styles["day-name"]}>Sat</div>
 
         {calendarDays.map((day, index) => (
-          <div key={index} className={styles.day}>
-            <div>{day || ""}</div>
+          <div key={`day-${index}`} className={styles.day}>
+            {" "}
+            {/* Use a unique key for each day */}
+            <div className={styles.dayContainer}>{day || ""}</div>
           </div>
         ))}
       </div>

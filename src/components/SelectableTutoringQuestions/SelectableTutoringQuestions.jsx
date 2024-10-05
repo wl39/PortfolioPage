@@ -2,7 +2,6 @@ import React from "react";
 import Submission from "../Submission/Submission";
 
 function SelectableTutoringQuestions(props) {
-  console.log(props.data);
   return (
     <>
       <div>
@@ -12,6 +11,7 @@ function SelectableTutoringQuestions(props) {
           studentAnswer={props.data.answer}
           submitDate={props.data.generatedDate}
           id={props.data.id}
+          isMarked={1}
         />
       </div>
     </>

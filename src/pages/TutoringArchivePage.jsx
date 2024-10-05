@@ -16,6 +16,8 @@ const localUrl = "http://localhost:8080/api/v1/questions";
 
 function TutoringArchivePage() {
   const [questions, setQuestions] = useState();
+  const [students, setLocalStudents] = useState([]);
+  const [studentsString, setStudentsString] = useState("");
 
   const setQuestionComponents = useCallback((data) => {
     let newQuestions = [];
@@ -46,10 +48,66 @@ function TutoringArchivePage() {
       setQuestionComponents(response.data.content);
     });
   }, [setQuestionComponents]);
+
+  const setStudents = () => {
+    let storageStudents = localStorage.getItem("students");
+
+    let pageStudents = [];
+
+    pageStudents = studentsString
+      .toLowerCase()
+      .trimStart()
+      .replace(/,\s+/g, ",")
+      .split(",");
+
+    if (storageStudents) {
+      let array = storageStudents.split(",");
+      pageStudents.forEach((element) => {
+        if (!array.includes(element)) {
+          array.push(element);
+        }
+      });
+
+      pageStudents = array;
+    }
+    pageStudents = pageStudents.filter((value) => value);
+
+    localStorage.setItem("students", pageStudents);
+  };
+
+  const change = (event) => {
+    let pageStudents = [];
+    let string = event.target.value;
+
+    pageStudents = string
+      .toLowerCase()
+      .trimStart()
+      .replace(/,\s+/g, ",")
+      .split(",");
+    pageStudents = pageStudents.filter((value) => value);
+
+    setStudentsString(event.target.value);
+    setLocalStudents(pageStudents);
+  };
+
+  const submit = () => {
+    setStudents();
+  };
+
   return (
     <div className={styles.main}>
       <h1>Archive</h1>
       {questions}
+      <div className={styles.modal}>
+        <input
+          value={studentsString}
+          onChange={(event) => change(event)}
+          placeholder="Students for..."
+        />
+        <button onClick={submit} className={styles.button}>
+          SUBMIT
+        </button>
+      </div>
     </div>
   );
 }

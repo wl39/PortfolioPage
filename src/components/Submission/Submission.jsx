@@ -13,8 +13,10 @@ function Submission({ question, studentAnswer, submitDate, isMarked, id }) {
         <fieldset
           className={
             isMarked
-              ? studentAnswer === question.answer
-                ? styles.correctQuestionContainer
+              ? isMarked === 1
+                ? studentAnswer === question.answer || question.type === "s"
+                  ? styles.correctQuestionContainer
+                  : styles.wrongQuestionContainer
                 : styles.wrongQuestionContainer
               : styles.unMarkedContainer
           }

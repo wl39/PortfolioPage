@@ -53,7 +53,7 @@ function TutoringPage() {
 
       newAnswer[questionID] = {
         answer: "",
-        studentsName: "",
+        studentName: "",
         submitDate: "",
       };
       newAnswer[questionID].answer = answer;
@@ -132,7 +132,7 @@ function TutoringPage() {
           window.alert("There is an issue...");
         })
         .finally(() => {
-          // window.location.reload();
+          window.location.reload();
         });
     }
   };
@@ -143,6 +143,12 @@ function TutoringPage() {
         <h1 className={styles.h1}>
           {studentsName[0].toUpperCase() + studentsName.slice(1)}
         </h1>
+        <Link
+          to={"/review/" + studentsName}
+          style={{ marginTop: "22px", marginRight: "15px" }}
+        >
+          <button className={styles.button}>Review</button>
+        </Link>
         <Link to={"/submission/" + studentsName} style={{ marginTop: "22px" }}>
           <button className={styles.button}>Submissions</button>
         </Link>

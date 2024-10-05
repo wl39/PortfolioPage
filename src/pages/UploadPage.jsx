@@ -58,7 +58,6 @@ function UploadPage() {
       case "question":
         let code = "";
         if (questions.question.includes("&code:")) {
-          console.log("hi");
           code = "&code:" + questions.question.split("&code:")[1];
         }
         setQuestion(event.target.value);

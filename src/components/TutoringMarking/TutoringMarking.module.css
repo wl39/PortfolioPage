@@ -1,0 +1,35 @@
+.buttonContainer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 24px;
+    height: 48px;
+}
+
+.button {
+    background-color: transparent;
+    margin-left: 24px;
+    width: 80px;
+    border: 2px solid black;
+    font-weight: 500;
+}
+
+.button:hover { 
+    border: 3px solid black;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.wrongQuestionContainer {
+    border: 2px solid rgba(255, 0, 0, 0.58);;
+    box-shadow: 5px 5px rgba(255, 0, 0, 0.58);;
+}
+  
+.correctQuestionContainer {
+border: 2px solid green;
+box-shadow: 5px 5px green;
+}
+
+.unMarkedContainer {
+border: 2px dashed black;
+box-shadow: 5px 5px black;
+}

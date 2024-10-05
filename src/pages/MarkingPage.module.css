@@ -1,0 +1,7 @@
+.h1 {
+    width: 100%;
+    margin: 0px;
+    height: 80px;
+    line-height: 80px;
+    text-transform: capitalize;
+  }

@@ -12,6 +12,8 @@ import UploadPage from "./pages/UploadPage";
 import SubmissionPage from "./pages/SubmissionPage";
 import TutoringArchivePage from "./pages/TutoringArchivePage";
 import TeacherPage from "./pages/TeacherPage";
+import MarkingPage from "./pages/MarkingPage";
+import ReviewPage from "./pages/ReviewPage";
 
 function App() {
   return (
@@ -24,11 +26,12 @@ function App() {
         <Route path="/wall" element={<WallPage />} />
         <Route path="/spinner" element={<SpinnerWheelPage />} />
         <Route path="/sandbox" element={<SandBoxPage />} />
-        <Route path="/archive/tutoring" element={<TutoringArchivePage />} />
+        <Route path="/questions" element={<TutoringArchivePage />} />
+        <Route path="/review/:studentsName" element={<ReviewPage />} />
         <Route path="/submission/:studentsName" element={<SubmissionPage />} />
         <Route path="/tutoring/:studentsName" element={<TutoringPage />} />
         <Route path="/teacher" element={<TeacherPage />} />
-        <Route path="/upload/:studentName" element={<UploadPage />} />
+        <Route path="/marking/:studentName" element={<MarkingPage />} />
         <Route path="/upload" element={<UploadPage />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

@@ -82,3 +82,8 @@
   margin: 20px 0px;
   font-weight: 500;
 }
+
+textarea {
+  width: 100%;
+  box-sizing: border-box;
+}

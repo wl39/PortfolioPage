@@ -3,3 +3,35 @@
   padding-top: 60px;
   width: 50vw;
 }
+
+.modal {
+  background-color: ivory;
+  position: fixed;
+    top: 30px;
+    right: 120px;
+    display: flex;
+    flex-direction: column;
+    height: 120px;
+    justify-content: space-between;
+    border: 2px solid black;
+  box-shadow: 5px 5px black;
+
+  padding: 15px 10px;
+}
+
+.button {
+  width: 130px;
+  height: 40px;
+  font-size: 18px;
+  font-weight: 600;
+  border: 1px solid black;
+  background-color: transparent;
+  cursor: pointer;
+  margin: 0px auto;
+}
+
+.button:hover {
+  font-weight: 800;
+  border: 2px solid black;
+  background-color: #ffffe7;
+}
