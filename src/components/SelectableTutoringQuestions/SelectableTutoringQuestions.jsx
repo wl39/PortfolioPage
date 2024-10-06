@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Submission from "../Submission/Submission";
 
 function SelectableTutoringQuestions(props) {
+  useEffect(() => {
+    console.log(props);
+  }, []);
   return (
     <>
       <div>
-        <input type="checkbox" />
         <Submission
           question={props.data}
           studentAnswer={props.data.answer}
@@ -13,6 +15,9 @@ function SelectableTutoringQuestions(props) {
           id={props.data.id}
           isMarked={1}
         />
+        <button onClick={() => props.addQuestion(props.data.id)}>
+          Duplicate
+        </button>
       </div>
     </>
   );

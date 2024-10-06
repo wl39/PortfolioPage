@@ -19,13 +19,25 @@ function TutoringArchivePage() {
   const [students, setLocalStudents] = useState([]);
   const [studentsString, setStudentsString] = useState("");
 
+  const [questionsCopy, setQuestionsCopy] = useState([]);
+
+  const addQuestion = (value) => {
+    console.log(value);
+    setQuestionsCopy((prev) => [...prev, value]);
+    console.log(questionsCopy);
+  };
+
   const setQuestionComponents = useCallback((data) => {
     let newQuestions = [];
 
     data.map((value, index) => {
       newQuestions = [
         ...newQuestions,
-        <SelectableTutoringQuestions data={value} key={index} />,
+        <SelectableTutoringQuestions
+          addQuestion={(value) => addQuestion(value)}
+          data={value}
+          key={index}
+        />,
       ];
 
       return null;
