@@ -222,7 +222,6 @@ function SubmissionPage() {
 
   return (
     <div className={styles.page}>
-      <button onClick={showGetAll}>TEMP</button>
       <div className={styles.header}>
         <h1 className={styles.h1}>
           {studentsName[0].toUpperCase() + studentsName.slice(1)}
@@ -285,6 +284,15 @@ function SubmissionPage() {
               <button onClick={() => selectSearchParameter("All")}>All</button>
             </div>
           ) : null}
+        </div>
+      </div>
+
+      <div className={styles.showAllContainer}>
+        <button className={styles.buttonShowAll} onClick={showGetAll}>
+          Show All Submissions
+        </button>
+        <div className={styles.checkboxContianer}>
+          <div className={isGettingAll ? styles.showAllCheckd : null} />
         </div>
       </div>
 

@@ -1,7 +1,35 @@
+.page {
+  width: 50vw;
+  margin: auto;
+  padding-top: 60px;
+}
+
 .h1 {
-    width: 100%;
-    margin: 0px;
-    height: 80px;
-    line-height: 80px;
-    text-transform: capitalize;
-  }
+  width: 100%;
+  margin: 0px;
+  height: 80px;
+  line-height: 80px;
+  text-transform: capitalize;
+}
+
+.buttonContainer {
+  display: flex;
+  margin-top: 30px;
+  justify-content: center;
+}
+
+.button {
+  width: 130px;
+  height: 40px;
+  font-size: 18px;
+  font-weight: 600;
+  border: 1px solid black;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.button:hover {
+  font-weight: 800;
+  border: 2px solid black;
+  background-color: #ffffe7;
+}

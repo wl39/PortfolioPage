@@ -1,66 +1,74 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Calendar.module.css";
 import axios from "axios";
-
-// Utility to generate the days for a month
-const generateCalendarDays = (year, month, data) => {
-  const daysInMonth = new Date(year, month + 1, 0).getDate(); // Get number of days in the month
-  const firstDayOfMonth = new Date(year, month, 1).getDay(); // Get the first day of the month (0 = Sunday, 6 = Saturday)
-
-  let daysArray = [];
-
-  // Fill in the empty days before the 1st of the month
-  for (let i = 0; i < firstDayOfMonth; i++) {
-    daysArray.push(null);
-  }
-
-  // Add the days of the current month
-  for (let i = 1; i <= daysInMonth; i++) {
-    if (data[i]) {
-      let div = [
-        <div key={`${i}-header`} className={styles.dayText}>
-          {i}
-        </div>,
-      ];
-      data[i].forEach((e, j) => {
-        let name = Object.keys(e)[0];
-
-        div.push(
-          <div key={`${i}-${j}`} className={styles.mark}>
-            {" "}
-            {/* Use i and j to create a unique key */}
-            <div>{name}</div>{" "}
-            <div
-              className={
-                e[name]["solved"] / e[name]["questions"] >= 0.9
-                  ? styles.green
-                  : styles.red
-              }
-            >
-              {e[name]["solved"]}/{e[name]["questions"]}
-              {e[name]["unmarked"] > 0 ? (
-                <div className={styles.unmarked}>{e[name]["unmarked"]}*</div>
-              ) : null}
-            </div>
-          </div>
-        );
-      });
-      daysArray.push(div);
-    } else {
-      daysArray.push(
-        <div key={`${i}-empty`} className={styles.dayText}>
-          {i}
-        </div>
-      ); // Added a unique key for empty days as well
-    }
-  }
-
-  return daysArray;
-};
+import { useNavigate } from "react-router-dom";
 
 const Calendar = ({ students }) => {
+  const navigate = useNavigate();
   const [currentDate, setCurrentDate] = useState(new Date());
   const [calendarDays, setCalendarDays] = useState([]);
+
+  // Utility to generate the days for a month
+  const generateCalendarDays = (year, month, data) => {
+    const daysInMonth = new Date(year, month + 1, 0).getDate(); // Get number of days in the month
+    const firstDayOfMonth = new Date(year, month, 1).getDay(); // Get the first day of the month (0 = Sunday, 6 = Saturday)
+
+    let daysArray = [];
+
+    // Fill in the empty days before the 1st of the month
+    for (let i = 0; i < firstDayOfMonth; i++) {
+      daysArray.push(null);
+    }
+
+    // Add the days of the current month
+    for (let i = 1; i <= daysInMonth; i++) {
+      if (data[i]) {
+        let div = [
+          <div key={`${i}-header`} className={styles.dayText}>
+            {i}
+          </div>,
+        ];
+        data[i].forEach((e, j) => {
+          let name = Object.keys(e)[0];
+
+          div.push(
+            <div
+              key={`${i}-${j}`}
+              className={e[name]["unmarked"] > 0 ? styles.toCheck : styles.mark}
+              onClick={() =>
+                e[name]["unmarked"] > 0 ? navigate("/marking/" + name) : null
+              }
+            >
+              {" "}
+              {/* Use i and j to create a unique key */}
+              <div>{name}</div>{" "}
+              <div
+                className={
+                  e[name]["solved"] / e[name]["questions"] >= 0.9
+                    ? styles.green
+                    : styles.red
+                }
+              >
+                {e[name]["solved"]}/{e[name]["questions"]}
+                {e[name]["unmarked"] > 0 ? (
+                  <div className={styles.unmarked}>{e[name]["unmarked"]}*</div>
+                ) : null}
+              </div>
+            </div>
+          );
+        });
+        daysArray.push(div);
+      } else {
+        daysArray.push(
+          <div key={`${i}-empty`} className={styles.dayText}>
+            {i}
+          </div>
+        ); // Added a unique key for empty days as well
+      }
+    }
+
+    return daysArray;
+  };
 
   useEffect(() => {
     const year = currentDate.getFullYear();

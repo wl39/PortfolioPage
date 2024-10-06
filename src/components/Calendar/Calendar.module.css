@@ -68,6 +68,15 @@
   margin-bottom: 8px;
 }
 
+.toCheck {
+    background-color: lightgray;
+    text-transform: capitalize;
+    width: 100%;
+    font-weight: 700;
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+
 .mark {
   text-transform: capitalize;
   width: 100%;
@@ -96,7 +105,7 @@
 .unmarked {
   position: absolute;
   right: 12px;
-  font-size: 12px;
+  font-size: 14px;
   color: black;
-  top: -2px;
+  top: 0px;
 }

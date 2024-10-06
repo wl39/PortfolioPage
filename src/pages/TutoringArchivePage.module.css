@@ -35,3 +35,108 @@
   border: 2px solid black;
   background-color: #ffffe7;
 }
+
+
+.linkContainer {
+  display: flex;
+}
+
+.linkButton {
+  width: 130px;
+  height: 40px;
+  font-size: 18px;
+  font-weight: 600;
+  border: 1px solid black;
+  background-color: transparent;
+  cursor: pointer;
+  color: black;
+  text-decoration: none;
+  display: block;
+  line-height: 38px;
+  text-align: center;
+  margin-right: 15px;
+  box-sizing: border-box;
+}
+
+.linkButton:hover {
+  font-weight: 800;
+  border: 2px solid black;
+  background-color: #ffffe7;
+}
+
+.searchContainer {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.searchDropdownContainer {
+  position: relative;
+}
+
+.searchDropdownButton {
+  border: 0px solid #000;
+  border: 2px solid gray;
+  height: 38px;
+  line-height: 34px;
+  text-align: left;
+  width: 150px;
+  background: transparent;
+  font-size: 20px;
+  padding-left: 14px;
+  cursor: pointer;
+}
+
+.searchDropdownButton:hover{
+  border: 2px solid black;
+}
+.searchDropdownButton:active{
+  border: 2px solid black;
+}
+
+.searchDropdownButton:focus{
+  border: 2px solid black;
+}
+
+.downward {
+  top: 15px;
+  right: 7px;
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 10px solid black;
+  position: absolute;
+}
+
+.upward {
+  top: 15px;
+  right: 7px;
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 10px solid black;
+  position: absolute;
+}
+
+.searchDropdown {
+  position: absolute;
+  background-color: ivory;
+  border: 1px solid black;
+  border-top: 0px;
+  width: 150px;
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+}
+
+.searchDropdown button {
+  font-size: 20px;
+  text-align: left;
+  border: 0px;
+  border-bottom: 1px solid black;
+  background-color: ivory;
+  cursor: pointer;
+  padding: 8px 0px 8px 12px;
+}

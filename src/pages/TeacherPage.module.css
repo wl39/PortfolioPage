@@ -56,3 +56,31 @@
   border: 2px solid black;
   font-weight: 700;
 }
+
+.linkContainer {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.linkButton {
+  width: 130px;
+  height: 40px;
+  font-size: 18px;
+  font-weight: 600;
+  border: 1px solid black;
+  background-color: transparent;
+  cursor: pointer;
+  color: black;
+  text-decoration: none;
+  display: block;
+  line-height: 38px;
+  text-align: center;
+  margin-right: 15px;
+  box-sizing: border-box;
+}
+
+.linkButton:hover {
+  font-weight: 800;
+  border: 2px solid black;
+  background-color: #ffffe7;
+}

@@ -4,6 +4,7 @@ import axios from "axios";
 
 import styles from "./UploadPage.module.css";
 import TutoringQuestions from "../components/TutoringQuestions/TutoringQuestions";
+import { Link } from "react-router-dom";
 
 function UploadPage() {
   const [questions, setQuestions] = useState({
@@ -248,8 +249,14 @@ function UploadPage() {
   return (
     <>
       <div>
-        <button onClick={getStudents}>GET</button>
-        <button onClick={setStudents}>SET</button>
+        <div className={styles.linkContainer}>
+          <Link className={styles.linkButton} to={"/questions"}>
+            Archive
+          </Link>
+          <Link className={styles.linkButton} to={"/teacher"}>
+            Teacher
+          </Link>
+        </div>
         <div style={{ display: "flex" }}>
           <div className={styles.container}>
             <div className={styles.titleContainer}>

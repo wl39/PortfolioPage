@@ -1,12 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Submission from "../Submission/Submission";
-
+import styles from "./SelectableTutoringQuestions.module.css";
 function SelectableTutoringQuestions(props) {
-  useEffect(() => {
-    console.log(props);
-  }, []);
+  const [checked, setChecked] = useState(false);
+
+  const addQuestion = () => {
+    props.addQuestion(props.data.id);
+    setChecked(!checked);
+    console.log(checked);
+  };
   return (
-    <>
+    <div className={styles.page}>
       <div>
         <Submission
           question={props.data}
@@ -15,11 +19,14 @@ function SelectableTutoringQuestions(props) {
           id={props.data.id}
           isMarked={1}
         />
-        <button onClick={() => props.addQuestion(props.data.id)}>
-          Duplicate
-        </button>
+        <div className={styles.buttonContainer} onClick={addQuestion}>
+          <div className={styles.text}>Duplicate</div>
+          <div className={styles.checkboxContianer}>
+            <div className={checked ? styles.checked : null} />
+          </div>
+        </div>
       </div>
-    </>
+    </div>
   );
 }
 

@@ -36,6 +36,44 @@
   background-color: #ffffe7;
 }
 
+.showAllContainer {
+  display: flex;
+  margin-top: 25px;
+  justify-content: end;
+}
+
+.buttonShowAll {
+  width: 240px;
+  height: 40px;
+  font-size: 18px;
+  font-weight: 600;
+  border: 1px solid black;
+  background-color: transparent;
+  cursor: pointer;
+  margin-right: 15px;
+}
+
+.buttonShowAll:hover {
+  font-weight: 800;
+  border: 2px solid black;
+  background-color: #ffffe7;
+}
+
+.checkboxContianer {
+  width: 40px;
+  height: 40px;
+  border: 1px solid black;
+  box-sizing: border-box;
+  display: flex;
+}
+
+.showAllCheckd {
+  width: 32px;
+  height: 32px;
+  background-color: black;
+  margin: auto
+}
+
 .score {
   margin-left: 5px;
   font-size: 24px;

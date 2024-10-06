@@ -70,11 +70,15 @@ const MarkingPage = () => {
     });
   }, [studentName, setQuestionComponents]);
   return (
-    <>
+    <div className={styles.page}>
       <h1 className={styles.h1}>{studentName}</h1>
       {questions}
-      <button onClick={markSubmissions}>Submit</button>
-    </>
+      <div className={styles.buttonContainer}>
+        <button className={styles.button} onClick={markSubmissions}>
+          Submit
+        </button>
+      </div>
+    </div>
   );
 };
 

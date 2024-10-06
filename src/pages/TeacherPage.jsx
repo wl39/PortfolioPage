@@ -90,9 +90,13 @@ const TeacherPage = () => {
     <>
       <div className={styles.container}>
         <div className={styles.studentContainer}>
-          <div>
-            <Link>Archive</Link>
-            <Link to={"/upload"}>Upload</Link>
+          <div className={styles.linkContainer}>
+            <Link className={styles.linkButton} to={"/questions"}>
+              Archive
+            </Link>
+            <Link className={styles.linkButton} to={"/upload"}>
+              Upload
+            </Link>
           </div>
           <div className={styles.studentsTitle}>Students</div>
           <div className={styles.link}>
