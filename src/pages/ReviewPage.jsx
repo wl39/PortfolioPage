@@ -121,17 +121,15 @@ const ReviewPage = () => {
     setSubmissions(submissionComponents);
   }, []);
 
-  const localUrl =
-    "http://localhost:8080/api/v1/submissions/review?studentName=" +
-    studentsName +
-    "&";
-
   // const localUrl =
-  //   "https://91b.co.uk/api/v1/submissions?studentName=" +
+  //   "http://localhost:8080/api/v1/submissions/review?studentName=" +
   //   studentsName +
-  //   (isGettingAll ? getAll : notGetAll) +
   //   "&";
 
+  const localUrl =
+    "https://91b.co.uk/api/v1/submissions/review?studentName=" +
+    studentsName +
+    "&";
   const changeDropdown = () => {
     setIsSearchParamterClicked(!isSearchParamterClicked);
   };

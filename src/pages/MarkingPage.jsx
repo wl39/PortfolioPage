@@ -9,11 +9,11 @@ const MarkingPage = () => {
   const [questions, setQuestions] = useState([]);
   const [mark, setMark] = useState({});
 
-  const localUrl = "http://localhost:8080/api/v1/submissions/saq?studentName=";
-  // const localUrl = "https://91b.co.uk/api/v1/submissions/saq?studentName=";
+  // const localUrl = "http://localhost:8080/api/v1/submissions/saq?studentName=";
+  const localUrl = "https://91b.co.uk/api/v1/submissions/saq?studentName=";
 
+  // const markUrl = "http://localhost:8080/api/v1/submissions/marks?studentName=";
   const markUrl = "http://localhost:8080/api/v1/submissions/marks?studentName=";
-  //   const markUrl = "http://localhost:8080/api/v1/submissions/marks?studentName=";
 
   const marks = (key, value) => {
     setMark((prevMark) => ({

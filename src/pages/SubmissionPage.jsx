@@ -48,16 +48,16 @@ function SubmissionPage() {
   const [totalQuestions, setTotalQuestions] = useState(1);
   const [totalCorrectQuestions, setTotalCorrectQuestions] = useState(1);
 
-  const localUrl =
-    "http://localhost:8080/api/v1/submissions?studentName=" +
-    studentsName +
-    (isGettingAll ? getAll : notGetAll) +
-    "&";
   // const localUrl =
-  //   "https://91b.co.uk/api/v1/submissions?studentName=" +
+  //   "http://localhost:8080/api/v1/submissions?studentName=" +
   //   studentsName +
   //   (isGettingAll ? getAll : notGetAll) +
   //   "&";
+  const localUrl =
+    "https://91b.co.uk/api/v1/submissions?studentName=" +
+    studentsName +
+    (isGettingAll ? getAll : notGetAll) +
+    "&";
 
   const setSubmissionComponents = useCallback((data, searched) => {
     let submissionComponents = [];

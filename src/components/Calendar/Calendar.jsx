@@ -75,8 +75,15 @@ const Calendar = ({ students }) => {
     const month = currentDate.getMonth();
     setCalendarDays(generateCalendarDays(year, month, {}));
 
+    // let localUrl =
+    //   "http://localhost:8080/api/v1/calendar/" +
+    //   year +
+    //   "/" +
+    //   (month + 1) +
+    //   "?students=" +
+    //   students;
     let localUrl =
-      "http://localhost:8080/api/v1/calendar/" +
+      "https://91b.co.uk/api/v1/calendar/" +
       year +
       "/" +
       (month + 1) +
