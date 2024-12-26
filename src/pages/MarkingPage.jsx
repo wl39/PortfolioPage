@@ -13,7 +13,7 @@ const MarkingPage = () => {
   const localUrl = "https://91b.co.uk/api/v1/submissions/saq?studentName=";
 
   // const markUrl = "http://localhost:8080/api/v1/submissions/marks?studentName=";
-  const markUrl = "http://localhost:8080/api/v1/submissions/marks?studentName=";
+  const markUrl = "https://91b.co.uk/api/v1/submissions/marks?studentName=";
 
   const marks = (key, value) => {
     setMark((prevMark) => ({
