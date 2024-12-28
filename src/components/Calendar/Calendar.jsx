@@ -3,6 +3,8 @@ import styles from "./Calendar.module.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+const API_URI = process.env.REACT_APP_API_URL;
+
 const Calendar = ({ students }) => {
   const navigate = useNavigate();
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -75,15 +77,9 @@ const Calendar = ({ students }) => {
     const month = currentDate.getMonth();
     setCalendarDays(generateCalendarDays(year, month, {}));
 
-    // let localUrl =
-    //   "http://localhost:8080/api/v1/calendar/" +
-    //   year +
-    //   "/" +
-    //   (month + 1) +
-    //   "?students=" +
-    //   students;
     let localUrl =
-      "https://91b.co.uk/api/v1/calendar/" +
+      API_URI +
+      "calendar/" +
       year +
       "/" +
       (month + 1) +

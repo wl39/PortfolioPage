@@ -6,6 +6,8 @@ import styles from "./TutoringPage.module.css";
 import TutoringQuestions from "../components/TutoringQuestions/TutoringQuestions";
 import axios from "axios";
 
+const URL = process.env.REACT_APP_API_URL;
+
 // Once pageParams needs to change it suppose to change to state.
 const pageParams = {
   page: 0,
@@ -42,10 +44,10 @@ function TutoringPage() {
 
   const { studentsName } = useParams();
   const localUrl = "http://localhost:8080/api/v1/questions/page/";
-  // const localUrl = "https://91b.co.uk/api/v1/questions/page/";
+  // const localUrl = URL + "questions/page/";
 
   const answerUrl = "http://localhost:8080/api/v1/submissions/multiples";
-  // const answerUrl = "https://91b.co.uk/api/v1/submissions/multiples";
+  // const answerUrl = URL + "submissions/multiples";
 
   const selectAnswer = useCallback(
     (questionID, answer) => {

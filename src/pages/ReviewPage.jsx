@@ -5,6 +5,8 @@ import styles from "./SubmissionPage.module.css";
 import axios from "axios";
 import TutoringQuestions from "../components/TutoringQuestions/TutoringQuestions";
 
+const URL = process.env.REACT_APP_API_URL;
+
 const ReviewPage = () => {
   const { studentsName } = useParams();
   const emptyQuestion = {
@@ -126,10 +128,7 @@ const ReviewPage = () => {
   //   studentsName +
   //   "&";
 
-  const localUrl =
-    "https://91b.co.uk/api/v1/submissions/review?studentName=" +
-    studentsName +
-    "&";
+  const localUrl = URL + "submissions/review?studentName=" + studentsName + "&";
   const changeDropdown = () => {
     setIsSearchParamterClicked(!isSearchParamterClicked);
   };

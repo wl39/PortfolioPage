@@ -4,6 +4,8 @@ import styles from "./TutoringArchivePage.module.css";
 import SelectableTutoringQuestions from "../components/SelectableTutoringQuestions/SelectableTutoringQuestions";
 import { Link } from "react-router-dom";
 
+const URL = process.env.REACT_APP_API_URL;
+
 // Once pageParams needs to change it suppose to change to state.
 const pageParams = {
   page: 0,
@@ -13,7 +15,7 @@ const pageParams = {
 };
 
 // const localUrl = "http://localhost:8080/api/v1/questions";
-const localUrl = "https://91b.co.uk/api/v1/questions";
+const localUrl = URL + "questions";
 
 function TutoringArchivePage() {
   const today = new Date(Date.now());

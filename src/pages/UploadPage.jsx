@@ -6,6 +6,8 @@ import styles from "./UploadPage.module.css";
 import TutoringQuestions from "../components/TutoringQuestions/TutoringQuestions";
 import { Link } from "react-router-dom";
 
+const URL = process.env.REACT_APP_API_URL;
+
 function UploadPage() {
   const [questions, setQuestions] = useState({
     title: "",
@@ -24,7 +26,7 @@ function UploadPage() {
   const [candidates, setCandidates] = useState([]);
   const [isAnswerCode, setIsAnswerCode] = useState(false);
   // const localUrl = "http://localhost:8080/api/v1/questions";
-  const localUrl = "https://91b.co.uk/api/v1/questions";
+  const localUrl = URL + "questions";
 
   const today = new Date(Date.now());
   today.setDate(today.getDate() + 14);

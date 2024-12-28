@@ -5,6 +5,8 @@ import styles from "./SubmissionPage.module.css";
 import axios from "axios";
 import Submission from "../components/Submission/Submission";
 
+const URL = process.env.REACT_APP_API_URL;
+
 // Once pageParams needs to change it suppose to change to state.
 const pageParams = {
   page: 0,
@@ -54,7 +56,8 @@ function SubmissionPage() {
   //   (isGettingAll ? getAll : notGetAll) +
   //   "&";
   const localUrl =
-    "https://91b.co.uk/api/v1/submissions?studentName=" +
+    URL +
+    "submissions?studentName=" +
     studentsName +
     (isGettingAll ? getAll : notGetAll) +
     "&";

@@ -10,10 +10,11 @@ import start from "../assets/svgs/SandClockStart.svg";
 import pause from "../assets/svgs/SandClockPause.svg";
 import end from "../assets/svgs/SandClockEnd.svg";
 
+const URL = process.env.REACT_APP_API_URL;
 const instance = new WorkerBuilder(stopwatchWorker);
 
 // const localUrl = "http://localhost:8080/api/v1/stopwatch";
-const localUrl = "https://91b.co.uk/api/v1/stopwatch";
+const localUrl = URL + "stopwatch";
 class StopwatchPage extends Component {
   constructor(props) {
     super(props);
