@@ -3,12 +3,12 @@ import logo from "../../../../assets/logo512.png";
 import Slider from "../../../../components/Slider/Slider";
 import styles from "../../MainPage.module.css";
 
-import image1 from "../../../../images/1651807930774_Original-modified.jpg";
-import image2 from "../../../../images/1645053171211_Original-modified.jpg";
-import image3 from "../../../../images/1600685054178_Original-modified.jpg";
-import image4 from "../../../../images/20191018_2120280_Original-modified.jpg";
-import image5 from "../../../../images/IMG_1339-modified.JPG";
-import image6 from "../../../../images/IMG_2131-modified.JPG";
+import image1 from "../../../../images/main1.webp";
+import image2 from "../../../../images/main2.webp";
+import image4 from "../../../../images/main4.webp";
+import image5 from "../../../../images/main5.webp";
+import image6 from "../../../../images/main6.webp";
+import image7 from "../../../../images/main7.webp";
 
 function Main(props) {
   return (
@@ -34,7 +34,7 @@ function Main(props) {
       </div>
       <div className={styles.slider}>
         <Slider
-          images={[image1, image2, image3, image4, image5, image6]}
+          images={[image1, image2, image4, image5, image6, image7]}
           height="100%"
           time={4000}
           isActive={props.isActive}

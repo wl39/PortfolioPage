@@ -3,108 +3,104 @@ import Slider from "../../../../components/Slider/Slider";
 import Timeline from "../../../../components/Timeline/Timeline";
 import CircleAnimation from "../../../../components/Timeline/CircleAnimation/CircleAnimation";
 
-import first1 from "../../../../images/firstYear/First_Year_1.jpg";
-import first2 from "../../../../images/firstYear/First_Year_2.jpg";
-import first3 from "../../../../images/firstYear/First_Year_3.jpg";
-import first4 from "../../../../images/firstYear/First_Year_4.jpg";
-import first5 from "../../../../images/firstYear/First_Year_5.jpg";
-import first6 from "../../../../images/firstYear/First_Year_6.jpg";
-import first7 from "../../../../images/firstYear/First_Year_7.jpg";
-import first9 from "../../../../images/firstYear/First_Year_9.jpg";
-import first11 from "../../../../images/firstYear/First_Year_11.jpg";
-import bono1 from "../../../../images/firstYear/Bonoware_1.jpg";
-import bono2 from "../../../../images/firstYear/Bonoware_2.jpg";
-import bono3 from "../../../../images/firstYear/Bonoware_3.jpg";
-import bono4 from "../../../../images/firstYear/Bonoware_4.jpg";
-import bono5 from "../../../../images/firstYear/Bonoware_5.jpg";
-import bono6 from "../../../../images/firstYear/Bonoware_6.jpg";
-import bono7 from "../../../../images/firstYear/Bonoware_7.jpg";
+import first1 from "../../../../images/firstYear/First_Year_1.webp";
+import first2 from "../../../../images/firstYear/First_Year_2.webp";
+import first3 from "../../../../images/firstYear/First_Year_3.webp";
+import first4 from "../../../../images/firstYear/First_Year_4.webp";
+import first5 from "../../../../images/firstYear/First_Year_5.webp";
+import first6 from "../../../../images/firstYear/First_Year_6.webp";
+import first7 from "../../../../images/firstYear/First_Year_7.webp";
+import first9 from "../../../../images/firstYear/First_Year_9.webp";
+import first11 from "../../../../images/firstYear/First_Year_11.webp";
+import bono1 from "../../../../images/firstYear/Bonoware_1.webp";
+import bono2 from "../../../../images/firstYear/Bonoware_2.webp";
+import bono3 from "../../../../images/firstYear/Bonoware_3.webp";
+import bono4 from "../../../../images/firstYear/Bonoware_4.webp";
+import bono5 from "../../../../images/firstYear/Bonoware_5.webp";
+import bono6 from "../../../../images/firstYear/Bonoware_6.webp";
+import bono7 from "../../../../images/firstYear/Bonoware_7.webp";
 
-import second1 from "../../../../images/secondYear/Second_Year_1.jpg";
-import second2 from "../../../../images/secondYear/Second_Year_2.jpg";
-import second3 from "../../../../images/secondYear/Second_Year_3.jpg";
-import second4 from "../../../../images/secondYear/Second_Year_4.jpg";
-import second5 from "../../../../images/secondYear/Second_Year_5.jpg";
-import second6 from "../../../../images/secondYear/Second_Year_6.jpg";
-import second7 from "../../../../images/secondYear/Second_Year_7.jpg";
-import second8 from "../../../../images/secondYear/Second_Year_8.jpg";
-import second9 from "../../../../images/secondYear/Second_Year_9.jpg";
-import second10 from "../../../../images/secondYear/Second_Year_10.jpg";
-import second11 from "../../../../images/secondYear/Second_Year_11.jpg";
-import second12 from "../../../../images/secondYear/Second_Year_12.jpg";
-import second13 from "../../../../images/secondYear/Second_Year_13.jpg";
-import second14 from "../../../../images/secondYear/Second_Year_14.jpg";
+import second1 from "../../../../images/secondYear/Second_Year_1.webp";
+import second2 from "../../../../images/secondYear/Second_Year_2.webp";
+import second3 from "../../../../images/secondYear/Second_Year_3.webp";
+import second4 from "../../../../images/secondYear/Second_Year_4.webp";
+import second5 from "../../../../images/secondYear/Second_Year_5.webp";
+import second6 from "../../../../images/secondYear/Second_Year_6.webp";
+import second7 from "../../../../images/secondYear/Second_Year_7.webp";
+import second8 from "../../../../images/secondYear/Second_Year_8.webp";
+import second9 from "../../../../images/secondYear/Second_Year_9.webp";
+import second10 from "../../../../images/secondYear/Second_Year_10.webp";
+import second12 from "../../../../images/secondYear/Second_Year_12.webp";
+import second13 from "../../../../images/secondYear/Second_Year_13.webp";
+import second14 from "../../../../images/secondYear/Second_Year_14.webp";
 import second15 from "../../../../images/secondYear/Second_Year_15.gif";
 import second16 from "../../../../images/secondYear/Second_Year_16.gif";
-import s_bono1 from "../../../../images/secondYear/Bonoware_1.jpg";
-import s_bono2 from "../../../../images/secondYear/Bonoware_2.png";
-import s_bono3 from "../../../../images/secondYear/Bonoware_3.png";
-import s_bono4 from "../../../../images/secondYear/Bonoware_4.jpg";
-import s_bono5 from "../../../../images/secondYear/Bonoware_5.jpg";
+import s_bono1 from "../../../../images/secondYear/Bonoware_1.webp";
+import s_bono2 from "../../../../images/secondYear/Bonoware_2.png.webp";
+import s_bono3 from "../../../../images/secondYear/Bonoware_3.png.webp";
+import s_bono4 from "../../../../images/secondYear/Bonoware_4.webp";
+import s_bono5 from "../../../../images/secondYear/Bonoware_5.webp";
 import s_bono6 from "../../../../images/secondYear/Bonoware_6.gif";
 
-import holiday1 from "../../../../images/army/holiday_1.jpg";
-import holiday2 from "../../../../images/army/holiday_2.jpg";
-import holiday3 from "../../../../images/army/holiday_3.jpg";
-import army1 from "../../../../images/army/army_1.jpg";
-import army2 from "../../../../images/army/army_2.jpg";
-import army3 from "../../../../images/army/army_3.jpg";
-import army4 from "../../../../images/army/army_4.jpg";
-import army5 from "../../../../images/army/army_5.jpg";
-import army6 from "../../../../images/army/army_6.jpg";
-import army7 from "../../../../images/army/army_7.jpg";
-import army8 from "../../../../images/army/army_8.jpg";
-import army9 from "../../../../images/army/army_9.jpg";
-import army10 from "../../../../images/army/army_10.jpg";
-import army11 from "../../../../images/army/army_11.jpg";
-import army12 from "../../../../images/army/army_12.jpg";
-import army13 from "../../../../images/army/army_13.jpg";
-import army14 from "../../../../images/army/army_14.jpg";
+import holiday1 from "../../../../images/army/holiday_1.webp";
+import holiday2 from "../../../../images/army/holiday_2.webp";
+import holiday3 from "../../../../images/army/holiday_3.webp";
+import army1 from "../../../../images/army/army_1.webp";
+import army2 from "../../../../images/army/army_2.webp";
+import army3 from "../../../../images/army/army_3.webp";
+import army4 from "../../../../images/army/army_4.webp";
+import army5 from "../../../../images/army/army_5.webp";
+import army6 from "../../../../images/army/army_6.webp";
+import army7 from "../../../../images/army/army_7.webp";
+import army8 from "../../../../images/army/army_8.webp";
+import army9 from "../../../../images/army/army_9.webp";
+import army10 from "../../../../images/army/army_10.webp";
+import army11 from "../../../../images/army/army_11.webp";
+import army12 from "../../../../images/army/army_12.webp";
+import army13 from "../../../../images/army/army_13.webp";
+import army14 from "../../../../images/army/army_14.webp";
 
-import third1 from "../../../../images/thirdYear/third_1.jpg";
-import third2 from "../../../../images/thirdYear/third_2.jpg";
-import third3 from "../../../../images/thirdYear/third_3.jpg";
-import third4 from "../../../../images/thirdYear/third_4.jpg";
-import third5 from "../../../../images/thirdYear/third_5.jpg";
+import third1 from "../../../../images/thirdYear/third_1.webp";
+import third2 from "../../../../images/thirdYear/third_2.webp";
+import third3 from "../../../../images/thirdYear/third_3.webp";
+import third4 from "../../../../images/thirdYear/third_4.webp";
+import third5 from "../../../../images/thirdYear/third_5.webp";
 import third6 from "../../../../images/thirdYear/third_6.gif";
-import third7 from "../../../../images/thirdYear/third_7.jpg";
-import third8 from "../../../../images/thirdYear/third_8.jpg";
-import third9 from "../../../../images/thirdYear/third_9.jpg";
-import third10 from "../../../../images/thirdYear/third_10.jpg";
-import third11 from "../../../../images/thirdYear/third_11.jpg";
-import third12 from "../../../../images/thirdYear/third_12.jpg";
+import third8 from "../../../../images/thirdYear/third_8.webp";
+import third10 from "../../../../images/thirdYear/third_10.webp";
+import third11 from "../../../../images/thirdYear/third_11.webp";
+import third12 from "../../../../images/thirdYear/third_12.webp";
 import third13 from "../../../../images/thirdYear/third_13.gif";
 
-import fourth1 from "../../../../images/fourthYear/fourth_1.jpg";
-import fourth2 from "../../../../images/fourthYear/fourth_2.jpg";
-import fourth3 from "../../../../images/fourthYear/fourth_3.jpg";
-import fourth4 from "../../../../images/fourthYear/fourth_4.jpg";
-import fourth5 from "../../../../images/fourthYear/fourth_5.jpg";
-import fourth6 from "../../../../images/fourthYear/fourth_6.jpg";
+import fourth1 from "../../../../images/fourthYear/fourth_1.webp";
+import fourth2 from "../../../../images/fourthYear/fourth_2.webp";
+import fourth3 from "../../../../images/fourthYear/fourth_3.webp";
+import fourth4 from "../../../../images/fourthYear/fourth_4.webp";
+import fourth5 from "../../../../images/fourthYear/fourth_5.webp";
+import fourth6 from "../../../../images/fourthYear/fourth_6.webp";
 
 import graduate1 from "../../../../images/graduate/graduate_1.gif";
-import graduate2 from "../../../../images/graduate/graduate_2.jpg";
-import graduate3 from "../../../../images/graduate/graduate_3.JPG";
-import graduate4 from "../../../../images/graduate/graduate_4.JPG";
-import graduate5 from "../../../../images/graduate/graduate_5.jpg";
-import graduate6 from "../../../../images/graduate/graduate_6.jpg";
-import graduate7 from "../../../../images/graduate/graduate_7.JPG";
-import graduate8 from "../../../../images/graduate/graduate_8.jpg";
-import graduate9 from "../../../../images/graduate/graduate_9.jpg";
-import graduate10 from "../../../../images/graduate/graduate_10.jpg";
+import graduate2 from "../../../../images/graduate/graduate_2.webp";
+import graduate3 from "../../../../images/graduate/graduate_3.webp";
+import graduate4 from "../../../../images/graduate/graduate_4.webp";
+import graduate5 from "../../../../images/graduate/graduate_5.webp";
+import graduate6 from "../../../../images/graduate/graduate_6.webp";
+import graduate7 from "../../../../images/graduate/graduate_7.webp";
+import graduate8 from "../../../../images/graduate/graduate_8.webp";
+import graduate9 from "../../../../images/graduate/graduate_9.webp";
+import graduate10 from "../../../../images/graduate/graduate_10.webp";
 
-import present1 from "../../../../images/present/present_1.jpg";
-import present2 from "../../../../images/present/present_2.jpg";
-import present3 from "../../../../images/present/present_3.jpg";
-import present4 from "../../../../images/present/present_4.JPG";
-import present5 from "../../../../images/present/present_5.JPG";
-import present6 from "../../../../images/present/present_6.JPG";
-import present7 from "../../../../images/present/present_7.JPG";
-import present8 from "../../../../images/present/present_8.JPG";
-import present9 from "../../../../images/present/present_9.jpg";
-import present10 from "../../../../images/present/present_10.JPG";
-import present11 from "../../../../images/present/present_11.JPG";
-import present12 from "../../../../images/present/present_12.jpeg";
+import present1 from "../../../../images/present/present_1.webp";
+import present2 from "../../../../images/present/present_2.webp";
+import present3 from "../../../../images/present/present_3.webp";
+import present4 from "../../../../images/present/present_4.webp";
+import present5 from "../../../../images/present/present_5.webp";
+import present6 from "../../../../images/present/present_6.webp";
+import present7 from "../../../../images/present/present_7.webp";
+import present8 from "../../../../images/present/present_8.webp";
+import present9 from "../../../../images/present/present_9.webp";
+import present10 from "../../../../images/present/present_10.webp";
+import present11 from "../../../../images/present/present_11.webp";
 
 import TimelineDetail from "../../../../components/Timeline/TimelineDetail/TimelineDetail";
 
@@ -231,7 +227,6 @@ function TimelinePage(props) {
           second8,
           second9,
           second10,
-          second11,
           second12,
           second13,
           second14,
@@ -369,9 +364,7 @@ function TimelinePage(props) {
           third4,
           third5,
           third6,
-          third7,
           third8,
-          third9,
           third10,
           third11,
           third12,
@@ -562,7 +555,6 @@ function TimelinePage(props) {
           present9,
           present10,
           present11,
-          present12,
         ];
         details = (
           <TimelineDetail

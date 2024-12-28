@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./MainPage.module.css";
 
-import image0 from "../../images/under_construction.png";
+import image0 from "../../images/under_construction.webp";
 
 import Main from "./components/Main/Main";
 import TimelinePage from "./components/Timeline/TimelinePage";
@@ -129,7 +129,7 @@ class MainPage extends React.Component {
               href="https://c-lime.tistory.com/14"
               className={styles.portfoliPageLink}
             >
-              Clike here
+              Click here
             </a>
           </div>
           {/* <div>TEMP ENDS </div> */}
