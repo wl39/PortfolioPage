@@ -11,10 +11,8 @@ const MarkingPage = () => {
   const [questions, setQuestions] = useState([]);
   const [mark, setMark] = useState({});
 
-  // const localUrl = "http://localhost:8080/api/v1/submissions/saq?studentName=";
   const localUrl = URL + "submissions/saq?studentName=";
 
-  // const markUrl = "http://localhost:8080/api/v1/submissions/marks?studentName=";
   const markUrl = URL + "submissions/marks?studentName=";
 
   const marks = (key, value) => {

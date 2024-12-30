@@ -43,11 +43,9 @@ function TutoringPage() {
   const [answers, setAnswers] = useState({});
 
   const { studentsName } = useParams();
-  const localUrl = "http://localhost:8080/api/v1/questions/page/";
-  // const localUrl = URL + "questions/page/";
 
-  const answerUrl = "http://localhost:8080/api/v1/submissions/multiples";
-  // const answerUrl = URL + "submissions/multiples";
+  const localUrl = URL + "questions/page/";
+  const answerUrl = URL + "submissions/multiples";
 
   const selectAnswer = useCallback(
     (questionID, answer) => {

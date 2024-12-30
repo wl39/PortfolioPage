@@ -123,11 +123,6 @@ const ReviewPage = () => {
     setSubmissions(submissionComponents);
   }, []);
 
-  // const localUrl =
-  //   "http://localhost:8080/api/v1/submissions/review?studentName=" +
-  //   studentsName +
-  //   "&";
-
   const localUrl = URL + "submissions/review?studentName=" + studentsName + "&";
   const changeDropdown = () => {
     setIsSearchParamterClicked(!isSearchParamterClicked);

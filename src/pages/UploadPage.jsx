@@ -25,7 +25,7 @@ function UploadPage() {
   const [question, setQuestion] = useState("");
   const [candidates, setCandidates] = useState([]);
   const [isAnswerCode, setIsAnswerCode] = useState(false);
-  // const localUrl = "http://localhost:8080/api/v1/questions";
+  // const localUrl = URL + "questions";
   const localUrl = URL + "questions";
 
   const today = new Date(Date.now());
