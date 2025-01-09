@@ -3,8 +3,10 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 import styles from "./UploadPage.module.css";
-import TutoringQuestions from "../components/TutoringQuestions/TutoringQuestions";
 import { Link } from "react-router-dom";
+import UploadForm from "../components/UploadForm/UploadForm";
+import UploadFixer from "../components/UploadFixer/UploadFixer";
+import DragAndDrop from "../components/DragAndDrop/DragAndDrop";
 
 const URL = process.env.REACT_APP_API_URL;
 
@@ -22,10 +24,24 @@ function UploadPage() {
     generatedDate: new Date(Date.now()).toISOString().slice(0, 19),
     targetDate: "",
   });
+
+  const [fixed, setFixed] = useState({
+    title: false,
+    type: false,
+    question: false,
+    question_code: false,
+    candidates: false,
+    hints: false,
+    students: false,
+    answer: false,
+    explanation: false,
+    target_date: false,
+  });
+
   const [question, setQuestion] = useState("");
   const [candidates, setCandidates] = useState([]);
   const [isAnswerCode, setIsAnswerCode] = useState(false);
-  // const localUrl = URL + "questions";
+
   const localUrl = URL + "questions";
 
   const today = new Date(Date.now());
@@ -50,6 +66,22 @@ function UploadPage() {
       explanation: "",
       generatedDate: new Date(Date.now()).toISOString().slice(0, 19),
       targetDate: "",
+    });
+  };
+
+  const resetQuestionsOnSubmit = () => {
+    setQuestions({
+      title: fixed.title ? questions.title : "",
+      question: fixed.question ? questions.question : "",
+      type: fixed.type ? questions.type : "",
+      candidates: fixed.type ? Array(questions.candidates.length).fill("") : [],
+      hint: fixed.hints ? questions.hint : "",
+      studentsFor: fixed.students ? questions.studentsFor : [],
+      studentsForString: fixed.students ? questions.studentsForString : "",
+      answer: fixed.answer ? questions.answer : "",
+      explanation: fixed.explanation ? questions.explanation : "",
+      generatedDate: new Date(Date.now()).toISOString().slice(0, 19),
+      targetDate: fixed.target_date ? questions.targetDate : "",
     });
   };
 
@@ -147,7 +179,6 @@ function UploadPage() {
     if (questions.candidates[index]) {
       const newCandidates = [...questions.candidates];
 
-      console.log(updatedCandidates[index]);
       if (updatedCandidates[index])
         newCandidates[index] = "&code:" + newCandidates[index];
       else {
@@ -204,19 +235,14 @@ function UploadPage() {
           .post(localUrl, questions)
           .then((response) => {
             window.alert("Successfully uploaded!");
-            setStudents();
+            if (fixed.students) setStudents();
             console.log(response.data);
-            resetQuestions();
+            resetQuestionsOnSubmit();
           })
           .catch((error) => {
             console.log(error);
           });
     }
-  };
-
-  const getStudents = () => {
-    let students = localStorage.getItem("students");
-    console.log(students);
   };
 
   const setStudents = () => {
@@ -248,9 +274,18 @@ function UploadPage() {
     localStorage.setItem("students", pageStudents);
   };
 
+  const fixedHandler = (event) => {
+    console.log(event.target.id);
+    // setF
+    setFixed({ ...fixed, [event.target.id]: !fixed[event.target.id] });
+  };
+
   return (
     <>
       <div>
+        <button className={styles.input} onClick={resetQuestionsOnSubmit}>
+          TEMP
+        </button>
         <div className={styles.linkContainer}>
           <Link className={styles.linkButton} to={"/questions"}>
             Archive
@@ -258,182 +293,21 @@ function UploadPage() {
           <Link className={styles.linkButton} to={"/teacher"}>
             Teacher
           </Link>
+          <DragAndDrop x={350} y={40}>
+            <UploadFixer fixedHandler={fixedHandler} fixed={fixed} />
+          </DragAndDrop>
         </div>
-        <div style={{ display: "flex" }}>
-          <div className={styles.container}>
-            <div className={styles.titleContainer}>
-              <input
-                className={styles.title}
-                placeholder="Title"
-                onChange={(e) => inputHandler(e, "title")}
-                value={questions.title}
-              />
-            </div>
-            <div className={styles.radioContainer}>
-              <input
-                id="SAQ"
-                type="radio"
-                name="type"
-                value="s"
-                onChange={(e) => select(e)}
-              />
-              <label htmlFor="SAQ">Short Answer Question</label>
-              <input
-                id="MAQ"
-                type="radio"
-                name="type"
-                value="M"
-                onChange={(e) => select(e)}
-              />
-              <label htmlFor="MAQ">Multiple Answers Question</label>
-              <input
-                id="MCQ"
-                type="radio"
-                name="type"
-                value="m"
-                onChange={(e) => select(e)}
-              />
-              <label htmlFor="MCQ">Multiple Choice Question</label>
-            </div>
-            <input
-              placeholder="Question"
-              onChange={(e) => inputHandler(e, "question")}
-              className={styles.input}
-              value={questions.question.split("&code:")[0]}
-            />
-            <textarea
-              className={styles.textfield}
-              placeholder="Code for the question?"
-              onChange={(e) => inputHandler(e, "code")}
-              value={
-                questions.question.includes("&code:")
-                  ? questions.question.split("&code:")[1]
-                  : ""
-              }
-            />
-            {questions.type === "m" && (
-              <input
-                placeholder="Number of Candidates"
-                type="number"
-                min="2"
-                max="5"
-                onChange={(e) => inputHandler(e, "can")}
-                className={styles.input}
-              />
-            )}
-            {questions.candidates.map((_, index) => (
-              <div key={index} className={styles.candidateContainer}>
-                <input
-                  className={styles.checkbox}
-                  type="checkbox"
-                  id={"candidate" + index}
-                  onChange={(e) => updateCandidates(index)}
-                />
-                <label className={styles.label} htmlFor={"candidate" + index}>
-                  Code
-                </label>
-                <input
-                  className={styles.candidateInput}
-                  placeholder={"Candidate " + (index + 1)}
-                  value={
-                    questions.candidates[index].includes("&code:")
-                      ? questions.candidates[index].split("&code:")[1]
-                      : questions.candidates[index]
-                  }
-                  onChange={(e) => {
-                    const updatedCandidates = [...questions.candidates];
-                    updatedCandidates[index] = candidates[index]
-                      ? "&code:" + e.target.value
-                      : e.target.value;
-                    setQuestions({
-                      ...questions,
-                      candidates: updatedCandidates,
-                    });
-                  }}
-                />
-              </div>
-            ))}
-            <input
-              placeholder="Hints"
-              className={styles.input}
-              onChange={(e) => inputHandler(e, "hint")}
-              value={questions.hint}
-            />
-            <input
-              placeholder="Students For"
-              className={styles.input}
-              onChange={(e) => inputHandler(e, "for")}
-              value={questions.studentsForString}
-            />
-
-            <div className={styles.candidateContainer}>
-              <input
-                className={styles.checkbox}
-                type="checkbox"
-                id={"Answer"}
-                value={isAnswerCode}
-                onChange={(e) => {
-                  // console.log(isAnswerCode);
-                  setIsAnswerCode(!isAnswerCode);
-                  setQuestions({
-                    ...questions,
-                    answer: !isAnswerCode
-                      ? "&code:" + questions.answer
-                      : questions.answer.replace("&code:", ""),
-                  });
-                }}
-              />
-              <label className={styles.label} htmlFor={"Answer"}>
-                Code
-              </label>
-              <input
-                className={styles.candidateInput}
-                placeholder={"Answer"}
-                value={
-                  questions.answer.includes("&code:")
-                    ? questions.answer.split("&code:")[1]
-                    : questions.answer
-                }
-                onChange={(e) => {
-                  setQuestions({
-                    ...questions,
-                    answer: isAnswerCode
-                      ? "&code:" + e.target.value
-                      : e.target.value,
-                  });
-                }}
-              />
-            </div>
-            <input
-              placeholder="Explanation"
-              className={styles.input}
-              onChange={(e) => inputHandler(e, "exp")}
-              value={questions.explanation}
-            />
-            <input
-              placeholder="Target Date"
-              className={styles.input}
-              type="datetime-local"
-              min={new Date(Date.now()).toISOString().slice(0, 16)}
-              max={target}
-              onChange={(e) => inputHandler(e, "target")}
-              value={questions.targetDate}
-            />
-          </div>
-          <div
-            style={{
-              display: "flex",
-              width: "100%",
-              flexDirection: "column",
-              paddingLeft: "10px",
-            }}
-          >
-            <h3 style={{ fontSize: "30px" }}>
-              Expected Result For The Question
-            </h3>
-            <TutoringQuestions question={questions} />
-          </div>
-        </div>
+        <UploadForm
+          inputHandler={inputHandler}
+          select={select}
+          questions={questions}
+          setQuestions={setQuestions}
+          candidates={candidates}
+          updateCandidates={updateCandidates}
+          isAnswerCode={isAnswerCode}
+          setIsAnswerCode={setIsAnswerCode}
+          target={target}
+        />
         <button className={styles.input} onClick={uploadQuestions}>
           SUBMIT
         </button>

@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  width: 450px;
+}
+.boxContainer {
+  width: 215px;
+}
+
+.fixContainer {
+  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid gray;
+  margin: 0px 8px;
+  height: 32px;
+}
+
+.fixContainer:last-child {
+  border-bottom: 0px;
+}
+
+.label {
+  width: 100%;
+}

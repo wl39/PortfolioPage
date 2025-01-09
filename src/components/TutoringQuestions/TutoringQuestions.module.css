@@ -81,6 +81,7 @@
 .hint {
   margin: 20px 0px;
   font-weight: 500;
+  white-space: pre;
 }
 
 textarea {
