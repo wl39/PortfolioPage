@@ -14,6 +14,8 @@ import TutoringArchivePage from "./pages/TutoringArchivePage";
 import TeacherPage from "./pages/TeacherPage";
 import MarkingPage from "./pages/MarkingPage";
 import ReviewPage from "./pages/ReviewPage";
+import MathSolveMainPage from "./pages/MathSolveMainPage";
+import MathSolvePage from "./pages/MathSolvePage";
 
 function App() {
   return (
@@ -33,6 +35,8 @@ function App() {
         <Route path="/teacher" element={<TeacherPage />} />
         <Route path="/marking/:studentName" element={<MarkingPage />} />
         <Route path="/upload" element={<UploadPage />} />
+        <Route path="/math" element={<MathSolveMainPage />} />
+        <Route path="/math/start" element={<MathSolvePage />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </BrowserRouter>
