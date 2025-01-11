@@ -95,15 +95,14 @@ function Submission({ question, studentAnswer, submitDate, isMarked, id }) {
                     : "test:" + index + ":" + value
                 }
               >
-                {value
-                  .split("&code:")
-                  .map((value, index) =>
-                    index === 1 ? (
-                      <SyntaxHighlight code={value} key={"syntax" + index} />
-                    ) : (
-                      <div key={value + ":" + index}> {value} </div>
-                    )
-                  )}
+                {value.includes("&code:") ? (
+                  <SyntaxHighlight
+                    code={value.split("&code:")[1]}
+                    key={"syntax" + index}
+                  />
+                ) : (
+                  <div key={value + ":" + index}>{value}</div>
+                )}
               </label>
             </div>
           ))}

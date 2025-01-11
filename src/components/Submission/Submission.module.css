@@ -6,11 +6,15 @@
 .wrongQuestionContainer {
   border: 2px solid black;
   box-shadow: 5px 5px black;
+  white-space: pre-wrap;
+  word-break: break-word;
 }
 
 .correctQuestionContainer {
   border: 2px solid green;
   box-shadow: 5px 5px green;
+  white-space: pre-wrap;
+  word-break: break-word;
 }
 
 .unMarkedContainer {
@@ -87,7 +91,6 @@
 .hint {
   margin: 20px 0px;
   font-weight: 500;
-  white-space: pre;
 }
 
 .answerContainer {
@@ -113,7 +116,6 @@
   background: #2d2d2d;
   color: white;
   padding: 10px 5px;
-  white-space: pre;
 }
 
 .explanationHeader {

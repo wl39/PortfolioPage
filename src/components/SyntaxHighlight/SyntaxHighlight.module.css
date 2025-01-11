@@ -17,6 +17,7 @@
 }
 
 .codeContainer {
+  white-space: pre-wrap;
   background-color: rgb(40, 40, 40);
   color: white;
   padding: 15px 10px;

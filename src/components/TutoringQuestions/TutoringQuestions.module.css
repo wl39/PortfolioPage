@@ -6,6 +6,8 @@
 .questionContainer {
   border: 2px solid black;
   box-shadow: 5px 5px black;
+  white-space: pre-wrap;
+  word-break: break-word;
 }
 
 .question {
@@ -81,7 +83,7 @@
 .hint {
   margin: 20px 0px;
   font-weight: 500;
-  white-space: pre;
+  /* white-space: pre-wrap; */
 }
 
 textarea {
