@@ -17,7 +17,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "sudo dd if=/dev/zero of=/mnt/swapfile bs=1M count=1024; sudo swapon /mnt/swapfile; react-scripts build; sudo swapoff -v /mnt/swapfile; sudo rm /mnt/swapfile;",
+    "build": "sudo dd if=/dev/zero of=/mnt/swapfile bs=1M count=1024; sudo mkswap /mnt/swapfile; sudo swapon /mnt/swapfile; react-scripts build; sudo swapoff -v /mnt/swapfile; sudo rm /mnt/swapfile;",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
