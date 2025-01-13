@@ -280,10 +280,14 @@ function UploadPage() {
     setFixed({ ...fixed, [event.target.id]: !fixed[event.target.id] });
   };
 
+  const printQuestion = () => {
+    console.log(questions);
+  };
+
   return (
     <>
       <div>
-        <button className={styles.input} onClick={resetQuestionsOnSubmit}>
+        <button className={styles.input} onClick={printQuestion}>
           TEMP
         </button>
         <div className={styles.linkContainer}>
