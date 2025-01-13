@@ -80,9 +80,7 @@ const MathQuestion = ({ setCorrectAnswer }) => {
       />
       <div className={styles.timer}>
         <div>Timer: </div>
-        <div style={{ width: "105px", marginLeft: "8px" }}>
-          {(timer / 1000).toFixed(2)}
-        </div>
+        <div className={styles.timerText}>{(timer / 1000).toFixed(2)}</div>
         <div> seconds</div>
       </div>
 

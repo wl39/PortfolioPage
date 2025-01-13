@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import MathQuestion from "../components/MathQuestion/MathQuestion";
 import RobuxAdder from "../components/RobuxAdder/RobuxAdder";
 
+import styles from "./MathSolvePage.module.css";
+
 const MathSolvePage = () => {
   const [time, setTime] = useState(3);
   const [correctAnswer, setCorrectAnswer] = useState(0);
@@ -31,6 +33,7 @@ const MathSolvePage = () => {
         margin: "auto",
         textAlign: "center",
       }}
+      className={styles.font}
     >
       {time > 0 ? (
         time

@@ -13,3 +13,8 @@
   border: 2px solid black;
   background-color: #ffffe7;
 }
+
+.font {
+  font-family: "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
