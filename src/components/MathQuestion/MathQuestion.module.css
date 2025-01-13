@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 600px;
+  height: 600px;
+  margin-top: 120px;
+}
+
+.question {
+  font-size: 120px;
+  font-weight: 900;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.timer {
+  font-size: 50px;
+  font-weight: 300;
+  display: flex;
+}
+
+.answer {
+  margin: 72px 20px;
+  font-size: 60px;
+  height: 72px;
+}
