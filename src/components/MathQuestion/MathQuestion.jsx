@@ -10,11 +10,10 @@ const MathQuestion = ({
   studentName,
   showedQuestionsParent,
 }) => {
-  const max_questions = 30;
+  const max_questions = 100;
   const milliSeconds = 1000;
 
   const [showedQuestions, setShowedQuestions] = useState(showedQuestionsParent);
-  // const [counter, setCounter] = useState(10);
   const counter = useRef(10);
 
   const [studentAnswer, setStudentAnswer] = useState("");
@@ -41,7 +40,6 @@ const MathQuestion = ({
     setRight(r);
     setAnswer(l + r);
 
-    console.log(l + r);
     setShowedQuestions((prev) => prev + 1);
   }, []);
 
