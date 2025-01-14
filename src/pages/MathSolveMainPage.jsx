@@ -1,12 +1,34 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./MathSolvePage.module.css";
 const MathSolveMainPage = () => {
+  const [name, setName] = useState("");
+  const navigate = useNavigate();
+
+  const handleStart = () => {
+    if (name) {
+      navigate("/math/start", { state: { name: name } });
+    }
+  };
+
   return (
-    <div>
-      <Link to={"/math/start"}>
-        <button className={styles.button}>Start</button>
-      </Link>
+    <div className={styles.container}>
+      <div className={styles.question}>Simple Math Question</div>
+      <div className={styles.inputContainer}>
+        <input
+          style={{ height: "60px", fontSize: "30px" }}
+          placeholder="Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <button
+          className={styles.button}
+          disabled={!name}
+          onClick={handleStart}
+        >
+          Start
+        </button>
+      </div>
     </div>
   );
 };

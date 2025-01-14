@@ -1,14 +1,31 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import styles from "./MathQuestion.module.css";
+import axios from "axios";
 
-const MathQuestion = ({ setCorrectAnswer }) => {
+const URL = process.env.REACT_APP_API_URL;
+const localUrl = URL + "simple_math";
+
+const MathQuestion = ({
+  setCorrectAnswer,
+  studentName,
+  showedQuestionsParent,
+}) => {
+  const max_questions = 20;
   const milliSeconds = 1000;
-  const [counter, setCounter] = useState(10);
+
+  const [showedQuestions, setShowedQuestions] = useState(showedQuestionsParent);
+  // const [counter, setCounter] = useState(10);
+  const counter = useRef(10);
+
   const [studentAnswer, setStudentAnswer] = useState("");
-  const [timer, setTimer] = useState(counter * milliSeconds);
+  const [timer, setTimer] = useState(counter.current * milliSeconds);
   const [left, setLeft] = useState(0);
   const [right, setRight] = useState(0);
   const [answer, setAnswer] = useState(0);
+
+  const leftRef = useRef(left);
+  const rightRef = useRef(right);
+  const showedQuestionsRef = useRef(showedQuestions);
 
   const min = 99;
   const max = 999;
@@ -23,27 +40,52 @@ const MathQuestion = ({ setCorrectAnswer }) => {
     setLeft(l);
     setRight(r);
     setAnswer(l + r);
-    console.log(l + r);
+
+    setShowedQuestions((prev) => prev + 1);
   }, []);
 
   useEffect(() => {
+    leftRef.current = left;
+    rightRef.current = right;
+    showedQuestionsRef.current = showedQuestions;
+  }, [left, right, showedQuestions]);
+
+  useEffect(() => {
     setNumber();
+
     const intervalId = setInterval(() => {
+      if (showedQuestionsRef.current > max_questions) {
+        clearInterval(intervalId);
+      }
+
       setTimer((prevTimer) => {
         if (prevTimer === 0) {
-          setNumber(); // Execute setNumber when timer reaches 0
+          const date = new Date();
+          const koreaTime = new Date(
+            date.toLocaleString("en-US", { timeZone: "Asia/Seoul" })
+          );
+          const formattedDate = koreaTime.toISOString();
+
+          axios.post(localUrl, {
+            name: studentName,
+            answer: -1,
+            question: `${leftRef.current} + ${rightRef.current}`,
+            submitDate: formattedDate,
+          });
+
+          setNumber();
           setStudentAnswer("");
-          return counter * milliSeconds; // Reset the timer
+          return counter.current * milliSeconds;
         }
         return prevTimer - 10;
       });
     }, 10);
 
     return () => clearInterval(intervalId);
-  }, [setNumber, counter]);
+  }, [setNumber, studentName]);
 
   const resetTimer = () => {
-    setTimer(counter * milliSeconds);
+    setTimer(counter.current * milliSeconds);
     setNumber();
     setStudentAnswer("");
   };
@@ -53,9 +95,21 @@ const MathQuestion = ({ setCorrectAnswer }) => {
       setStudentAnswer(parseInt(e.target.value));
 
       if (parseInt(e.target.value) === answer) {
-        setCorrectAnswer((prev) => {
-          return prev + 1;
+        const date = new Date();
+        const koreaTime = new Date(
+          date.toLocaleString("en-US", { timeZone: "Asia/Seoul" })
+        );
+        const formattedDate = koreaTime.toISOString();
+
+        axios.post(localUrl, {
+          name: studentName,
+          answer: answer,
+          question: `${left} + ${right}`,
+          submitDate: formattedDate,
         });
+
+        setCorrectAnswer((prev) => prev + 1);
+        counter.current = counter.current - 1;
         resetTimer();
       }
     } else {
@@ -63,7 +117,7 @@ const MathQuestion = ({ setCorrectAnswer }) => {
     }
   };
 
-  return (
+  return showedQuestions <= max_questions ? (
     <div className={styles.container}>
       <div className={styles.question}>
         <div style={{ width: "220px" }}>{left}</div>
@@ -99,6 +153,12 @@ const MathQuestion = ({ setCorrectAnswer }) => {
           }}
         />
       </div>
+    </div>
+  ) : (
+    <div className={styles.doneMessage}>
+      {console.log(showedQuestions)}
+      <h1>100 Questions DONE</h1>
+      <p>Try again later.</p>
     </div>
   );
 };
