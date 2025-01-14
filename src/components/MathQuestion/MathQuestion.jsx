@@ -10,7 +10,7 @@ const MathQuestion = ({
   studentName,
   showedQuestionsParent,
 }) => {
-  const max_questions = 20;
+  const max_questions = 30;
   const milliSeconds = 1000;
 
   const [showedQuestions, setShowedQuestions] = useState(showedQuestionsParent);
@@ -41,6 +41,7 @@ const MathQuestion = ({
     setRight(r);
     setAnswer(l + r);
 
+    console.log(l + r);
     setShowedQuestions((prev) => prev + 1);
   }, []);
 
@@ -59,7 +60,7 @@ const MathQuestion = ({
       }
 
       setTimer((prevTimer) => {
-        if (prevTimer === 0) {
+        if (prevTimer <= 0) {
           const date = new Date();
           const koreaTime = new Date(
             date.toLocaleString("en-US", { timeZone: "Asia/Seoul" })
@@ -75,6 +76,8 @@ const MathQuestion = ({
 
           setNumber();
           setStudentAnswer("");
+          counter.current += 0.02;
+
           return counter.current * milliSeconds;
         }
         return prevTimer - 10;
@@ -109,7 +112,7 @@ const MathQuestion = ({
         });
 
         setCorrectAnswer((prev) => prev + 1);
-        counter.current = counter.current - 1;
+        counter.current = counter.current - 0.1;
         resetTimer();
       }
     } else {
