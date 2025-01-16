@@ -1,15 +1,15 @@
 import React from "react";
 import styles from "./MainPagePrev.module.css";
-import portrait from "../assets/lim_cropped.jpg";
-import CustomCard from "../components/CustomCard/CustomCard";
+import portrait from "../../assets/lim_cropped.jpg";
+import CustomCard from "../../components/CustomCard/CustomCard";
 
-import reactLogo from "../assets/React-icon.svg";
-import javascriptLogo from "../assets/JavaScript-logo.png";
-import springBootLogo from "../assets/spring-2.svg";
+import reactLogo from "../../assets/React-icon.svg";
+import javascriptLogo from "../../assets/JavaScript-logo.png";
+import springBootLogo from "../../assets/spring-2.svg";
 
-import javaLogo from "../assets/java-icon.svg";
-import mariadbLogo from "../assets/MariaDB_colour_logo.svg";
-import nodejsLogo from "../assets/Node.js_logo.svg";
+import javaLogo from "../../assets/java-icon.svg";
+import mariadbLogo from "../../assets/MariaDB_colour_logo.svg";
+import nodejsLogo from "../../assets/Node.js_logo.svg";
 // import Login
 // import gitHubLogo from "../assets/gitHub.png";
 // import { IconButton } from "@mui/material";

@@ -1,7 +1,7 @@
 import React, { useEffect, useCallback, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import TutoringMarking from "../components/TutoringMarking/TutoringMarking";
+import TutoringMarking from "../../components/TutoringMarking/TutoringMarking";
 import styles from "./MarkingPage.module.css";
 
 const URL = process.env.REACT_APP_API_URL;

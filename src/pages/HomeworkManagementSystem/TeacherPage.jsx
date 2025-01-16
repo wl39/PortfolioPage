@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import Calendar from "../components/Calendar/Calendar";
+import Calendar from "../../components/Calendar/Calendar";
 
 import styles from "./TeacherPage.module.css";
 import { Link } from "react-router-dom";

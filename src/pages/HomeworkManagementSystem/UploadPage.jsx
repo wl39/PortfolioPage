@@ -4,9 +4,9 @@ import axios from "axios";
 
 import styles from "./UploadPage.module.css";
 import { Link } from "react-router-dom";
-import UploadForm from "../components/UploadForm/UploadForm";
-import UploadFixer from "../components/UploadFixer/UploadFixer";
-import DragAndDrop from "../components/DragAndDrop/DragAndDrop";
+import UploadForm from "../../components/UploadForm/UploadForm";
+import UploadFixer from "../../components/UploadFixer/UploadFixer";
+import DragAndDrop from "../../components/DragAndDrop/DragAndDrop";
 
 const URL = process.env.REACT_APP_API_URL;
 

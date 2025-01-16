@@ -1,21 +1,21 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import MainPage from "./pages/MainPages/MainPage";
-import MainPagePrev from "./pages/MainPagePrev";
-import LoginPage from "./pages/LoginPage";
-import WallPage from "./pages/WallPage";
-import StopwatchPage from "./pages/StopwatchPage";
-import SpinnerWheelPage from "./pages/SpinnerWheelPage";
-import SandBoxPage from "./pages/SandBoxPage";
-import TutoringPage from "./pages/TutoringPage";
-import UploadPage from "./pages/UploadPage";
-import SubmissionPage from "./pages/SubmissionPage";
-import TutoringArchivePage from "./pages/TutoringArchivePage";
-import TeacherPage from "./pages/TeacherPage";
-import MarkingPage from "./pages/MarkingPage";
-import ReviewPage from "./pages/ReviewPage";
-import MathSolveMainPage from "./pages/MathSolveMainPage";
-import MathSolvePage from "./pages/MathSolvePage";
+import MainPagePrev from "./pages/MainPrevious/MainPagePrev";
+import LoginPage from "./pages/User/LoginPage";
+import WallPage from "./pages/Sandbox/WallPage";
+import StopwatchPage from "./pages/Stopwatch/StopwatchPage";
+import SpinnerWheelPage from "./pages/Sandbox/SpinnerWheelPage";
+import SandBoxPage from "./pages/Sandbox/SandBoxPage";
+import TutoringPage from "./pages/HomeworkManagementSystem/TutoringPage";
+import UploadPage from "./pages/HomeworkManagementSystem/UploadPage";
+import SubmissionPage from "./pages/HomeworkManagementSystem/SubmissionPage";
+import TutoringArchivePage from "./pages/HomeworkManagementSystem/TutoringArchivePage";
+import TeacherPage from "./pages/HomeworkManagementSystem/TeacherPage";
+import MarkingPage from "./pages/HomeworkManagementSystem/MarkingPage";
+import ReviewPage from "./pages/HomeworkManagementSystem/ReviewPage";
+import MathSolveMainPage from "./pages/TimedQuestion/MathSolveMainPage";
+import MathSolvePage from "./pages/TimedQuestion/MathSolvePage";
 
 function App() {
   return (

@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./TutoringArchivePage.module.css";
-import SelectableTutoringQuestions from "../components/SelectableTutoringQuestions/SelectableTutoringQuestions";
+import SelectableTutoringQuestions from "../../components/SelectableTutoringQuestions/SelectableTutoringQuestions";
 import { Link } from "react-router-dom";
 
 const URL = process.env.REACT_APP_API_URL;

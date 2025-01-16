@@ -1,30 +1,17 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-
+import Submission from "../../components/Submission/Submission";
 import styles from "./SubmissionPage.module.css";
 import axios from "axios";
-import Submission from "../components/Submission/Submission";
+import TutoringQuestions from "../../components/TutoringQuestions/TutoringQuestions";
 
 const URL = process.env.REACT_APP_API_URL;
 
-// Once pageParams needs to change it suppose to change to state.
-const pageParams = {
-  page: 0,
-  size: 100,
-  sortType: "desc",
-  sortParam: "id",
-};
-
-const getAll = "&getAll=true";
-const notGetAll = "&getAll=false";
-
-function SubmissionPage() {
+const ReviewPage = () => {
   const { studentsName } = useParams();
-  const [submissions, setSubmissions] = useState([]);
-
   const emptyQuestion = {
     id: 0,
-    title: "Oops! It appears there are no submissions at the moment.",
+    title: "Oops! It appears there are no incorrect answers at the moment.",
     question: "Please come back after you've finished answering the questions.",
     type: "m",
     candidates: [],
@@ -41,21 +28,38 @@ function SubmissionPage() {
     hourLeft: 0,
     dayLeft: 0,
   };
-
-  const [isGettingAll, setIsGettingAll] = useState(false);
+  const [pageParams, setPageParams] = useState({
+    page: 0,
+    size: 10,
+    sortType: "desc",
+    sortParam: "id",
+  });
+  const [data, setData] = useState();
+  const [submissions, setSubmissions] = useState([]);
   const [searchParameter, setSearchParameter] = useState("Question");
   const [isSearchParamterClicked, setIsSearchParamterClicked] = useState(false);
-  const [searchedQuestionsData, setSearchedQuestionsData] = useState([]);
   const [questionsData, setQuestionsData] = useState([]);
-  const [totalQuestions, setTotalQuestions] = useState(1);
-  const [totalCorrectQuestions, setTotalCorrectQuestions] = useState(1);
+  const [answers, setAnswers] = useState({});
 
-  const localUrl =
-    URL +
-    "submissions?studentName=" +
-    studentsName +
-    (isGettingAll ? getAll : notGetAll) +
-    "&";
+  const selectAnswer = useCallback(
+    (questionID, answer) => {
+      const newAnswer = answers;
+
+      newAnswer[questionID] = {
+        answer: "",
+        studentName: "",
+        submitDate: "",
+      };
+      newAnswer[questionID].answer = answer;
+      newAnswer[questionID].studentName = studentsName;
+      newAnswer[questionID].submitDate = new Date(Date.now())
+        .toISOString()
+        .slice(0, 19);
+
+      setAnswers(newAnswer);
+    },
+    [answers, studentsName]
+  );
 
   const setSubmissionComponents = useCallback((data, searched) => {
     let submissionComponents = [];
@@ -64,20 +68,16 @@ function SubmissionPage() {
     let localQuestions = [];
 
     data.map((value, index) => {
-      console.log(value);
       totalQuestions++;
       localQuestions = [...localQuestions, value];
 
       if (value.studentAnswer === value.question.answer) correctQuestions++;
       submissionComponents = [
         ...submissionComponents,
-        <Submission
+        <TutoringQuestions
           key={index}
           question={value.question}
-          studentAnswer={value.studentAnswer}
-          submitDate={value.submitDate}
-          isMarked={value.marked}
-          id={value.id}
+          selectAnswer={selectAnswer}
         />,
       ];
       return null;
@@ -87,27 +87,55 @@ function SubmissionPage() {
       setQuestionsData(localQuestions);
     }
 
-    setSearchedQuestionsData(localQuestions);
-    setTotalQuestions(totalQuestions);
-    setTotalCorrectQuestions(correctQuestions);
     setSubmissions(submissionComponents);
   }, []);
 
-  useEffect(() => {
-    const pageParam =
-      "?page=" +
-      pageParams.page +
-      "&size=" +
-      pageParams.size +
-      "&sort=" +
-      pageParams.sortParam +
-      "," +
-      pageParams.sortType;
-    axios.get(localUrl + pageParam).then((response) => {
-      setTotalQuestions(response.data.numberOfElements);
-      setSubmissionComponents(response.data.content, false);
+  const setTemp = useCallback((data, searched, userAnswers) => {
+    let submissionComponents = [];
+    let totalQuestions = 0;
+    let correctQuestions = 0;
+    let localQuestions = [];
+
+    console.log(data);
+    console.log(userAnswers);
+
+    data.map((value, index) => {
+      totalQuestions++;
+      localQuestions = [...localQuestions, value];
+
+      if (value.studentAnswer === value.question.answer) correctQuestions++;
+      submissionComponents = [
+        ...submissionComponents,
+        <Submission
+          key={index}
+          question={value.question}
+          studentAnswer={userAnswers[value.question.id].answer}
+          isMarked={1}
+        />,
+      ];
+      return null;
     });
-  }, [localUrl, setSubmissionComponents]);
+
+    if (!searched) {
+      setQuestionsData(localQuestions);
+    }
+
+    setSubmissions(submissionComponents);
+  }, []);
+
+  const localUrl = URL + "submissions/review?studentName=" + studentsName + "&";
+  const changeDropdown = () => {
+    setIsSearchParamterClicked(!isSearchParamterClicked);
+  };
+
+  const closeDropdown = () => {
+    setIsSearchParamterClicked(false);
+  };
+
+  const selectSearchParameter = (paramter) => {
+    closeDropdown();
+    setSearchParameter(paramter);
+  };
 
   const inputHandler = (event) => {
     if (event.target.value === null || event.target.value === "") {
@@ -117,6 +145,15 @@ function SubmissionPage() {
     }
   };
 
+  const submit = () => {
+    console.log(Object.keys(answers).length);
+    console.log(data.length);
+    if (Object.keys(answers).length !== data.length) {
+      window.alert("You should solve all questions");
+    } else {
+      setTemp(data, false, answers);
+    }
+  };
   const search = (text) => {
     let localQuestions = [];
 
@@ -201,22 +238,21 @@ function SubmissionPage() {
     setSubmissionComponents(localQuestions, true);
   };
 
-  const changeDropdown = () => {
-    setIsSearchParamterClicked(!isSearchParamterClicked);
-  };
-
-  const closeDropdown = () => {
-    setIsSearchParamterClicked(false);
-  };
-
-  const selectSearchParameter = (paramter) => {
-    closeDropdown();
-    setSearchParameter(paramter);
-  };
-
-  const showGetAll = () => {
-    setIsGettingAll(!isGettingAll);
-  };
+  useEffect(() => {
+    const pageParam =
+      "page=" +
+      pageParams.page +
+      "&size=" +
+      pageParams.size +
+      "&sort=" +
+      pageParams.sortParam +
+      "," +
+      pageParams.sortType;
+    axios.get(localUrl + pageParam).then((response) => {
+      setData(response.data.content);
+      setSubmissionComponents(response.data.content, false);
+    });
+  }, [localUrl]);
 
   return (
     <div className={styles.page}>
@@ -225,22 +261,16 @@ function SubmissionPage() {
           {studentsName[0].toUpperCase() + studentsName.slice(1)}
         </h1>
         <Link
-          to={"/review/" + studentsName}
+          to={"/tutoring/" + studentsName}
           style={{ marginTop: "22px", marginRight: "15px" }}
         >
-          <button className={styles.button}>Review</button>
-        </Link>
-        <Link to={"/tutoring/" + studentsName} style={{ marginTop: "22px" }}>
           <button className={styles.button}>Questions</button>
         </Link>
+        <Link to={"/submission/" + studentsName} style={{ marginTop: "22px" }}>
+          <button className={styles.button}>Submissions</button>
+        </Link>
       </div>
-      {!totalQuestions ? null : (
-        <div className={styles.score}>
-          Score{": "}
-          {((totalCorrectQuestions / totalQuestions) * 100).toFixed(2)}% (
-          {totalCorrectQuestions} / {totalQuestions}){" "}
-        </div>
-      )}
+
       <div className={styles.searchContainer}>
         <input
           placeholder="Search"
@@ -285,17 +315,8 @@ function SubmissionPage() {
         </div>
       </div>
 
-      <div className={styles.showAllContainer}>
-        <button className={styles.buttonShowAll} onClick={showGetAll}>
-          Show All Submissions
-        </button>
-        <div className={styles.checkboxContianer}>
-          <div className={isGettingAll ? styles.showAllCheckd : null} />
-        </div>
-      </div>
-
       {submissions.length === 0 ? (
-        <Submission
+        <TutoringQuestions
           question={emptyQuestion}
           studentAnswer={""}
           submitDate={""}
@@ -305,8 +326,17 @@ function SubmissionPage() {
       ) : (
         submissions
       )}
+      <div className={styles.buttonContainer}>
+        <button
+          className={styles.button}
+          onClick={submit}
+          disabled={submissions.length === 0}
+        >
+          Submit
+        </button>
+      </div>
     </div>
   );
-}
+};
 
-export default SubmissionPage;
+export default ReviewPage;

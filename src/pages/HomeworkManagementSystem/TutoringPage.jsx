@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 
 import styles from "./TutoringPage.module.css";
 
-import TutoringQuestions from "../components/TutoringQuestions/TutoringQuestions";
+import TutoringQuestions from "../../components/TutoringQuestions/TutoringQuestions";
 import axios from "axios";
 
 const URL = process.env.REACT_APP_API_URL;

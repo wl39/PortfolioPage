@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import MathQuestion from "../components/MathQuestion/MathQuestion";
-import RobuxAdder from "../components/RobuxAdder/RobuxAdder";
+import MathQuestion from "../../components/MathQuestion/MathQuestion";
+import RobuxAdder from "../../components/RobuxAdder/RobuxAdder";
 
 import { useLocation } from "react-router-dom";
 import styles from "./MathSolvePage.module.css";

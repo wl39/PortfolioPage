@@ -3,12 +3,12 @@ import axios from "axios";
 
 import styles from "./StopwatchPage.module.css";
 
-import WorkerBuilder from "./worker/workerBuilder";
-import stopwatchWorker from "./worker/stopwatchWorker";
+import WorkerBuilder from "../worker/workerBuilder";
+import stopwatchWorker from "../worker/stopwatchWorker";
 
-import start from "../assets/svgs/SandClockStart.svg";
-import pause from "../assets/svgs/SandClockPause.svg";
-import end from "../assets/svgs/SandClockEnd.svg";
+import start from "../../assets/svgs/SandClockStart.svg";
+import pause from "../../assets/svgs/SandClockPause.svg";
+import end from "../../assets/svgs/SandClockEnd.svg";
 
 const URL = process.env.REACT_APP_API_URL;
 const instance = new WorkerBuilder(stopwatchWorker);
