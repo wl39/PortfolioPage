@@ -5,6 +5,7 @@ import styles from "./TutoringPage.module.css";
 
 import TutoringQuestions from "../../components/TutoringQuestions/TutoringQuestions";
 import axios from "axios";
+import { getQuestionsWithStudentName } from "../../services/api/HMSService";
 
 const URL = process.env.REACT_APP_API_URL;
 
@@ -90,18 +91,22 @@ function TutoringPage() {
 
   // const setQuestionComponents = (data) => {};
   useEffect(() => {
-    const pageParam =
-      "?page=" +
-      pageParams.page +
-      "&size=" +
-      pageParams.size +
-      "&sort=" +
-      pageParams.sortParam +
-      "," +
-      pageParams.sortType;
-    axios.get(localUrl + studentsName + pageParam).then((response) => {
-      setQuestionComponents(response.data.content);
-    });
+    const fetchQuestions = async () => {
+      try {
+        const questionData = await getQuestionsWithStudentName(
+          studentsName,
+          pageParams
+        );
+
+        console.log(questionData);
+
+        setQuestionComponents(questionData);
+      } catch (error) {
+        console.error("Failed to fetch questions", error);
+      }
+    };
+
+    fetchQuestions();
   }, [studentsName, setQuestionComponents]);
 
   const submit = () => {
