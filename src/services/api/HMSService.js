@@ -12,9 +12,8 @@ export const getQuestionsWithStudentName = async (name, pageParams) => {
     pageParams.sortType;
 
   try {
-    console.log(pageParam);
     const response = await axios.get(`/questions/page/${name}${pageParam}`);
-    console.log(response);
+
     return response.data.content;
   } catch (error) {
     console.error("Error fetching questions : ", error);
