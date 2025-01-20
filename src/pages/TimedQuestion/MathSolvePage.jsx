@@ -10,19 +10,21 @@ const URL = process.env.REACT_APP_API_URL;
 
 const MathSolvePage = () => {
   const location = useLocation();
-  const localURL = URL + "simple_math/count?name=";
+  const localURL = URL + "simple_math/day_count?name=";
 
   const { name } = location.state || {};
 
   const [showedQuestions, setShowedQuestions] = useState(100);
-
   const [time, setTime] = useState(3);
   const [correctAnswer, setCorrectAnswer] = useState(0);
+  const [wrongAnswer, setWrongAnswer] = useState(0);
 
   useEffect(() => {
     if (name) {
+      let date = new Date(Date.now()).toISOString().split("T")[0];
+
       axios
-        .get(localURL + name)
+        .get(localURL + name + "&submitDate=" + date)
         .then((res) => {
           setShowedQuestions(res.data);
 
@@ -46,7 +48,7 @@ const MathSolvePage = () => {
           window.alert("There is something wrong with the server");
         });
     }
-  }, [name]);
+  }, [localURL, name]);
 
   return name ? (
     <div
@@ -64,10 +66,11 @@ const MathSolvePage = () => {
         <div>
           <MathQuestion
             setCorrectAnswer={setCorrectAnswer}
+            setWrongAnswer={setWrongAnswer}
             studentName={name}
             showedQuestionsParent={showedQuestions}
           />
-          <RobuxAdder correctAnswer={correctAnswer} />
+          <RobuxAdder correctAnswer={correctAnswer} wrongAnswer={wrongAnswer} />
         </div>
       )}
     </div>

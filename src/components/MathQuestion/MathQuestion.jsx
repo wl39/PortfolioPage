@@ -7,6 +7,7 @@ const localUrl = URL + "simple_math";
 
 const MathQuestion = ({
   setCorrectAnswer,
+  setWrongAnswer,
   studentName,
   showedQuestionsParent,
 }) => {
@@ -22,6 +23,7 @@ const MathQuestion = ({
   const [right, setRight] = useState(0);
   const [answer, setAnswer] = useState(0);
 
+  const [temp, settemp] = useState(false);
   const leftRef = useRef(left);
   const rightRef = useRef(right);
   const showedQuestionsRef = useRef(showedQuestions);
@@ -50,11 +52,11 @@ const MathQuestion = ({
   }, [left, right, showedQuestions]);
 
   useEffect(() => {
-    setNumber();
+    setNumber(); // 문제를 설정하는 함수 호출
 
     const intervalId = setInterval(() => {
       if (showedQuestionsRef.current > max_questions) {
-        clearInterval(intervalId);
+        clearInterval(intervalId); // 문제 수가 최대를 넘으면 타이머 종료
       }
 
       setTimer((prevTimer) => {
@@ -74,17 +76,28 @@ const MathQuestion = ({
 
           setNumber();
           setStudentAnswer("");
+          // setTimeout(() => {
+          //   setWrongAnswer((prev) => prev + 1);
+          // }, 0);
+
+          settemp(true);
           counter.current += 0.02;
 
-          return counter.current * milliSeconds;
+          return counter.current * milliSeconds; // 타이머 리셋
         }
         return prevTimer - 10;
       });
     }, 10);
 
-    return () => clearInterval(intervalId);
-  }, [setNumber, studentName]);
+    return () => clearInterval(intervalId); // cleanup: 컴포넌트가 언마운트될 때 interval을 정리
+  }, [setNumber, studentName, setWrongAnswer]);
 
+  useEffect(() => {
+    if (temp) {
+      setWrongAnswer((prev) => prev + 1);
+      settemp(false);
+    }
+  }, [temp, setWrongAnswer]);
   const resetTimer = () => {
     setTimer(counter.current * milliSeconds);
     setNumber();
@@ -109,8 +122,8 @@ const MathQuestion = ({
           submitDate: formattedDate,
         });
 
-        setCorrectAnswer((prev) => prev + 1);
-        counter.current = counter.current - 0.1;
+        setCorrectAnswer((prev) => prev + 1); // 정답 개수 증가
+        counter.current = counter.current - 0.1; // 타이머 속도 증가
         resetTimer();
       }
     } else {
@@ -157,7 +170,6 @@ const MathQuestion = ({
     </div>
   ) : (
     <div className={styles.doneMessage}>
-      {console.log(showedQuestions)}
       <h1>100 Questions DONE</h1>
       <p>Try again later.</p>
     </div>
