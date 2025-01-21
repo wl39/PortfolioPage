@@ -10,6 +10,10 @@
   word-break: break-word;
 }
 
+.questionContainer .inputContainer:not(:last-child) {
+  border-bottom: 1px solid lightgray;
+}
+
 .question {
   margin-top: 15px;
   font-size: 30px;
@@ -30,6 +34,7 @@
   margin-left: 10px;
   display: flex;
   min-height: 36px;
+  padding: 18px 0px;
 }
 
 .questionHeader {
@@ -109,6 +114,7 @@ textarea {
   .inputContainer {
     margin-left: 4px;
     font-size: 14px;
+    padding: 12px 0px;
   }
 
   .dueDateContainer {
