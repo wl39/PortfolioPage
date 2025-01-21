@@ -4,9 +4,8 @@ import RobuxAdder from "../../components/RobuxAdder/RobuxAdder";
 
 import { useLocation } from "react-router-dom";
 import styles from "./MathSolvePage.module.css";
-import axios from "axios";
 
-const URL = process.env.REACT_APP_API_URL;
+import { getDaySubmissions } from "../../services/api/SimpleMathQuestionService";
 
 const MathSolvePage = () => {
   const location = useLocation();
@@ -23,12 +22,13 @@ const MathSolvePage = () => {
     if (name) {
       let date = new Date(Date.now()).toISOString().split("T")[0];
 
-      axios
-        .get(localURL + name + "&submitDate=" + date)
-        .then((res) => {
-          setShowedQuestions(res.data);
+      const fetchDaySubmissions = async (name, date) => {
+        try {
+          const submissionCounts = await getDaySubmissions(name, date);
 
-          if (res.data < 100) {
+          setShowedQuestions(submissionCounts);
+
+          if (submissionCounts < 100) {
             const interval = setInterval(() => {
               setTime((prevTime) => {
                 if (prevTime > 0) {
@@ -42,11 +42,14 @@ const MathSolvePage = () => {
 
             return () => clearInterval(interval);
           }
-        })
-        .catch((err) => {
-          console.log(err);
-          window.alert("There is something wrong with the server");
-        });
+        } catch (error) {
+          console.err(error);
+
+          window.alert("There is an issue...");
+        }
+      };
+
+      fetchDaySubmissions(name, date);
     }
   }, [localURL, name]);
 

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
 
 import styles from "./StopwatchPage.module.css";
 
@@ -9,11 +8,14 @@ import stopwatchWorker from "../worker/stopwatchWorker";
 import start from "../../assets/svgs/SandClockStart.svg";
 import pause from "../../assets/svgs/SandClockPause.svg";
 import end from "../../assets/svgs/SandClockEnd.svg";
+import {
+  getRecentStopwatch,
+  getRecentStopwatchByPage,
+  postStopwatch,
+} from "../../services/api/StopwatchService";
 
-const URL = process.env.REACT_APP_API_URL;
 const instance = new WorkerBuilder(stopwatchWorker);
 
-const localUrl = URL + "stopwatch";
 class StopwatchPage extends Component {
   constructor(props) {
     super(props);
@@ -55,35 +57,30 @@ class StopwatchPage extends Component {
     this.getRecentStopwatch();
   }
 
-  getRecentStopwatch = () => {
-    axios
-      .get(localUrl + "?page=0&size=" + this.state.size + "&sort=id,desc")
-      .then((response) => {
-        this.makeRecord(response.data.content);
-        this.makePage(response.data.pageable, response.data.totalPages);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  getRecentStopwatch = async () => {
+    try {
+      const response = await getRecentStopwatch(this.state.size);
+
+      this.makeRecord(response.data.content);
+      this.makePage(response.data.pageable, response.data.totalPages);
+    } catch (error) {
+      console.error(error);
+
+      window.alert("There is an issue...");
+    }
   };
 
-  getRecentStopwatchByPage = (page) => {
-    axios
-      .get(
-        localUrl +
-          "?page=" +
-          page +
-          "&size=" +
-          this.state.size +
-          "&sort=id,desc"
-      )
-      .then((response) => {
-        this.makeRecord(response.data.content);
-        this.makePage(response.data.pageable, response.data.totalPages);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  getRecentStopwatchByPage = async (page) => {
+    try {
+      const response = await getRecentStopwatchByPage(this.state.size, page);
+
+      this.makeRecord(response.data.content);
+      this.makePage(response.data.pageable, response.data.totalPages);
+    } catch (error) {
+      console.error(error);
+
+      window.alert("There is an issue...");
+    }
   };
 
   makeRecord = (record) => {
@@ -318,87 +315,106 @@ class StopwatchPage extends Component {
     return message;
   };
 
-  startStopwatch = () => {
+  startStopwatch = async () => {
     let id = -1;
-    axios
-      .post(localUrl, {
-        name: this.state.name ? this.state.name : "Anonymous",
-        generatedDate: new Date(Date.now()).toISOString().slice(0, 19),
+    const data = {
+      name: this.state.name ? this.state.name : "Anonymous",
+      generatedDate: new Date(Date.now()).toISOString().slice(0, 19),
+      elapsedTime: this.state.elapsedTime,
+      type: this.state.elapsedTime > 0 ? "r" : "s",
+      relatedID: this.state.elapsedTime > 0 ? this.state.id : null,
+    };
+
+    try {
+      const resId = await postStopwatch(
+        data.name,
+        data.generatedDate,
+        data.elapsedTime,
+        data.type,
+        data.relatedID
+      );
+
+      id = this.state.elapsedTime > 0 ? this.state.id : resId;
+    } catch (error) {
+      console.error(error);
+
+      window.alert("There is an issue...");
+    } finally {
+      instance.postMessage({
         elapsedTime: this.state.elapsedTime,
-        type: this.state.elapsedTime > 0 ? "r" : "s",
-        relatedID: this.state.elapsedTime > 0 ? this.state.id : null,
-      })
-      .then((response) => {
-        id = this.state.elapsedTime > 0 ? this.state.id : response.data;
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        instance.postMessage({
-          elapsedTime: this.state.elapsedTime,
-          intervalID: null,
-          start: true,
-        });
-        this.setState({ isRunning: true, id: id });
-        this.getRecentStopwatch();
+        intervalID: null,
+        start: true,
       });
+      this.setState({ isRunning: true, id: id });
+      this.getRecentStopwatch();
+    }
   };
 
-  pauseStopwatch = () => {
-    // if (this.state.id > 0) {
-    axios
-      .post(localUrl, {
-        name: this.state.name ? this.state.name : "Anonymous",
-        relatedID: this.state.id,
-        generatedDate: new Date(Date.now()).toISOString().slice(0, 19),
+  pauseStopwatch = async () => {
+    const data = {
+      name: this.state.name ? this.state.name : "Anonymous",
+      relatedID: this.state.id,
+      generatedDate: new Date(Date.now()).toISOString().slice(0, 19),
+      elapsedTime: this.state.elapsedTime,
+      type: "p",
+    };
+
+    try {
+      const resId = await postStopwatch(
+        data.name,
+        data.generatedDate,
+        data.elapsedTime,
+        data.type,
+        data.relatedID
+      );
+      console.log(resId);
+    } catch (error) {
+      console.error(error);
+
+      window.alert("There is an issue...");
+    } finally {
+      instance.postMessage({
         elapsedTime: this.state.elapsedTime,
-        type: "p",
-      })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        instance.postMessage({
-          elapsedTime: this.state.elapsedTime,
-          intervalID: this.state.intervalID,
-        });
-        this.setState({ isRunning: false });
-        this.getRecentStopwatch();
+        intervalID: this.state.intervalID,
       });
-    // }
+      this.setState({ isRunning: false });
+      this.getRecentStopwatch();
+    }
   };
 
-  resetStopwatch = () => {
+  resetStopwatch = async () => {
     document.title = "Lim's portfolio";
-    // if (this.state.id > 0) {
-    axios
-      .post(localUrl, {
-        name: this.state.name ? this.state.name : "Anonymous",
-        relatedID: this.state.id,
-        generatedDate: new Date(Date.now()).toISOString().slice(0, 19),
-        elapsedTime: this.state.elapsedTime,
-        type: "d",
-      })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        instance.postMessage({
-          elapsedTime: 0,
-          intervalID: this.state.intervalID,
-          start: false,
-        });
-        this.setState({ elapsedTime: 0, isRunning: false });
-        this.getRecentStopwatch();
+
+    const data = {
+      name: this.state.name ? this.state.name : "Anonymous",
+      relatedID: this.state.id,
+      generatedDate: new Date(Date.now()).toISOString().slice(0, 19),
+      elapsedTime: this.state.elapsedTime,
+      type: "d",
+    };
+
+    try {
+      const resId = await postStopwatch(
+        data.name,
+        data.generatedDate,
+        data.elapsedTime,
+        data.type,
+        data.relatedID
+      );
+      console.log(resId);
+    } catch (error) {
+      console.error(error);
+
+      window.alert("There is an issue...");
+    } finally {
+      instance.postMessage({
+        elapsedTime: 0,
+        intervalID: this.state.intervalID,
+        start: false,
       });
-    // }
+      this.setState({ elapsedTime: 0, isRunning: false });
+      this.getRecentStopwatch();
+    }
   };
 
   startStopwatchHandler = (event) => {

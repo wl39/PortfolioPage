@@ -1,10 +1,11 @@
 import React, { useCallback, useEffect, useState } from "react";
-import axios from "axios";
 import styles from "./TutoringArchivePage.module.css";
 import SelectableTutoringQuestions from "../../components/SelectableTutoringQuestions/SelectableTutoringQuestions";
 import { Link } from "react-router-dom";
-
-const URL = process.env.REACT_APP_API_URL;
+import {
+  getAllQuestions,
+  postReassignQuestions,
+} from "../../services/api/HMSService";
 
 // Once pageParams needs to change it suppose to change to state.
 const pageParams = {
@@ -14,17 +15,13 @@ const pageParams = {
   sortParam: "id",
 };
 
-// const localUrl = URL + "questions";
-const localUrl = URL + "questions";
-
 function TutoringArchivePage() {
   const today = new Date(Date.now());
   today.setDate(today.getDate() + 14);
   const target = today.toISOString().slice(0, 19);
 
   const [questions, setQuestions] = useState();
-  const [targetDate, setTargetDate] = useState();
-  const [students, setLocalStudents] = useState([]);
+  const [targetDate, setTargetDate] = useState("");
   const [studentsString, setStudentsString] = useState("");
 
   const [searchParameter, setSearchParameter] = useState("Question");
@@ -72,18 +69,13 @@ function TutoringArchivePage() {
   }, []);
 
   useEffect(() => {
-    const pageParam =
-      "?page=" +
-      pageParams.page +
-      "&size=" +
-      pageParams.size +
-      "&sort=" +
-      pageParams.sortParam +
-      "," +
-      pageParams.sortType;
-    axios.get(localUrl + pageParam).then((response) => {
-      setQuestionComponents(response.data.content);
-    });
+    const fetchAllQuestions = async () => {
+      const questions = await getAllQuestions(pageParams);
+
+      setQuestionComponents(questions);
+    };
+
+    fetchAllQuestions();
   }, [setQuestionComponents]);
 
   const setStudents = () => {
@@ -113,18 +105,7 @@ function TutoringArchivePage() {
   };
 
   const change = (event) => {
-    let pageStudents = [];
-    let string = event.target.value;
-
-    pageStudents = string
-      .toLowerCase()
-      .trimStart()
-      .replace(/,\s+/g, ",")
-      .split(",");
-    pageStudents = pageStudents.filter((value) => value);
-
     setStudentsString(event.target.value);
-    setLocalStudents(pageStudents);
   };
 
   const changeDropdown = () => {
@@ -226,19 +207,23 @@ function TutoringArchivePage() {
       pageStudents = pageStudents.filter((value) => value);
 
       console.log(questionsCopy + " " + pageStudents);
-      if (questionsCopy && pageStudents && targetDate)
-        axios
-          .post(localUrl + "/multiples", {
-            questionIds: questionsCopy, // Array of question IDs
-            studentsFor: pageStudents,
-            targetDate: targetDate, // Array of student names
-          })
-          .then((response) => {
+      if (questionsCopy && pageStudents && targetDate) {
+        const fecthReassignQuestions = async (
+          questionIds,
+          studentsFor,
+          targetDate
+        ) => {
+          try {
+            const response = await postReassignQuestions(
+              questionIds,
+              studentsFor,
+              targetDate
+            );
+
             window.alert("Successfully uploaded!");
             setStudents(); // Assuming this resets your student list
             console.log(response.data);
-          })
-          .catch((error) => {
+          } catch (error) {
             if (error.response) {
               console.log(
                 "Server responded with:",
@@ -250,7 +235,11 @@ function TutoringArchivePage() {
             } else {
               console.log("Axios error:", error.message);
             }
-          });
+          }
+        };
+
+        fecthReassignQuestions(questionsCopy, pageStudents, targetDate);
+      }
     }
   };
 

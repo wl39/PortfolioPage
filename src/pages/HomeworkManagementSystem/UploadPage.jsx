@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from "react";
 
-import axios from "axios";
-
 import styles from "./UploadPage.module.css";
 import { Link } from "react-router-dom";
 import UploadForm from "../../components/UploadForm/UploadForm";
 import UploadFixer from "../../components/UploadFixer/UploadFixer";
 import DragAndDrop from "../../components/DragAndDrop/DragAndDrop";
-
-const URL = process.env.REACT_APP_API_URL;
+import { postQuestion } from "../../services/api/HMSService";
 
 function UploadPage() {
   const [questions, setQuestions] = useState({
@@ -41,8 +38,6 @@ function UploadPage() {
   const [question, setQuestion] = useState("");
   const [candidates, setCandidates] = useState([]);
   const [isAnswerCode, setIsAnswerCode] = useState(false);
-
-  const localUrl = URL + "questions";
 
   const today = new Date(Date.now());
   today.setDate(today.getDate() + 14);
@@ -230,18 +225,24 @@ function UploadPage() {
     }
 
     if (window.confirm("This will be the question info: " + questions)) {
-      if (questions)
-        axios
-          .post(localUrl, questions)
-          .then((response) => {
+      if (questions) {
+        const fetchQuestion = async (questions) => {
+          try {
+            const response = await postQuestion(questions);
+
             window.alert("Successfully uploaded!");
-            if (fixed.students) setStudents();
+            if (questions.studentsForString) setStudents();
             console.log(response.data);
             resetQuestionsOnSubmit();
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+          } catch (error) {
+            console.error(error);
+
+            window.alert("There is an issue...");
+          }
+        };
+
+        fetchQuestion(questions);
+      }
     }
   };
 
@@ -275,8 +276,6 @@ function UploadPage() {
   };
 
   const fixedHandler = (event) => {
-    console.log(event.target.id);
-    // setF
     setFixed({ ...fixed, [event.target.id]: !fixed[event.target.id] });
   };
 

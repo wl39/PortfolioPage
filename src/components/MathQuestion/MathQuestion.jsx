@@ -1,9 +1,7 @@
 import React, { useEffect, useState, useCallback, useRef } from "react";
 import styles from "./MathQuestion.module.css";
-import axios from "axios";
 
-const URL = process.env.REACT_APP_API_URL;
-const localUrl = URL + "simple_math";
+import { postMathAnswer } from "../../services/api/SimpleMathQuestionService";
 
 const MathQuestion = ({
   setCorrectAnswer,
@@ -45,6 +43,16 @@ const MathQuestion = ({
     setShowedQuestions((prev) => prev + 1);
   }, []);
 
+  const fetchMathAnswer = async (name, question, answer, submitDate) => {
+    try {
+      await postMathAnswer(name, question, answer, submitDate);
+    } catch (error) {
+      console.error(error);
+
+      window.alert("There is an issue...");
+    }
+  };
+
   useEffect(() => {
     leftRef.current = left;
     rightRef.current = right;
@@ -67,18 +75,15 @@ const MathQuestion = ({
           );
           const formattedDate = koreaTime.toISOString();
 
-          axios.post(localUrl, {
-            name: studentName,
-            answer: -1,
-            question: `${leftRef.current} + ${rightRef.current}`,
-            submitDate: formattedDate,
-          });
+          fetchMathAnswer(
+            studentName,
+            -1,
+            `${leftRef.current} + ${rightRef.current}`,
+            formattedDate
+          );
 
           setNumber();
           setStudentAnswer("");
-          // setTimeout(() => {
-          //   setWrongAnswer((prev) => prev + 1);
-          // }, 0);
 
           settemp(true);
           counter.current += 0.02;
@@ -115,12 +120,12 @@ const MathQuestion = ({
         );
         const formattedDate = koreaTime.toISOString();
 
-        axios.post(localUrl, {
-          name: studentName,
-          answer: answer,
-          question: `${left} + ${right}`,
-          submitDate: formattedDate,
-        });
+        fetchMathAnswer(
+          studentName,
+          answer,
+          `${left} + ${right}`,
+          formattedDate
+        );
 
         setCorrectAnswer((prev) => prev + 1); // 정답 개수 증가
         counter.current = counter.current - 0.1; // 타이머 속도 증가

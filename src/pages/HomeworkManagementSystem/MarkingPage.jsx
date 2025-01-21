@@ -1,19 +1,17 @@
 import React, { useEffect, useCallback, useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 import TutoringMarking from "../../components/TutoringMarking/TutoringMarking";
 import styles from "./MarkingPage.module.css";
 
-const URL = process.env.REACT_APP_API_URL;
+import {
+  getUnmarkedSubmissions,
+  putSubmissions,
+} from "../../services/api/HMSService";
 
 const MarkingPage = () => {
   const { studentName } = useParams();
   const [questions, setQuestions] = useState([]);
   const [mark, setMark] = useState({});
-
-  const localUrl = URL + "submissions/saq?studentName=";
-
-  const markUrl = URL + "submissions/marks?studentName=";
 
   const marks = (key, value) => {
     setMark((prevMark) => ({
@@ -51,24 +49,39 @@ const MarkingPage = () => {
 
   const markSubmissions = () => {
     if (window.confirm("Are you sure to submit?")) {
-      axios
-        .put(markUrl + studentName, mark)
-        .then((res) => {
+      const fetchMarkSubmissions = async () => {
+        try {
+          const res = putSubmissions(studentName, mark);
+
           console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
+        } catch (error) {
+          console.log(error);
           window.alert("There is an issue...");
-        })
-        .finally(() => window.location.reload());
+        } finally {
+          window.location.reload();
+        }
+      };
+
+      fetchMarkSubmissions();
     }
   };
 
   useEffect(() => {
-    axios.get(localUrl + studentName).then((res) => {
-      setQuestionComponents(res.data.content);
-    });
+    const fetchUnmarkedSubmissions = async (studentName) => {
+      try {
+        const submissions = await getUnmarkedSubmissions(studentName);
+
+        setQuestionComponents(submissions);
+      } catch (error) {
+        console.log(error);
+
+        window.alert("There is an issue...");
+      }
+    };
+
+    fetchUnmarkedSubmissions(studentName);
   }, [studentName, setQuestionComponents]);
+
   return (
     <div className={styles.page}>
       <h1 className={styles.h1}>{studentName}</h1>

@@ -1,120 +1,120 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import styles from "./Calendar.module.css";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
-const API_URI = process.env.REACT_APP_API_URL;
+import { useNavigate } from "react-router-dom";
+import { getCalendarData } from "../../services/api/HMSService";
 
 const Calendar = ({ students }) => {
   const navigate = useNavigate();
   const [currentDate, setCurrentDate] = useState(new Date());
   const [calendarDays, setCalendarDays] = useState([]);
 
-  // Utility to generate the days for a month
-  const generateCalendarDays = (year, month, data) => {
-    const daysInMonth = new Date(year, month + 1, 0).getDate(); // Get number of days in the month
-    const firstDayOfMonth = new Date(year, month, 1).getDay(); // Get the first day of the month (0 = Sunday, 6 = Saturday)
+  const generateCalendarDays = useCallback(
+    (year, month, data) => {
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      const firstDayOfMonth = new Date(year, month, 1).getDay();
+      let daysArray = [];
 
-    let daysArray = [];
+      for (let i = 0; i < firstDayOfMonth; i++) {
+        daysArray.push(null);
+      }
 
-    // Fill in the empty days before the 1st of the month
-    for (let i = 0; i < firstDayOfMonth; i++) {
-      daysArray.push(null);
-    }
-
-    // Add the days of the current month
-    for (let i = 1; i <= daysInMonth; i++) {
-      if (data[i]) {
-        let div = [
-          <div key={`${i}-header`} className={styles.dayText}>
-            {i}
-          </div>,
-        ];
-        data[i].forEach((e, j) => {
-          let name = Object.keys(e)[0];
-
-          div.push(
-            <div
-              key={`${i}-${j}`}
-              className={e[name]["unmarked"] > 0 ? styles.toCheck : styles.mark}
-              onClick={() =>
-                e[name]["unmarked"] > 0 ? navigate("/marking/" + name) : null
-              }
-            >
-              {" "}
-              {/* Use i and j to create a unique key */}
-              <div>{name}</div>{" "}
+      for (let i = 1; i <= daysInMonth; i++) {
+        if (data[i]) {
+          let div = [
+            <div key={`${i}-header`} className={styles.dayText}>
+              {i}
+            </div>,
+          ];
+          data[i].forEach((e, j) => {
+            let name = Object.keys(e)[0];
+            div.push(
               <div
+                key={`${i}-${j}`}
                 className={
-                  e[name]["solved"] / e[name]["questions"] >= 0.9
-                    ? styles.green
-                    : styles.red
+                  e[name]["unmarked"] > 0 ? styles.toCheck : styles.mark
+                }
+                onClick={() =>
+                  e[name]["unmarked"] > 0 ? navigate("/marking/" + name) : null
                 }
               >
-                {e[name]["solved"]}/{e[name]["questions"]}
-                {e[name]["unmarked"] > 0 ? (
-                  <div className={styles.unmarked}>{e[name]["unmarked"]}*</div>
-                ) : null}
+                <div>{name}</div>
+                <div
+                  className={
+                    e[name]["solved"] / e[name]["questions"] >= 0.9
+                      ? styles.green
+                      : styles.red
+                  }
+                >
+                  {e[name]["solved"]}/{e[name]["questions"]}
+                  {e[name]["unmarked"] > 0 ? (
+                    <div className={styles.unmarked}>
+                      {e[name]["unmarked"]}*
+                    </div>
+                  ) : null}
+                </div>
               </div>
+            );
+          });
+          daysArray.push(div);
+        } else {
+          daysArray.push(
+            <div key={`${i}-empty`} className={styles.dayText}>
+              {i}
             </div>
           );
-        });
-        daysArray.push(div);
-      } else {
-        daysArray.push(
-          <div key={`${i}-empty`} className={styles.dayText}>
-            {i}
-          </div>
-        ); // Added a unique key for empty days as well
+        }
       }
-    }
 
-    return daysArray;
-  };
+      return daysArray;
+    },
+    [navigate]
+  ); // No dependencies because it doesn't rely on external variables
 
   useEffect(() => {
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth();
     setCalendarDays(generateCalendarDays(year, month, {}));
 
-    let localUrl =
-      API_URI +
-      "calendar/" +
-      year +
-      "/" +
-      (month + 1) +
-      "?students=" +
-      students;
-
     if (students) {
       const transformedData = {};
 
-      axios.get(localUrl).then((res) => {
-        res.data.forEach((element) => {
-          const date = new Date(element.calendarID.date).getDate();
-          const studentName = element.calendarID.studentName;
+      const fetchCalendarData = async (year, month, students) => {
+        try {
+          const calendars = await getCalendarData(year, month, students);
 
-          const studentEntry = {
-            [studentName]: {
-              solved: element.solved,
-              unmarked: element.unmarked, // Change this if you want to use a different value for "marked"
-              questions: element.questions,
-            },
-          };
+          calendars.forEach((element) => {
+            const date = new Date(element.calendarID.date).getDate();
+            const studentName = element.calendarID.studentName;
 
-          // Initialize the date entry if it doesn't exist
-          if (!transformedData[date]) {
-            transformedData[date] = [];
-          }
+            const studentEntry = {
+              [studentName]: {
+                solved: element.solved,
+                unmarked: element.unmarked, // Change this if you want to use a different value for "marked"
+                questions: element.questions,
+              },
+            };
 
-          // Push the student entry into the corresponding date array
-          transformedData[date].push(studentEntry);
-        });
+            // Initialize the date entry if it doesn't exist
+            if (!transformedData[date]) {
+              transformedData[date] = [];
+            }
 
-        setCalendarDays(generateCalendarDays(year, month, transformedData));
-      });
+            // Push the student entry into the corresponding date array
+            transformedData[date].push(studentEntry);
+          });
+
+          setCalendarDays(generateCalendarDays(year, month, transformedData));
+        } catch (error) {
+          console.error(error);
+
+          window.alert("There is an issue...");
+        }
+      };
+
+      fetchCalendarData(year, month, students);
     }
-  }, [currentDate, students]);
+  }, [currentDate, students, generateCalendarDays]);
 
   const handlePreviousMonth = () => {
     setCurrentDate(

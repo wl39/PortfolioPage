@@ -2,10 +2,8 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import styles from "./SubmissionPage.module.css";
-import axios from "axios";
 import Submission from "../../components/Submission/Submission";
-
-const URL = process.env.REACT_APP_API_URL;
+import { getAllSubmissions } from "../../services/api/HMSService";
 
 // Once pageParams needs to change it suppose to change to state.
 const pageParams = {
@@ -14,9 +12,6 @@ const pageParams = {
   sortType: "desc",
   sortParam: "id",
 };
-
-const getAll = "&getAll=true";
-const notGetAll = "&getAll=false";
 
 function SubmissionPage() {
   const { studentsName } = useParams();
@@ -45,17 +40,9 @@ function SubmissionPage() {
   const [isGettingAll, setIsGettingAll] = useState(false);
   const [searchParameter, setSearchParameter] = useState("Question");
   const [isSearchParamterClicked, setIsSearchParamterClicked] = useState(false);
-  const [searchedQuestionsData, setSearchedQuestionsData] = useState([]);
   const [questionsData, setQuestionsData] = useState([]);
   const [totalQuestions, setTotalQuestions] = useState(1);
   const [totalCorrectQuestions, setTotalCorrectQuestions] = useState(1);
-
-  const localUrl =
-    URL +
-    "submissions?studentName=" +
-    studentsName +
-    (isGettingAll ? getAll : notGetAll) +
-    "&";
 
   const setSubmissionComponents = useCallback((data, searched) => {
     let submissionComponents = [];
@@ -87,27 +74,31 @@ function SubmissionPage() {
       setQuestionsData(localQuestions);
     }
 
-    setSearchedQuestionsData(localQuestions);
     setTotalQuestions(totalQuestions);
     setTotalCorrectQuestions(correctQuestions);
     setSubmissions(submissionComponents);
   }, []);
 
   useEffect(() => {
-    const pageParam =
-      "?page=" +
-      pageParams.page +
-      "&size=" +
-      pageParams.size +
-      "&sort=" +
-      pageParams.sortParam +
-      "," +
-      pageParams.sortType;
-    axios.get(localUrl + pageParam).then((response) => {
-      setTotalQuestions(response.data.numberOfElements);
-      setSubmissionComponents(response.data.content, false);
-    });
-  }, [localUrl, setSubmissionComponents]);
+    const fetchAllSubmissions = async () => {
+      const response = await getAllSubmissions(
+        studentsName,
+        isGettingAll,
+        pageParams
+      );
+
+      try {
+        setTotalQuestions(response.numberOfElements);
+        setSubmissionComponents(response.content, false);
+      } catch (error) {
+        console.error(error);
+
+        window.alert("There is an issue...");
+      }
+    };
+
+    fetchAllSubmissions();
+  }, [setSubmissionComponents, isGettingAll, studentsName]);
 
   const inputHandler = (event) => {
     if (event.target.value === null || event.target.value === "") {

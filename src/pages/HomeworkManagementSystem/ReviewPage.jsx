@@ -2,38 +2,39 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Submission from "../../components/Submission/Submission";
 import styles from "./SubmissionPage.module.css";
-import axios from "axios";
 import TutoringQuestions from "../../components/TutoringQuestions/TutoringQuestions";
+import { getReviewQuestions } from "../../services/api/HMSService";
 
-const URL = process.env.REACT_APP_API_URL;
+const pageParams = {
+  page: 0,
+  size: 10,
+  sortType: "desc",
+  sortParam: "id",
+};
+
+const emptyQuestion = {
+  id: 0,
+  title: "Oops! It appears there are no incorrect answers at the moment.",
+  question: "Please come back after you've finished answering the questions.",
+  type: "m",
+  candidates: [],
+  hint: "Remember to return after completing the questions!",
+  studentsFor: [],
+  answer: "a",
+  explanation: "",
+  generatedDate: "",
+  targetDate: "",
+  minAgo: 430,
+  hourAgo: 7,
+  dayAgo: 0,
+  minLeft: 0,
+  hourLeft: 0,
+  dayLeft: 0,
+};
 
 const ReviewPage = () => {
   const { studentsName } = useParams();
-  const emptyQuestion = {
-    id: 0,
-    title: "Oops! It appears there are no incorrect answers at the moment.",
-    question: "Please come back after you've finished answering the questions.",
-    type: "m",
-    candidates: [],
-    hint: "Remember to return after completing the questions!",
-    studentsFor: [],
-    answer: "a",
-    explanation: "",
-    generatedDate: "",
-    targetDate: "",
-    minAgo: 430,
-    hourAgo: 7,
-    dayAgo: 0,
-    minLeft: 0,
-    hourLeft: 0,
-    dayLeft: 0,
-  };
-  const [pageParams, setPageParams] = useState({
-    page: 0,
-    size: 10,
-    sortType: "desc",
-    sortParam: "id",
-  });
+
   const [data, setData] = useState();
   const [submissions, setSubmissions] = useState([]);
   const [searchParameter, setSearchParameter] = useState("Question");
@@ -61,49 +62,44 @@ const ReviewPage = () => {
     [answers, studentsName]
   );
 
-  const setSubmissionComponents = useCallback((data, searched) => {
-    let submissionComponents = [];
-    let totalQuestions = 0;
-    let correctQuestions = 0;
-    let localQuestions = [];
+  const setSubmissionComponents = useCallback(
+    (data, searched) => {
+      let submissionComponents = [];
+      let localQuestions = [];
 
-    data.map((value, index) => {
-      totalQuestions++;
-      localQuestions = [...localQuestions, value];
+      data.map((value, index) => {
+        localQuestions = [...localQuestions, value];
 
-      if (value.studentAnswer === value.question.answer) correctQuestions++;
-      submissionComponents = [
-        ...submissionComponents,
-        <TutoringQuestions
-          key={index}
-          question={value.question}
-          selectAnswer={selectAnswer}
-        />,
-      ];
-      return null;
-    });
+        submissionComponents = [
+          ...submissionComponents,
+          <TutoringQuestions
+            key={index}
+            question={value.question}
+            selectAnswer={selectAnswer}
+          />,
+        ];
+        return null;
+      });
 
-    if (!searched) {
-      setQuestionsData(localQuestions);
-    }
+      if (!searched) {
+        setQuestionsData(localQuestions);
+      }
 
-    setSubmissions(submissionComponents);
-  }, []);
+      setSubmissions(submissionComponents);
+    },
+    [selectAnswer]
+  );
 
   const setTemp = useCallback((data, searched, userAnswers) => {
     let submissionComponents = [];
-    let totalQuestions = 0;
-    let correctQuestions = 0;
     let localQuestions = [];
 
     console.log(data);
     console.log(userAnswers);
 
     data.map((value, index) => {
-      totalQuestions++;
       localQuestions = [...localQuestions, value];
 
-      if (value.studentAnswer === value.question.answer) correctQuestions++;
       submissionComponents = [
         ...submissionComponents,
         <Submission
@@ -123,7 +119,6 @@ const ReviewPage = () => {
     setSubmissions(submissionComponents);
   }, []);
 
-  const localUrl = URL + "submissions/review?studentName=" + studentsName + "&";
   const changeDropdown = () => {
     setIsSearchParamterClicked(!isSearchParamterClicked);
   };
@@ -239,20 +234,21 @@ const ReviewPage = () => {
   };
 
   useEffect(() => {
-    const pageParam =
-      "page=" +
-      pageParams.page +
-      "&size=" +
-      pageParams.size +
-      "&sort=" +
-      pageParams.sortParam +
-      "," +
-      pageParams.sortType;
-    axios.get(localUrl + pageParam).then((response) => {
-      setData(response.data.content);
-      setSubmissionComponents(response.data.content, false);
-    });
-  }, [localUrl]);
+    const fetchReviewQuestions = async (name, pageParams) => {
+      try {
+        const response = await getReviewQuestions(name, pageParams);
+
+        setData(response);
+        setSubmissionComponents(response, false);
+      } catch (error) {
+        console.error(error);
+
+        window.alert("There is an issue...");
+      }
+    };
+
+    fetchReviewQuestions(studentsName, pageParams);
+  }, [setSubmissionComponents, studentsName]);
 
   return (
     <div className={styles.page}>
