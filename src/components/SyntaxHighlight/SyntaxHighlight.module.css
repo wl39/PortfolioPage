@@ -27,3 +27,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+@media (max-width: 480px) {
+  .codeContainer {
+    font-size: 10px;
+  }
+}

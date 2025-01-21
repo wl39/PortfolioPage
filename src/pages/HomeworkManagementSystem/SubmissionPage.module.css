@@ -8,8 +8,14 @@
   display: flex;
 }
 
+.linkContainer {
+  width: 275px;
+  display: flex;
+  justify-content: space-between;
+}
+
 .h1 {
-  width: 100%;
+  width: calc(100% - 275px);
   margin: 0px;
   height: 80px;
   line-height: 80px;
@@ -172,4 +178,21 @@
 
 .input:hover {
   border: 2px solid black;
+}
+
+@media (max-width: 480px) {
+  .page {
+    width: calc(100vw - 16px);
+    padding-top: 10px;
+    margin: 0px 8px;
+  }
+
+  .header {
+    flex-direction: column;
+  }
+
+  .linkContainer {
+    width: 100%;
+    margin-bottom: 8px;
+  }
 }

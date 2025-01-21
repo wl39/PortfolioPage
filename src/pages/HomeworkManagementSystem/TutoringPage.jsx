@@ -113,15 +113,17 @@ function TutoringPage() {
         <h1 className={styles.h1}>
           {studentsName[0].toUpperCase() + studentsName.slice(1)}
         </h1>
-        <Link
-          to={`/review/${studentsName}`}
-          style={{ marginTop: "22px", marginRight: "15px" }}
-        >
-          <button className={styles.button}>Review</button>
-        </Link>
-        <Link to={`/submission/${studentsName}`} style={{ marginTop: "22px" }}>
-          <button className={styles.button}>Submissions</button>
-        </Link>
+        <div className={styles.linkContainer}>
+          <Link to={`/review/${studentsName}`} style={{ marginTop: "22px" }}>
+            <button className={styles.button}>Review</button>
+          </Link>
+          <Link
+            to={`/submission/${studentsName}`}
+            style={{ marginTop: "22px" }}
+          >
+            <button className={styles.button}>Submissions</button>
+          </Link>
+        </div>
       </div>
 
       {/* Render questions */}
