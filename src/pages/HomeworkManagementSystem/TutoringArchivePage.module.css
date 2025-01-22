@@ -6,14 +6,14 @@
 
 .modal {
   background-color: ivory;
-  position: fixed;
-    top: 30px;
-    right: 120px;
-    display: flex;
-    flex-direction: column;
-    height: 120px;
-    justify-content: space-between;
-    border: 2px solid black;
+  /* position: fixed; */
+  top: 30px;
+  right: 120px;
+  display: flex;
+  flex-direction: column;
+  height: 120px;
+  justify-content: space-between;
+  border: 2px solid black;
   box-shadow: 5px 5px black;
 
   padding: 15px 10px;
@@ -35,7 +35,6 @@
   border: 2px solid black;
   background-color: #ffffe7;
 }
-
 
 .linkContainer {
   display: flex;
@@ -87,14 +86,14 @@
   cursor: pointer;
 }
 
-.searchDropdownButton:hover{
+.searchDropdownButton:hover {
   border: 2px solid black;
 }
-.searchDropdownButton:active{
+.searchDropdownButton:active {
   border: 2px solid black;
 }
 
-.searchDropdownButton:focus{
+.searchDropdownButton:focus {
   border: 2px solid black;
 }
 

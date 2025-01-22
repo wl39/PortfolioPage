@@ -1,19 +1,46 @@
-.keyword {
+.type {
+  justify-content: flex-end;
+  color: lightgray;
+  font-size: 10px;
+  display: flex;
+}
+
+.java_keyword {
   color: rgb(241, 167, 254);
 }
-.string {
+.java_string {
   color: rgb(137, 255, 137);
 }
-.comment {
+.java_comment {
   color: gray;
 }
 
-.method {
+.java_method {
   color: rgb(118, 253, 248);
 }
 
-.type {
+.java_type {
   color: rgb(250, 199, 105);
+}
+
+.sql_keyword {
+  color: rgb(241, 167, 254); /* Pink-ish */
+}
+
+.sql_string {
+  color: rgb(137, 255, 137); /* Green-ish */
+}
+
+.sql_comment {
+  color: gray;
+}
+
+.sql_method {
+  color: rgb(118, 253, 248); /* Cyan-ish */
+}
+
+.sql_type {
+  color: rgb(250, 199, 105); /* Orange-ish */
 }
 
 .codeContainer {

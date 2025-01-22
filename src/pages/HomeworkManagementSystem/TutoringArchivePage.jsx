@@ -6,6 +6,7 @@ import {
   getAllQuestions,
   postReassignQuestions,
 } from "../../services/api/HMSService";
+import DragAndDrop from "../../components/DragAndDrop/DragAndDrop";
 
 // Once pageParams needs to change it suppose to change to state.
 const pageParams = {
@@ -298,25 +299,27 @@ function TutoringArchivePage() {
         </div>
       </div>
       {questions}
-      <div className={styles.modal}>
-        <input
-          value={studentsString}
-          onChange={(event) => change(event)}
-          placeholder="Students for..."
-        />
-        <input
-          placeholder="Target Date"
-          className={styles.input}
-          type="datetime-local"
-          min={new Date(Date.now()).toISOString().slice(0, 16)}
-          max={target}
-          onChange={(e) => setTargetDate(e.target.value)}
-          value={targetDate}
-        />
-        <button onClick={submit} className={styles.button}>
-          SUBMIT
-        </button>
-      </div>
+      <DragAndDrop x={300} y={100}>
+        <div className={styles.modal}>
+          <input
+            value={studentsString}
+            onChange={(event) => change(event)}
+            placeholder="Students for..."
+          />
+          <input
+            placeholder="Target Date"
+            className={styles.input}
+            type="datetime-local"
+            min={new Date(Date.now()).toISOString().slice(0, 16)}
+            max={target}
+            onChange={(e) => setTargetDate(e.target.value)}
+            value={targetDate}
+          />
+          <button onClick={submit} className={styles.button}>
+            SUBMIT
+          </button>
+        </div>
+      </DragAndDrop>
     </div>
   );
 }
