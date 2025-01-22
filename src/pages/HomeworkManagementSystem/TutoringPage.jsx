@@ -50,7 +50,7 @@ function TutoringPage() {
           studentsName,
           pageParams
         );
-        setQuestions(questionData);
+        setQuestions(questionData.reverse());
       } catch (error) {
         console.error("Failed to fetch questions", error);
       }
