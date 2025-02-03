@@ -2,22 +2,23 @@ import React, { useState } from "react";
 import SyntaxHighlight from "../SyntaxHighlight/SyntaxHighlight";
 import styles from "../TutoringQuestions/TutoringQuestions.module.css";
 import newStyles from "./TutoringMarking.module.css";
+import { dateOptions } from "../../utils/dateFormat";
 
-const TutoringMarking = ({ question, submission, marks }) => {
+const TutoringMarking = ({ question, submission, id, marks }) => {
   let [mark, setMark] = useState(0);
 
   const unmarked = () => {
-    marks(question.id, 0);
+    marks(id, 0);
     setMark(0);
   };
 
   const setCorrect = () => {
-    marks(question.id, 1);
+    marks(id, 1);
     setMark(1);
   };
 
   const setWrong = () => {
-    marks(question.id, -1);
+    marks(id, -1);
     setMark(-1);
   };
   return (
@@ -45,9 +46,10 @@ const TutoringMarking = ({ question, submission, marks }) => {
                   {!question.targetDate ? null : (
                     <div>
                       Due at{" "}
-                      {new Date(question.targetDate)
-                        .toUTCString()
-                        .substring(0, 22)}
+                      {new Date(question.targetDate).toLocaleString(
+                        "en-US",
+                        dateOptions
+                      )}
                       {"  ("}
                       {question.dayLeft > 0
                         ? question.dayLeft +

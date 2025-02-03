@@ -4,6 +4,7 @@ import Submission from "../../components/Submission/Submission";
 import styles from "./SubmissionPage.module.css";
 import TutoringQuestions from "../../components/TutoringQuestions/TutoringQuestions";
 import { getReviewQuestions } from "../../services/api/HMSService";
+import { formatToISO } from "../../utils/dateFormat";
 
 const pageParams = {
   page: 0,
@@ -53,9 +54,7 @@ const ReviewPage = () => {
       };
       newAnswer[questionID].answer = answer;
       newAnswer[questionID].studentName = studentsName;
-      newAnswer[questionID].submitDate = new Date(Date.now())
-        .toISOString()
-        .slice(0, 19);
+      newAnswer[questionID].submitDate = formatToISO(Date.now());
 
       setAnswers(newAnswer);
     },

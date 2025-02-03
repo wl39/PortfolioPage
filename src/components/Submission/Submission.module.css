@@ -4,8 +4,8 @@
 }
 
 .wrongQuestionContainer {
-  border: 2px solid black;
-  box-shadow: 5px 5px black;
+  border: 2px solid rgba(255, 0, 0, 0.58);
+  box-shadow: 5px 5px rgba(255, 0, 0, 0.58);
   white-space: pre-wrap;
   word-break: break-word;
 }

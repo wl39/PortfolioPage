@@ -84,14 +84,15 @@ const Calendar = ({ students }) => {
           const calendars = await getCalendarData(year, month, students);
 
           calendars.forEach((element) => {
-            const date = new Date(element.calendarID.date).getDate();
-            const studentName = element.calendarID.studentName;
+            const stringDate = `${element.year}-${element.month}-${element.day}`;
+            const date = new Date(stringDate).getDate();
+            const studentName = element.student.name;
 
             const studentEntry = {
               [studentName]: {
-                solved: element.solved,
-                unmarked: element.unmarked, // Change this if you want to use a different value for "marked"
-                questions: element.questions,
+                solved: element.solved - element.toMark,
+                unmarked: element.toMark, // Change this if you want to use a different value for "marked"
+                questions: element.unsolved + element.solved,
               },
             };
 
