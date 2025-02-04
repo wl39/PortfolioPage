@@ -36,6 +36,7 @@ const MarkingPage = () => {
           key={index}
           question={value.question}
           submission={value.studentAnswer}
+          id={value.id}
           marks={(k, v) => marks(k, v)}
         />,
       ];
@@ -51,14 +52,14 @@ const MarkingPage = () => {
     if (window.confirm("Are you sure to submit?")) {
       const fetchMarkSubmissions = async () => {
         try {
-          const res = putSubmissions(studentName, mark);
+          const res = await putSubmissions(mark);
 
           console.log(res);
         } catch (error) {
           console.log(error);
           window.alert("There is an issue...");
         } finally {
-          window.location.reload();
+          // window.location.reload();
         }
       };
 

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./TutoringQuestions.module.css";
 import SyntaxHighlight from "../SyntaxHighlight/SyntaxHighlight";
+import { dateOptions } from "../../utils/dateFormat";
 
 function TutoringQuestions({ question, selectAnswer }) {
   const [showHint, setShowHint] = useState(false);
@@ -21,9 +22,10 @@ function TutoringQuestions({ question, selectAnswer }) {
                   {!question.targetDate ? null : (
                     <div>
                       Due at{" "}
-                      {new Date(question.targetDate)
-                        .toUTCString()
-                        .substring(0, 22)}
+                      {new Date(question.targetDate).toLocaleString(
+                        "en-US",
+                        dateOptions
+                      )}
                       {"  ("}
                       {question.dayLeft > 0
                         ? question.dayLeft +
@@ -67,35 +69,37 @@ function TutoringQuestions({ question, selectAnswer }) {
             )
           )}
           {question.type === "m" ? (
-            question.candidates.map((value, index) => (
-              <div className={styles.inputContainer} key={"D:" + index}>
+            question.candidates.map((element) => (
+              <div className={styles.inputContainer} key={"D:" + element.id}>
                 <input
                   style={{ margin: "auto 4px" }}
                   type="radio"
                   id={
                     question.id
-                      ? question.id + ":" + index + ":" + value
-                      : "test:" + index + ":" + value
+                      ? question.id + ":" + element.id + ":" + element.value
+                      : "test:" + element.id + ":" + element.value
                   }
                   name={question.id ? question.id : "test"}
-                  value={value}
-                  onChange={() => selectAnswer(question.id, value)}
+                  value={element.value}
+                  onChange={() => selectAnswer(question.id, element.value)}
                 />
                 <label
                   className={styles.candidates}
                   htmlFor={
                     question.id
-                      ? question.id + ":" + index + ":" + value
-                      : "test:" + index + ":" + value
+                      ? question.id + ":" + element.id + ":" + element.value
+                      : "test:" + element.id + ":" + element.value
                   }
                 >
-                  {value.includes("&code:") ? (
+                  {element.value.includes("&code:") ? (
                     <SyntaxHighlight
-                      code={value.split("&code:")[1]}
-                      key={"syntax" + index}
+                      code={element.value.split("&code:")[1]}
+                      key={"syntax" + element.id}
                     />
                   ) : (
-                    <div key={value + ":" + index}>{value}</div>
+                    <div key={element.value + ":" + element.id}>
+                      {element.value}
+                    </div>
                   )}
                 </label>
               </div>

@@ -13,6 +13,7 @@ import {
   getRecentStopwatchByPage,
   postStopwatch,
 } from "../../services/api/StopwatchService";
+import { formatToISO } from "../../utils/dateFormat";
 
 const instance = new WorkerBuilder(stopwatchWorker);
 
@@ -319,7 +320,7 @@ class StopwatchPage extends Component {
     let id = -1;
     const data = {
       name: this.state.name ? this.state.name : "Anonymous",
-      generatedDate: new Date(Date.now()).toISOString().slice(0, 19),
+      generatedDate: formatToISO(Date.now()),
       elapsedTime: this.state.elapsedTime,
       type: this.state.elapsedTime > 0 ? "r" : "s",
       relatedID: this.state.elapsedTime > 0 ? this.state.id : null,
@@ -354,7 +355,7 @@ class StopwatchPage extends Component {
     const data = {
       name: this.state.name ? this.state.name : "Anonymous",
       relatedID: this.state.id,
-      generatedDate: new Date(Date.now()).toISOString().slice(0, 19),
+      generatedDate: formatToISO(Date.now()),
       elapsedTime: this.state.elapsedTime,
       type: "p",
     };
@@ -388,7 +389,7 @@ class StopwatchPage extends Component {
     const data = {
       name: this.state.name ? this.state.name : "Anonymous",
       relatedID: this.state.id,
-      generatedDate: new Date(Date.now()).toISOString().slice(0, 19),
+      generatedDate: formatToISO(Date.now()),
       elapsedTime: this.state.elapsedTime,
       type: "d",
     };

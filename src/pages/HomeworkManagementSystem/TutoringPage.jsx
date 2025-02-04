@@ -7,6 +7,7 @@ import {
   getQuestionsWithStudentName,
   postAnswers,
 } from "../../services/api/HMSService";
+import { formatToISO } from "../../utils/dateFormat";
 
 const pageParams = {
   page: 0,
@@ -67,7 +68,7 @@ function TutoringPage() {
         [questionID]: {
           answer: answerValue,
           studentName: studentsName,
-          submitDate: new Date(Date.now()).toISOString().slice(0, 19),
+          submitDate: formatToISO(Date.now()),
         },
       }));
     },
@@ -97,7 +98,7 @@ function TutoringPage() {
         console.error(error);
         window.alert("There is an issue...");
       } finally {
-        window.location.reload();
+        // window.location.reload();
       }
     };
 

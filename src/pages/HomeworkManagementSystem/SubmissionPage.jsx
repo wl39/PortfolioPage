@@ -37,7 +37,6 @@ function SubmissionPage() {
     dayLeft: 0,
   };
 
-  const [isGettingAll, setIsGettingAll] = useState(false);
   const [searchParameter, setSearchParameter] = useState("Question");
   const [isSearchParamterClicked, setIsSearchParamterClicked] = useState(false);
   const [questionsData, setQuestionsData] = useState([]);
@@ -51,10 +50,10 @@ function SubmissionPage() {
     let localQuestions = [];
 
     data.map((value, index) => {
-      console.log(value);
       totalQuestions++;
       localQuestions = [...localQuestions, value];
 
+      console.log(value);
       if (value.studentAnswer === value.question.answer) correctQuestions++;
       submissionComponents = [
         ...submissionComponents,
@@ -81,11 +80,7 @@ function SubmissionPage() {
 
   useEffect(() => {
     const fetchAllSubmissions = async () => {
-      const response = await getAllSubmissions(
-        studentsName,
-        isGettingAll,
-        pageParams
-      );
+      const response = await getAllSubmissions(studentsName, pageParams);
 
       try {
         setTotalQuestions(response.numberOfElements);
@@ -98,7 +93,7 @@ function SubmissionPage() {
     };
 
     fetchAllSubmissions();
-  }, [setSubmissionComponents, isGettingAll, studentsName]);
+  }, [setSubmissionComponents, studentsName]);
 
   const inputHandler = (event) => {
     if (event.target.value === null || event.target.value === "") {
@@ -205,9 +200,9 @@ function SubmissionPage() {
     setSearchParameter(paramter);
   };
 
-  const showGetAll = () => {
-    setIsGettingAll(!isGettingAll);
-  };
+  // const showGetAll = () => {
+  //   setIsGettingAll(!isGettingAll);
+  // };
 
   return (
     <div className={styles.page}>
@@ -275,14 +270,14 @@ function SubmissionPage() {
         </div>
       </div>
 
-      <div className={styles.showAllContainer}>
+      {/* <div className={styles.showAllContainer}>
         <button className={styles.buttonShowAll} onClick={showGetAll}>
           Show All Submissions
         </button>
         <div className={styles.checkboxContianer}>
           <div className={isGettingAll ? styles.showAllCheckd : null} />
         </div>
-      </div>
+      </div> */}
 
       {submissions.length === 0 ? (
         <Submission

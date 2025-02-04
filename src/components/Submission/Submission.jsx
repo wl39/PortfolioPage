@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./Submission.module.css";
 import SyntaxHighlight from "../SyntaxHighlight/SyntaxHighlight";
+import { dateOptions } from "../../utils/dateFormat";
 
 function Submission({ question, studentAnswer, submitDate, isMarked, id }) {
   const [showHint, setShowHint] = useState(false);
@@ -32,7 +33,10 @@ function Submission({ question, studentAnswer, submitDate, isMarked, id }) {
                     {submitDate === ""
                       ? null
                       : "Submitted at " +
-                        new Date(submitDate).toUTCString().substring(0, 22)}
+                        new Date(submitDate).toLocaleString(
+                          "en-US",
+                          dateOptions
+                        )}
                   </div>
                   <div></div>
                 </div>
@@ -63,45 +67,47 @@ function Submission({ question, studentAnswer, submitDate, isMarked, id }) {
               </div>
             )
           )}
-          {question.candidates.map((value, index) => (
+          {question.candidates.map((element) => (
             <div
               className={
-                value === question.answer
+                element.value === question.answer
                   ? styles.answerContainer
-                  : value === studentAnswer
+                  : element.value === studentAnswer
                   ? styles.wrongAnswerContainer
                   : styles.inputContainer
               }
-              key={"D:" + index}
+              key={"D:" + element.id}
             >
               <input
                 style={{ margin: "auto 4px" }}
                 type="radio"
                 id={
                   id
-                    ? id + ":" + index + ":" + value
-                    : "test:" + index + ":" + value
+                    ? id + ":" + element.id + ":" + element.value
+                    : "test:" + element.id + ":" + element.value
                 }
                 name={id ? id : "test"}
-                checked={value === studentAnswer}
-                value={value}
+                checked={element.value === studentAnswer}
+                value={element.value}
                 disabled={true}
               />
               <label
                 className={styles.candidates}
                 htmlFor={
                   id
-                    ? id + ":" + index + ":" + value
-                    : "test:" + index + ":" + value
+                    ? id + ":" + element.id + ":" + element.value
+                    : "test:" + element.id + ":" + element.value
                 }
               >
-                {value.includes("&code:") ? (
+                {element.value.includes("&code:") ? (
                   <SyntaxHighlight
-                    code={value.split("&code:")[1]}
-                    key={"syntax" + index}
+                    code={element.value.split("&code:")[1]}
+                    key={"syntax" + element.id}
                   />
                 ) : (
-                  <div key={value + ":" + index}>{value}</div>
+                  <div key={element.value + ":" + element.id}>
+                    {element.value}
+                  </div>
                 )}
               </label>
             </div>

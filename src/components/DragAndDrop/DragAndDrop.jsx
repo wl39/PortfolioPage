@@ -45,7 +45,7 @@ function DragAndDrop({ children, x, y }) {
       <div
         style={{
           border: hide ? "0px" : "1px solid black",
-          position: "absolute",
+          position: "fixed",
           left: position.x,
           top: position.y + 39,
           background: "ivory",
@@ -57,7 +57,7 @@ function DragAndDrop({ children, x, y }) {
         onMouseDown={handleMouseDown}
         style={{
           boxSizing: "border-box",
-          position: "absolute",
+          position: "fixed",
           left: position.x,
           top: position.y,
           width: "40px",
@@ -79,7 +79,7 @@ function DragAndDrop({ children, x, y }) {
       <div
         onClick={() => setHide(!hide)}
         style={{
-          position: "absolute",
+          position: "fixed",
           boxSizing: "border-box",
           left: position.x + 40,
           top: position.y,

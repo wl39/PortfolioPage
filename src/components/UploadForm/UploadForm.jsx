@@ -3,6 +3,7 @@ import Submission from "../Submission/Submission";
 import TutoringQuestions from "../TutoringQuestions/TutoringQuestions";
 
 import styles from "./UploadForm.module.css";
+import { formatToISO } from "../../utils/dateFormat";
 
 const UploadForm = ({
   inputHandler,
@@ -176,7 +177,7 @@ const UploadForm = ({
           placeholder="Target Date"
           className={styles.input}
           type="datetime-local"
-          min={new Date(Date.now()).toISOString().slice(0, 16)}
+          min={formatToISO(Date.now()).slice(0, 16)}
           max={target}
           onChange={(e) => inputHandler(e, "target")}
           value={questions.targetDate}

@@ -6,6 +6,7 @@ import UploadForm from "../../components/UploadForm/UploadForm";
 import UploadFixer from "../../components/UploadFixer/UploadFixer";
 import DragAndDrop from "../../components/DragAndDrop/DragAndDrop";
 import { postQuestion } from "../../services/api/HMSService";
+import { formatToISO } from "../../utils/dateFormat";
 
 function UploadPage() {
   const [questions, setQuestions] = useState({
@@ -18,7 +19,7 @@ function UploadPage() {
     studentsForString: "",
     answer: "",
     explanation: "",
-    generatedDate: new Date(Date.now()).toISOString().slice(0, 19),
+    generatedDate: formatToISO(Date.now()).sli,
     targetDate: "",
   });
 
@@ -59,7 +60,7 @@ function UploadPage() {
       studentsForString: "",
       answer: "",
       explanation: "",
-      generatedDate: new Date(Date.now()).toISOString().slice(0, 19),
+      generatedDate: formatToISO(Date.now()),
       targetDate: "",
     });
   };
@@ -75,7 +76,7 @@ function UploadPage() {
       studentsForString: fixed.students ? questions.studentsForString : "",
       answer: fixed.answer ? questions.answer : "",
       explanation: fixed.explanation ? questions.explanation : "",
-      generatedDate: new Date(Date.now()).toISOString().slice(0, 19),
+      generatedDate: formatToISO(Date.now()),
       targetDate: fixed.target_date ? questions.targetDate : "",
     });
   };

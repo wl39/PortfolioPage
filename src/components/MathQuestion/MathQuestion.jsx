@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback, useRef } from "react";
 import styles from "./MathQuestion.module.css";
 
 import { postMathAnswer } from "../../services/api/SimpleMathQuestionService";
+import { formatToISO } from "../../utils/dateFormat";
 
 const MathQuestion = ({
   setCorrectAnswer,
@@ -69,11 +70,7 @@ const MathQuestion = ({
 
       setTimer((prevTimer) => {
         if (prevTimer <= 0) {
-          const date = new Date();
-          const koreaTime = new Date(
-            date.toLocaleString("en-US", { timeZone: "Asia/Seoul" })
-          );
-          const formattedDate = koreaTime.toISOString();
+          const formattedDate = formatToISO(Date.now());
 
           fetchMathAnswer(
             studentName,
@@ -114,11 +111,7 @@ const MathQuestion = ({
       setStudentAnswer(parseInt(e.target.value));
 
       if (parseInt(e.target.value) === answer) {
-        const date = new Date();
-        const koreaTime = new Date(
-          date.toLocaleString("en-US", { timeZone: "Asia/Seoul" })
-        );
-        const formattedDate = koreaTime.toISOString();
+        const formattedDate = formatToISO(Date.now());
 
         fetchMathAnswer(
           studentName,

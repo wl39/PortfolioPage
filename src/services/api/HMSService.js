@@ -1,6 +1,6 @@
 import axios from "../utils/axiosInstance";
 
-/* Upload Page */
+/* Upload Page - DONE */
 export const postQuestion = async (questions) => {
   try {
     const response = await axios.post("questions", questions);
@@ -12,7 +12,7 @@ export const postQuestion = async (questions) => {
   }
 };
 
-/* Tutoring Page */
+/* Tutoring Page - DONE */
 export const getQuestionsWithStudentName = async (name, pageParams) => {
   const pageParam =
     "?page=" +
@@ -34,7 +34,7 @@ export const getQuestionsWithStudentName = async (name, pageParams) => {
   }
 };
 
-/* Tutoring Page */
+/* Tutoring Page - DONE */
 export const postAnswers = async (answers) => {
   try {
     const response = await axios.post("submissions/multiples", answers);
@@ -46,7 +46,7 @@ export const postAnswers = async (answers) => {
   }
 };
 
-/* Tutoring Archive Page */
+/* Tutoring Archive Page - DONE */
 export const getAllQuestions = async (pageParams) => {
   const pageParam =
     "?page=" +
@@ -68,16 +68,16 @@ export const getAllQuestions = async (pageParams) => {
   }
 };
 
-/* Tutoring Archive Page */
+/* Tutoring Archive Page - DONE */
 export const postReassignQuestions = async (
   questionIds,
   studentsFor,
   targetDate
 ) => {
   try {
-    const response = await axios.post("questions/multiples", {
+    const response = await axios.post("assignments", {
       questionIds: questionIds,
-      studentsFor: studentsFor,
+      names: studentsFor,
       targetDate: targetDate,
     });
 
@@ -88,13 +88,10 @@ export const postReassignQuestions = async (
   }
 };
 
-/* Marking Page */
-export const putSubmissions = async (name, mark) => {
+/* Marking Page - DONE */
+export const putSubmissions = async (mark) => {
   try {
-    const response = await axios.put(
-      "submissions/marks?studentName=" + name,
-      mark
-    );
+    const response = await axios.put("submissions/mark", mark);
 
     return response.data.content;
   } catch (error) {
@@ -103,10 +100,10 @@ export const putSubmissions = async (name, mark) => {
   }
 };
 
-/* Marking Page */
+/* Marking Page - DONE */
 export const getUnmarkedSubmissions = async (name) => {
   try {
-    const response = await axios.get("submissions/saq?studentName=" + name);
+    const response = await axios.get("submissions/mark/" + name);
 
     return response.data.content;
   } catch (error) {
@@ -114,7 +111,7 @@ export const getUnmarkedSubmissions = async (name) => {
   }
 };
 
-/* Review Page */
+/* Review Page - DONE */
 export const getReviewQuestions = async (name, pageParams) => {
   const pageParam =
     "page=" +
@@ -127,9 +124,7 @@ export const getReviewQuestions = async (name, pageParams) => {
     pageParams.sortType;
 
   try {
-    const response = await axios.get(
-      `submissions/review?studentName=${name}&${pageParam}`
-    );
+    const response = await axios.get(`submissions/review/${name}?${pageParam}`);
 
     return response.data.content;
   } catch (error) {
@@ -138,8 +133,8 @@ export const getReviewQuestions = async (name, pageParams) => {
   }
 };
 
-/* Submission Page */
-export const getAllSubmissions = async (name, isGettingAll, pageParams) => {
+/* Submission Page - DONE */
+export const getAllSubmissions = async (name, pageParams) => {
   const pageParam =
     "?page=" +
     pageParams.page +
@@ -151,10 +146,7 @@ export const getAllSubmissions = async (name, isGettingAll, pageParams) => {
     pageParams.sortType;
 
   try {
-    const response = await axios.get(
-      `submissions?studentName=${name}&getAll=${isGettingAll}&${pageParam}`
-    );
-
+    const response = await axios.get(`submissions/${name}${pageParam}`);
     return response.data;
   } catch (error) {
     console.error("Error fetching submissions : ", error);
@@ -163,11 +155,11 @@ export const getAllSubmissions = async (name, isGettingAll, pageParams) => {
 };
 
 /* Components */
-/* Calendar */
+/* Calendar - DONE */
 export const getCalendarData = async (year, month, students) => {
   try {
     const response = await axios.get(
-      "calendar/" + year + "/" + (month + 1) + "?students=" + students
+      "calendars/" + year + "/" + (month + 1) + "?students=" + students
     );
 
     return response.data;

@@ -7,6 +7,7 @@ import {
   postReassignQuestions,
 } from "../../services/api/HMSService";
 import DragAndDrop from "../../components/DragAndDrop/DragAndDrop";
+import { formatToISO } from "../../utils/dateFormat";
 
 // Once pageParams needs to change it suppose to change to state.
 const pageParams = {
@@ -310,7 +311,7 @@ function TutoringArchivePage() {
             placeholder="Target Date"
             className={styles.input}
             type="datetime-local"
-            min={new Date(Date.now()).toISOString().slice(0, 16)}
+            min={formatToISO(Date.now()).slice(0, 16)}
             max={target}
             onChange={(e) => setTargetDate(e.target.value)}
             value={targetDate}
