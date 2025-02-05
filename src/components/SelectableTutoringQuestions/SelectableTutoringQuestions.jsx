@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Submission from "../Submission/Submission";
 import styles from "./SelectableTutoringQuestions.module.css";
 function SelectableTutoringQuestions(props) {
