@@ -67,51 +67,87 @@ function Submission({ question, studentAnswer, submitDate, isMarked, id }) {
               </div>
             )
           )}
-          {question.candidates.map((element) => (
-            <div
-              className={
-                element.value === question.answer
-                  ? styles.answerContainer
-                  : element.value === studentAnswer
-                  ? styles.wrongAnswerContainer
-                  : styles.inputContainer
-              }
-              key={"D:" + element.id}
-            >
-              <input
-                style={{ margin: "auto 4px" }}
-                type="radio"
-                id={
-                  id
-                    ? id + ":" + element.id + ":" + element.value
-                    : "test:" + element.id + ":" + element.value
+          {question.candidates.map((element, index) =>
+            element.id ? (
+              <div
+                className={
+                  element.value === question.answer
+                    ? styles.answerContainer
+                    : element.value === studentAnswer
+                    ? styles.wrongAnswerContainer
+                    : styles.inputContainer
                 }
-                name={id ? id : "test"}
-                checked={element.value === studentAnswer}
-                value={element.value}
-                disabled={true}
-              />
-              <label
-                className={styles.candidates}
-                htmlFor={
-                  id
-                    ? id + ":" + element.id + ":" + element.value
-                    : "test:" + element.id + ":" + element.value
-                }
+                key={"D:" + element.id}
               >
-                {element.value.includes("&code:") ? (
-                  <SyntaxHighlight
-                    code={element.value.split("&code:")[1]}
-                    key={"syntax" + element.id}
-                  />
-                ) : (
-                  <div key={element.value + ":" + element.id}>
-                    {element.value}
-                  </div>
-                )}
-              </label>
-            </div>
-          ))}
+                <input
+                  style={{ margin: "auto 4px" }}
+                  type="radio"
+                  id={
+                    id
+                      ? id + ":" + element.id + ":" + element.value
+                      : "test:" + element.id + ":" + element.value
+                  }
+                  name={id ? id : "test"}
+                  checked={element.value === studentAnswer}
+                  value={element.value}
+                  disabled={true}
+                />
+                <label
+                  className={styles.candidates}
+                  htmlFor={
+                    id
+                      ? id + ":" + element.id + ":" + element.value
+                      : "test:" + element.id + ":" + element.value
+                  }
+                >
+                  {element.value.includes("&code:") ? (
+                    <SyntaxHighlight
+                      code={element.value.split("&code:")[1]}
+                      key={"syntax" + element.id}
+                    />
+                  ) : (
+                    <div key={element.value + ":" + element.id}>
+                      {element.value}
+                    </div>
+                  )}
+                </label>
+              </div>
+            ) : (
+              <div
+                className={
+                  element === question.answer
+                    ? styles.answerContainer
+                    : element === studentAnswer
+                    ? styles.wrongAnswerContainer
+                    : styles.inputContainer
+                }
+                key={"D:" + index}
+              >
+                <input
+                  style={{ margin: "auto 4px" }}
+                  type="radio"
+                  id={index + ":" + element}
+                  name={id ? id : "test"}
+                  checked={element === studentAnswer}
+                  value={element}
+                  disabled={true}
+                />
+                <label
+                  className={styles.candidates}
+                  htmlFor={index + ":" + element}
+                >
+                  {element.includes("&code:") ? (
+                    <SyntaxHighlight
+                      code={element.split("&code:")[1]}
+                      key={"syntax" + element.id}
+                    />
+                  ) : (
+                    <div key={element + ":" + index}>{element}</div>
+                  )}
+                </label>
+              </div>
+            )
+          )}
           <div className={styles.explanationContainer}>
             <div className={styles.explanationHeader}>Explanation</div>
             <div className={styles.explanationDetails}>
