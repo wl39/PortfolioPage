@@ -40,6 +40,7 @@
 }
 
 .candidateInput {
+  resize: vertical;
   width: 100%;
   margin: 8px 0px;
 }

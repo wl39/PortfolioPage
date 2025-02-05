@@ -93,7 +93,7 @@ const UploadForm = ({
             <label className={styles.label} htmlFor={"candidate" + index}>
               Code
             </label>
-            <input
+            <textarea
               className={styles.candidateInput}
               placeholder={"Candidate " + (index + 1)}
               value={
@@ -148,7 +148,7 @@ const UploadForm = ({
           <label className={styles.label} htmlFor={"Answer"}>
             Code
           </label>
-          <input
+          <textarea
             className={styles.candidateInput}
             placeholder={"Answer"}
             value={
