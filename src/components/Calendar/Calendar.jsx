@@ -90,7 +90,7 @@ const Calendar = ({ students }) => {
 
             const studentEntry = {
               [studentName]: {
-                solved: element.solved - element.toMark,
+                solved: element.solved,
                 unmarked: element.toMark, // Change this if you want to use a different value for "marked"
                 questions: element.unsolved + element.solved,
               },
