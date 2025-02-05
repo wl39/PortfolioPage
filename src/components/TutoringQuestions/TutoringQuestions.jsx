@@ -69,41 +69,66 @@ function TutoringQuestions({ question, selectAnswer }) {
             )
           )}
           {question.type === "m" ? (
-            question.candidates.map((element) => (
-              <div className={styles.inputContainer} key={"D:" + element.id}>
-                <input
-                  style={{ margin: "auto 4px" }}
-                  type="radio"
-                  id={
-                    question.id
-                      ? question.id + ":" + element.id + ":" + element.value
-                      : "test:" + element.id + ":" + element.value
-                  }
-                  name={question.id ? question.id : "test"}
-                  value={element.value}
-                  onChange={() => selectAnswer(question.id, element.value)}
-                />
-                <label
-                  className={styles.candidates}
-                  htmlFor={
-                    question.id
-                      ? question.id + ":" + element.id + ":" + element.value
-                      : "test:" + element.id + ":" + element.value
-                  }
-                >
-                  {element.value.includes("&code:") ? (
-                    <SyntaxHighlight
-                      code={element.value.split("&code:")[1]}
-                      key={"syntax" + element.id}
-                    />
-                  ) : (
-                    <div key={element.value + ":" + element.id}>
-                      {element.value}
-                    </div>
-                  )}
-                </label>
-              </div>
-            ))
+            question.candidates.map((element, index) =>
+              element.id ? (
+                <div className={styles.inputContainer} key={"D:" + element.id}>
+                  <input
+                    style={{ margin: "auto 4px" }}
+                    type="radio"
+                    id={
+                      question.id
+                        ? question.id + ":" + element.id + ":" + element.value
+                        : "test:" + element.id + ":" + element.value
+                    }
+                    name={question.id ? question.id : "test"}
+                    value={element.value}
+                    onChange={() => selectAnswer(question.id, element.value)}
+                  />
+                  <label
+                    className={styles.candidates}
+                    htmlFor={
+                      question.id
+                        ? question.id + ":" + element.id + ":" + element.value
+                        : "test:" + element.id + ":" + element.value
+                    }
+                  >
+                    {element.value.includes("&code:") ? (
+                      <SyntaxHighlight
+                        code={element.value.split("&code:")[1]}
+                        key={"syntax" + element.id}
+                      />
+                    ) : (
+                      <div key={element.value + ":" + element.id}>
+                        {element.value}
+                      </div>
+                    )}
+                  </label>
+                </div>
+              ) : (
+                <div className={styles.inputContainer} key={"D:" + index}>
+                  <input
+                    style={{ margin: "auto 4px" }}
+                    type="radio"
+                    id={index + ":" + element}
+                    value={element}
+                    onChange={() => selectAnswer(question.id, element)}
+                  />
+                  <label
+                    className={styles.candidates}
+                    htmlFor={index + ":" + element}
+                  >
+                    {element.includes("&code:") ? (
+                      <SyntaxHighlight
+                        code={element.split("&code:")[1]}
+                        key={"syntax" + element.id}
+                      />
+                    ) : (
+                      <div key={element + ":" + index}>{element}</div>
+                    )}
+                  </label>
+                </div>
+              )
+            )
           ) : question.type === "s" ? (
             <div>
               <textarea
