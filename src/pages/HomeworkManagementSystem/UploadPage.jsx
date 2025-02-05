@@ -15,7 +15,7 @@ function UploadPage() {
     type: "",
     candidates: [],
     hint: "",
-    studentsFor: [],
+    students: [],
     studentsForString: "",
     answer: "",
     explanation: "",
@@ -56,7 +56,7 @@ function UploadPage() {
       type: "",
       candidates: [],
       hint: "",
-      studentsFor: [],
+      students: [],
       studentsForString: "",
       answer: "",
       explanation: "",
@@ -72,7 +72,7 @@ function UploadPage() {
       type: fixed.type ? questions.type : "",
       candidates: fixed.type ? Array(questions.candidates.length).fill("") : [],
       hint: fixed.hints ? questions.hint : "",
-      studentsFor: fixed.students ? questions.studentsFor : [],
+      students: fixed.students ? questions.students : [],
       studentsForString: fixed.students ? questions.studentsForString : "",
       answer: fixed.answer ? questions.answer : "",
       explanation: fixed.explanation ? questions.explanation : "",
@@ -156,7 +156,7 @@ function UploadPage() {
 
         setQuestions({
           ...questions,
-          studentsFor: pageStudents,
+          students: pageStudents,
           studentsForString: event.target.value,
         });
         break;
