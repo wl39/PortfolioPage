@@ -16,6 +16,7 @@ import MarkingPage from "./pages/HomeworkManagementSystem/MarkingPage";
 import ReviewPage from "./pages/HomeworkManagementSystem/ReviewPage";
 import MathSolveMainPage from "./pages/TimedQuestion/MathSolveMainPage";
 import MathSolvePage from "./pages/TimedQuestion/MathSolvePage";
+import UploadMultiplePage from "./pages/HomeworkManagementSystem/UploadMultiplePage";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Route path="/teacher" element={<TeacherPage />} />
         <Route path="/marking/:studentName" element={<MarkingPage />} />
         <Route path="/upload" element={<UploadPage />} />
+        <Route path="/upload/multiples" element={<UploadMultiplePage />} />
         <Route path="/math" element={<MathSolveMainPage />} />
         <Route path="/math/start" element={<MathSolvePage />} />
         <Route path="*" element={<Navigate to="/" />} />

@@ -12,6 +12,18 @@ export const postQuestion = async (questions) => {
   }
 };
 
+/* Upload Multiple Page - DONE */
+export const postQuestions = async (questions) => {
+  try {
+    const response = await axios.post("questions/multiples", questions);
+
+    return response;
+  } catch (error) {
+    console.error("Error fetching questions : ", error);
+    throw error;
+  }
+};
+
 /* Tutoring Page - DONE */
 export const getQuestionsWithStudentName = async (name, pageParams) => {
   const pageParam =

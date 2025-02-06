@@ -1,0 +1,15 @@
+.modifyButton {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border: 2px solid green;
+  right: -2px;
+  top: -52px;
+  background: ivory;
+  box-shadow: 5px 5px green;
+}
+
+.label {
+  margin: auto 0px;
+  padding-right: 10px;
+}
