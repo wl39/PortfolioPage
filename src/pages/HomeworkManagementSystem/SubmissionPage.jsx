@@ -83,7 +83,7 @@ function SubmissionPage() {
           size: response.size,
           totalElements: response.totalElements,
           totalPages: response.totalPages,
-          pageNumber: response.pageNumber,
+          pageNumber: response.pageable.pageNumber,
         });
       } catch (error) {
         console.error(error);

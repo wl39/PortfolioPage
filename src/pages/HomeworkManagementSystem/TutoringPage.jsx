@@ -47,13 +47,13 @@ function TutoringPage() {
           studentsName,
           pageParams
         );
-        setQuestions(questionData.content.reverse());
+        setQuestions(questionData.content);
         setPageable({
           numberOfElements: questionData.numberOfElements,
           size: questionData.size,
           totalElements: questionData.totalElements,
           totalPages: questionData.totalPages,
-          pageNumber: questionData.pageNumber,
+          pageNumber: questionData.pageable.pageNumber,
         });
       } catch (error) {
         console.error("Failed to fetch questions", error);

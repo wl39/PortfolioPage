@@ -17,7 +17,7 @@ function Pageable({ children }) {
   const [pageParams, setPageParams] = useState({
     page: 0,
     size: 5,
-    sortType: "desc",
+    sortType: "asc",
     sortParam: "id",
   });
 
@@ -37,6 +37,7 @@ function Pageable({ children }) {
           />
         </div>
         {children}
+        {console.log(pageable)}
         <br />
         <PageHandler pageable={pageable} changePage={changePage} />
         <ScrollTo />
