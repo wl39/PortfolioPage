@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import styles from "./TutoringArchivePage.module.css";
 import SelectableTutoringQuestions from "../../components/SelectableTutoringQuestions/SelectableTutoringQuestions";
 import { Link } from "react-router-dom";
@@ -8,19 +8,14 @@ import {
 } from "../../services/api/HMSService";
 import DragAndDrop from "../../components/DragAndDrop/DragAndDrop";
 import { formatToISO } from "../../utils/dateFormat";
-
-// Once pageParams needs to change it suppose to change to state.
-const pageParams = {
-  page: 0,
-  size: 100,
-  sortType: "desc",
-  sortParam: "id",
-};
+import { PageableContext } from "../../layouts/Pageable/PageableContext";
 
 function TutoringArchivePage() {
   const today = new Date(Date.now());
   today.setDate(today.getDate() + 14);
   const target = today.toISOString().slice(0, 19);
+
+  const { setPageable, pageParams } = useContext(PageableContext);
 
   const [questions, setQuestions] = useState();
   const [targetDate, setTargetDate] = useState("");
@@ -72,13 +67,20 @@ function TutoringArchivePage() {
 
   useEffect(() => {
     const fetchAllQuestions = async () => {
-      const questions = await getAllQuestions(pageParams);
+      const data = await getAllQuestions(pageParams);
 
-      setQuestionComponents(questions);
+      setPageable({
+        numberOfElements: data.numberOfElements,
+        size: data.size,
+        totalElements: data.totalElements,
+        totalPages: data.totalPages,
+        pageNumber: data.pageable.pageNumber,
+      });
+      setQuestionComponents(data.content);
     };
 
     fetchAllQuestions();
-  }, [setQuestionComponents]);
+  }, [setQuestionComponents, pageParams, setPageable]);
 
   const setStudents = () => {
     let storageStudents = localStorage.getItem("students");
@@ -246,7 +248,7 @@ function TutoringArchivePage() {
   };
 
   return (
-    <div className={styles.main}>
+    <>
       <div className={styles.linkContainer}>
         <Link className={styles.linkButton} to={"/questions"}>
           Archive
@@ -256,6 +258,7 @@ function TutoringArchivePage() {
         </Link>
       </div>
       <h1>Archive</h1>
+      {/* <ScrollTo /> */}
       <div className={styles.searchContainer}>
         <input
           placeholder="Search"
@@ -298,9 +301,13 @@ function TutoringArchivePage() {
             </div>
           ) : null}
         </div>
+        {/* <PageParameterController
+          pageParams={pageParams}
+          setPageParams={setPageParams}
+        /> */}
       </div>
       {questions}
-      <DragAndDrop x={300} y={100}>
+      <DragAndDrop x={0} y={0}>
         <div className={styles.modal}>
           <input
             value={studentsString}
@@ -321,7 +328,8 @@ function TutoringArchivePage() {
           </button>
         </div>
       </DragAndDrop>
-    </div>
+      {/* <PageHandler pageable={pageable} changePage={changePage} /> */}
+    </>
   );
 }
 

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import styles from "./TutoringPage.module.css";
@@ -8,13 +8,7 @@ import {
   postAnswers,
 } from "../../services/api/HMSService";
 import { formatToISO } from "../../utils/dateFormat";
-
-const pageParams = {
-  page: 0,
-  size: 100,
-  sortType: "desc",
-  sortParam: "id",
-};
+import { PageableContext } from "../../layouts/Pageable/PageableContext";
 
 const mockQuestion = {
   id: 0,
@@ -40,6 +34,8 @@ const mockQuestion = {
 function TutoringPage() {
   const { studentsName } = useParams();
 
+  const { pageParams, setPageable } = useContext(PageableContext);
+
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState({});
 
@@ -51,14 +47,21 @@ function TutoringPage() {
           studentsName,
           pageParams
         );
-        setQuestions(questionData.reverse());
+        setQuestions(questionData.content.reverse());
+        setPageable({
+          numberOfElements: questionData.numberOfElements,
+          size: questionData.size,
+          totalElements: questionData.totalElements,
+          totalPages: questionData.totalPages,
+          pageNumber: questionData.pageNumber,
+        });
       } catch (error) {
         console.error("Failed to fetch questions", error);
       }
     };
 
     fetchQuestions();
-  }, [studentsName]);
+  }, [studentsName, pageParams, setPageable]);
 
   // Update answers in state
   const selectAnswer = useCallback(

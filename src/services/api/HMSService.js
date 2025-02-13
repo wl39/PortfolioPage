@@ -39,7 +39,7 @@ export const getQuestionsWithStudentName = async (name, pageParams) => {
   try {
     const response = await axios.get(`/questions/page/${name}${pageParam}`);
 
-    return response.data.content;
+    return response.data;
   } catch (error) {
     console.error("Error fetching questions : ", error);
     throw error;
@@ -73,7 +73,7 @@ export const getAllQuestions = async (pageParams) => {
   try {
     const questions = await axios.get("questions" + pageParam);
 
-    return questions.data.content;
+    return questions.data;
   } catch (error) {
     console.error("Error fetching questions : ", error);
     throw error;

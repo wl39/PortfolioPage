@@ -1,0 +1,70 @@
+.dropdownContainer {
+  position: relative;
+  width: fit-content;
+}
+
+.dropdownButton {
+  border: 0px solid #000;
+  border: 2px solid gray;
+  height: 40px;
+  line-height: 34px;
+  text-align: left;
+  background: transparent;
+  font-size: 20px;
+  padding-left: 14px;
+  cursor: pointer;
+  padding-right: 28px;
+}
+
+.dropdownButton:hover {
+  border: 2px solid black;
+}
+.dropdownButton:active {
+  border: 2px solid black;
+}
+
+.dropdownButton:focus {
+  border: 2px solid black;
+}
+
+.downward {
+  top: 15px;
+  right: 7px;
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 10px solid black;
+  position: absolute;
+}
+
+.upward {
+  top: 15px;
+  right: 7px;
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 10px solid black;
+  position: absolute;
+}
+
+.dropdown {
+  position: absolute;
+  background-color: ivory;
+  border: 1px solid black;
+  border-top: 0px;
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+.dropdown button {
+  font-size: 20px;
+  text-align: left;
+  border: 0px;
+  border-bottom: 1px solid black;
+  background-color: ivory;
+  cursor: pointer;
+  padding: 8px 0px 8px 12px;
+  width: 100%;
+}

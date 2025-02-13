@@ -1,19 +1,13 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import styles from "./SubmissionPage.module.css";
 import Submission from "../../components/Submission/Submission";
 import { getAllSubmissions } from "../../services/api/HMSService";
-
-// Once pageParams needs to change it suppose to change to state.
-const pageParams = {
-  page: 0,
-  size: 100,
-  sortType: "desc",
-  sortParam: "id",
-};
+import { PageableContext } from "../../layouts/Pageable/PageableContext";
 
 function SubmissionPage() {
+  const { setPageable, pageParams } = useContext(PageableContext);
   const { studentsName } = useParams();
   const [submissions, setSubmissions] = useState([]);
 
@@ -53,7 +47,6 @@ function SubmissionPage() {
       totalQuestions++;
       localQuestions = [...localQuestions, value];
 
-      console.log(value);
       if (value.studentAnswer === value.question.answer) correctQuestions++;
       submissionComponents = [
         ...submissionComponents,
@@ -85,6 +78,13 @@ function SubmissionPage() {
       try {
         setTotalQuestions(response.numberOfElements);
         setSubmissionComponents(response.content, false);
+        setPageable({
+          numberOfElements: response.numberOfElements,
+          size: response.size,
+          totalElements: response.totalElements,
+          totalPages: response.totalPages,
+          pageNumber: response.pageNumber,
+        });
       } catch (error) {
         console.error(error);
 
@@ -93,7 +93,7 @@ function SubmissionPage() {
     };
 
     fetchAllSubmissions();
-  }, [setSubmissionComponents, studentsName]);
+  }, [setSubmissionComponents, studentsName, pageParams, setPageable]);
 
   const inputHandler = (event) => {
     if (event.target.value === null || event.target.value === "") {
@@ -200,10 +200,6 @@ function SubmissionPage() {
     setSearchParameter(paramter);
   };
 
-  // const showGetAll = () => {
-  //   setIsGettingAll(!isGettingAll);
-  // };
-
   return (
     <div className={styles.page}>
       <div className={styles.header}>
@@ -269,15 +265,6 @@ function SubmissionPage() {
           ) : null}
         </div>
       </div>
-
-      {/* <div className={styles.showAllContainer}>
-        <button className={styles.buttonShowAll} onClick={showGetAll}>
-          Show All Submissions
-        </button>
-        <div className={styles.checkboxContianer}>
-          <div className={isGettingAll ? styles.showAllCheckd : null} />
-        </div>
-      </div> */}
 
       {submissions.length === 0 ? (
         <Submission

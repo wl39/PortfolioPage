@@ -8,6 +8,7 @@
   box-shadow: 5px 5px rgba(255, 0, 0, 0.58);
   white-space: pre-wrap;
   word-break: break-word;
+  background-color: ivory;
 }
 
 .correctQuestionContainer {
@@ -16,6 +17,7 @@
   white-space: pre-wrap;
   word-break: break-word;
   position: relative;
+  background-color: ivory;
 }
 
 .unMarkedContainer {

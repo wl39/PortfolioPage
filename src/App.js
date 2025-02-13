@@ -17,6 +17,7 @@ import ReviewPage from "./pages/HomeworkManagementSystem/ReviewPage";
 import MathSolveMainPage from "./pages/TimedQuestion/MathSolveMainPage";
 import MathSolvePage from "./pages/TimedQuestion/MathSolvePage";
 import UploadMultiplePage from "./pages/HomeworkManagementSystem/UploadMultiplePage";
+import Pageable from "./layouts/Pageable/Pageable";
 
 function App() {
   return (
@@ -29,10 +30,31 @@ function App() {
         <Route path="/wall" element={<WallPage />} />
         <Route path="/spinner" element={<SpinnerWheelPage />} />
         <Route path="/sandbox" element={<SandBoxPage />} />
-        <Route path="/questions" element={<TutoringArchivePage />} />
+        <Route
+          path="/questions"
+          element={
+            <Pageable>
+              <TutoringArchivePage />
+            </Pageable>
+          }
+        />
         <Route path="/review/:studentsName" element={<ReviewPage />} />
-        <Route path="/submission/:studentsName" element={<SubmissionPage />} />
-        <Route path="/tutoring/:studentsName" element={<TutoringPage />} />
+        <Route
+          path="/submission/:studentsName"
+          element={
+            <Pageable>
+              <SubmissionPage />
+            </Pageable>
+          }
+        />
+        <Route
+          path="/tutoring/:studentsName"
+          element={
+            <Pageable>
+              <TutoringPage />
+            </Pageable>
+          }
+        />
         <Route path="/teacher" element={<TeacherPage />} />
         <Route path="/marking/:studentName" element={<MarkingPage />} />
         <Route path="/upload" element={<UploadPage />} />
