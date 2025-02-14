@@ -9,6 +9,7 @@ const MathQuestion = ({
   setWrongAnswer,
   studentName,
   showedQuestionsParent,
+  correctEvent,
 }) => {
   const max_questions = 100;
   const milliSeconds = 1000;
@@ -100,6 +101,7 @@ const MathQuestion = ({
       settemp(false);
     }
   }, [temp, setWrongAnswer]);
+
   const resetTimer = () => {
     setTimer(counter.current * milliSeconds);
     setNumber();
@@ -123,6 +125,7 @@ const MathQuestion = ({
         setCorrectAnswer((prev) => prev + 1); // 정답 개수 증가
         counter.current = counter.current - 0.1; // 타이머 속도 증가
         resetTimer();
+        correctEvent("Good job!");
       }
     } else {
       setStudentAnswer("");

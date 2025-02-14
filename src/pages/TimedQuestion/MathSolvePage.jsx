@@ -6,6 +6,7 @@ import { useLocation } from "react-router-dom";
 import styles from "./MathSolvePage.module.css";
 
 import { getDaySubmissions } from "../../services/api/SimpleMathQuestionService";
+import SnackbarContainer from "../../components/Snackbar/SnackbarContainer";
 
 const MathSolvePage = () => {
   const location = useLocation();
@@ -17,6 +18,8 @@ const MathSolvePage = () => {
   const [time, setTime] = useState(3);
   const [correctAnswer, setCorrectAnswer] = useState(0);
   const [wrongAnswer, setWrongAnswer] = useState(0);
+
+  const [addSnackbar, setAddSnackbar] = useState(null);
 
   useEffect(() => {
     if (name) {
@@ -67,11 +70,13 @@ const MathSolvePage = () => {
         time
       ) : (
         <div>
+          <SnackbarContainer addSnackbar={setAddSnackbar} />
           <MathQuestion
             setCorrectAnswer={setCorrectAnswer}
             setWrongAnswer={setWrongAnswer}
             studentName={name}
             showedQuestionsParent={showedQuestions}
+            correctEvent={addSnackbar}
           />
           <RobuxAdder correctAnswer={correctAnswer} wrongAnswer={wrongAnswer} />
         </div>

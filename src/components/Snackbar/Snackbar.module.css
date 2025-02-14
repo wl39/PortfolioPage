@@ -1,0 +1,72 @@
+.container {
+  position: fixed;
+  top: 30px !important;
+  left: 50%;
+  right: 50%;
+  z-index: 3;
+  transform: translate(-50%, 0%);
+  display: flex;
+  flex-direction: column;
+  width: max-content;
+  box-sizing: content-box;
+  transform-origin: left;
+  text-align: center;
+}
+
+.snackbar {
+  opacity: 0;
+  height: 80px;
+  border: 2px solid black;
+  margin-bottom: 15px;
+  animation: expandShrink 4s ease-in-out;
+  background-color: ivory;
+  overflow-x: hidden;
+  font-size: 24px;
+  line-height: 80px;
+  text-overflow: unset;
+  color: transparent;
+}
+
+@keyframes expandShrink {
+  0% {
+    opacity: 1;
+    width: 0;
+  }
+  20% {
+    /* (또는 20% 등) Snackbar가 펼쳐질 시점 */
+    width: 240px;
+    color: transparent;
+  }
+  30% {
+    /* (또는 80% 등) 펼쳐진 상태 유지 */
+    width: 240px;
+    border: 2px solid black;
+    box-shadow: 5px 5px black;
+    color: black;
+  }
+
+  40% {
+    width: 240px;
+
+    border: 2px solid green;
+    box-shadow: 5px 5px green;
+  }
+
+  75% {
+    width: 240px;
+
+    border: 2px solid green;
+    box-shadow: 5px 5px green;
+    color: transparent;
+  }
+
+  90% {
+    width: 0;
+    opacity: 1;
+  }
+  100% {
+    width: 0;
+    border-left: 0px;
+    border-right: 0px;
+  }
+}
