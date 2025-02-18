@@ -75,15 +75,16 @@ const MathQuestion = ({
 
           fetchMathAnswer(
             studentName,
-            -1,
             `${leftRef.current} + ${rightRef.current}`,
+            -1,
             formattedDate
           );
 
           setNumber();
           setStudentAnswer("");
+          setWrongAnswer((prev) => prev + 1);
 
-          settemp(true);
+          // settemp(true);
           counter.current += 0.02;
 
           return counter.current * milliSeconds; // 타이머 리셋
@@ -117,8 +118,8 @@ const MathQuestion = ({
 
         fetchMathAnswer(
           studentName,
-          answer,
           `${left} + ${right}`,
+          answer,
           formattedDate
         );
 
