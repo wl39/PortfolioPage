@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import AutoComplete from "../../components/AutoComplete/AutoComplete";
-import data from "../../data/countries.txt";
-import SeamCarving from "../../components/SeamCarving/SeamCarving";
-import SnackbarContainer from "../../components/Snackbar/SnackbarContainer";
-import Temp from "../../components/TEMP/Temp";
+// import AutoComplete from "../../components/AutoComplete/AutoComplete";
+// import data from "../../data/countries.txt";
+// import SeamCarving from "../../components/SeamCarving/SeamCarving";
+// import SnackbarContainer from "../../components/Snackbar/SnackbarContainer";
+import Bar from "../../components/Bar/Bar";
 
 function SandBoxPage(props) {
   const [temp, setTemp] = useState(null);
@@ -13,12 +13,12 @@ function SandBoxPage(props) {
   };
   return (
     <>
-      <div>Hello</div>
+      {/* <div>Hello</div>
       <AutoComplete data={data} />
       <SeamCarving />
       <button onClick={halo}>temp!</button>
-      <SnackbarContainer addSnackbar={setTemp} />
-      <Temp />
+      <SnackbarContainer addSnackbar={setTemp} />*/}
+      <Bar />
     </>
   );
 }

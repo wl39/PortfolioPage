@@ -18,6 +18,7 @@ import MathSolveMainPage from "./pages/TimedQuestion/MathSolveMainPage";
 import MathSolvePage from "./pages/TimedQuestion/MathSolvePage";
 import UploadMultiplePage from "./pages/HomeworkManagementSystem/UploadMultiplePage";
 import Pageable from "./layouts/Pageable/Pageable";
+import MathSolveResultPage from "./pages/TimedQuestion/MathSolveResultPage";
 
 function App() {
   return (
@@ -61,6 +62,14 @@ function App() {
         <Route path="/upload/multiples" element={<UploadMultiplePage />} />
         <Route path="/math" element={<MathSolveMainPage />} />
         <Route path="/math/start" element={<MathSolvePage />} />
+        <Route
+          path="/math/result/:studentName"
+          element={
+            <Pageable>
+              <MathSolveResultPage />
+            </Pageable>
+          }
+        />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </BrowserRouter>

@@ -37,7 +37,6 @@ function Pageable({ children }) {
           />
         </div>
         {children}
-        {console.log(pageable)}
         <br />
         <PageHandler pageable={pageable} changePage={changePage} />
         <ScrollTo />

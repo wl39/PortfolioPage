@@ -23,7 +23,7 @@ const MathQuestion = ({
   const [right, setRight] = useState(0);
   const [answer, setAnswer] = useState(0);
 
-  const [temp, settemp] = useState(false);
+  const [isWrong, setIsWrong] = useState(false);
   const leftRef = useRef(left);
   const rightRef = useRef(right);
   const showedQuestionsRef = useRef(showedQuestions);
@@ -82,9 +82,8 @@ const MathQuestion = ({
 
           setNumber();
           setStudentAnswer("");
-          setWrongAnswer((prev) => prev + 1);
 
-          // settemp(true);
+          setIsWrong(true);
           counter.current += 0.02;
 
           return counter.current * milliSeconds; // 타이머 리셋
@@ -97,11 +96,11 @@ const MathQuestion = ({
   }, [setNumber, studentName, setWrongAnswer]);
 
   useEffect(() => {
-    if (temp) {
+    if (isWrong) {
       setWrongAnswer((prev) => prev + 1);
-      settemp(false);
+      setIsWrong(false);
     }
-  }, [temp, setWrongAnswer]);
+  }, [isWrong, setWrongAnswer]);
 
   const resetTimer = () => {
     setTimer(counter.current * milliSeconds);
