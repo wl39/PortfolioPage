@@ -27,7 +27,7 @@ const MarkingPage = () => {
     data.map((value, index) => {
       newMark = {
         ...newMark,
-        [value.question.id]: 0,
+        [value.id]: 0,
       };
 
       questionComponents = [
@@ -37,7 +37,7 @@ const MarkingPage = () => {
           question={value.question}
           submission={value.studentAnswer}
           id={value.id}
-          marks={(k, v) => marks(k, v)}
+          marks={marks}
         />,
       ];
 
