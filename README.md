@@ -1,70 +1,160 @@
-# Getting Started with Create React App
+# Portfolio Website
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This repository contains my personal portfolio website built with React. It’s not just a showcase of my career and skills—it’s also a demonstration of my ability to build complex, interactive web applications. The website is divided into three main sections:
 
-## Available Scripts
+1. **Main Page (`/`)**  
+   The landing page features my professional background, career highlights, skills, and other relevant information to provide a quick overview of my experience.
 
-In the project directory, you can run:
+2. **Homework Management System (HMS)**  
+   A full-fledged educational platform that includes several modules to help students and teachers interact with practice problems:
 
-### `npm start`
+   - **Question**: A central hub for all practice problem sets.
+   - **Review**: Allows students to revisit and review problems they previously answered incorrectly.
+   - **Tutoring**: An interactive module where students can solve problems with guided help.
+   - **Teacher**: A dashboard for teachers to monitor student progress, check submitted assignments, and track pending grading tasks.
+   - **Marking**: Dedicated for descriptive (essay-style) questions where teachers can set the correct answers.
+   - **Upload**: A page for uploading new problems into the system.
+   - **Math**: A simple math problem-solving module designed for quick exercises.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+3. **Stopwatch (`/stopwatch`)**  
+   A lightweight toy project designed to help track study time, ensuring efficient time management during study sessions.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## Table of Contents
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- [Overview](#overview)
+- [Project Structure](#project-structure)
+- [Features](#features)
+- [Technologies](#technologies)
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Overview
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The website serves two primary purposes:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **Professional Showcase:** The main page details my work experience, skills, and career achievements.
+- **Interactive Demonstrations:** The HMS and Stopwatch modules illustrate my ability to build dynamic, interactive web applications that cater to both educational and utility purposes.
 
-### `npm run eject`
+Each module is carefully designed with user experience in mind, from intuitive navigation to responsive design across different devices.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Project Structure
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Below is the complete directory structure for the project:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```
+/portfolio-website
+├── /public                     # Publicly available static assets
+│   ├── index.html              # Main HTML file
+│   └── assets/                 # Images, icons, etc.
+├── /src                        # Source files for the React application
+│   ├── App.js                  # Main application file (includes routing)
+│   ├── index.js                # Application entry point
+│   ├── reportWebVitals.js      # Performance metrics setup
+│   ├── /components             # Reusable UI components
+│   │   ├── Calendar/           # Calendar component & styles
+│   │   ├── Dropdown/           # Dropdown component & styles
+│   │   ├── Snackbar/           # Snackbar notifications
+│   │   ├── UploadForm/         # Upload form for new content
+│   │   ├── Timeline/           # Timeline component & subcomponents (e.g., CircleAnimation, TimelineDetail)
+│   │   ├── Header/             # Header component for navigation
+│   │   ├── CustomButton/       # Custom button styling & functionality
+│   │   └── (other UI components...)
+│   ├── /pages                  # Main pages of the website
+│   │   ├── /MainPages          # Portfolio main page
+│   │   │   ├── MainPage.jsx
+│   │   │   ├── MainPage.module.css
+│   │   │   └── components/     # Subcomponents for the Main Page (e.g., Skills, TimelinePage)
+│   │   ├── /Stopwatch          # Stopwatch module for tracking study time
+│   │   │   ├── StopwatchPage.jsx
+│   │   │   └── StopwatchPage.module.css
+│   │   ├── /User               # User authentication pages
+│   │   │   ├── LoginPage.jsx
+│   │   │   ├── LoginPage.module.css
+│   │   │   └── SignUpPage.jsx
+│   │   ├── /HomeworkManagementSystem  # HMS modules for education
+│   │   │   ├── UploadMultiplePage.jsx
+│   │   │   ├── MarkingPage.jsx
+│   │   │   ├── TeacherPage.jsx
+│   │   │   ├── TutoringPage.jsx
+│   │   │   ├── ReviewPage.jsx
+│   │   │   ├── SubmissionPage.jsx
+│   │   │   ├── UploadPage.jsx
+│   │   │   └── TutoringArchivePage.jsx
+│   │   ├── /TimedQuestion       # Math problem-solving pages
+│   │   │   ├── MathSolvePage.jsx
+│   │   │   ├── MathSolveResultPage.jsx
+│   │   │   └── MathSolvePage.module.css
+│   │   ├── /Sandbox             # Additional experimental pages (e.g., wall, spinner wheel)
+│   │   │   ├── SandBoxPage.jsx
+│   │   │   └── SandBoxPage.module.css
+│   │   └── /worker              # Web worker scripts for Stopwatch
+│   │       ├── stopwatchWorker.js
+│   │       └── workerBuilder.js
+│   ├── /services                # Services and API integrations
+│   │   ├── /api
+│   │   │   ├── HMSService.js
+│   │   │   ├── StopwatchService.js
+│   │   │   └── SimpleMathQuestionService.js
+│   │   └── /utils
+│   │       ├── axiosInstance.js   # Configured Axios instance for API calls
+│   │       └── dateFormat.js        # Utility for formatting dates
+│   ├── /styles                  # Global CSS/SCSS files
+│   └── /utils                   # General helper functions
+├── /data                        # Data files (e.g., list.txt, countries.txt)
+├── /layouts                     # Layout components (e.g., HorizontalSplit, Pageable)
+├── /fonts                       # Custom fonts (Playfair Display, DM Sans, etc.)
+├── package.json                 # Project metadata and dependencies
+└── README.md                    # This file
+```
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Features
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Main Page
 
-### Code Splitting
+- Responsive layout that adapts to various devices.
+- Interactive sections showcasing professional achievements and skills.
+- Modern UI components for a clean, professional look.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Homework Management System (HMS)
 
-### Analyzing the Bundle Size
+- **User Roles:**  
+  Supports different interfaces for students and teachers.
+- **Interactive Modules:**  
+  Each module is designed to enhance the learning process through interactivity—whether reviewing problems, engaging in tutoring sessions, or uploading new challenges.
+- **Performance Tracking:**  
+  Teachers can easily monitor progress and manage grading tasks through the dedicated dashboard.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Stopwatch
 
-### Making a Progressive Web App
+- A simple yet effective tool to help users track study time.
+- Utilizes web workers for accurate and non-blocking time tracking.
+- Intuitive interface designed for quick start/stop functionality.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+## Technologies
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- **React:**  
+  The main framework used for building the user interface.
+- **React Router:**  
+  For managing multi-page navigation within the single-page application.
+- **Axios:**  
+  For handling API calls and managing data fetching.
+- **CSS Modules:**  
+  To ensure modular and scoped styling for components.
+- **Web Workers:**  
+  Used in the Stopwatch module for efficient background processing.
+- **Custom Fonts & Assets:**  
+  Custom typography from Playfair Display and DM Sans to give the site a unique visual appeal.
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Thank you for taking the time to explore my portfolio website. If you have any questions or feedback, please feel free to reach out!
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
