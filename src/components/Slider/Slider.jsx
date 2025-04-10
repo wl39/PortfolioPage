@@ -35,25 +35,25 @@ class Slider extends React.Component {
           overflow: "hidden",
         }}
       >
-        <div
-          style={{
-            backgroundImage: `url(${
-              this.props.images[
-                this.state.timerValue % this.props.images.length
-              ]
-            })`,
-          }}
-          className={style.blur}
+        <img
+          key={this.state.timerValue + ".blur"}
+          src={
+            this.props.images[
+            this.state.timerValue % this.props.images.length
+            ]
+          }
+          alt="Background"
+          className={`${style.blur} ${style.fade}`}
         />
-        <div
-          style={{
-            backgroundImage: `url(${
-              this.props.images[
-                this.state.timerValue % this.props.images.length
-              ]
-            })`,
-          }}
-          className={style.image}
+        <img
+          key={this.state.timerValue}
+          src={
+            this.props.images[
+            this.state.timerValue % this.props.images.length
+            ]
+          }
+          alt="Main"
+          className={`${style.image} ${style.fade}`}
         />
         {/* <div>{this.state.timerValue % this.props.images.length}</div> */}
       </div>

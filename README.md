@@ -50,22 +50,20 @@ Below is the complete directory structure for the project:
 ```
 /portfolio-website
 ├── /public                     # Publicly available static assets
-│   ├── index.html              # Main HTML file
-│   └── assets/                 # Images, icons, etc.
 ├── /src                        # Source files for the React application
 │   ├── App.js                  # Main application file (includes routing)
 │   ├── index.js                # Application entry point
 │   ├── reportWebVitals.js      # Performance metrics setup
 │   ├── /components             # Reusable UI components
-│   │   ├── Calendar/           # Calendar component & styles
-│   │   ├── Dropdown/           # Dropdown component & styles
-│   │   ├── Snackbar/           # Snackbar notifications
-│   │   ├── UploadForm/         # Upload form for new content
-│   │   ├── Timeline/           # Timeline component & subcomponents (e.g., CircleAnimation, TimelineDetail)
-│   │   ├── Header/             # Header component for navigation
-│   │   ├── CustomButton/       # Custom button styling & functionality
+│   │   ├── Calendar/
+│   │   ├── Dropdown/
+│   │   ├── Snackbar/
+│   │   ├── UploadForm/
+│   │   ├── Timeline/
+│   │   ├── Header/
+│   │   ├── CustomButton/
 │   │   └── (other UI components...)
-│   ├── /pages                  # Main pages of the website
+│   ├── /pages                  # Pages of the website
 │   │   ├── /MainPages          # Portfolio main page
 │   │   │   ├── MainPage.jsx
 │   │   │   ├── MainPage.module.css
@@ -73,26 +71,9 @@ Below is the complete directory structure for the project:
 │   │   ├── /Stopwatch          # Stopwatch module for tracking study time
 │   │   │   ├── StopwatchPage.jsx
 │   │   │   └── StopwatchPage.module.css
-│   │   ├── /User               # User authentication pages
-│   │   │   ├── LoginPage.jsx
-│   │   │   ├── LoginPage.module.css
-│   │   │   └── SignUpPage.jsx
 │   │   ├── /HomeworkManagementSystem  # HMS modules for education
-│   │   │   ├── UploadMultiplePage.jsx
-│   │   │   ├── MarkingPage.jsx
-│   │   │   ├── TeacherPage.jsx
-│   │   │   ├── TutoringPage.jsx
-│   │   │   ├── ReviewPage.jsx
-│   │   │   ├── SubmissionPage.jsx
-│   │   │   ├── UploadPage.jsx
-│   │   │   └── TutoringArchivePage.jsx
 │   │   ├── /TimedQuestion       # Math problem-solving pages
-│   │   │   ├── MathSolvePage.jsx
-│   │   │   ├── MathSolveResultPage.jsx
-│   │   │   └── MathSolvePage.module.css
 │   │   ├── /Sandbox             # Additional experimental pages (e.g., wall, spinner wheel)
-│   │   │   ├── SandBoxPage.jsx
-│   │   │   └── SandBoxPage.module.css
 │   │   └── /worker              # Web worker scripts for Stopwatch
 │   │       ├── stopwatchWorker.js
 │   │       └── workerBuilder.js
@@ -103,9 +84,10 @@ Below is the complete directory structure for the project:
 │   │   │   └── SimpleMathQuestionService.js
 │   │   └── /utils
 │   │       ├── axiosInstance.js   # Configured Axios instance for API calls
-│   │       └── dateFormat.js        # Utility for formatting dates
+│   │
 │   ├── /styles                  # Global CSS/SCSS files
 │   └── /utils                   # General helper functions
+│       └── dateFormat.js           # Utility for formatting dates
 ├── /data                        # Data files (e.g., list.txt, countries.txt)
 ├── /layouts                     # Layout components (e.g., HorizontalSplit, Pageable)
 ├── /fonts                       # Custom fonts (Playfair Display, DM Sans, etc.)
