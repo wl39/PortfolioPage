@@ -8,9 +8,11 @@
 .java_keyword {
   color: rgb(241, 167, 254);
 }
+
 .java_string {
   color: rgb(137, 255, 137);
 }
+
 .java_comment {
   color: gray;
 }
@@ -24,11 +26,13 @@
 }
 
 .sql_keyword {
-  color: rgb(241, 167, 254); /* Pink-ish */
+  color: rgb(241, 167, 254);
+  /* Pink-ish */
 }
 
 .sql_string {
-  color: rgb(137, 255, 137); /* Green-ish */
+  color: rgb(137, 255, 137);
+  /* Green-ish */
 }
 
 .sql_comment {
@@ -36,12 +40,85 @@
 }
 
 .sql_method {
-  color: rgb(118, 253, 248); /* Cyan-ish */
+  color: rgb(118, 253, 248);
+  /* Cyan-ish */
 }
 
 .sql_type {
-  color: rgb(250, 199, 105); /* Orange-ish */
+  color: rgb(250, 199, 105);
+  /* Orange-ish */
 }
+
+/* Python */
+.python_keyword {
+  color: rgb(241, 167, 254);
+  /* Pink-ish */
+}
+
+.python_string {
+  color: rgb(137, 255, 137);
+  /* Green-ish */
+}
+
+.python_comment {
+  color: gray;
+}
+
+.python_method {
+  color: rgb(118, 253, 248);
+  /* Cyan-ish */
+}
+
+/* C */
+.c_keyword {
+  color: rgb(241, 167, 254);
+  /* Pink-ish */
+}
+
+.c_string {
+  color: rgb(137, 255, 137);
+  /* Green-ish */
+}
+
+.c_char {
+  color: rgb(137, 255, 137);
+  /* Green-ish */
+}
+
+.c_comment {
+  color: gray;
+}
+
+.c_method {
+  color: rgb(118, 253, 248);
+  /* Cyan-ish */
+}
+
+/* C++ */
+.cpp_keyword {
+  color: rgb(241, 167, 254);
+  /* Pink-ish */
+}
+
+.cpp_string {
+  color: rgb(137, 255, 137);
+  /* Green-ish */
+}
+
+.cpp_char {
+  color: rgb(137, 255, 137);
+  /* Green-ish */
+}
+
+.cpp_comment {
+  color: gray;
+}
+
+.cpp_method {
+  color: rgb(118, 253, 248);
+  /* Cyan-ish */
+}
+
 
 .codeContainer {
   white-space: pre-wrap;
