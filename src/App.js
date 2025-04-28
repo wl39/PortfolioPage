@@ -19,6 +19,7 @@ import MathSolvePage from "./pages/TimedQuestion/MathSolvePage";
 import UploadMultiplePage from "./pages/HomeworkManagementSystem/UploadMultiplePage";
 import Pageable from "./layouts/Pageable/Pageable";
 import MathSolveResultPage from "./pages/TimedQuestion/MathSolveResultPage";
+import SignUpPage from "./pages/User/SignUpPage";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route exact path="/" element={<MainPage />} />
         <Route path="/prev" element={<MainPagePrev />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignUpPage />} />
         <Route path="/stopwatch" element={<StopwatchPage />} />
         <Route path="/wall" element={<WallPage />} />
         <Route path="/spinner" element={<SpinnerWheelPage />} />

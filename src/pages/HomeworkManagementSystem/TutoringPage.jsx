@@ -9,6 +9,7 @@ import {
 } from "../../services/api/HMSService";
 import { formatToISO } from "../../utils/dateFormat";
 import { PageableContext } from "../../layouts/Pageable/PageableContext";
+import Button from "../../components/Button/Button";
 
 const mockQuestion = {
   id: 0,
@@ -140,13 +141,12 @@ function TutoringPage() {
       ))}
 
       <div className={styles.buttonContainer}>
-        <button
-          className={styles.button}
-          onClick={handleSubmit}
+        <Button
+          onclick={handleSubmit}
           disabled={questions.length === 0}
         >
           Submit
-        </button>
+        </Button>
       </div>
     </div>
   );

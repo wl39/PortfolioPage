@@ -20,6 +20,7 @@
   height: 80px;
   line-height: 80px;
 }
+
 .buttonContainer {
   margin-top: 40px;
   display: flex;
@@ -44,6 +45,12 @@
 
 .button:active {
   background-color: white;
+}
+
+.button:disabled {
+  cursor: default;
+  border: 1px solid gray;
+  background-color: transparent;
 }
 
 @media (max-width: 480px) {

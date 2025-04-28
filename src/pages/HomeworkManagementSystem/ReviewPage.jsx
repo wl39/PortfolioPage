@@ -5,6 +5,7 @@ import styles from "./SubmissionPage.module.css";
 import TutoringQuestions from "../../components/TutoringQuestions/TutoringQuestions";
 import { getReviewQuestions } from "../../services/api/HMSService";
 import { formatToISO } from "../../utils/dateFormat";
+import Button from "../../components/Button/Button";
 
 const pageParams = {
   page: 0,
@@ -322,13 +323,11 @@ const ReviewPage = () => {
         submissions
       )}
       <div className={styles.buttonContainer}>
-        <button
-          className={styles.button}
+        <Button
           onClick={submit}
-          disabled={submissions.length === 0}
-        >
+          disabled={submissions.length === 0}>
           Submit
-        </button>
+        </Button>
       </div>
     </div>
   );

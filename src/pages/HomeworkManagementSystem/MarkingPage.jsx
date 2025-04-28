@@ -7,6 +7,7 @@ import {
   getUnmarkedSubmissions,
   putSubmissions,
 } from "../../services/api/HMSService";
+import Button from "../../components/Button/Button";
 
 const MarkingPage = () => {
   const { studentName } = useParams();
@@ -88,9 +89,11 @@ const MarkingPage = () => {
       <h1 className={styles.h1}>{studentName}</h1>
       {questions}
       <div className={styles.buttonContainer}>
-        <button className={styles.button} onClick={markSubmissions}>
+        <Button
+          onClick={markSubmissions}
+        >
           Submit
-        </button>
+        </Button>
       </div>
     </div>
   );
