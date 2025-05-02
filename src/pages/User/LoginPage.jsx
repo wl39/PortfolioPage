@@ -1,11 +1,11 @@
-import { useState } from "react"
-
-import LoginForm from "../../components/LoginForm/LoginForm";
+import LoginForm from '../../components/LoginForm/LoginForm';
 
 const LoginPage = () => {
-  return <>
-    <LoginForm />
-  </>
-}
+  return (
+    <>
+      <LoginForm directTo="tutoring" addParam={true} />
+    </>
+  );
+};
 
-export default LoginPage
+export default LoginPage;

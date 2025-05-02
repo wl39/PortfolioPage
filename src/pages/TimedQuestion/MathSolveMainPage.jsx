@@ -1,22 +1,24 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import styles from "./MathSolvePage.module.css";
+import React from 'react';
+// import { useNavigate } from 'react-router-dom';
+import styles from './MathSolvePage.module.css';
+import LoginForm from '../../components/LoginForm/LoginForm';
 const MathSolveMainPage = () => {
-  const [name, setName] = useState("");
-  const navigate = useNavigate();
+  // const [name, setName] = useState('');
+  // const navigate = useNavigate();
 
-  const handleStart = () => {
-    if (name) {
-      navigate("/math/start", { state: { name: name } });
-    }
-  };
+  // const handleStart = () => {
+  //   if (name) {
+  //     navigate('/math/start', { state: { name: name } });
+  //   }
+  // };
 
   return (
     <div className={styles.container}>
       <div className={styles.question}>Simple Math Question</div>
-      <div className={styles.inputContainer}>
+      <LoginForm directTo="math/start" addParam={false} />
+      {/* <div className={styles.inputContainer}>
         <input
-          style={{ height: "60px", fontSize: "30px" }}
+          style={{ height: '60px', fontSize: '30px' }}
           placeholder="Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -28,7 +30,7 @@ const MathSolveMainPage = () => {
         >
           Start
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };
