@@ -5,7 +5,19 @@
     height: 550px;
     justify-content: space-evenly;
     padding: 20px 30px;
-    margin: 50px auto 0px;
+    margin: 120px auto 0px;
+    position: relative;
+}
+
+.title {
+    margin: 0px;
+    text-align: center;
+    position: absolute;
+    top: -60px;
+    background: ivory;
+    left: 50%;
+    transform: translateX(-50%);
+    width: max-content;
 }
 
 .signupButton {

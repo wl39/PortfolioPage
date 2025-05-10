@@ -11,8 +11,12 @@ import styles from './LoginForm.module.css';
 import Input from '../../components/Input/Input';
 import { login } from '../../services/api/HMSService';
 import Button from '../Button/Button';
+import { useDispatch } from 'react-redux';
+import { setUsername } from '../../features/user/userSlice';
 
 const LoginForm = ({ directTo, addParam }) => {
+  const dispatch = useDispatch();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -29,16 +33,24 @@ const LoginForm = ({ directTo, addParam }) => {
       return;
     }
 
-    login({ email: email, password: password }).then((response) => {
-      navigate(`/${directTo}/${addParam ? response.data : ''}`, {
-        state: { name: response.data },
+    login({ email: email, password: password })
+      .then((response) => {
+        dispatch(setUsername(response.data));
+        navigate(`/${directTo}/${addParam ? response.data : ''}`, {
+          state: { name: response.data },
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        alert('Either email is invalid or password is wrong.');
+        setPassword('');
       });
-    });
   };
 
   return (
     <>
       <Card propStyles={styles.inputContainer}>
+        <h1 className={styles.title}>Login</h1>
         <Input
           placeholder="Email"
           type="text"

@@ -49,6 +49,7 @@ const SignUpForm = () => {
   return (
     <>
       <Card propStyles={styles.inputContainer}>
+        <h1 className={styles.title}>Sign Up</h1>
         <input
           placeholder="Email"
           value={email}

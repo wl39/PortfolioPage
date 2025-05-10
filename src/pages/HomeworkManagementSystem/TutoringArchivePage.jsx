@@ -1,16 +1,17 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
-import styles from "./TutoringArchivePage.module.css";
-import SelectableTutoringQuestions from "../../components/SelectableTutoringQuestions/SelectableTutoringQuestions";
-import { Link } from "react-router-dom";
+import React, { useCallback, useContext, useEffect, useState } from 'react';
+import styles from './TutoringArchivePage.module.css';
+import SelectableTutoringQuestions from '../../components/SelectableTutoringQuestions/SelectableTutoringQuestions';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   getAllQuestions,
   postReassignQuestions,
-} from "../../services/api/HMSService";
-import DragAndDrop from "../../components/DragAndDrop/DragAndDrop";
-import { formatToISO } from "../../utils/dateFormat";
-import { PageableContext } from "../../layouts/Pageable/PageableContext";
+} from '../../services/api/HMSService';
+import DragAndDrop from '../../components/DragAndDrop/DragAndDrop';
+import { formatToISO } from '../../utils/dateFormat';
+import { PageableContext } from '../../layouts/Pageable/PageableContext';
 
 function TutoringArchivePage() {
+  const navigate = useNavigate();
   const today = new Date(Date.now());
   today.setDate(today.getDate() + 14);
   const target = today.toISOString().slice(0, 19);
@@ -18,10 +19,10 @@ function TutoringArchivePage() {
   const { setPageable, pageParams } = useContext(PageableContext);
 
   const [questions, setQuestions] = useState();
-  const [targetDate, setTargetDate] = useState("");
-  const [studentsString, setStudentsString] = useState("");
+  const [targetDate, setTargetDate] = useState('');
+  const [studentsString, setStudentsString] = useState('');
 
-  const [searchParameter, setSearchParameter] = useState("Question");
+  const [searchParameter, setSearchParameter] = useState('Question');
   const [questionsData, setQuestionsData] = useState([]);
   const [isSearchParamterClicked, setIsSearchParamterClicked] = useState(false);
 
@@ -67,34 +68,44 @@ function TutoringArchivePage() {
 
   useEffect(() => {
     const fetchAllQuestions = async () => {
-      const data = await getAllQuestions(pageParams);
+      try {
+        const data = await getAllQuestions(pageParams);
 
-      setPageable({
-        numberOfElements: data.numberOfElements,
-        size: data.size,
-        totalElements: data.totalElements,
-        totalPages: data.totalPages,
-        pageNumber: data.pageable.pageNumber,
-      });
-      setQuestionComponents(data.content);
+        setPageable({
+          numberOfElements: data.numberOfElements,
+          size: data.size,
+          totalElements: data.totalElements,
+          totalPages: data.totalPages,
+          pageNumber: data.pageable.pageNumber,
+        });
+        setQuestionComponents(data.content);
+      } catch (error) {
+        if (error.response && error.response.status === 401) {
+          // 401 에러이면 로그인 페이지로 이동
+          navigate('/login');
+        } else {
+          console.error('Failed to fetch questions', error);
+          alert('There is an issue on the server...!');
+        }
+      }
     };
 
     fetchAllQuestions();
-  }, [setQuestionComponents, pageParams, setPageable]);
+  }, [setQuestionComponents, pageParams, setPageable, navigate]);
 
   const setStudents = () => {
-    let storageStudents = localStorage.getItem("students");
+    let storageStudents = localStorage.getItem('students');
 
     let pageStudents = [];
 
     pageStudents = studentsString
       .toLowerCase()
       .trimStart()
-      .replace(/,\s+/g, ",")
-      .split(",");
+      .replace(/,\s+/g, ',')
+      .split(',');
 
     if (storageStudents) {
-      let array = storageStudents.split(",");
+      let array = storageStudents.split(',');
       pageStudents.forEach((element) => {
         if (!array.includes(element)) {
           array.push(element);
@@ -105,7 +116,7 @@ function TutoringArchivePage() {
     }
     pageStudents = pageStudents.filter((value) => value);
 
-    localStorage.setItem("students", pageStudents);
+    localStorage.setItem('students', pageStudents);
   };
 
   const change = (event) => {
@@ -121,7 +132,7 @@ function TutoringArchivePage() {
   };
 
   const inputHandler = (event) => {
-    if (event.target.value === null || event.target.value === "") {
+    if (event.target.value === null || event.target.value === '') {
       setQuestionComponents(questionsData, false);
     } else {
       search(event.target.value);
@@ -139,27 +150,27 @@ function TutoringArchivePage() {
     questionsData.forEach((value) => {
       console.log(value);
       switch (searchParameter) {
-        case "Question":
+        case 'Question':
           if (value.question.toLowerCase().includes(text.toLowerCase())) {
             localQuestions = [...localQuestions, value];
           }
           break;
-        case "Answer":
+        case 'Answer':
           if (value.answer.toLowerCase().includes(text.toLowerCase())) {
             localQuestions = [...localQuestions, value];
           }
           break;
-        case "Title":
+        case 'Title':
           if (value.title.toLowerCase().includes(text.toLowerCase())) {
             localQuestions = [...localQuestions, value];
           }
           break;
-        case "Explanation":
+        case 'Explanation':
           if (value.explanation.toLowerCase().includes(text.toLowerCase())) {
             localQuestions = [...localQuestions, value];
           }
           break;
-        case "Choice":
+        case 'Choice':
           for (let choice of value.candidates) {
             if (choice.toLowerCase().includes(text.toLowerCase())) {
               localQuestions = [...localQuestions, value];
@@ -167,7 +178,7 @@ function TutoringArchivePage() {
             }
           }
           break;
-        case "Hint":
+        case 'Hint':
           if (value.hint.toLowerCase().includes(text.toLowerCase())) {
             localQuestions = [...localQuestions, value];
           }
@@ -201,16 +212,16 @@ function TutoringArchivePage() {
   };
 
   const submit = () => {
-    if (window.confirm("This will be the question info: " + questionsCopy)) {
+    if (window.confirm('This will be the question info: ' + questionsCopy)) {
       let pageStudents = studentsString
         .toLowerCase()
         .trimStart()
-        .replace(/,\s+/g, ",")
-        .split(",");
+        .replace(/,\s+/g, ',')
+        .split(',');
 
       pageStudents = pageStudents.filter((value) => value);
 
-      console.log(questionsCopy + " " + pageStudents);
+      console.log(questionsCopy + ' ' + pageStudents);
       if (questionsCopy && pageStudents && targetDate) {
         const fecthReassignQuestions = async (
           questionIds,
@@ -224,20 +235,20 @@ function TutoringArchivePage() {
               targetDate
             );
 
-            window.alert("Successfully uploaded!");
+            window.alert('Successfully uploaded!');
             setStudents(); // Assuming this resets your student list
             console.log(response.data);
           } catch (error) {
             if (error.response) {
               console.log(
-                "Server responded with:",
+                'Server responded with:',
                 error.response.status,
                 error.response.data
               );
             } else if (error.request) {
-              console.log("No response received:", error.request);
+              console.log('No response received:', error.request);
             } else {
-              console.log("Axios error:", error.message);
+              console.log('Axios error:', error.message);
             }
           }
         };
@@ -250,10 +261,10 @@ function TutoringArchivePage() {
   return (
     <>
       <div className={styles.linkContainer}>
-        <Link className={styles.linkButton} to={"/questions"}>
+        <Link className={styles.linkButton} to={'/questions'}>
           Archive
         </Link>
-        <Link className={styles.linkButton} to={"/teacher"}>
+        <Link className={styles.linkButton} to={'/teacher'}>
           Teacher
         </Link>
       </div>
@@ -279,25 +290,25 @@ function TutoringArchivePage() {
           )}
           {isSearchParamterClicked ? (
             <div className={styles.searchDropdown}>
-              <button onClick={() => selectSearchParameter("Question")}>
+              <button onClick={() => selectSearchParameter('Question')}>
                 Question
               </button>
-              <button onClick={() => selectSearchParameter("Answer")}>
+              <button onClick={() => selectSearchParameter('Answer')}>
                 Answer
               </button>
-              <button onClick={() => selectSearchParameter("Title")}>
+              <button onClick={() => selectSearchParameter('Title')}>
                 Title
               </button>
-              <button onClick={() => selectSearchParameter("Explanation")}>
+              <button onClick={() => selectSearchParameter('Explanation')}>
                 Explanation
               </button>
-              <button onClick={() => selectSearchParameter("Choice")}>
+              <button onClick={() => selectSearchParameter('Choice')}>
                 Choice
               </button>
-              <button onClick={() => selectSearchParameter("Hint")}>
+              <button onClick={() => selectSearchParameter('Hint')}>
                 Hint
               </button>
-              <button onClick={() => selectSearchParameter("All")}>All</button>
+              <button onClick={() => selectSearchParameter('All')}>All</button>
             </div>
           ) : null}
         </div>

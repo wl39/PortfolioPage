@@ -1,10 +1,10 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import React, { useCallback, useContext, useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 
-import styles from "./SubmissionPage.module.css";
-import Submission from "../../components/Submission/Submission";
-import { getAllSubmissions } from "../../services/api/HMSService";
-import { PageableContext } from "../../layouts/Pageable/PageableContext";
+import styles from './SubmissionPage.module.css';
+import Submission from '../../components/Submission/Submission';
+import { getAllSubmissions } from '../../services/api/HMSService';
+import { PageableContext } from '../../layouts/Pageable/PageableContext';
 
 function SubmissionPage() {
   const { setPageable, pageParams } = useContext(PageableContext);
@@ -13,16 +13,16 @@ function SubmissionPage() {
 
   const emptyQuestion = {
     id: 0,
-    title: "Oops! It appears there are no submissions at the moment.",
+    title: 'Oops! It appears there are no submissions at the moment.',
     question: "Please come back after you've finished answering the questions.",
-    type: "m",
+    type: 'm',
     candidates: [],
-    hint: "Remember to return after completing the questions!",
+    hint: 'Remember to return after completing the questions!',
     studentsFor: [],
-    answer: "a",
-    explanation: "",
-    generatedDate: "",
-    targetDate: "",
+    answer: 'a',
+    explanation: '',
+    generatedDate: '',
+    targetDate: '',
     minAgo: 430,
     hourAgo: 7,
     dayAgo: 0,
@@ -31,7 +31,7 @@ function SubmissionPage() {
     dayLeft: 0,
   };
 
-  const [searchParameter, setSearchParameter] = useState("Question");
+  const [searchParameter, setSearchParameter] = useState('Question');
   const [isSearchParamterClicked, setIsSearchParamterClicked] = useState(false);
   const [questionsData, setQuestionsData] = useState([]);
   const [totalQuestions, setTotalQuestions] = useState(1);
@@ -88,7 +88,7 @@ function SubmissionPage() {
       } catch (error) {
         console.error(error);
 
-        window.alert("There is an issue...");
+        window.alert('There is an issue...');
       }
     };
 
@@ -96,7 +96,7 @@ function SubmissionPage() {
   }, [setSubmissionComponents, studentsName, pageParams, setPageable]);
 
   const inputHandler = (event) => {
-    if (event.target.value === null || event.target.value === "") {
+    if (event.target.value === null || event.target.value === '') {
       setSubmissionComponents(questionsData, false);
     } else {
       search(event.target.value);
@@ -108,26 +108,26 @@ function SubmissionPage() {
 
     questionsData.forEach((value) => {
       switch (searchParameter) {
-        case "Question":
+        case 'Question':
           if (
             value.question.question.toLowerCase().includes(text.toLowerCase())
           ) {
             localQuestions = [...localQuestions, value];
           }
           break;
-        case "Answer":
+        case 'Answer':
           if (
             value.question.answer.toLowerCase().includes(text.toLowerCase())
           ) {
             localQuestions = [...localQuestions, value];
           }
           break;
-        case "Title":
+        case 'Title':
           if (value.question.title.toLowerCase().includes(text.toLowerCase())) {
             localQuestions = [...localQuestions, value];
           }
           break;
-        case "Explanation":
+        case 'Explanation':
           if (
             value.question.explanation
               .toLowerCase()
@@ -136,7 +136,7 @@ function SubmissionPage() {
             localQuestions = [...localQuestions, value];
           }
           break;
-        case "Choice":
+        case 'Choice':
           for (let choice of value.question.candidates) {
             if (choice.toLowerCase().includes(text.toLowerCase())) {
               localQuestions = [...localQuestions, value];
@@ -144,7 +144,7 @@ function SubmissionPage() {
             }
           }
           break;
-        case "Hint":
+        case 'Hint':
           if (value.question.hint.toLowerCase().includes(text.toLowerCase())) {
             localQuestions = [...localQuestions, value];
           }
@@ -207,19 +207,19 @@ function SubmissionPage() {
           {studentsName[0].toUpperCase() + studentsName.slice(1)}
         </h1>
         <div className={styles.linkContainer}>
-          <Link to={"/review/" + studentsName} style={{ marginTop: "22px" }}>
-            <button className={styles.button}>Review</button>
+          <Link to={'/user'} style={{ marginTop: '22px' }}>
+            <button className={styles.button}>Details...</button>
           </Link>
-          <Link to={"/tutoring/" + studentsName} style={{ marginTop: "22px" }}>
+          <Link to={'/tutoring/' + studentsName} style={{ marginTop: '22px' }}>
             <button className={styles.button}>Questions</button>
           </Link>
         </div>
       </div>
       {!totalQuestions ? null : (
         <div className={styles.score}>
-          Score{": "}
+          Score{': '}
           {((totalCorrectQuestions / totalQuestions) * 100).toFixed(2)}% (
-          {totalCorrectQuestions} / {totalQuestions}){" "}
+          {totalCorrectQuestions} / {totalQuestions}){' '}
         </div>
       )}
       <div className={styles.searchContainer}>
@@ -242,25 +242,25 @@ function SubmissionPage() {
           )}
           {isSearchParamterClicked ? (
             <div className={styles.searchDropdown}>
-              <button onClick={() => selectSearchParameter("Question")}>
+              <button onClick={() => selectSearchParameter('Question')}>
                 Question
               </button>
-              <button onClick={() => selectSearchParameter("Answer")}>
+              <button onClick={() => selectSearchParameter('Answer')}>
                 Answer
               </button>
-              <button onClick={() => selectSearchParameter("Title")}>
+              <button onClick={() => selectSearchParameter('Title')}>
                 Title
               </button>
-              <button onClick={() => selectSearchParameter("Explanation")}>
+              <button onClick={() => selectSearchParameter('Explanation')}>
                 Explanation
               </button>
-              <button onClick={() => selectSearchParameter("Choice")}>
+              <button onClick={() => selectSearchParameter('Choice')}>
                 Choice
               </button>
-              <button onClick={() => selectSearchParameter("Hint")}>
+              <button onClick={() => selectSearchParameter('Hint')}>
                 Hint
               </button>
-              <button onClick={() => selectSearchParameter("All")}>All</button>
+              <button onClick={() => selectSearchParameter('All')}>All</button>
             </div>
           ) : null}
         </div>
@@ -269,8 +269,8 @@ function SubmissionPage() {
       {submissions.length === 0 ? (
         <Submission
           question={emptyQuestion}
-          studentAnswer={""}
-          submitDate={""}
+          studentAnswer={''}
+          submitDate={''}
           isMarked={true}
           id={0}
         />
