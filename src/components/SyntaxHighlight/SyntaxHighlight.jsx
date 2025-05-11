@@ -92,9 +92,9 @@ function SyntaxHighlight({ code }) {
 
     // 기본 Java 하이라이팅 (type 태그 없을 때)
     return code
+    .replace(java_keywords, "<span class=" + styles.java_keyword + ">$&</span>")
       .replace(java_comments, "<span class=" + styles.java_comment + ">$&</span>")
       .replace(java_strings, "<span class=" + styles.java_string + ">$&</span>")
-      .replace(java_keywords, "<span class=" + styles.java_keyword + ">$&</span>")
       .replace(java_type, "<span class=" + styles.java_type + ">$&</span>")
       .replace(java_methods, "<span class=" + styles.java_method + ">$&</span>");
   };
