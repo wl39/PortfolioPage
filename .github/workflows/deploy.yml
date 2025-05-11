@@ -23,4 +23,8 @@ jobs:
           ssh -o StrictHostKeyChecking=no ubuntu@${{secrets.EC2_PUBLIC_IP_ADDRESS}} << 'EOF'
             echo "SSH DONE"
             hostname
+
+            cd ~/web/PortfolioPage
+            git pull
+            npm run build
           EOF
