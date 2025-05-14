@@ -36,6 +36,7 @@ const LoginForm = ({ directTo, addParam }) => {
     login({ email: email, password: password })
       .then((response) => {
         dispatch(setUsername(response.data));
+        sessionStorage.setItem('username', response.data);
         navigate(`/${directTo}/${addParam ? response.data : ''}`, {
           state: { name: response.data },
         });

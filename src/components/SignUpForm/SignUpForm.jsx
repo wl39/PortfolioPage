@@ -4,12 +4,16 @@ import styles from './SignUpForm.module.css';
 import Button from '../Button/Button';
 import { login, signup } from '../../services/api/HMSService';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setUser, setUsername } from '../../features/user/userSlice';
 
 const SignUpForm = () => {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [passwordRepeat, setPasswordRepeat] = useState('');
+
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
@@ -33,9 +37,12 @@ const SignUpForm = () => {
       alert('Passwords do not match!');
       return;
     }
+
     signup({ email: email, username: name, password: password })
       .then((res) => {
         login({ email: email, password: password }).then((response) => {
+          dispatch(setUsername(response.data));
+          sessionStorage.setItem('username', response.data);
           navigate(`/tutoring/${response.data}`, {
             state: { name: response.data },
           });

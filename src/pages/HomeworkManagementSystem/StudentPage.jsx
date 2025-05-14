@@ -4,7 +4,8 @@ const StudentPage = () => {
   const username = useSelector((state) => state.user.username);
   return (
     <>
-      <h1>{username || 'Login First'}</h1>
+      {console.log(username)}
+      <h1>{username || sessionStorage.getItem('username') || 'Login First'}</h1>
     </>
   );
 };
