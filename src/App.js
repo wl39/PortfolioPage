@@ -37,7 +37,7 @@ function App() {
         <Route
           path="/questions"
           element={
-            <Pageable>
+            <Pageable key={'archive'} sortTypes={[]} sortParams={[]}>
               <TutoringArchivePage />
             </Pageable>
           }
@@ -46,7 +46,11 @@ function App() {
         <Route
           path="/submission/:studentsName"
           element={
-            <Pageable>
+            <Pageable
+              key={'submission'}
+              sortTypes={['desc']}
+              sortParams={['question.generatedDate']}
+            >
               <SubmissionPage />
             </Pageable>
           }
@@ -54,7 +58,7 @@ function App() {
         <Route
           path="/tutoring/:studentsName"
           element={
-            <Pageable>
+            <Pageable key={'tutoring'} sortTypes={[]} sortParams={[]}>
               <TutoringPage />
             </Pageable>
           }
@@ -69,7 +73,7 @@ function App() {
         <Route
           path="/math/result/:studentName"
           element={
-            <Pageable>
+            <Pageable key={'math.result'} sortTypes={[]} sortParams={[]}>
               <MathSolveResultPage />
             </Pageable>
           }

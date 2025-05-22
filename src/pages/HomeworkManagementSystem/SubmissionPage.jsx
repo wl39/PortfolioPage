@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 import styles from './SubmissionPage.module.css';
 import Submission from '../../components/Submission/Submission';
@@ -10,6 +10,8 @@ function SubmissionPage() {
   const { setPageable, pageParams } = useContext(PageableContext);
   const { studentsName } = useParams();
   const [submissions, setSubmissions] = useState([]);
+
+  const navigate = useNavigate();
 
   const emptyQuestion = {
     id: 0,
@@ -73,9 +75,13 @@ function SubmissionPage() {
 
   useEffect(() => {
     const fetchAllSubmissions = async () => {
-      const response = await getAllSubmissions(studentsName, pageParams);
-
       try {
+        const response = await getAllSubmissions(
+          studentsName,
+
+          pageParams
+        );
+
         setTotalQuestions(response.numberOfElements);
         setSubmissionComponents(response.content, false);
         setPageable({
@@ -86,14 +92,25 @@ function SubmissionPage() {
           pageNumber: response.pageable.pageNumber,
         });
       } catch (error) {
-        console.error(error);
+        if (error.response && error.response.status === 401) {
+          // 401 에러이면 로그인 페이지로 이동
+          navigate('/login');
+        } else {
+          console.error(error);
 
-        window.alert('There is an issue...');
+          window.alert('There is an issue...');
+        }
       }
     };
 
     fetchAllSubmissions();
-  }, [setSubmissionComponents, studentsName, pageParams, setPageable]);
+  }, [
+    setSubmissionComponents,
+    studentsName,
+    pageParams,
+    setPageable,
+    navigate,
+  ]);
 
   const inputHandler = (event) => {
     if (event.target.value === null || event.target.value === '') {

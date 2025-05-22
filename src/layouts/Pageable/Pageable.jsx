@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import PageHandler from "../../components/PageHandler/PageHandler";
-import ScrollTo from "../../components/ScrollTo/ScrollTo";
-import PageParameterController from "../../components/PageParameterController/PageParameterController";
-import { PageableContext } from "./PageableContext";
+import React, { useState } from 'react';
+import PageHandler from '../../components/PageHandler/PageHandler';
+import ScrollTo from '../../components/ScrollTo/ScrollTo';
+import PageParameterController from '../../components/PageParameterController/PageParameterController';
+import { PageableContext } from './PageableContext';
 
-import stylese from "./Pageable.module.css";
+import stylese from './Pageable.module.css';
 
-function Pageable({ children }) {
+function Pageable({ children, sortTypes, sortParams }) {
   const [pageable, setPageable] = useState({
     numberOfElements: 5,
     size: 5,
@@ -17,8 +17,8 @@ function Pageable({ children }) {
   const [pageParams, setPageParams] = useState({
     page: 0,
     size: 5,
-    sortType: "asc",
-    sortParam: "id",
+    sortTypes: [...sortTypes, 'asc'],
+    sortParams: [...sortParams, 'id'],
   });
 
   const changePage = (page) => {

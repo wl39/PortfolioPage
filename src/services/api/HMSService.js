@@ -48,15 +48,12 @@ export const postQuestions = async (questions) => {
 
 /* Tutoring Page - DONE */
 export const getQuestionsWithStudentName = async (name, pageParams) => {
+  const sortQuery = pageParams.sortParams
+    .map((value, index) => `sort=${value},${pageParams.sortTypes[index]}`)
+    .join('&');
+
   const pageParam =
-    '?page=' +
-    pageParams.page +
-    '&size=' +
-    pageParams.size +
-    '&sort=' +
-    pageParams.sortParam +
-    ',' +
-    pageParams.sortType;
+    '?page=' + pageParams.page + '&size=' + pageParams.size + '&' + sortQuery;
 
   try {
     const response = await axios.get(`/questions/student/${name}${pageParam}`);
@@ -82,15 +79,12 @@ export const postAnswers = async (answers) => {
 
 /* Tutoring Archive Page - DONE */
 export const getAllQuestions = async (pageParams) => {
+  const sortQuery = pageParams.sortParams
+    .map((value, index) => `sort=${value},${pageParams.sortTypes[index]}`)
+    .join('&');
+
   const pageParam =
-    '?page=' +
-    pageParams.page +
-    '&size=' +
-    pageParams.size +
-    '&sort=' +
-    pageParams.sortParam +
-    ',' +
-    pageParams.sortType;
+    '?page=' + pageParams.page + '&size=' + pageParams.size + '&' + sortQuery;
 
   try {
     const questions = await axios.get('questions' + pageParam);
@@ -147,15 +141,12 @@ export const getUnmarkedSubmissions = async (name) => {
 
 /* Review Page - DONE */
 export const getReviewQuestions = async (name, pageParams) => {
+  const sortQuery = pageParams.sortParams
+    .map((value, index) => `sort=${value},${pageParams.sortTypes[index]}`)
+    .join('&');
+
   const pageParam =
-    'page=' +
-    pageParams.page +
-    '&size=' +
-    pageParams.size +
-    '&sort=' +
-    pageParams.sortParam +
-    ',' +
-    pageParams.sortType;
+    'page=' + pageParams.page + '&size=' + pageParams.size + '&' + sortQuery;
 
   try {
     const response = await axios.get(`submissions/review/${name}?${pageParam}`);
@@ -169,15 +160,13 @@ export const getReviewQuestions = async (name, pageParams) => {
 
 /* Submission Page - DONE */
 export const getAllSubmissions = async (name, pageParams) => {
+  console.log(pageParams.sortParams);
+  const sortQuery = pageParams.sortParams
+    .map((value, index) => `sort=${value},${pageParams.sortTypes[index]}`)
+    .join('&');
+
   const pageParam =
-    '?page=' +
-    pageParams.page +
-    '&size=' +
-    pageParams.size +
-    '&sort=' +
-    pageParams.sortParam +
-    ',' +
-    pageParams.sortType;
+    '?page=' + pageParams.page + '&size=' + pageParams.size + '&' + sortQuery;
 
   try {
     const response = await axios.get(`submissions/${name}${pageParam}`);
