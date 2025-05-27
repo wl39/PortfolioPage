@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import styles from "./UploadMultiplePage.module.css";
-import ModifiableTutoringQuestion from "../../components/ModifiableTutoringQuestion/ModifiableTutoringQuestion";
-import ModifiableSubmission from "../../components/ModifiableSubmission/ModifiableSubmission";
-import { postQuestions } from "../../services/api/HMSService";
+import React, { useState } from 'react';
+import styles from './UploadMultiplePage.module.css';
+import ModifiableTutoringQuestion from '../../components/ModifiableTutoringQuestion/ModifiableTutoringQuestion';
+import ModifiableSubmission from '../../components/ModifiableSubmission/ModifiableSubmission';
+import { postQuestions } from '../../services/api/HMSService';
 
 const UploadMultiplePage = () => {
-  const [questions, setQuestions] = useState("");
+  const [questions, setQuestions] = useState('');
   const [questionsJSON, setQuestionsJSON] = useState([]);
 
   const parseQuestionsToJSON = () => {
@@ -32,25 +32,72 @@ const UploadMultiplePage = () => {
   const submitQuestion = () => {
     let questionsToPost = questionsJSON;
 
-    if (!questionsToPost) {
+    if (!questionsToPost.length) {
       try {
         questionsToPost = JSON.parse(questions);
+        setQuestionsJSON(questionsToPost);
       } catch (error) {
         window.alert(error);
         return;
       }
     }
 
-    postQuestions(questionsToPost)
-      .then((value) => {
-        window.alert(value.data + " questions uploaded Successfully");
-      })
-      .catch((error) => {
-        console.error(error);
+    if (checkValidity(questionsToPost)) {
+      postQuestions(questionsToPost)
+        .then((value) => {
+          window.alert(value.data + ' questions uploaded Successfully');
+        })
+        .catch((error) => {
+          console.error(error);
 
-        window.alert(error);
-      });
+          window.alert(error);
+        });
+    }
+
     // .finally(window.location.reload());
+  };
+
+  const checkValidity = (questionsToPost) => {
+    for (const question of questionsToPost) {
+      if (!question.title) {
+        alert('Title is missing');
+        return false;
+      }
+      if (!question.question) {
+        alert('Question is missing');
+        return false;
+      }
+      if (!question.type || !['m', 'M', 's'].includes(question.type)) {
+        alert('Type is missing or incorrect');
+        return false;
+      }
+      if (!question.candidates) {
+        alert("'candidates' are missing");
+        return false;
+      }
+      if (!question.students) {
+        alert("'students' header is missing");
+        return false;
+      }
+      if (!question.answer) {
+        alert('Answer is missing');
+        return false;
+      }
+      if (!question.explanation) {
+        alert('Explanation is missing');
+        return false;
+      }
+      if (!question.generatedDate) {
+        alert('Generated date is missing');
+        return false;
+      }
+      if (!question.targetDate) {
+        alert('Target date is missing');
+        return false;
+      }
+    }
+
+    return true;
   };
 
   return (
@@ -63,7 +110,9 @@ const UploadMultiplePage = () => {
         onChange={(e) => setQuestions(e.target.value)}
       />
       <button onClick={parseQuestionsToJSON}>PARSE</button>
-      <button onClick={submitQuestion}>submit</button>
+      <button disabled={!questionsJSON.length} onClick={submitQuestion}>
+        submit
+      </button>
       {questionsJSON.map((element, index) => (
         <div key={index} className={styles.row}>
           <div className={styles.question}>

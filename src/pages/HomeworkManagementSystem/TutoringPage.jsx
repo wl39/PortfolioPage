@@ -10,7 +10,6 @@ import {
 import { formatToISO } from '../../utils/dateFormat';
 import { PageableContext } from '../../layouts/Pageable/PageableContext';
 import Button from '../../components/Button/Button';
-import { useSelector } from 'react-redux';
 
 const mockQuestion = {
   id: 0,
@@ -52,18 +51,24 @@ function TutoringPage() {
           pageParams
         );
 
-        setQuestions(questionData.content);
+        setQuestions(questionData.content || []);
+
         setPageable({
-          numberOfElements: questionData.numberOfElements,
-          size: questionData.size,
-          totalElements: questionData.totalElements,
-          totalPages: questionData.totalPages,
-          pageNumber: questionData.pageable.pageNumber,
+          numberOfElements: questionData.numberOfElements || 1,
+          size: questionData.size || 1,
+          totalElements: questionData.totalElements || 1,
+          totalPages: questionData.totalPages || 1,
+          pageNumber: questionData.pageable
+            ? questionData.pageable.pageNumber
+            : 1,
         });
       } catch (error) {
         if (error.response && error.response.status === 401) {
           // 401 에러이면 로그인 페이지로 이동
           navigate('/login');
+        } else if (error.response && error.response.status === 403) {
+          alert('Access Denied!');
+          navigate('/tutoring/' + sessionStorage.getItem('username'));
         } else {
           console.error('Failed to fetch questions', error);
           alert('There is an issue on the server...!');
