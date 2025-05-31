@@ -65,6 +65,7 @@
 
 .searchDropdownContainer {
   position: relative;
+  z-index: 1;
 }
 
 .searchDropdownButton {
@@ -83,6 +84,7 @@
 .searchDropdownButton:hover {
   border: 2px solid black;
 }
+
 .searchDropdownButton:active {
   border: 2px solid black;
 }

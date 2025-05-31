@@ -116,6 +116,18 @@ export const postReassignQuestions = async (
   }
 };
 
+/* Tutoring Modify Page - Done */
+export const patchQuestions = async (toModify) => {
+  try {
+    const response = await axios.patch('questions/multiples', toModify);
+
+    return response;
+  } catch (error) {
+    console.error('Error fetching patch questions : ');
+    throw error;
+  }
+};
+
 /* Marking Page - DONE */
 export const putSubmissions = async (mark) => {
   try {

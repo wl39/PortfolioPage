@@ -13,3 +13,42 @@
   margin: auto 0px;
   padding-right: 10px;
 }
+
+.inputTitle {
+  height: 42px;
+  font-weight: bold;
+}
+
+.question {
+  font-size: 32px;
+  height: 40px;
+  margin-top: 12px;
+  font-weight: bold;
+  width: 100%;
+}
+
+.code {
+  height: 300px;
+  resize: vertical;
+}
+
+.candidate_number {
+  display: flex;
+  justify-content: space-between;
+  margin: 4px 0px 8px;
+}
+
+.label {
+  height: 36px;
+  line-height: 36px;
+  font-size: 20px;
+}
+
+.code_label {
+  width: 40px;
+  margin: auto 0px;
+}
+
+.answer_label {
+  margin: auto 0px
+}

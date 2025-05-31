@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Card from '../../components/Card/Card';
 
 // import goolge from "../../assets/login/web_neutral_sq_SI@4x.png"
@@ -16,11 +16,14 @@ import { setUsername } from '../../features/user/userSlice';
 
 const LoginForm = ({ directTo, addParam }) => {
   const dispatch = useDispatch();
+  const location = useLocation();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const navigate = useNavigate();
+
+  const from = location.state?.from?.pathname || null; // 없으면 홈으로
 
   const userLogin = () => {
     if (!email) {
@@ -37,9 +40,14 @@ const LoginForm = ({ directTo, addParam }) => {
       .then((response) => {
         dispatch(setUsername(response.data));
         sessionStorage.setItem('username', response.data);
-        navigate(`/${directTo}/${addParam ? response.data : ''}`, {
-          state: { name: response.data },
-        });
+
+        if (from) {
+          navigate(from, { replace: true });
+        } else {
+          navigate(`/${directTo}/${addParam ? response.data : ''}`, {
+            state: { name: response.data },
+          });
+        }
       })
       .catch((error) => {
         console.log(error);

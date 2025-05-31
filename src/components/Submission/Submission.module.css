@@ -1,6 +1,8 @@
 .title {
   font-size: 40px;
   margin-bottom: 10px;
+  margin-top: 28px;
+  word-break: break-all;
 }
 
 .wrongQuestionContainer {
@@ -55,12 +57,14 @@
   margin-bottom: 10px;
   font-weight: 600;
 }
+
 .hintButtonContainer {
   display: flex;
   cursor: pointer;
   font-weight: 600;
   justify-content: flex-end;
 }
+
 .hintButtonContainer:hover {
   font-weight: 800;
 }
@@ -139,6 +143,7 @@
   .title {
     font-size: 24px;
     margin-bottom: 8px;
+    word-break: break-all;
   }
 
   .question {

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef } from 'react';
 
 function DragAndDrop({ children, x, y }) {
   // State to track the current position of the component
@@ -21,8 +21,8 @@ function DragAndDrop({ children, x, y }) {
     };
 
     // Add mouse move and mouse up listeners
-    document.addEventListener("mousemove", handleMouseMove);
-    document.addEventListener("mouseup", handleMouseUp);
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
   };
 
   // Handle mouse move event
@@ -36,89 +36,95 @@ function DragAndDrop({ children, x, y }) {
   // Handle mouse up event
   const handleMouseUp = () => {
     // Remove mouse move and mouse up listeners
-    document.removeEventListener("mousemove", handleMouseMove);
-    document.removeEventListener("mouseup", handleMouseUp);
+    document.removeEventListener('mousemove', handleMouseMove);
+    document.removeEventListener('mouseup', handleMouseUp);
   };
 
   return (
-    <div style={{ zIndex: 10 }}>
+    <div>
       <div
         style={{
-          border: hide ? "0px" : "1px solid black",
-          position: "fixed",
-          left: position.x,
-          top: position.y + 39,
-          background: "ivory",
-        }}
-      >
-        {hide ? null : children}
-      </div>
-      <div
-        onMouseDown={handleMouseDown}
-        style={{
-          boxSizing: "border-box",
-          position: "fixed",
+          position: 'fixed',
           left: position.x,
           top: position.y,
-          width: "40px",
-          height: "40px",
-          backgroundColor: "ivory",
-          cursor: "move",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          color: "black",
-          fontWeight: "bold",
-          userSelect: "none",
-          border: "1px solid black",
-          fontSize: "20px",
+          background: 'transparent',
+          zIndex: 10,
         }}
       >
-        M
-      </div>
-      <div
-        onClick={() => setHide(!hide)}
-        style={{
-          position: "fixed",
-          boxSizing: "border-box",
-          left: position.x + 40,
-          top: position.y,
-          width: "40px",
-          height: "40px",
-          backgroundColor: "ivory",
-          cursor: "pointer",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          color: "black",
-          fontWeight: "bold",
-          userSelect: "none",
-          border: "1px solid black",
-        }}
-      >
-        {hide ? (
+        <div style={{ display: 'flex' }}>
           <div
+            onMouseDown={handleMouseDown}
             style={{
-              marginTop: 2,
-              width: 0,
-              height: 0,
-              borderTop: "14px solid black",
-              borderLeft: "10px solid transparent",
-              borderRight: "10px solid transparent",
+              boxSizing: 'border-box',
+              // position: 'fixed',
+              // left: position.x,
+              // top: position.y,
+              width: '40px',
+              height: '40px',
+              backgroundColor: 'ivory',
+              cursor: 'move',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: 'black',
+              fontWeight: 'bold',
+              userSelect: 'none',
+              border: '1px solid black',
+              borderBottom: hide ? '1px solid black' : '0px',
+              fontSize: '20px',
+              zIndex: 10,
             }}
-          />
-        ) : (
+          >
+            M
+          </div>
           <div
+            onClick={() => setHide(!hide)}
             style={{
-              marginTop: 0,
-              width: 0,
-              height: 0,
-              borderBottom: "14px solid black",
-              borderLeft: "10px solid transparent",
-              borderRight: "10px solid transparent",
+              // position: 'fixed',
+              boxSizing: 'border-box',
+              // left: position.x + 40,
+              // top: position.y,
+              width: '40px',
+              height: '40px',
+              backgroundColor: 'ivory',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: 'black',
+              fontWeight: 'bold',
+              userSelect: 'none',
+              border: '1px solid black',
+              borderBottom: hide ? '1px solid black' : '0px',
+              zIndex: 10,
             }}
-          />
-        )}
+          >
+            {hide ? (
+              <div
+                style={{
+                  marginTop: 2,
+                  width: 0,
+                  height: 0,
+                  borderTop: '14px solid black',
+                  borderLeft: '10px solid transparent',
+                  borderRight: '10px solid transparent',
+                }}
+              />
+            ) : (
+              <div
+                style={{
+                  marginTop: 0,
+                  width: 0,
+                  height: 0,
+                  borderBottom: '14px solid black',
+                  borderLeft: '10px solid transparent',
+                  borderRight: '10px solid transparent',
+                }}
+              />
+            )}
+          </div>
+        </div>
+        <div>{hide ? null : children}</div>
       </div>
     </div>
   );

@@ -1,0 +1,13 @@
+.studentName {
+    text-transform: capitalize;
+}
+
+.barContainer {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.bar {
+    margin: auto;
+    text-align: center;
+}

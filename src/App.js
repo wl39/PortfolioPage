@@ -21,6 +21,7 @@ import Pageable from './layouts/Pageable/Pageable';
 import MathSolveResultPage from './pages/TimedQuestion/MathSolveResultPage';
 import SignUpPage from './pages/User/SignUpPage';
 import StudentPage from './pages/HomeworkManagementSystem/StudentPage';
+import ModifyQuestionPage from './pages/HomeworkManagementSystem/ModifyQuestionPage';
 
 function App() {
   return (
@@ -75,6 +76,14 @@ function App() {
           element={
             <Pageable key={'math.result'} sortTypes={[]} sortParams={[]}>
               <MathSolveResultPage />
+            </Pageable>
+          }
+        />
+        <Route
+          path="/questions/modify"
+          element={
+            <Pageable key={'questions.modify'} sortTypes={[]} sortParams={[]}>
+              <ModifyQuestionPage />
             </Pageable>
           }
         />

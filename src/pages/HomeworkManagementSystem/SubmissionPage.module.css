@@ -20,6 +20,7 @@
   height: 80px;
   line-height: 80px;
 }
+
 .buttonContainer {
   margin-top: 40px;
   display: flex;
@@ -94,6 +95,7 @@
 
 .searchDropdownContainer {
   position: relative;
+  z-index: 1;
 }
 
 .searchDropdownButton {
@@ -112,6 +114,7 @@
 .searchDropdownButton:hover {
   border: 2px solid black;
 }
+
 .searchDropdownButton:active {
   border: 2px solid black;
 }

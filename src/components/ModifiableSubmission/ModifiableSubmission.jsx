@@ -1,29 +1,30 @@
-import React, { useEffect, useState } from "react";
-import styles from "../Submission/Submission.module.css";
-import mStyles from "./ModifiableSubmission.module.css";
-import SyntaxHighlight from "../SyntaxHighlight/SyntaxHighlight";
-import { dateOptions } from "../../utils/dateFormat";
+import React, { useEffect, useState } from 'react';
+import styles from '../Submission/Submission.module.css';
+import mStyles from './ModifiableSubmission.module.css';
+import SyntaxHighlight from '../SyntaxHighlight/SyntaxHighlight';
+import { dateOptions } from '../../utils/dateFormat';
+import { classnames } from '../../utils/classnames';
 
 const defaultQuestion = {
-  title: "",
-  question: "",
-  type: "",
+  title: '',
+  question: '',
+  type: '',
   candidates: [],
-  hint: "",
+  hint: '',
   students: [],
-  answer: "",
-  explanation: "",
-  generatedDate: "",
-  targetDate: "",
+  answer: '',
+  explanation: '',
+  generatedDate: '',
+  targetDate: '',
 };
 
 function ModifiableSubmission({
   question,
   submitDate,
-  isMarked,
   id,
   modify,
   index,
+  unique,
 }) {
   const [newQuestion, setNewQuestion] = useState(question || defaultQuestion);
   const [showHint, setShowHint] = useState(false);
@@ -41,11 +42,24 @@ function ModifiableSubmission({
     }));
   };
 
-  const candidateChange = (checked, value, index) => {
-    value = value.replaceAll("&code:", "");
+  const changeValueAndModify = (value, type, index) => {
+    setIsChanged(true);
+    let prevQuestion = newQuestion;
+
+    prevQuestion = {
+      ...prevQuestion,
+      [type]: value,
+    };
+
+    modify(prevQuestion, index);
+    setNewQuestion(prevQuestion);
+  };
+
+  const candidateChange = (checked, value, index, isAnswer) => {
+    value = value.replaceAll('&code:', '');
 
     if (checked) {
-      value = "&code:" + value;
+      value = '&code:' + value;
     }
 
     setIsChanged(true);
@@ -54,6 +68,7 @@ function ModifiableSubmission({
       candidates: prevQuestion.candidates.map((candidate, i) =>
         i === index ? value : candidate
       ), // Update the specific index
+      answer: isAnswer ? value : prevQuestion.answer,
     }));
   };
 
@@ -61,7 +76,7 @@ function ModifiableSubmission({
     if (value < 4) {
       return;
     }
-    let newCandidates = new Array(parseInt(value)).fill("");
+    let newCandidates = new Array(parseInt(value)).fill('');
 
     let newQuestionWithCandidates = {};
 
@@ -99,10 +114,10 @@ function ModifiableSubmission({
       <div>
         {isModifying ? (
           <input
-            id={"m." + newQuestion.title + index}
-            className={styles.title}
+            className={classnames([mStyles.inputTitle, styles.title])}
+            id={'m.' + newQuestion.title + index}
             value={newQuestion.title}
-            onChange={(e) => changeValue(e.target.value, "title")}
+            onChange={(e) => changeValue(e.target.value, 'title')}
           />
         ) : (
           <h1 className={styles.title}>
@@ -123,66 +138,68 @@ function ModifiableSubmission({
           {isModifying ? (
             <div>
               <input
-                id={"m." + newQuestion.question}
-                value={newQuestion.question.split("&code:")[0]}
+                className={mStyles.question}
+                id={'m.' + newQuestion.question}
+                value={newQuestion.question.split('&code:')[0]}
                 onChange={(e) =>
                   changeValue(
                     e.target.value +
-                      (newQuestion.question.split("&code:")[1]
-                        ? "&code:" + newQuestion.question.split("&code:")[1]
-                        : ""),
-                    "question"
+                      (newQuestion.question.split('&code:')[1]
+                        ? '&code:' + newQuestion.question.split('&code:')[1]
+                        : ''),
+                    'question'
                   )
                 }
               />
               <textarea
+                className={mStyles.code}
                 id={
-                  "m.code." +
-                  (newQuestion.question.includes("&code:")
-                    ? newQuestion.question.split("&code:")[1]
+                  'm.code.' +
+                  (newQuestion.question.includes('&code:')
+                    ? newQuestion.question.split('&code:')[1]
                     : index)
                 }
-                value={newQuestion.question.split("&code:")[1]}
+                value={newQuestion.question.split('&code:')[1]}
                 placeholder="code for"
                 onChange={(e) =>
                   changeValue(
-                    newQuestion.question.split("&code:")[0] +
-                      "&code:" +
+                    newQuestion.question.split('&code:')[0] +
+                      '&code:' +
                       e.target.value,
-                    "question"
+                    'question'
                   )
                 }
               />
             </div>
           ) : (
-            question.question.split("&code:").map((value, qIndex) =>
+            question.question.split('&code:').map((value, qIndex) =>
               qIndex === 1 ? (
                 <SyntaxHighlight code={value} key={qIndex} />
               ) : (
                 <div
-                  key={index + ":" + qIndex}
+                  key={index + ':' + qIndex}
                   className={styles.questionHeader}
                 >
                   <h2 className={styles.question}>{value}</h2>
 
                   <div className={styles.dueDateContainer}>
                     <div>
-                      {submitDate === ""
+                      {submitDate === ''
                         ? null
-                        : "Submitted at " +
+                        : 'Submitted at ' +
                           new Date(submitDate).toLocaleString(
-                            "en-US",
+                            'en-US',
                             dateOptions
                           )}
                     </div>
                   </div>
                   <hr
                     style={{
-                      width: "100%",
-                      borderTop: "1px solid #cfcfcf",
+                      width: '100%',
+                      borderTop: '1px solid #cfcfcf',
                     }}
                   />
-                  <div style={{ marginBottom: "15px" }}>
+                  <div style={{ marginBottom: '15px' }}>
                     <div
                       className={styles.hintButtonContainer}
                       onClick={() => {
@@ -206,13 +223,21 @@ function ModifiableSubmission({
           )}
 
           {isModifying ? (
-            <input
-              type="number"
-              onChange={(e) => changeCandidatesSize(e.target.value)}
-              value={
-                question.candidates.length < 4 ? 4 : question.candidates.length
-              }
-            />
+            <div className={mStyles.candidate_number}>
+              <label className={mStyles.label} htmlFor={`c_n${index}`}>
+                Number of Candidates:
+              </label>
+              <input
+                id={`c_n${index}`}
+                type="number"
+                onChange={(e) => changeCandidatesSize(e.target.value)}
+                value={
+                  question.candidates.length < 4
+                    ? 4
+                    : question.candidates.length
+                }
+              />
+            </div>
           ) : (
             <></>
           )}
@@ -220,15 +245,16 @@ function ModifiableSubmission({
           {isModifying
             ? question.candidates.map((element, cIndex) => (
                 <div
+                  style={{ padding: '8px 4px 8px 0px' }}
                   className={
                     element === question.answer
                       ? styles.answerContainer
                       : styles.inputContainer
                   }
-                  key={element + ":" + cIndex}
+                  key={element + ':' + cIndex}
                 >
                   <input
-                    id={"checkbox." + index + "." + cIndex}
+                    id={'checkbox.' + index + '.' + cIndex}
                     type="checkbox"
                     onChange={(e) =>
                       candidateChange(
@@ -239,36 +265,53 @@ function ModifiableSubmission({
                     }
                     checked={
                       newQuestion.candidates[cIndex]
-                        ? newQuestion.candidates[cIndex].includes("&code:")
+                        ? newQuestion.candidates[cIndex].includes('&code:')
                         : false
                     }
                   />
                   <label
-                    className={mStyles.label}
-                    htmlFor={"checkbox." + index + "." + cIndex}
+                    className={mStyles.code_label}
+                    htmlFor={'checkbox.' + index + '.' + cIndex}
                   >
                     Code
                   </label>
                   <textarea
-                    style={{ margin: "auto 4px", resize: "vertical" }}
-                    id={"mc" + index + "." + cIndex}
+                    style={{
+                      margin: 'auto 4px',
+                      resize: 'vertical',
+                      width: 'calc(100% - 175px)',
+                    }}
+                    id={'mc' + index + '.' + cIndex}
                     value={
-                      newQuestion.candidates[cIndex].includes("&code:")
-                        ? newQuestion.candidates[cIndex].split("&code:")[1]
+                      newQuestion.candidates[cIndex].includes('&code:')
+                        ? newQuestion.candidates[cIndex].split('&code:')[1]
                         : newQuestion.candidates[cIndex]
                     }
                     onChange={(e) =>
-                      candidateChange(false, e.target.value, cIndex)
+                      candidateChange(
+                        false,
+                        e.target.value,
+                        cIndex,
+                        newQuestion.answer === newQuestion.candidates[cIndex]
+                      )
                     }
                   />
                   <input
-                    id={"radio.c" + index + "." + cIndex}
-                    name={"radio.c." + index}
+                    id={'radio.c' + index + '.' + cIndex}
+                    name={'radio.c.' + index}
                     type="radio"
-                    value={element}
-                    onChange={(e) => changeValue(e.target.value, "answer")}
+                    value={newQuestion.candidates[cIndex]}
+                    checked={
+                      newQuestion.answer === newQuestion.candidates[cIndex]
+                    }
+                    onChange={(e) => {
+                      changeValueAndModify(e.target.value, 'answer', index);
+                    }}
                   />
-                  <label htmlFor={"radio.c" + index + "." + cIndex}>
+                  <label
+                    className={mStyles.answer_label}
+                    htmlFor={'radio.c' + index + '.' + cIndex}
+                  >
                     ANSWER
                   </label>
                 </div>
@@ -280,26 +323,27 @@ function ModifiableSubmission({
                       ? styles.answerContainer
                       : styles.inputContainer
                   }
-                  key={"D:" + qIndex}
+                  key={'D:' + qIndex}
                 >
                   <input
-                    style={{ margin: "auto 4px" }}
+                    style={{ margin: 'auto 4px' }}
                     type="radio"
-                    name={id ? id : "test"}
+                    name={id ? id : 'test'}
                     value={element}
                     disabled={true}
+                    id={index + ':' + qIndex + ':' + element + unique}
                   />
                   <label
                     className={styles.candidates}
-                    htmlFor={index + ":" + qIndex + ":" + element}
+                    htmlFor={index + ':' + qIndex + ':' + element + unique}
                   >
-                    {element.includes("&code:") ? (
+                    {element.includes('&code:') ? (
                       <SyntaxHighlight
-                        code={element.split("&code:")[1]}
-                        key={"syntax" + element.id}
+                        code={element.split('&code:')[1]}
+                        key={'syntax' + element.id}
                       />
                     ) : (
-                      <div key={element + ":" + qIndex}>{element}</div>
+                      <div key={element + ':' + qIndex}>{element}</div>
                     )}
                   </label>
                 </div>
@@ -307,10 +351,10 @@ function ModifiableSubmission({
 
           {isModifying ? (
             <textarea
-              id={"m.exp" + index}
+              id={'m.exp' + index}
               value={newQuestion.explanation}
-              style={{ height: "250px", resize: "vertical" }}
-              onChange={(e) => changeValue(e.target.value, "explanation")}
+              style={{ height: '250px', resize: 'vertical' }}
+              onChange={(e) => changeValue(e.target.value, 'explanation')}
             />
           ) : (
             <div className={styles.explanationContainer}>

@@ -3,6 +3,7 @@ import styles from './UploadMultiplePage.module.css';
 import ModifiableTutoringQuestion from '../../components/ModifiableTutoringQuestion/ModifiableTutoringQuestion';
 import ModifiableSubmission from '../../components/ModifiableSubmission/ModifiableSubmission';
 import { postQuestions } from '../../services/api/HMSService';
+import Button from '../../components/Button/Button';
 
 const UploadMultiplePage = () => {
   const [questions, setQuestions] = useState('');
@@ -21,12 +22,10 @@ const UploadMultiplePage = () => {
   };
 
   const modify = (newQuestion, index) => {
-    let q = questionsJSON;
-
-    q[index] = newQuestion;
-
-    setQuestionsJSON(q);
-    setQuestions(JSON.stringify(q));
+    const updated = [...questionsJSON];
+    updated[index] = newQuestion;
+    setQuestionsJSON(updated);
+    setQuestions(JSON.stringify(updated));
   };
 
   const submitQuestion = () => {
@@ -109,10 +108,10 @@ const UploadMultiplePage = () => {
         value={questions}
         onChange={(e) => setQuestions(e.target.value)}
       />
-      <button onClick={parseQuestionsToJSON}>PARSE</button>
-      <button disabled={!questionsJSON.length} onClick={submitQuestion}>
-        submit
-      </button>
+      <Button onclick={parseQuestionsToJSON}>Parse</Button>
+      <Button disabled={!questionsJSON.length} onclick={submitQuestion}>
+        Submit
+      </Button>
       {questionsJSON.map((element, index) => (
         <div key={index} className={styles.row}>
           <div className={styles.question}>

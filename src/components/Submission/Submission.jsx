@@ -1,9 +1,16 @@
-import React, { useState } from "react";
-import styles from "./Submission.module.css";
-import SyntaxHighlight from "../SyntaxHighlight/SyntaxHighlight";
-import { dateOptions } from "../../utils/dateFormat";
+import React, { useState } from 'react';
+import styles from './Submission.module.css';
+import SyntaxHighlight from '../SyntaxHighlight/SyntaxHighlight';
+import { dateOptions } from '../../utils/dateFormat';
 
-function Submission({ question, studentAnswer, submitDate, isMarked, id }) {
+function Submission({
+  question,
+  studentAnswer,
+  submitDate,
+  isMarked,
+  id,
+  unique,
+}) {
   const [showHint, setShowHint] = useState(false);
   return (
     <>
@@ -15,14 +22,14 @@ function Submission({ question, studentAnswer, submitDate, isMarked, id }) {
           className={
             isMarked
               ? isMarked === 1
-                ? studentAnswer === question.answer || question.type === "s"
+                ? studentAnswer === question.answer || question.type === 's'
                   ? styles.correctQuestionContainer
                   : styles.wrongQuestionContainer
                 : styles.wrongQuestionContainer
               : styles.unMarkedContainer
           }
         >
-          {question.question.split("&code:").map((value, index) =>
+          {question.question.split('&code:').map((value, index) =>
             index === 1 ? (
               <SyntaxHighlight code={value} key={index} />
             ) : (
@@ -30,11 +37,11 @@ function Submission({ question, studentAnswer, submitDate, isMarked, id }) {
                 <h2 className={styles.question}>{value}</h2>
                 <div className={styles.dueDateContainer}>
                   <div>
-                    {submitDate === ""
+                    {submitDate === ''
                       ? null
-                      : "Submitted at " +
+                      : 'Submitted at ' +
                         new Date(submitDate).toLocaleString(
-                          "en-US",
+                          'en-US',
                           dateOptions
                         )}
                   </div>
@@ -42,11 +49,11 @@ function Submission({ question, studentAnswer, submitDate, isMarked, id }) {
                 </div>
                 <hr
                   style={{
-                    width: "100%",
-                    borderTop: "1px solid #cfcfcf",
+                    width: '100%',
+                    borderTop: '1px solid #cfcfcf',
                   }}
                 />
-                <div style={{ marginBottom: "15px" }}>
+                <div style={{ marginBottom: '15px' }}>
                   <div
                     className={styles.hintButtonContainer}
                     onClick={() => {
@@ -77,17 +84,17 @@ function Submission({ question, studentAnswer, submitDate, isMarked, id }) {
                     ? styles.wrongAnswerContainer
                     : styles.inputContainer
                 }
-                key={"D:" + element.id}
+                key={'D:' + element.id}
               >
                 <input
-                  style={{ margin: "auto 4px" }}
+                  style={{ margin: 'auto 4px' }}
                   type="radio"
                   id={
                     id
-                      ? id + ":" + element.id + ":" + element.value
-                      : "test:" + element.id + ":" + element.value
+                      ? id + ':' + element.id + ':' + element.value + unique
+                      : 'test:' + element.id + ':' + element.value + unique
                   }
-                  name={id ? id : "test"}
+                  name={id ? id : 'test'}
                   checked={element.value === studentAnswer}
                   value={element.value}
                   disabled={true}
@@ -96,17 +103,17 @@ function Submission({ question, studentAnswer, submitDate, isMarked, id }) {
                   className={styles.candidates}
                   htmlFor={
                     id
-                      ? id + ":" + element.id + ":" + element.value
-                      : "test:" + element.id + ":" + element.value
+                      ? id + ':' + element.id + ':' + element.value + unique
+                      : 'test:' + element.id + ':' + element.value + unique
                   }
                 >
-                  {element.value.includes("&code:") ? (
+                  {element.value.includes('&code:') ? (
                     <SyntaxHighlight
-                      code={element.value.split("&code:")[1]}
-                      key={"syntax" + element.id}
+                      code={element.value.split('&code:')[1]}
+                      key={'syntax' + element.id}
                     />
                   ) : (
-                    <div key={element.value + ":" + element.id}>
+                    <div key={element.value + ':' + element.id}>
                       {element.value}
                     </div>
                   )}
@@ -121,28 +128,28 @@ function Submission({ question, studentAnswer, submitDate, isMarked, id }) {
                     ? styles.wrongAnswerContainer
                     : styles.inputContainer
                 }
-                key={"D:" + index}
+                key={'D:' + index}
               >
                 <input
-                  style={{ margin: "auto 4px" }}
+                  style={{ margin: 'auto 4px' }}
                   type="radio"
-                  id={index + ":" + element}
-                  name={id ? id : "test"}
+                  id={index + ':' + element + unique}
+                  name={id ? id : 'test'}
                   checked={element === studentAnswer}
                   value={element}
                   disabled={true}
                 />
                 <label
                   className={styles.candidates}
-                  htmlFor={index + ":" + element}
+                  htmlFor={index + ':' + element + unique}
                 >
-                  {element.includes("&code:") ? (
+                  {element.includes('&code:') ? (
                     <SyntaxHighlight
-                      code={element.split("&code:")[1]}
-                      key={"syntax" + element.id}
+                      code={element.split('&code:')[1]}
+                      key={'syntax' + element.id}
                     />
                   ) : (
-                    <div key={element + ":" + index}>{element}</div>
+                    <div key={element + ':' + index}>{element}</div>
                   )}
                 </label>
               </div>

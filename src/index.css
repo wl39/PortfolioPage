@@ -86,6 +86,7 @@ body {
   font-style: italic;
   font-weight: 400;
 }
+
 /* 
 @font-face {
   font-family: "DM Sans";
@@ -252,8 +253,14 @@ textarea {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   border: 2px solid black;
+  box-shadow: 3px 3px black;
   padding-top: 6px;
+  margin: 10px 0px;
+  background: transparent;
+  box-sizing: border-box;
+  width: 100%;
 }
+
 
 input[type="radio"] {
   height: auto;

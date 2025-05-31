@@ -1,7 +1,7 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import styles from './TutoringArchivePage.module.css';
 import SelectableTutoringQuestions from '../../components/SelectableTutoringQuestions/SelectableTutoringQuestions';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
   getAllQuestions,
   postReassignQuestions,
@@ -11,10 +11,12 @@ import { formatToISO } from '../../utils/dateFormat';
 import { PageableContext } from '../../layouts/Pageable/PageableContext';
 
 function TutoringArchivePage() {
-  const navigate = useNavigate();
   const today = new Date(Date.now());
   today.setDate(today.getDate() + 14);
   const target = today.toISOString().slice(0, 19);
+
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const { setPageable, pageParams } = useContext(PageableContext);
 
@@ -82,7 +84,7 @@ function TutoringArchivePage() {
       } catch (error) {
         if (error.response && error.response.status === 401) {
           // 401 에러이면 로그인 페이지로 이동
-          navigate('/login');
+          navigate('/login', { state: { from: location }, replace: true });
         } else {
           console.error('Failed to fetch questions', error);
           alert('There is an issue on the server...!');
@@ -91,7 +93,7 @@ function TutoringArchivePage() {
     };
 
     fetchAllQuestions();
-  }, [setQuestionComponents, pageParams, setPageable, navigate]);
+  }, [setQuestionComponents, pageParams, setPageable, navigate, location]);
 
   const setStudents = () => {
     let storageStudents = localStorage.getItem('students');
