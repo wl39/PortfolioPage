@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { PageableContext } from '../../layouts/Pageable/PageableContext';
-import { useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { getSimpleMathCounts } from '../../services/api/SimpleMathQuestionService';
 // import Bar from '../../components/Bar/Bar';
 
@@ -16,6 +16,9 @@ const MathSolveResultPage = () => {
   const [totalPieChart, setTotalPieChart] = useState();
   const [totalCounts, setTotalCounts] = useState(0);
   const [width, setWidth] = useState(0);
+
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const handleResize = () => {
@@ -143,12 +146,18 @@ const MathSolveResultPage = () => {
           setPieCharts(pieCharts);
         })
         .catch((err) => {
-          console.error(err);
-
-          window.alert('There is an issue...');
+          if (
+            err.response &&
+            err.response.status &&
+            err.response.status === 401
+          ) {
+            navigate('/login', { state: { from: location }, replace: true });
+          } else {
+            window.alert('There is an issue...');
+          }
         });
     }
-  }, [pageParams, setPageable, studentName]);
+  }, [pageParams, setPageable, studentName, navigate, location]);
 
   return (
     <>
