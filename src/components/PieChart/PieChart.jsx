@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-function PieChart({ values, size = 300, fontSize = 14, gap = 4 }) {
+function PieChart({ values, size = 300, fontSize = 14, gap = 4, propStyles }) {
   const canvasRef = useRef(null);
   const [hoverIndex, setHoverIndex] = useState(null);
   const [hoverOffsets, setHoverOffsets] = useState(
@@ -59,7 +59,16 @@ function PieChart({ values, size = 300, fontSize = 14, gap = 4 }) {
     };
 
     draw();
-  }, [hoverOffsets, progress, centerX, centerY, radius, size, values]);
+  }, [
+    hoverOffsets,
+    fontSize,
+    progress,
+    centerX,
+    centerY,
+    radius,
+    size,
+    values,
+  ]);
 
   // 조각 확대 애니메이션 처리
   useEffect(() => {
@@ -76,7 +85,7 @@ function PieChart({ values, size = 300, fontSize = 14, gap = 4 }) {
 
     animationRef.current = requestAnimationFrame(animateOffset);
     return () => cancelAnimationFrame(animationRef.current);
-  }, [hoverIndex]);
+  }, [hoverIndex, gap]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -135,6 +144,7 @@ function PieChart({ values, size = 300, fontSize = 14, gap = 4 }) {
       width={size}
       height={size}
       style={{ display: 'block' }}
+      className={propStyles}
     />
   );
 }

@@ -5,19 +5,33 @@ import { getSimpleMathCounts } from '../../services/api/SimpleMathQuestionServic
 // import Bar from '../../components/Bar/Bar';
 
 import styles from './MathSolveResultPage.module.css';
-import PieChart from '../../components/PieChart/PieChart';
+import PieCahrtCard from '../../components/PieChartCard/PieChartCard';
 
 const MathSolveResultPage = () => {
   const { setPageable, setPageParams, pageParams } =
     useContext(PageableContext);
+
   const { studentName } = useParams();
   const [pieCharts, setPieCharts] = useState([]);
   const [totalPieChart, setTotalPieChart] = useState();
   const [totalCounts, setTotalCounts] = useState(0);
+  const [width, setWidth] = useState(0);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWidth(document.documentElement.clientWidth);
+    };
+
+    setWidth(document.documentElement.clientWidth);
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const generatePieChart = (
     correctCounts,
     wrongCounts,
+    date,
     size,
     fontSize,
     gap,
@@ -54,9 +68,10 @@ const MathSolveResultPage = () => {
     }));
 
     return (
-      <PieChart
+      <PieCahrtCard
         key={key}
         values={pieChartValues}
+        date={date}
         size={size}
         fontSize={fontSize}
         gap={gap}
@@ -88,7 +103,7 @@ const MathSolveResultPage = () => {
           let pieCharts = [];
           let localCounts = 0;
 
-          let localTotalCounts = 0;
+          let dates = [];
           let localCorrectTotalCounts = 0;
           let localWrongTotalCounts = 0;
 
@@ -97,23 +112,28 @@ const MathSolveResultPage = () => {
             localCorrectTotalCounts += value.correctCounts;
             localWrongTotalCounts += value.wrongCounts;
 
+            const formattedDate = value.date.replaceAll('-', '.');
+
             const pieChart = generatePieChart(
               value.correctCounts,
               value.wrongCounts,
-              150,
+              formattedDate,
+              width / 10,
               13,
               1,
               index + value.date
             );
 
             pieCharts = [...pieCharts, pieChart];
+            dates = [...dates, formattedDate];
           });
 
           setTotalPieChart(
             generatePieChart(
               localCorrectTotalCounts,
               localWrongTotalCounts,
-              400,
+              `${dates[dates.length - 1]} - ${dates[0]}`,
+              width / 2,
               20,
               4,
               'total'
@@ -133,8 +153,7 @@ const MathSolveResultPage = () => {
   return (
     <>
       <h1 className={styles.studentName}>{studentName}</h1>
-      {totalPieChart}
-      <div>{totalCounts}</div>
+      <div style={{ marginBottom: '20px' }}>{totalPieChart}</div>
       <div className={styles.barContainer}>{pieCharts}</div>
     </>
   );
