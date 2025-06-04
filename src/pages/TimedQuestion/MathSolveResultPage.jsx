@@ -121,7 +121,7 @@ const MathSolveResultPage = () => {
               value.correctCounts,
               value.wrongCounts,
               formattedDate,
-              width / 10,
+              width / (width <= 480 ? 5 : 10) - (width <= 480 ? 20 : 0),
               13,
               1,
               index + value.date
@@ -136,7 +136,7 @@ const MathSolveResultPage = () => {
               localCorrectTotalCounts,
               localWrongTotalCounts,
               `${dates[dates.length - 1]} - ${dates[0]}`,
-              width / 2,
+              width / (width <= 480 ? 1 : 2) - (width <= 480 ? 20 : 0),
               20,
               4,
               'total'
@@ -160,11 +160,11 @@ const MathSolveResultPage = () => {
   }, [pageParams, setPageable, studentName, navigate, location]);
 
   return (
-    <>
+    <div className={styles.container}>
       <h1 className={styles.studentName}>{studentName}</h1>
       <div style={{ marginBottom: '20px' }}>{totalPieChart}</div>
       <div className={styles.barContainer}>{pieCharts}</div>
-    </>
+    </div>
   );
 };
 

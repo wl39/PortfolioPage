@@ -1,3 +1,9 @@
+.container {
+    @media (max-width: 480px) {
+        margin: 0px 10px
+    }
+}
+
 .studentName {
     text-transform: capitalize;
 }

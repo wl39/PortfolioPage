@@ -172,7 +172,6 @@ export const getReviewQuestions = async (name, pageParams) => {
 
 /* Submission Page - DONE */
 export const getAllSubmissions = async (name, pageParams) => {
-  console.log(pageParams.sortParams);
   const sortQuery = pageParams.sortParams
     .map((value, index) => `sort=${value},${pageParams.sortTypes[index]}`)
     .join('&');
@@ -185,6 +184,18 @@ export const getAllSubmissions = async (name, pageParams) => {
     return response.data;
   } catch (error) {
     console.error('Error fetching submissions : ', error);
+    throw error;
+  }
+};
+
+/* Student Page (Subscriptions) */
+export const getAllSubscriptions = async (name) => {
+  try {
+    // http://localhost:8080/api/v1/subscriptions?name=wl39
+    const response = await axios.get(`subscriptions?name=${name}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching subscriptions : ', error);
     throw error;
   }
 };
