@@ -1,0 +1,66 @@
+.container {
+    display: flex;
+    padding: 30px 40px
+}
+
+.source {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.target {
+    flex: 1
+}
+
+.smallCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 24px;
+    border-width: 1px;
+    box-shadow: 2px 2px black;
+    padding: 8px 4px;
+    margin-bottom: 12px;
+}
+
+.valueAndCheckbox {
+    display: flex;
+    width: 100%;
+    min-height: 32px;
+    align-items: center;
+    position: relative;
+}
+
+.checkbox {
+    margin-left: 4px !important;
+    margin-right: 8px !important;
+}
+
+.mapContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.up {
+    width: 0;
+    height: 0;
+    border-bottom: 8px solid black;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    cursor: pointer;
+    position: absolute;
+    right: 8px;
+}
+
+.down {
+    width: 0;
+    height: 0;
+    border-top: 8px solid black;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    cursor: pointer;
+    position: absolute;
+    right: 8px;
+
+}

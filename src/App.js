@@ -22,6 +22,7 @@ import MathSolveResultPage from './pages/TimedQuestion/MathSolveResultPage';
 import SignUpPage from './pages/User/SignUpPage';
 import StudentPage from './pages/HomeworkManagementSystem/StudentPage';
 import ModifyQuestionPage from './pages/HomeworkManagementSystem/ModifyQuestionPage';
+import AdminMainPage from './pages/HomeworkManagementSystem/AdminPage/AdminMainPage';
 
 function App() {
   return (
@@ -67,6 +68,8 @@ function App() {
         <Route path="/teacher" element={<TeacherPage />} />
         <Route path="/marking/:studentName" element={<MarkingPage />} />
         <Route path="/user" element={<StudentPage />} />
+        <Route path="/91b-admin" element={<AdminMainPage />} />
+
         <Route path="/upload" element={<UploadPage />} />
         <Route path="/upload/multiples" element={<UploadMultiplePage />} />
         <Route path="/math" element={<MathSolveMainPage />} />

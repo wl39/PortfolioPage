@@ -214,3 +214,64 @@ export const getCalendarData = async (year, month, students) => {
     throw error;
   }
 };
+
+/* Auth Check */
+export const checkAuth = async () => {
+  try {
+    const response = await axios.get('users/auth-check');
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching user authentication : ', error);
+    throw error;
+  }
+};
+
+export const postService = async (name) => {
+  try {
+    const response = await axios.post('services', name, {
+      headers: {
+        'Content-Type': 'text/plain',
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching service : ', error);
+
+    throw error;
+  }
+};
+
+export const postSubscriptions = async (subscriptions) => {
+  try {
+    const response = await axios.post('subscriptions/multiples', subscriptions);
+
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching subscriptions : ', error);
+    throw error;
+  }
+};
+
+export const getAllServices = async () => {
+  try {
+    const response = await axios.get('services');
+
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching services : ', error);
+
+    throw error;
+  }
+};
+
+export const getAllStudents = async () => {
+  try {
+    const response = await axios.get('student');
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching students : ', error);
+
+    throw error;
+  }
+};

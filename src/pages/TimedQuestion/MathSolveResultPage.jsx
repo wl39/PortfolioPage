@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { PageableContext } from '../../layouts/Pageable/PageableContext';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { getSimpleMathCounts } from '../../services/api/SimpleMathQuestionService';
@@ -14,18 +14,16 @@ const MathSolveResultPage = () => {
   const { studentName } = useParams();
   const [pieCharts, setPieCharts] = useState([]);
   const [totalPieChart, setTotalPieChart] = useState();
-  const [totalCounts, setTotalCounts] = useState(0);
-  const [width, setWidth] = useState(0);
 
   const navigate = useNavigate();
   const location = useLocation();
 
+  const widthRef = useRef(document.documentElement.clientWidth);
+
   useEffect(() => {
     const handleResize = () => {
-      setWidth(document.documentElement.clientWidth);
+      widthRef.current = document.documentElement.clientWidth;
     };
-
-    setWidth(document.documentElement.clientWidth);
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
@@ -91,6 +89,7 @@ const MathSolveResultPage = () => {
     });
   }, [setPageParams]);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (pageParams.sortParam === 'submitDate') {
       getSimpleMathCounts(studentName, pageParams)
@@ -104,14 +103,12 @@ const MathSolveResultPage = () => {
           });
 
           let pieCharts = [];
-          let localCounts = 0;
 
           let dates = [];
           let localCorrectTotalCounts = 0;
           let localWrongTotalCounts = 0;
 
           response.content.forEach((value, index) => {
-            localCounts += value.correctCounts - value.wrongCounts;
             localCorrectTotalCounts += value.correctCounts;
             localWrongTotalCounts += value.wrongCounts;
 
@@ -121,7 +118,8 @@ const MathSolveResultPage = () => {
               value.correctCounts,
               value.wrongCounts,
               formattedDate,
-              width / (width <= 480 ? 5 : 10) - (width <= 480 ? 20 : 0),
+              widthRef.current / (widthRef.current <= 480 ? 5 : 10) -
+                (widthRef.current <= 480 ? 20 : 0),
               13,
               1,
               index + value.date
@@ -136,13 +134,13 @@ const MathSolveResultPage = () => {
               localCorrectTotalCounts,
               localWrongTotalCounts,
               `${dates[dates.length - 1]} - ${dates[0]}`,
-              width / (width <= 480 ? 1 : 2) - (width <= 480 ? 20 : 0),
+              widthRef.current / (widthRef.current <= 480 ? 1 : 2) -
+                (widthRef.current <= 480 ? 20 : 0),
               20,
               4,
               'total'
             )
           );
-          setTotalCounts(localCounts);
           setPieCharts(pieCharts);
         })
         .catch((err) => {
