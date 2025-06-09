@@ -1,31 +1,32 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import Submission from "../../components/Submission/Submission";
-import styles from "./SubmissionPage.module.css";
-import TutoringQuestions from "../../components/TutoringQuestions/TutoringQuestions";
-import { getReviewQuestions } from "../../services/api/HMSService";
-import { formatToISO } from "../../utils/dateFormat";
-import Button from "../../components/Button/Button";
+import React, { useCallback, useContext, useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import Submission from '../../components/Submission/Submission';
+import styles from './SubmissionPage.module.css';
+import TutoringQuestions from '../../components/TutoringQuestions/TutoringQuestions';
+import { getReviewQuestions } from '../../services/api/HMSService';
+import { formatToISO } from '../../utils/dateFormat';
+import Button from '../../components/Button/Button';
+import { PageableContext } from '../../layouts/Pageable/PageableContext';
 
 const pageParams = {
   page: 0,
   size: 10,
-  sortType: "desc",
-  sortParam: "id",
+  sortType: 'desc',
+  sortParam: 'id',
 };
 
 const emptyQuestion = {
   id: 0,
-  title: "Oops! It appears there are no incorrect answers at the moment.",
+  title: 'Oops! It appears there are no incorrect answers at the moment.',
   question: "Please come back after you've finished answering the questions.",
-  type: "m",
+  type: 'm',
   candidates: [],
-  hint: "Remember to return after completing the questions!",
+  hint: 'Remember to return after completing the questions!',
   studentsFor: [],
-  answer: "a",
-  explanation: "",
-  generatedDate: "",
-  targetDate: "",
+  answer: 'a',
+  explanation: '',
+  generatedDate: '',
+  targetDate: '',
   minAgo: 430,
   hourAgo: 7,
   dayAgo: 0,
@@ -37,9 +38,11 @@ const emptyQuestion = {
 const ReviewPage = () => {
   const { studentsName } = useParams();
 
+  const { pageParams, setPageable } = useContext(PageableContext);
+
   const [data, setData] = useState();
   const [submissions, setSubmissions] = useState([]);
-  const [searchParameter, setSearchParameter] = useState("Question");
+  const [searchParameter, setSearchParameter] = useState('Question');
   const [isSearchParamterClicked, setIsSearchParamterClicked] = useState(false);
   const [questionsData, setQuestionsData] = useState([]);
   const [answers, setAnswers] = useState({});
@@ -49,9 +52,9 @@ const ReviewPage = () => {
       const newAnswer = answers;
 
       newAnswer[questionID] = {
-        answer: "",
-        studentName: "",
-        submitDate: "",
+        answer: '',
+        studentName: '',
+        submitDate: '',
       };
       newAnswer[questionID].answer = answer;
       newAnswer[questionID].studentName = studentsName;
@@ -133,7 +136,7 @@ const ReviewPage = () => {
   };
 
   const inputHandler = (event) => {
-    if (event.target.value === null || event.target.value === "") {
+    if (event.target.value === null || event.target.value === '') {
       setSubmissionComponents(questionsData, false);
     } else {
       search(event.target.value);
@@ -144,7 +147,7 @@ const ReviewPage = () => {
     console.log(Object.keys(answers).length);
     console.log(data.length);
     if (Object.keys(answers).length !== data.length) {
-      window.alert("You should solve all questions");
+      window.alert('You should solve all questions');
     } else {
       setTemp(data, false, answers);
     }
@@ -154,26 +157,26 @@ const ReviewPage = () => {
 
     questionsData.forEach((value) => {
       switch (searchParameter) {
-        case "Question":
+        case 'Question':
           if (
             value.question.question.toLowerCase().includes(text.toLowerCase())
           ) {
             localQuestions = [...localQuestions, value];
           }
           break;
-        case "Answer":
+        case 'Answer':
           if (
             value.question.answer.toLowerCase().includes(text.toLowerCase())
           ) {
             localQuestions = [...localQuestions, value];
           }
           break;
-        case "Title":
+        case 'Title':
           if (value.question.title.toLowerCase().includes(text.toLowerCase())) {
             localQuestions = [...localQuestions, value];
           }
           break;
-        case "Explanation":
+        case 'Explanation':
           if (
             value.question.explanation
               .toLowerCase()
@@ -182,7 +185,7 @@ const ReviewPage = () => {
             localQuestions = [...localQuestions, value];
           }
           break;
-        case "Choice":
+        case 'Choice':
           for (let choice of value.question.candidates) {
             if (choice.toLowerCase().includes(text.toLowerCase())) {
               localQuestions = [...localQuestions, value];
@@ -190,7 +193,7 @@ const ReviewPage = () => {
             }
           }
           break;
-        case "Hint":
+        case 'Hint':
           if (value.question.hint.toLowerCase().includes(text.toLowerCase())) {
             localQuestions = [...localQuestions, value];
           }
@@ -243,7 +246,7 @@ const ReviewPage = () => {
       } catch (error) {
         console.error(error);
 
-        window.alert("There is an issue...");
+        window.alert('There is an issue...');
       }
     };
 
@@ -257,12 +260,12 @@ const ReviewPage = () => {
           {studentsName[0].toUpperCase() + studentsName.slice(1)}
         </h1>
         <Link
-          to={"/tutoring/" + studentsName}
-          style={{ marginTop: "22px", marginRight: "15px" }}
+          to={'/tutoring/' + studentsName}
+          style={{ marginTop: '22px', marginRight: '15px' }}
         >
           <button className={styles.button}>Questions</button>
         </Link>
-        <Link to={"/submission/" + studentsName} style={{ marginTop: "22px" }}>
+        <Link to={'/submission/' + studentsName} style={{ marginTop: '22px' }}>
           <button className={styles.button}>Submissions</button>
         </Link>
       </div>
@@ -287,25 +290,25 @@ const ReviewPage = () => {
           )}
           {isSearchParamterClicked ? (
             <div className={styles.searchDropdown}>
-              <button onClick={() => selectSearchParameter("Question")}>
+              <button onClick={() => selectSearchParameter('Question')}>
                 Question
               </button>
-              <button onClick={() => selectSearchParameter("Answer")}>
+              <button onClick={() => selectSearchParameter('Answer')}>
                 Answer
               </button>
-              <button onClick={() => selectSearchParameter("Title")}>
+              <button onClick={() => selectSearchParameter('Title')}>
                 Title
               </button>
-              <button onClick={() => selectSearchParameter("Explanation")}>
+              <button onClick={() => selectSearchParameter('Explanation')}>
                 Explanation
               </button>
-              <button onClick={() => selectSearchParameter("Choice")}>
+              <button onClick={() => selectSearchParameter('Choice')}>
                 Choice
               </button>
-              <button onClick={() => selectSearchParameter("Hint")}>
+              <button onClick={() => selectSearchParameter('Hint')}>
                 Hint
               </button>
-              <button onClick={() => selectSearchParameter("All")}>All</button>
+              <button onClick={() => selectSearchParameter('All')}>All</button>
             </div>
           ) : null}
         </div>
@@ -314,8 +317,8 @@ const ReviewPage = () => {
       {submissions.length === 0 ? (
         <TutoringQuestions
           question={emptyQuestion}
-          studentAnswer={""}
-          submitDate={""}
+          studentAnswer={''}
+          submitDate={''}
           isMarked={true}
           id={0}
         />
@@ -323,9 +326,7 @@ const ReviewPage = () => {
         submissions
       )}
       <div className={styles.buttonContainer}>
-        <Button
-          onClick={submit}
-          disabled={submissions.length === 0}>
+        <Button onclick={() => submit()} disabled={submissions.length === 0}>
           Submit
         </Button>
       </div>

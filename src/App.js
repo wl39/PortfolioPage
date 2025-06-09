@@ -44,7 +44,14 @@ function App() {
             </Pageable>
           }
         />
-        <Route path="/review/:studentsName" element={<ReviewPage />} />
+        <Route
+          path="/review/:studentsName"
+          element={
+            <Pageable key={'tutoring'} sortTypes={[]} sortParams={[]}>
+              <ReviewPage />{' '}
+            </Pageable>
+          }
+        />
         <Route
           path="/submission/:studentsName"
           element={
@@ -67,7 +74,7 @@ function App() {
         />
         <Route path="/teacher" element={<TeacherPage />} />
         <Route path="/marking/:studentName" element={<MarkingPage />} />
-        <Route path="/user" element={<StudentPage />} />
+        <Route path="/user/:studentName" element={<StudentPage />} />
         <Route path="/91b-admin" element={<AdminMainPage />} />
 
         <Route path="/upload" element={<UploadPage />} />

@@ -42,25 +42,8 @@
     width: 100%;
 }
 
-.up {
-    width: 0;
-    height: 0;
-    border-bottom: 8px solid black;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
+.triangle {
     cursor: pointer;
     position: absolute;
     right: 8px;
-}
-
-.down {
-    width: 0;
-    height: 0;
-    border-top: 8px solid black;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    cursor: pointer;
-    position: absolute;
-    right: 8px;
-
 }

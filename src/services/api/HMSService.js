@@ -275,3 +275,29 @@ export const getAllStudents = async () => {
     throw error;
   }
 };
+
+export const getAllUsers = async () => {
+  try {
+    const response = await axios.get('users');
+
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching students : ', error);
+
+    throw error;
+  }
+};
+
+export const getLatestSubmissionDayCountsByName = async (name) => {
+  try {
+    const response = await axios.get(
+      `submissions/day_counts/latest?name=${name}`
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching day counts : ', error);
+
+    throw error;
+  }
+};

@@ -3,12 +3,14 @@ import {
   checkAuth,
   getAllServices,
   getAllStudents,
+  getAllUsers,
   postService,
   postSubscriptions,
 } from '../../../services/api/HMSService';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Input from '../../../components/Input/Input';
 import AssignmentBox from '../../../components/AssignmentBox/AssignmentBox';
+import Accordion from '../../../components/Accordion/Accordion';
 
 function AdminMainPage() {
   const [user, setUser] = useState({});
@@ -103,8 +105,6 @@ function AdminMainPage() {
       const fetchNewService = async () => {
         try {
           const data = await postService(service);
-
-          console.log(data);
           alert(`Service ${service} is added!`);
         } catch (error) {
           alert(error);
@@ -159,15 +159,20 @@ function AdminMainPage() {
               }}
             />
           </div>
-          <AssignmentBox
-            source={services}
-            sourceToTargets={sourceToTargets}
-            target={target}
-            targetToSources={targetToSources}
-            submit={(s, t) => {
-              fetchSubscriptions(s, t);
-            }}
-          />
+          <Accordion title={'Service'}>
+            <AssignmentBox
+              source={services}
+              sourceToTargets={sourceToTargets}
+              target={target}
+              targetToSources={targetToSources}
+              submit={(s, t) => {
+                fetchSubscriptions(s, t);
+              }}
+            />
+          </Accordion>
+          <Accordion title={'Users'} onLoad={async () => getAllUsers()}>
+            {(data) => <div>{JSON.stringify(data)}</div>}
+          </Accordion>
         </div>
       ) : null}
     </>

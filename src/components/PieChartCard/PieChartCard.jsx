@@ -1,8 +1,25 @@
-import { useEffect } from 'react';
 import PieChart from '../PieChart/PieChart';
 
 import styles from './PieChartCard.module.css';
 
+/**
+ * 
+ * values
+[
+    {
+        "type": "wrong",
+        "percent": 48.81516587677725,
+        "value": 206,
+        "colour": "rgba(128, 128, 128, 0.58)"
+    },
+    {
+        "type": "correct",
+        "percent": 51.18483412322274,
+        "value": 216,
+        "colour": "rgba(0, 128, 0, 0.58)"
+    }
+]
+ */
 function PieCahrtCard({ values, date, size, fontSize, gap }) {
   const clampedSize = Math.max(size, 40);
   const isCorrect = values[0].type === 'wrong';

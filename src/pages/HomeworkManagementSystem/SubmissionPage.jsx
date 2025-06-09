@@ -224,7 +224,7 @@ function SubmissionPage() {
           {studentsName[0].toUpperCase() + studentsName.slice(1)}
         </h1>
         <div className={styles.linkContainer}>
-          <Link to={'/user'} style={{ marginTop: '22px' }}>
+          <Link to={'/user/' + studentsName} style={{ marginTop: '22px' }}>
             <button className={styles.button}>Details...</button>
           </Link>
           <Link to={'/tutoring/' + studentsName} style={{ marginTop: '22px' }}>

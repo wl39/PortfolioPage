@@ -5,6 +5,7 @@ import Card from '../Card/Card';
 
 import styles from './AssignmentBox.module.css';
 import Button from '../Button/Button';
+import Triangle from '../Triganle/Triangle';
 
 const AssignmentBox = ({
   source,
@@ -62,8 +63,9 @@ const AssignmentBox = ({
                   />
                   <label htmlFor={value}>{value}</label>
                   {sourceToTargets[value].length ? (
-                    <div
-                      className={sourceHide[value] ? styles.up : styles.down}
+                    <Triangle
+                      propStyles={styles.triangle}
+                      direction={sourceHide[value] ? 'up' : 'down'}
                       onClick={() =>
                         setSourceHide({
                           ...sourceHide,
@@ -113,8 +115,10 @@ const AssignmentBox = ({
                   />
                   <label htmlFor={value}>{value}</label>
                   {targetToSources[value].length ? (
-                    <div
-                      className={targetHide[value] ? styles.up : styles.down}
+                    <Triangle
+                      propStyles={styles.triangle}
+                      Triangle
+                      direction={targetHide[value] ? 'up' : 'down'}
                       onClick={() =>
                         setTargetHide({
                           ...targetHide,
