@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   getAllSubscriptions,
+  getLatestSimpleMathSubmissionDayCountsByName,
   getLatestSubmissionDayCountsByName,
 } from '../../services/api/HMSService';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
@@ -15,7 +16,6 @@ import styles from './StudentPage.module.css';
 
 const StudentPage = () => {
   // const [username, setUsername] = useState('');
-  const username = useSelector((state) => state.user.username);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -26,11 +26,6 @@ const StudentPage = () => {
   const userRef = useRef();
 
   const [services, setServices] = useState([]);
-
-  const redirectionMap = {
-    'Simple Math Question': '/math/result/',
-    Tutoring: '/tutoring/',
-  };
 
   useEffect(() => {
     const savedUsername = sessionStorage.getItem('username');
@@ -43,12 +38,10 @@ const StudentPage = () => {
   useEffect(() => {
     const fetchAllSubscriptions = async () => {
       try {
-        let localUsername =
-          userRef.current || studentName || sessionStorage.getItem('username');
+        let localUsername = studentName || sessionStorage.getItem('username');
 
         const result = await getAllSubscriptions(localUsername);
 
-        console.log(result);
         setServices(result);
       } catch (error) {
         if (error && error.response && error.response.status === 401) {
@@ -113,7 +106,7 @@ const StudentPage = () => {
 
   return (
     <>
-      <h1>
+      <h1 className={styles.title}>
         {studentName || sessionStorage.getItem('username') || 'Login First'}
       </h1>
       {services.map((value, index) => {
@@ -165,7 +158,46 @@ const StudentPage = () => {
               </Accordion>
             );
           case 'Simple Math Question':
-            return <></>;
+            return (
+              <Accordion
+                key={value + '.' + index}
+                title={value}
+                rightHeader={
+                  <>
+                    <Link
+                      to={'/math/start'}
+                      state={{ name: studentName }}
+                      style={{ marginRight: '8px' }}
+                    >
+                      <Button>Start</Button>
+                    </Link>
+
+                    <Link
+                      to={'/math/result/' + studentName}
+                      style={{ marginRight: '8px' }}
+                    >
+                      <Button>Result</Button>
+                    </Link>
+                  </>
+                }
+                onLoad={async () =>
+                  getLatestSimpleMathSubmissionDayCountsByName(studentName)
+                }
+              >
+                {(data) => (
+                  <Card propStyles={styles.card}>
+                    <div style={{ width: '300px' }}>
+                      {generatePieChart(
+                        data.correctCounts,
+                        data.wrongCounts,
+                        data.date.replaceAll('-', '.'),
+                        300
+                      )}
+                    </div>
+                  </Card>
+                )}
+              </Accordion>
+            );
           default:
             return null;
         }

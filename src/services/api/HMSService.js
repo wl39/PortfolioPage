@@ -301,3 +301,17 @@ export const getLatestSubmissionDayCountsByName = async (name) => {
     throw error;
   }
 };
+
+export const getLatestSimpleMathSubmissionDayCountsByName = async (name) => {
+  try {
+    const response = await axios.get(
+      `simple_math/day_counts/latest?name=${name}`
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching day counts : ', error);
+
+    throw error;
+  }
+};
