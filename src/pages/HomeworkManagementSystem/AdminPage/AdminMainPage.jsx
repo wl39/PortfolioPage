@@ -3,7 +3,9 @@ import {
   checkAuth,
   getAllServices,
   getAllStudents,
+  getAllTopics,
   getAllUsers,
+  getSimpleQuestionsWithTopics,
   postService,
   postSubscriptions,
 } from '../../../services/api/HMSService';
@@ -11,6 +13,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Input from '../../../components/Input/Input';
 import AssignmentBox from '../../../components/AssignmentBox/AssignmentBox';
 import Accordion from '../../../components/Accordion/Accordion';
+import Pageable from '../../../layouts/Pageable/Pageable';
+import QuestionTopicContainer from '../../../components/QuestionTopic/QuestionTopicContainer';
 
 function AdminMainPage() {
   const [user, setUser] = useState({});
@@ -144,6 +148,7 @@ function AdminMainPage() {
       fetchAllSubscriptions();
     }
   };
+
   return (
     <>
       {user ? (
@@ -159,7 +164,7 @@ function AdminMainPage() {
               }}
             />
           </div>
-          <Accordion title={'Service'}>
+          <Accordion title={'Services'}>
             <AssignmentBox
               source={services}
               sourceToTargets={sourceToTargets}
@@ -172,6 +177,17 @@ function AdminMainPage() {
           </Accordion>
           <Accordion title={'Users'} onLoad={async () => getAllUsers()}>
             {(data) => <div>{JSON.stringify(data)}</div>}
+          </Accordion>
+          <Accordion title={'Topics'} isHidden={true}>
+            <Pageable
+              key={'topics'}
+              isFixed={false}
+              hasScroll={false}
+              sortTypes={[]}
+              sortParams={[]}
+            >
+              <QuestionTopicContainer />
+            </Pageable>
           </Accordion>
         </div>
       ) : null}

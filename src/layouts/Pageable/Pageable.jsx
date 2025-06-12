@@ -4,9 +4,15 @@ import ScrollTo from '../../components/ScrollTo/ScrollTo';
 import PageParameterController from '../../components/PageParameterController/PageParameterController';
 import { PageableContext } from './PageableContext';
 
-import stylese from './Pageable.module.css';
+import styles from './Pageable.module.css';
 
-function Pageable({ children, sortTypes, sortParams }) {
+function Pageable({
+  children,
+  isFixed = true,
+  hasScroll = true,
+  sortTypes,
+  sortParams,
+}) {
   const [pageable, setPageable] = useState({
     numberOfElements: 5,
     size: 5,
@@ -29,8 +35,12 @@ function Pageable({ children, sortTypes, sortParams }) {
     <PageableContext.Provider
       value={{ pageable, setPageable, pageParams, setPageParams }}
     >
-      <div className={stylese.main}>
-        <div className={stylese.paramContainer}>
+      <div className={styles.main}>
+        <div
+          className={
+            isFixed ? styles.fixedParamContainer : styles.paramContainer
+          }
+        >
           <PageParameterController
             pageParams={pageParams}
             setPageParams={setPageParams}
@@ -39,7 +49,8 @@ function Pageable({ children, sortTypes, sortParams }) {
         {children}
         <br />
         <PageHandler pageable={pageable} changePage={changePage} />
-        <ScrollTo />
+
+        {hasScroll ? <ScrollTo /> : null}
       </div>
     </PageableContext.Provider>
   );

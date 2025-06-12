@@ -315,3 +315,34 @@ export const getLatestSimpleMathSubmissionDayCountsByName = async (name) => {
     throw error;
   }
 };
+
+export const getSimpleQuestionsWithTopics = async (pageParams, searchTitle) => {
+  try {
+    const sortQuery = pageParams.sortParams
+      .map((value, index) => `sort=${value},${pageParams.sortTypes[index]}`)
+      .join('&');
+
+    const basePath = searchTitle
+      ? '/search?title=' + encodeURIComponent(searchTitle)
+      : '';
+    const pageQuery = `page=${pageParams.page}&size=${pageParams.size}&${sortQuery}`;
+    const fullUrl = `questions/topics${
+      basePath ? basePath + '&' + pageQuery : '?' + pageQuery
+    }`;
+
+    const response = await axios.get(fullUrl);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getAllTopics = async () => {
+  try {
+    const response = await axios.get('topics');
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};

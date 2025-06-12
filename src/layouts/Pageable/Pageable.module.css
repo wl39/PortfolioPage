@@ -5,6 +5,11 @@
 }
 
 .paramContainer {
+  z-index: 2;
+  background-color: ivory;
+}
+
+.fixedParamContainer {
   position: fixed;
   right: 100px;
   z-index: 2;
