@@ -5,9 +5,11 @@ import PageParameterController from '../../components/PageParameterController/Pa
 import { PageableContext } from './PageableContext';
 
 import styles from './Pageable.module.css';
+import { classnames } from '../../utils/classnames';
 
 function Pageable({
   children,
+  propStyles,
   isFixed = true,
   hasScroll = true,
   sortTypes,
@@ -35,7 +37,7 @@ function Pageable({
     <PageableContext.Provider
       value={{ pageable, setPageable, pageParams, setPageParams }}
     >
-      <div className={styles.main}>
+      <div className={classnames([styles.main, propStyles])}>
         <div
           className={
             isFixed ? styles.fixedParamContainer : styles.paramContainer

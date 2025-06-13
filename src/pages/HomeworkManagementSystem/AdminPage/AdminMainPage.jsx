@@ -9,12 +9,15 @@ import {
   postService,
   postSubscriptions,
 } from '../../../services/api/HMSService';
+
 import { useLocation, useNavigate } from 'react-router-dom';
 import Input from '../../../components/Input/Input';
 import AssignmentBox from '../../../components/AssignmentBox/AssignmentBox';
 import Accordion from '../../../components/Accordion/Accordion';
 import Pageable from '../../../layouts/Pageable/Pageable';
 import QuestionTopicContainer from '../../../components/QuestionTopic/QuestionTopicContainer';
+
+import styles from './AdminMainPage.module.css';
 
 function AdminMainPage() {
   const [user, setUser] = useState({});
@@ -180,6 +183,7 @@ function AdminMainPage() {
           </Accordion>
           <Accordion title={'Topics'} isHidden={true}>
             <Pageable
+              propStyles={styles.pageableContainer}
               key={'topics'}
               isFixed={false}
               hasScroll={false}

@@ -13,6 +13,7 @@ const AssignmentBox = ({
   target,
   targetToSources,
   submit,
+  isSubmitting,
 }) => {
   const [sourceCheck, setSourceCheck] = useState({});
   const [targetCheck, setTargetCheck] = useState({});
@@ -147,10 +148,13 @@ const AssignmentBox = ({
         </div>
       </Card>
       <Button
+        disabled={isSubmitting}
         onclick={() => {
           submit(sourceCheck, targetCheck);
         }}
-      />
+      >
+        {isSubmitting ? 'Submitting ...' : 'Submit'}
+      </Button>
     </>
   );
 };

@@ -346,3 +346,31 @@ export const getAllTopics = async () => {
     throw error;
   }
 };
+
+export const postTopic = async (topic) => {
+  try {
+    const response = await axios.post('topics', topic, {
+      headers: {
+        'Content-Type': 'text/plain',
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const patchQuestionsTopics = async (questionsTopics) => {
+  try {
+    const response = await axios.patch('questions/topics', questionsTopics, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
