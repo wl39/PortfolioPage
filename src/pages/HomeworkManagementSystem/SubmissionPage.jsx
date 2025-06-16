@@ -49,7 +49,7 @@ function SubmissionPage() {
       totalQuestions++;
       localQuestions = [...localQuestions, value];
 
-      if (value.studentAnswer === value.question.answer) correctQuestions++;
+      if (value.marked === 1) correctQuestions++;
       submissionComponents = [
         ...submissionComponents,
         <Submission

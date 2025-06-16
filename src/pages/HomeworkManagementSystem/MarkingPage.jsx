@@ -1,13 +1,13 @@
-import React, { useEffect, useCallback, useState } from "react";
-import { useParams } from "react-router-dom";
-import TutoringMarking from "../../components/TutoringMarking/TutoringMarking";
-import styles from "./MarkingPage.module.css";
+import React, { useEffect, useCallback, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import TutoringMarking from '../../components/TutoringMarking/TutoringMarking';
+import styles from './MarkingPage.module.css';
 
 import {
   getUnmarkedSubmissions,
   putSubmissions,
-} from "../../services/api/HMSService";
-import Button from "../../components/Button/Button";
+} from '../../services/api/HMSService';
+import Button from '../../components/Button/Button';
 
 const MarkingPage = () => {
   const { studentName } = useParams();
@@ -50,7 +50,7 @@ const MarkingPage = () => {
   }, []);
 
   const markSubmissions = () => {
-    if (window.confirm("Are you sure to submit?")) {
+    if (window.confirm('Are you sure to submit?')) {
       const fetchMarkSubmissions = async () => {
         try {
           const res = await putSubmissions(mark);
@@ -58,7 +58,7 @@ const MarkingPage = () => {
           console.log(res);
         } catch (error) {
           console.log(error);
-          window.alert("There is an issue...");
+          window.alert('There is an issue...');
         } finally {
           // window.location.reload();
         }
@@ -77,7 +77,7 @@ const MarkingPage = () => {
       } catch (error) {
         console.log(error);
 
-        window.alert("There is an issue...");
+        window.alert('There is an issue...');
       }
     };
 
@@ -89,11 +89,7 @@ const MarkingPage = () => {
       <h1 className={styles.h1}>{studentName}</h1>
       {questions}
       <div className={styles.buttonContainer}>
-        <Button
-          onClick={markSubmissions}
-        >
-          Submit
-        </Button>
+        <Button onclick={markSubmissions}>Submit</Button>
       </div>
     </div>
   );

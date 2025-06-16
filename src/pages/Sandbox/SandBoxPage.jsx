@@ -77,14 +77,14 @@ function SandBoxPage(props) {
           sortTypes: ['desc'],
           sortParams: ['totalCount'],
         };
-        const data = await getSutdentTopicStats(pageParams, 'hyerin');
+        const data = await getSutdentTopicStats(pageParams, 'wl39');
 
         let newUser = {
           name: 'wl39',
           data: [],
         };
 
-        data.forEach((value) => {
+        data.content.forEach((value) => {
           newUser.data.push({
             label: value.topic,
             value: (value.correctCount / value.totalCount) * 100,
