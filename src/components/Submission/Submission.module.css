@@ -112,11 +112,13 @@
 }
 
 .wrongAnswerContainer {
+  margin: 10px 0px;
   padding-left: 10px;
   padding-right: 10px;
   display: flex;
   min-height: 36px;
   background-color: rgba(255, 0, 0, 0.58);
+  color: white;
 }
 
 .explanationContainer {

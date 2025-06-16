@@ -74,6 +74,18 @@ function Submission({
               </div>
             )
           )}
+
+          {question.type === 's' ? (
+            <div
+              className={
+                isMarked === 1
+                  ? styles.answerContainer
+                  : styles.wrongAnswerContainer
+              }
+            >
+              <div style={{ margin: 'auto 0px' }}>{studentAnswer}</div>
+            </div>
+          ) : null}
           {question.candidates.map((element, index) =>
             element.id ? (
               <div

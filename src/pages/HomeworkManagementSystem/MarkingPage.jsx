@@ -60,7 +60,7 @@ const MarkingPage = () => {
           console.log(error);
           window.alert('There is an issue...');
         } finally {
-          // window.location.reload();
+          window.location.reload();
         }
       };
 

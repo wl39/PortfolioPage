@@ -134,7 +134,7 @@ const StudentPage = () => {
                       <Button>Review</Button>
                     </Link>
                     <Link
-                      to={'/submissions/' + studentName}
+                      to={'/submission/' + studentName}
                       style={{ marginRight: '8px' }}
                     >
                       <Button>Submissions</Button>

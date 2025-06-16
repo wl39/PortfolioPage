@@ -38,10 +38,14 @@ const Calendar = ({ propStyles, students, isStudent = false }) => {
               <div
                 key={`${i}-${j}`}
                 className={
-                  e[name]['unmarked'] > 0 ? styles.toCheck : styles.mark
+                  e[name]['unmarked'] && !isStudent > 0
+                    ? styles.toCheck
+                    : styles.mark
                 }
                 onClick={() =>
-                  e[name]['unmarked'] > 0 ? navigate('/marking/' + name) : null
+                  e[name]['unmarked'] && !isStudent > 0
+                    ? navigate('/marking/' + name)
+                    : null
                 }
               >
                 <div>{name}</div>
@@ -53,7 +57,7 @@ const Calendar = ({ propStyles, students, isStudent = false }) => {
                   }
                 >
                   {e[name]['solved']}/{e[name]['questions']}
-                  {e[name]['unmarked'] > 0 ? (
+                  {e[name]['unmarked'] && !isStudent > 0 ? (
                     <div className={styles.unmarked}>
                       {e[name]['unmarked']}*
                     </div>
@@ -74,7 +78,7 @@ const Calendar = ({ propStyles, students, isStudent = false }) => {
 
       return daysArray;
     },
-    [navigate]
+    [navigate, isStudent]
   ); // No dependencies because it doesn't rely on external variables
 
   useEffect(() => {
@@ -123,7 +127,7 @@ const Calendar = ({ propStyles, students, isStudent = false }) => {
 
       fetchCalendarData(year, month, students, isStudent);
     }
-  }, [currentDate, students, generateCalendarDays]);
+  }, [currentDate, students, generateCalendarDays, isStudent]);
 
   const handlePreviousMonth = () => {
     setCurrentDate(
