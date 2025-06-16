@@ -8,6 +8,8 @@ import {
   getSimpleQuestionsWithTopics,
   postService,
   postSubscriptions,
+  reloadCalendars,
+  reloadTopicStats,
 } from '../../../services/api/HMSService';
 
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -18,6 +20,7 @@ import Pageable from '../../../layouts/Pageable/Pageable';
 import QuestionTopicContainer from '../../../components/QuestionTopic/QuestionTopicContainer';
 
 import styles from './AdminMainPage.module.css';
+import Reload from '../../../components/Reload/Reload';
 
 function AdminMainPage() {
   const [user, setUser] = useState({});
@@ -167,6 +170,10 @@ function AdminMainPage() {
               }}
             />
           </div>
+          <Accordion title={'Tutoring'} isHidden={true}>
+            <Reload title={'Calendar'} reload={reloadCalendars} />
+            <Reload title={'Topic Stats'} reload={reloadTopicStats} />
+          </Accordion>
           <Accordion title={'Services'}>
             <AssignmentBox
               source={services}

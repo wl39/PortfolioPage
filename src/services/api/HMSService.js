@@ -427,3 +427,23 @@ export const getSutdentTopicStats = async (pageParams, name) => {
     throw error;
   }
 };
+
+export const reloadTopicStats = async (name) => {
+  try {
+    const response = await axios.patch('stats/topics/reload/' + name);
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const reloadCalendars = async (name) => {
+  try {
+    const response = await axios.patch('calendars/' + name);
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
