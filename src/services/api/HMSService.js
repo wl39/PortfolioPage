@@ -396,7 +396,7 @@ export const getSutdentTopicStats = async (pageParams, name) => {
       .join('&');
 
     const pageQuery = `?page=${pageParams.page}&size=${pageParams.size}&${sortQuery}`;
-    const fullUrl = `stats/topics/${name}${pageQuery}`;
+    const fullUrl = `stats/topics/page/${name}${pageQuery}`;
 
     const response = await axios.get(fullUrl);
     return response.data;
