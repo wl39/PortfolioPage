@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {
+  getAllSubmissionDayCountsByName,
   getAllSubscriptions,
   getLatestSimpleMathSubmissionDayCountsByName,
   getLatestSubmissionDayCountsByName,
@@ -142,25 +143,53 @@ const StudentPage = () => {
                   </>
                 }
                 onLoad={async () =>
-                  getLatestSubmissionDayCountsByName(studentName)
+                  Promise.all([
+                    getLatestSubmissionDayCountsByName(studentName),
+                    getAllSubmissionDayCountsByName(studentName),
+                  ])
                 }
               >
                 {(data) => (
                   <>
+                    {console.log(data)}
                     <Card
                       propStyles={classnames([
                         styles.card,
                         styles.tutoringContainer,
                       ])}
                     >
-                      <div style={{ width: '300px' }}>
+                      <div
+                        style={{
+                          width: '640px',
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                        }}
+                      >
                         {generatePieChart(
-                          data.correctCounts,
-                          data.wrongCounts,
-                          data.date.replaceAll('-', '.'),
+                          data[0].correctCounts,
+                          data[0].wrongCounts,
+                          data[0].date.replaceAll('-', '.'),
+                          300
+                        )}
+                        {generatePieChart(
+                          data[1].reduce(
+                            (acc, value) => (acc += value.correctCounts),
+                            0
+                          ),
+                          data[1].reduce(
+                            (acc, value) => (acc += value.wrongCounts),
+                            0
+                          ),
+                          `${data[1][0].date.replaceAll('-', '.')}
+                           - 
+                          ${data[1][data[1].length - 1].date.replaceAll(
+                            '-',
+                            '.'
+                          )}`,
                           300
                         )}
                       </div>
+
                       <Calendar
                         propStyles={styles.calendar}
                         students={[studentName]}

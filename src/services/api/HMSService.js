@@ -12,6 +12,17 @@ export const login = async (loginForm) => {
   }
 };
 
+export const refresh = async () => {
+  try {
+    const response = await axios.post('users/refresh');
+
+    return response;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
 export const signup = async (signupForm) => {
   try {
     const response = await axios.post('users/signup', signupForm);
@@ -129,9 +140,9 @@ export const patchQuestions = async (toModify) => {
 };
 
 /* Marking Page - DONE */
-export const putSubmissions = async (mark) => {
+export const putSubmissions = async (mark, studentName) => {
   try {
-    const response = await axios.put('submissions/mark', mark);
+    const response = await axios.put('submissions/mark/' + studentName, mark);
 
     return response.data.content;
   } catch (error) {
@@ -307,6 +318,18 @@ export const getLatestSubmissionDayCountsByName = async (name) => {
     const response = await axios.get(
       `submissions/day_counts/latest?name=${name}`
     );
+
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching day counts : ', error);
+
+    throw error;
+  }
+};
+
+export const getAllSubmissionDayCountsByName = async (name) => {
+  try {
+    const response = await axios.get(`submissions/day_counts?name=${name}`);
 
     return response.data;
   } catch (error) {

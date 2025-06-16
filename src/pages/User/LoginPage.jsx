@@ -3,7 +3,7 @@ import LoginForm from '../../components/LoginForm/LoginForm';
 const LoginPage = () => {
   return (
     <>
-      <LoginForm directTo="tutoring" addParam={true} />
+      <LoginForm directTo="user" addParam={true} />
     </>
   );
 };

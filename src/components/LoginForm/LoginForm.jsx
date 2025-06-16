@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Card from '../../components/Card/Card';
@@ -9,7 +9,7 @@ import Card from '../../components/Card/Card';
 
 import styles from './LoginForm.module.css';
 import Input from '../../components/Input/Input';
-import { login } from '../../services/api/HMSService';
+import { login, refresh } from '../../services/api/HMSService';
 import Button from '../Button/Button';
 import { useDispatch } from 'react-redux';
 import { setUsername } from '../../features/user/userSlice';
@@ -55,6 +55,30 @@ const LoginForm = ({ directTo, addParam }) => {
         setPassword('');
       });
   };
+
+  useEffect(() => {
+    const refreshToken = async () => {
+      try {
+        const response = await refresh();
+
+        if (response.status === 200) {
+          if (from) {
+            navigate(from, { replace: true });
+          } else {
+            navigate(`/${directTo}/${addParam ? response.data : ''}`, {
+              state: { name: response.data },
+            });
+          }
+        }
+      } catch (error) {
+        alert('wtf?');
+
+        throw error;
+      }
+    };
+
+    refreshToken();
+  }, []);
 
   return (
     <>

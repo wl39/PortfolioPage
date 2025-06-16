@@ -53,7 +53,7 @@ const MarkingPage = () => {
     if (window.confirm('Are you sure to submit?')) {
       const fetchMarkSubmissions = async () => {
         try {
-          const res = await putSubmissions(mark);
+          const res = await putSubmissions(mark, studentName);
 
           console.log(res);
         } catch (error) {

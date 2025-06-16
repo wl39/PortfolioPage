@@ -133,7 +133,7 @@ const MathSolveResultPage = () => {
             generatePieChart(
               localCorrectTotalCounts,
               localWrongTotalCounts,
-              `${dates[dates.length - 1]} - ${dates[0]}`,
+              `${dates[0]} - ${dates[dates.length - 1]}`,
               widthRef.current / (widthRef.current <= 480 ? 1 : 2) -
                 (widthRef.current <= 480 ? 20 : 0),
               20,
