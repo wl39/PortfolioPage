@@ -1,10 +1,16 @@
-import React, { useState, useEffect, useCallback } from "react";
-import styles from "./Calendar.module.css";
+import React, { useState, useEffect, useCallback } from 'react';
+import styles from './Calendar.module.css';
 
-import { useNavigate } from "react-router-dom";
-import { getCalendarData } from "../../services/api/HMSService";
+import { useNavigate } from 'react-router-dom';
+import {
+  getCalendarData,
+  getStudentCalendarData,
+} from '../../services/api/HMSService';
+import Triangle from '../Triganle/Triangle';
+import Card from '../Card/Card';
+import { classnames } from '../../utils/classnames';
 
-const Calendar = ({ students }) => {
+const Calendar = ({ propStyles, students, isStudent = false }) => {
   const navigate = useNavigate();
   const [currentDate, setCurrentDate] = useState(new Date());
   const [calendarDays, setCalendarDays] = useState([]);
@@ -32,24 +38,24 @@ const Calendar = ({ students }) => {
               <div
                 key={`${i}-${j}`}
                 className={
-                  e[name]["unmarked"] > 0 ? styles.toCheck : styles.mark
+                  e[name]['unmarked'] > 0 ? styles.toCheck : styles.mark
                 }
                 onClick={() =>
-                  e[name]["unmarked"] > 0 ? navigate("/marking/" + name) : null
+                  e[name]['unmarked'] > 0 ? navigate('/marking/' + name) : null
                 }
               >
                 <div>{name}</div>
                 <div
                   className={
-                    e[name]["solved"] / e[name]["questions"] >= 0.9
+                    e[name]['solved'] / e[name]['questions'] >= 0.9
                       ? styles.green
                       : styles.red
                   }
                 >
-                  {e[name]["solved"]}/{e[name]["questions"]}
-                  {e[name]["unmarked"] > 0 ? (
+                  {e[name]['solved']}/{e[name]['questions']}
+                  {e[name]['unmarked'] > 0 ? (
                     <div className={styles.unmarked}>
-                      {e[name]["unmarked"]}*
+                      {e[name]['unmarked']}*
                     </div>
                   ) : null}
                 </div>
@@ -81,7 +87,9 @@ const Calendar = ({ students }) => {
 
       const fetchCalendarData = async (year, month, students) => {
         try {
-          const calendars = await getCalendarData(year, month, students);
+          const calendars = isStudent
+            ? await getStudentCalendarData(year, month, students[0])
+            : await getCalendarData(year, month, students);
 
           calendars.forEach((element) => {
             const stringDate = `${element.year}-${element.month}-${element.day}`;
@@ -109,11 +117,11 @@ const Calendar = ({ students }) => {
         } catch (error) {
           console.error(error);
 
-          window.alert("There is an issue...");
+          window.alert('There is an issue...');
         }
       };
 
-      fetchCalendarData(year, month, students);
+      fetchCalendarData(year, month, students, isStudent);
     }
   }, [currentDate, students, generateCalendarDays]);
 
@@ -131,53 +139,61 @@ const Calendar = ({ students }) => {
 
   const getMonthName = (monthIndex) => {
     const monthNames = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
     ];
     return monthNames[monthIndex];
   };
 
   return (
-    <div>
-      <div className={styles["calendar-header"]}>
+    <Card propStyles={classnames([propStyles, styles.card])}>
+      <div className={styles['calendar-header']}>
         <button className={styles.button} onClick={handlePreviousMonth}>
-          {"⯇"}
+          <Triangle
+            onClick={handlePreviousMonth}
+            direction={'left'}
+            propStyles={styles.left}
+          />
         </button>
         <span className={styles.span}>
           {currentDate.getFullYear()} {getMonthName(currentDate.getMonth())}
         </span>
         <button className={styles.button} onClick={handleNextMonth}>
-          {"⯈"}
+          <Triangle
+            onClick={handleNextMonth}
+            direction={'right'}
+            propStyles={styles.right}
+          />
         </button>
       </div>
-      <div className={styles["calendar-grid"]}>
-        <div className={styles["day-name"]}>Sun</div>
-        <div className={styles["day-name"]}>Mon</div>
-        <div className={styles["day-name"]}>Tue</div>
-        <div className={styles["day-name"]}>Wed</div>
-        <div className={styles["day-name"]}>Thu</div>
-        <div className={styles["day-name"]}>Fri</div>
-        <div className={styles["day-name"]}>Sat</div>
+      <div className={styles['calendar-grid']}>
+        <div className={styles['day-name']}>Sun</div>
+        <div className={styles['day-name']}>Mon</div>
+        <div className={styles['day-name']}>Tue</div>
+        <div className={styles['day-name']}>Wed</div>
+        <div className={styles['day-name']}>Thu</div>
+        <div className={styles['day-name']}>Fri</div>
+        <div className={styles['day-name']}>Sat</div>
 
         {calendarDays.map((day, index) => (
           <div key={`day-${index}`} className={styles.day}>
-            {" "}
+            {' '}
             {/* Use a unique key for each day */}
-            <div className={styles.dayContainer}>{day || ""}</div>
+            <div className={styles.dayContainer}>{day || ''}</div>
           </div>
         ))}
       </div>
-    </div>
+    </Card>
   );
 };
 

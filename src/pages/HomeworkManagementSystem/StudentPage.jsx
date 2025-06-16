@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {
   getAllSubscriptions,
   getLatestSimpleMathSubmissionDayCountsByName,
@@ -13,6 +13,8 @@ import Card from '../../components/Card/Card';
 import PieCahrtCard from '../../components/PieChartCard/PieChartCard';
 
 import styles from './StudentPage.module.css';
+import Calendar from '../../components/Calendar/Calendar';
+import { classnames } from '../../utils/classnames';
 
 const StudentPage = () => {
   // const [username, setUsername] = useState('');
@@ -144,16 +146,28 @@ const StudentPage = () => {
                 }
               >
                 {(data) => (
-                  <Card propStyles={styles.card}>
-                    <div style={{ width: '300px' }}>
-                      {generatePieChart(
-                        data.correctCounts,
-                        data.wrongCounts,
-                        data.date.replaceAll('-', '.'),
-                        300
-                      )}
-                    </div>
-                  </Card>
+                  <>
+                    <Card
+                      propStyles={classnames([
+                        styles.card,
+                        styles.tutoringContainer,
+                      ])}
+                    >
+                      <div style={{ width: '300px' }}>
+                        {generatePieChart(
+                          data.correctCounts,
+                          data.wrongCounts,
+                          data.date.replaceAll('-', '.'),
+                          300
+                        )}
+                      </div>
+                      <Calendar
+                        propStyles={styles.calendar}
+                        students={[studentName]}
+                        isStudent={true}
+                      />
+                    </Card>
+                  </>
                 )}
               </Accordion>
             );

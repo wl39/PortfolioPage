@@ -62,7 +62,7 @@ function QuestionTopicContainer({ data }) {
       setTopics(data[1]);
     } catch (error) {
       console.error(error);
-      alert('문제 목록을 불러오는 중 오류가 발생했습니다.');
+      alert('There is an issue while getting a list.');
     } finally {
       setLoading(false);
     }
@@ -77,7 +77,7 @@ function QuestionTopicContainer({ data }) {
         fetchQuestionTopics();
       } catch (error) {
         console.error(error);
-        alert('토픽 업로드 중 오류가 발생했습니다.');
+        alert('There is an issue on the server.');
       }
     }
   };
@@ -97,7 +97,7 @@ function QuestionTopicContainer({ data }) {
   // ✅ 수정된 submit 함수
   const submit = async (sourceCheck, targetCheck) => {
     if (!isNonEmptyObject(sourceCheck) || !isNonEmptyObject(targetCheck)) {
-      alert('문제 또는 토픽이 선택되지 않았습니다.');
+      alert('Question or topic is not selected');
       return;
     }
 
@@ -111,11 +111,11 @@ function QuestionTopicContainer({ data }) {
     try {
       setIsSubmitting(true);
       await patchQuestionsTopics(questionsTopics);
-      alert('업로드가 성공적으로 완료되었습니다!');
-      fetchQuestionTopics(); // 다시 불러오기
+      alert('Successfully Uploaded');
+      fetchQuestionTopics(); // reload
     } catch (error) {
       console.error('업로드 실패:', error);
-      alert('업로드 중 오류가 발생했습니다.');
+      alert('There is an issue on the server');
     } finally {
       setIsSubmitting(false);
     }

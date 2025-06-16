@@ -7,9 +7,16 @@ import Bar from '../../components/Bar/Bar';
 import ScatterPlot from '../../components/ScatterPlot/ScatterPlot';
 import RadarChart from '../../components/RadarChart/RadarChart';
 import LineGraph from '../../components/LineGraph/LineGraph';
+import { getSutdentTopicStats } from '../../services/api/HMSService';
 
 function SandBoxPage(props) {
   const [temp, setTemp] = useState(null);
+  const [radarData, setRadarData] = useState([
+    {
+      name: '',
+      data: [],
+    },
+  ]);
 
   const halo = () => {
     temp('Good job!');
@@ -61,6 +68,41 @@ function SandBoxPage(props) {
     { x: 6, y: 50 },
   ];
 
+  const temp2 = () => {
+    const temp = async () => {
+      try {
+        const pageParams = {
+          page: 0,
+          size: 6,
+          sortTypes: ['desc'],
+          sortParams: ['totalCount'],
+        };
+        const data = await getSutdentTopicStats(pageParams, 'hyerin');
+
+        let newUser = {
+          name: 'wl39',
+          data: [],
+        };
+
+        data.forEach((value) => {
+          newUser.data.push({
+            label: value.topic,
+            value: (value.correctCount / value.totalCount) * 100,
+          });
+        });
+
+        console.log(newUser);
+        setRadarData([newUser]);
+      } catch (error) {
+        alert('hi!');
+
+        throw error;
+      }
+    };
+
+    temp();
+  };
+
   return (
     <>
       {/* <div>Hello</div>
@@ -70,6 +112,7 @@ function SandBoxPage(props) {
       <SnackbarContainer addSnackbar={setTemp} />*/}
 
       <button onClick={halo}>temp!</button>
+      <button onClick={temp2}>temp!</button>
       <SnackbarContainer addSnackbar={setTemp} />
 
       <ScatterPlot width={900} height={800} data={data} />
@@ -77,6 +120,13 @@ function SandBoxPage(props) {
         width={400}
         height={400}
         dataList={userData}
+        colors={colorList}
+      />
+
+      <RadarChart
+        width={400}
+        height={400}
+        dataList={radarData}
         colors={colorList}
       />
       <LineGraph data={sampleData} width={700} height={400} />

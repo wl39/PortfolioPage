@@ -55,7 +55,7 @@
 
 .dayContainer {
   width: 100%;
-  margin-bottom: auto; 
+  margin-bottom: auto;
 }
 
 .dayText {
@@ -69,12 +69,12 @@
 }
 
 .toCheck {
-    background-color: lightgray;
-    text-transform: capitalize;
-    width: 100%;
-    font-weight: 700;
-    margin-bottom: 8px;
-    cursor: pointer;
+  background-color: lightgray;
+  text-transform: capitalize;
+  width: 100%;
+  font-weight: 700;
+  margin-bottom: 8px;
+  cursor: pointer;
 }
 
 .mark {
@@ -108,4 +108,20 @@
   font-size: 14px;
   color: black;
   top: 0px;
+}
+
+.card {
+  padding: 12px 8px;
+}
+
+.left {
+  border-right-width: 20px !important;
+  border-top-width: 12px !important;
+  border-bottom-width: 12px !important;
+}
+
+.right {
+  border-left-width: 20px !important;
+  border-top-width: 12px !important;
+  border-bottom-width: 12px !important;
 }

@@ -215,6 +215,20 @@ export const getCalendarData = async (year, month, students) => {
   }
 };
 
+/* Calendar - DONE */
+export const getStudentCalendarData = async (year, month, name) => {
+  try {
+    const response = await axios.get(
+      'calendars/' + name + '/' + year + '/' + (month + 1)
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching calendars : ', error);
+    throw error;
+  }
+};
+
 /* Auth Check */
 export const checkAuth = async () => {
   try {
@@ -369,6 +383,22 @@ export const patchQuestionsTopics = async (questionsTopics) => {
       },
     });
 
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getSutdentTopicStats = async (pageParams, name) => {
+  try {
+    const sortQuery = pageParams.sortParams
+      .map((value, index) => `sort=${value},${pageParams.sortTypes[index]}`)
+      .join('&');
+
+    const pageQuery = `?page=${pageParams.page}&size=${pageParams.size}&${sortQuery}`;
+    const fullUrl = `stats/topics/${name}${pageQuery}`;
+
+    const response = await axios.get(fullUrl);
     return response.data;
   } catch (error) {
     throw error;
