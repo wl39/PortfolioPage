@@ -71,8 +71,6 @@ const LoginForm = ({ directTo, addParam }) => {
           }
         }
       } catch (error) {
-        alert('wtf?');
-
         throw error;
       }
     };
