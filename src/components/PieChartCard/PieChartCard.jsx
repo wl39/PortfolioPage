@@ -25,7 +25,7 @@ function PieCahrtCard({ values, date, size, fontSize, gap }) {
   const clampedSize = Math.max(size, 40);
   const isCorrect = values[0].type === 'wrong';
   return (
-    <Card propStyles={styles.container}>
+    <Card fit={true} propStyles={styles.container}>
       <div
         className={styles.title}
         style={{ fontSize: `${clampedSize / 20}px` }}
