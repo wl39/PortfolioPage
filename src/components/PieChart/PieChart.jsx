@@ -18,6 +18,14 @@ function PieChart({ values, size = 300, fontSize = 14, gap = 4, propStyles }) {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
 
+    // Adjust for Retina (high DPI) displays
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = size * dpr;
+    canvas.height = size * dpr;
+    canvas.style.width = `${size}px`;
+    canvas.style.height = `${size}px`;
+    ctx.scale(dpr, dpr);
+
     const draw = () => {
       ctx.clearRect(0, 0, size, size);
       let startAngle = -0.5 * Math.PI;

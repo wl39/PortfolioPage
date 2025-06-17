@@ -9,6 +9,14 @@ const RadarChart = ({ size = 300, values, colors, fontSize = 12 }) => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
 
+    // Adjust for Retina (high DPI) displays
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = size * dpr;
+    canvas.height = size * dpr;
+    canvas.style.width = `${size}px`;
+    canvas.style.height = `${size}px`;
+    ctx.scale(dpr, dpr);
+
     const width = size;
     const height = size;
 
