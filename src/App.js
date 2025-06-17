@@ -23,6 +23,7 @@ import SignUpPage from './pages/User/SignUpPage';
 import StudentPage from './pages/HomeworkManagementSystem/StudentPage';
 import ModifyQuestionPage from './pages/HomeworkManagementSystem/ModifyQuestionPage';
 import AdminMainPage from './pages/HomeworkManagementSystem/AdminPage/AdminMainPage';
+import StatsPage from './pages/HomeworkManagementSystem/StatsPage/StatsPage';
 
 function App() {
   return (
@@ -75,6 +76,7 @@ function App() {
         <Route path="/teacher" element={<TeacherPage />} />
         <Route path="/marking/:studentName" element={<MarkingPage />} />
         <Route path="/user/:studentName" element={<StudentPage />} />
+        <Route path="/stats/:studentName" element={<StatsPage />} />
         <Route path="/91b-admin" element={<AdminMainPage />} />
 
         <Route path="/upload" element={<UploadPage />} />

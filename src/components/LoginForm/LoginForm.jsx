@@ -70,9 +70,7 @@ const LoginForm = ({ directTo, addParam }) => {
             });
           }
         }
-      } catch (error) {
-        throw error;
-      }
+      } catch (error) {}
     };
 
     refreshToken();

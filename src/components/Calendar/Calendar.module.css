@@ -125,3 +125,60 @@
   border-top-width: 12px !important;
   border-bottom-width: 12px !important;
 }
+
+@media (max-width: 480px) {
+  .header {
+    margin-bottom: 4px;
+  }
+
+  .button {
+    width: 24px;
+    height: 24px;
+  }
+
+  .left {
+    border-right-width: 12px !important;
+    border-top-width: 8px !important;
+    border-bottom-width: 8px !important;
+  }
+
+  .right {
+    border-left-width: 12px !important;
+    border-top-width: 8px !important;
+    border-bottom-width: 8px !important;
+  }
+
+  .span {
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  .calendar-grid {
+    gap: 3px
+  }
+
+  .day-name {
+    font-size: 12px;
+  }
+
+  .day {
+    min-height: 18px;
+  }
+
+  .dayText {
+    height: 12px;
+    line-height: 12px;
+    font-size: 12px;
+    margin-bottom: 4px;
+  }
+
+  .mark {
+    font-size: 10px;
+  }
+
+  .red {
+    font-size: 10px;
+    line-height: 10px;
+    height: 10px;
+  }
+}
