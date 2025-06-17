@@ -1,7 +1,7 @@
 .type {
   justify-content: flex-end;
   color: lightgray;
-  font-size: 10px;
+  font-size: 11px;
   display: flex;
 }
 
@@ -134,6 +134,6 @@
 
 @media (max-width: 480px) {
   .codeContainer {
-    font-size: 10px;
+    font-size: 11px;
   }
 }
