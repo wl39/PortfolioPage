@@ -23,3 +23,12 @@
     border: 1px solid gray;
     background-color: transparent;
 }
+
+@media (max-width: 480px) {
+    .button {
+        width: 88px;
+        height: 24px;
+        font-size: 12px;
+    }
+
+}

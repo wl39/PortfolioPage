@@ -41,7 +41,7 @@ function Accordion({
         style={{ borderBottom: hide ? '2px solid black' : '' }}
         className={styles.container}
       >
-        <h2 style={{ fontSize: '32px' }}>{title}</h2>
+        <h2 className={styles.title}>{title}</h2>
         <div className={styles.rightHeaderContainer}>
           {rightHeader}
           <Triangle

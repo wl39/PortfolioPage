@@ -116,19 +116,9 @@ function SandBoxPage(props) {
       <SnackbarContainer addSnackbar={setTemp} />
 
       <ScatterPlot width={900} height={800} data={data} />
-      <RadarChart
-        width={400}
-        height={400}
-        dataList={userData}
-        colors={colorList}
-      />
+      <RadarChart size={300} values={userData} colors={colorList} />
 
-      <RadarChart
-        width={400}
-        height={400}
-        dataList={radarData}
-        colors={colorList}
-      />
+      <RadarChart size={400} values={radarData} colors={colorList} />
       <LineGraph data={sampleData} width={700} height={400} />
       <Bar />
     </>

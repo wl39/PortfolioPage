@@ -18,7 +18,16 @@ import Calendar from '../../components/Calendar/Calendar';
 import { classnames } from '../../utils/classnames';
 
 const StudentPage = () => {
-  // const [username, setUsername] = useState('');
+  const windowWidth = useRef(0);
+  const isMobile = windowWidth.current <= 480;
+
+  const containerWidth = isMobile
+    ? windowWidth.current - 40
+    : (windowWidth.current - 200) / 2 + 40;
+
+  const pieChartSize = isMobile
+    ? (windowWidth.current - 60) / 2
+    : (windowWidth.current - 200) / 4;
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -36,6 +45,8 @@ const StudentPage = () => {
       userRef.current = savedUsername;
       dispatch(setUsername(savedUsername));
     }
+
+    windowWidth.current = window.innerWidth;
   }, [dispatch]);
 
   useEffect(() => {
@@ -123,20 +134,17 @@ const StudentPage = () => {
                   <>
                     <Link
                       to={'/tutoring/' + studentName}
-                      style={{ marginRight: '8px' }}
+                      className={styles.link}
                     >
                       <Button>Questions</Button>
                     </Link>
 
-                    <Link
-                      to={'/review/' + studentName}
-                      style={{ marginRight: '8px' }}
-                    >
+                    <Link to={'/review/' + studentName} className={styles.link}>
                       <Button>Review</Button>
                     </Link>
                     <Link
                       to={'/submission/' + studentName}
-                      style={{ marginRight: '8px' }}
+                      className={styles.link}
                     >
                       <Button>Submissions</Button>
                     </Link>
@@ -151,7 +159,6 @@ const StudentPage = () => {
               >
                 {(data) => (
                   <>
-                    {console.log(data)}
                     <Card
                       propStyles={classnames([
                         styles.card,
@@ -160,7 +167,7 @@ const StudentPage = () => {
                     >
                       <div
                         style={{
-                          width: '640px',
+                          width: `${containerWidth}px`,
                           display: 'flex',
                           justifyContent: 'space-between',
                         }}
@@ -169,7 +176,7 @@ const StudentPage = () => {
                           data[0].correctCounts,
                           data[0].wrongCounts,
                           data[0].date.replaceAll('-', '.'),
-                          300
+                          pieChartSize
                         )}
                         {generatePieChart(
                           data[1].reduce(
@@ -186,7 +193,7 @@ const StudentPage = () => {
                             '-',
                             '.'
                           )}`,
-                          300
+                          pieChartSize
                         )}
                       </div>
 

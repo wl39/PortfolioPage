@@ -2,6 +2,10 @@
     text-transform: capitalize;
 }
 
+.link {
+    margin-right: 8px;
+}
+
 .card {
     padding: 20px;
 }
@@ -12,5 +16,34 @@
 }
 
 .calendar {
-    width: 500px !important;
+    width: calc(50vw - 110px) !important;
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 40px;
+        margin: 10px 5px;
+    }
+
+    .subtitle .link {
+        margin-right: 4px;
+    }
+
+    .button {
+        width: 88px;
+        height: 24px;
+        font-size: 12px;
+    }
+
+    .tutoringContainer {
+        padding: 8px;
+        flex-direction: column;
+        margin-right: 12px;
+        margin-left: 8px;
+    }
+
+    .calendar {
+        margin-top: 12px;
+        width: calc(100vw - 60px) !important
+    }
 }

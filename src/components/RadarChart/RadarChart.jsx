@@ -1,10 +1,12 @@
 import React, { useRef, useEffect } from 'react';
 
-const RadarChart = ({ width, height, dataList, colors }) => {
+const RadarChart = ({ size = 300, values, colors, fontSize = 12 }) => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
-    if (!dataList || dataList.length === 0) return;
+    const width = size;
+    const height = size;
+    if (!values || values.length === 0) return;
 
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
@@ -18,18 +20,17 @@ const RadarChart = ({ width, height, dataList, colors }) => {
     const centerY = height / 2;
     const radius = (Math.min(width, height) / 2) * 0.75;
 
-    const count = dataList[0].data.length;
+    const count = values[0].data.length;
     const angleStep = (2 * Math.PI) / count;
 
     // 전체 최대값 계산
     const maxValue =
-      Math.max(...dataList.flatMap((user) => user.data.map((d) => d.value))) ||
-      1;
+      Math.max(...values.flatMap((user) => user.data.map((d) => d.value))) || 1;
 
     // 축과 라벨
     ctx.strokeStyle = '#aaa';
     ctx.fillStyle = 'black';
-    ctx.font = '12px sans-serif';
+    ctx.font = `${fontSize}px sans-serif`;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
 
@@ -48,7 +49,7 @@ const RadarChart = ({ width, height, dataList, colors }) => {
 
       const labelX = centerX + Math.cos(angle) * (radius + 20);
       const labelY = centerY + Math.sin(angle) * (radius + 20);
-      ctx.fillText(dataList[0].data[i].label, labelX, labelY);
+      ctx.fillText(values[0].data[i].label, labelX, labelY);
     }
 
     // 기준선 (5단계)
@@ -75,7 +76,7 @@ const RadarChart = ({ width, height, dataList, colors }) => {
     }
 
     // 각 유저의 값 그래프
-    dataList.forEach((user, index) => {
+    values.forEach((user, index) => {
       const fillColor = colors?.[index]?.fill || 'rgba(125,185,232,0.3)';
       const strokeColor = colors?.[index]?.stroke || '#7DB9E8';
 
@@ -95,14 +96,14 @@ const RadarChart = ({ width, height, dataList, colors }) => {
       ctx.lineWidth = 2;
       ctx.stroke();
     });
-  }, [dataList, width, height, colors]);
+  }, [values, size, colors]);
 
   return (
     <canvas
       ref={canvasRef}
-      width={width}
-      height={height}
-      style={{ border: '1px solid #aaa', background: 'ivory' }}
+      width={size}
+      height={size}
+      // style={{ border: '1px solid #aaa', background: 'ivory' }}
     />
   );
 };

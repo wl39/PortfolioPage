@@ -1,3 +1,4 @@
+import Card from '../Card/Card';
 import PieChart from '../PieChart/PieChart';
 
 import styles from './PieChartCard.module.css';
@@ -24,7 +25,7 @@ function PieCahrtCard({ values, date, size, fontSize, gap }) {
   const clampedSize = Math.max(size, 40);
   const isCorrect = values[0].type === 'wrong';
   return (
-    <div className={styles.container}>
+    <Card propStyles={styles.container}>
       <div
         className={styles.title}
         style={{ fontSize: `${clampedSize / 20}px` }}
@@ -85,7 +86,7 @@ function PieCahrtCard({ values, date, size, fontSize, gap }) {
         </div>
         <div>{values[0].value}</div>
       </div>
-    </div>
+    </Card>
   );
 }
 
