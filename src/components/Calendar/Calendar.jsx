@@ -22,28 +22,31 @@ const Calendar = ({ propStyles, students, isStudent = false }) => {
       let daysArray = [];
 
       for (let i = 0; i < firstDayOfMonth; i++) {
-        daysArray.push(null);
+        daysArray.push(<div key={`blank-${i}`} />);
       }
 
       for (let i = 1; i <= daysInMonth; i++) {
+        const dayContent = [];
+
+        dayContent.push(
+          <div key={`${i}-header`} className={styles.dayText}>
+            {i}
+          </div>
+        );
+
         if (data[i]) {
-          let div = [
-            <div key={`${i}-header`} className={styles.dayText}>
-              {i}
-            </div>,
-          ];
           data[i].forEach((e, j) => {
-            let name = Object.keys(e)[0];
-            div.push(
+            const name = Object.keys(e)[0];
+            dayContent.push(
               <div
                 key={`${i}-${j}`}
                 className={
-                  e[name]['unmarked'] && !isStudent > 0
+                  e[name]['unmarked'] && !isStudent
                     ? styles.toCheck
                     : styles.mark
                 }
                 onClick={() =>
-                  e[name]['unmarked'] && !isStudent > 0
+                  e[name]['unmarked'] && !isStudent
                     ? navigate('/marking/' + name)
                     : null
                 }
@@ -57,7 +60,7 @@ const Calendar = ({ propStyles, students, isStudent = false }) => {
                   }
                 >
                   {e[name]['solved']}/{e[name]['questions']}
-                  {e[name]['unmarked'] && !isStudent > 0 ? (
+                  {e[name]['unmarked'] && !isStudent ? (
                     <div className={styles.unmarked}>
                       {e[name]['unmarked']}*
                     </div>
@@ -66,67 +69,61 @@ const Calendar = ({ propStyles, students, isStudent = false }) => {
               </div>
             );
           });
-          daysArray.push(div);
-        } else {
-          daysArray.push(
-            <div key={`${i}-empty`} className={styles.dayText}>
-              {i}
-            </div>
-          );
         }
+
+        daysArray.push(
+          <div key={`${i}-container`} className={styles.dayContentWrapper}>
+            {dayContent}
+          </div>
+        );
       }
 
       return daysArray;
     },
     [navigate, isStudent]
-  ); // No dependencies because it doesn't rely on external variables
+  );
 
   useEffect(() => {
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth();
-    setCalendarDays(generateCalendarDays(year, month, {}));
 
-    if (students) {
-      const transformedData = {};
+    if (!students) return;
 
-      const fetchCalendarData = async (year, month, students) => {
-        try {
-          const calendars = isStudent
-            ? await getStudentCalendarData(year, month, students[0])
-            : await getCalendarData(year, month, students);
+    const transformedData = {};
 
-          calendars.forEach((element) => {
-            const stringDate = `${element.year}-${element.month}-${element.day}`;
-            const date = new Date(stringDate).getDate();
-            const studentName = element.student.name;
+    const fetchCalendarData = async () => {
+      try {
+        const calendars = isStudent
+          ? await getStudentCalendarData(year, month, students[0])
+          : await getCalendarData(year, month, students);
 
-            const studentEntry = {
-              [studentName]: {
-                solved: element.solved,
-                unmarked: element.toMark, // Change this if you want to use a different value for "marked"
-                questions: element.unsolved + element.solved,
-              },
-            };
+        calendars.forEach((element) => {
+          const date = element.day;
+          const studentName = element.student.name;
 
-            // Initialize the date entry if it doesn't exist
-            if (!transformedData[date]) {
-              transformedData[date] = [];
-            }
+          const studentEntry = {
+            [studentName]: {
+              solved: element.solved,
+              unmarked: element.toMark,
+              questions: element.unsolved + element.solved,
+            },
+          };
 
-            // Push the student entry into the corresponding date array
-            transformedData[date].push(studentEntry);
-          });
+          if (!transformedData[date]) {
+            transformedData[date] = [];
+          }
 
-          setCalendarDays(generateCalendarDays(year, month, transformedData));
-        } catch (error) {
-          console.error(error);
+          transformedData[date].push(studentEntry);
+        });
 
-          window.alert('There is an issue...');
-        }
-      };
+        setCalendarDays(generateCalendarDays(year, month, transformedData));
+      } catch (error) {
+        console.error(error);
+        window.alert('There is an issue...');
+      }
+    };
 
-      fetchCalendarData(year, month, students, isStudent);
-    }
+    fetchCalendarData();
   }, [currentDate, students, generateCalendarDays, isStudent]);
 
   const handlePreviousMonth = () => {
@@ -191,11 +188,10 @@ const Calendar = ({ propStyles, students, isStudent = false }) => {
 
         {calendarDays.map((day, index) => (
           <div key={`day-${index}`} className={styles.day}>
-            {' '}
-            {/* Use a unique key for each day */}
             <div className={styles.dayContainer}>{day || ''}</div>
           </div>
         ))}
+        {console.log('hi')}
       </div>
     </Card>
   );
