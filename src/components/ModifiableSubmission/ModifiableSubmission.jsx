@@ -5,6 +5,10 @@ import SyntaxHighlight from '../SyntaxHighlight/SyntaxHighlight';
 import { dateOptions } from '../../utils/dateFormat';
 import { classnames } from '../../utils/classnames';
 
+import Input from '../Input/Input';
+import Cross from '../Cross/Cross';
+import Card from '../Card/Card';
+
 const defaultQuestion = {
   title: '',
   question: '',
@@ -12,6 +16,7 @@ const defaultQuestion = {
   candidates: [],
   hint: '',
   students: [],
+  topics: [],
   answer: '',
   explanation: '',
   generatedDate: '',
@@ -34,12 +39,20 @@ function ModifiableSubmission({
     setNewQuestion(question);
   }, [question]);
 
-  const changeValue = (value, type) => {
+  const changeValue = (value, type, reload = false, index) => {
     setIsChanged(true);
     setNewQuestion((prevQuestion) => ({
       ...prevQuestion, // Spread the previous state
       [type]: value, // Update the specific property
     }));
+
+    if (reload) {
+      let localNewQuestion = { ...newQuestion, [type]: value };
+
+      console.log(localNewQuestion);
+
+      modify(localNewQuestion, index);
+    }
   };
 
   const changeValueAndModify = (value, type, index) => {
@@ -348,6 +361,56 @@ function ModifiableSubmission({
                   </label>
                 </div>
               ))}
+
+          {isModifying ? (
+            <div>
+              <Input
+                propStyles={mStyles.topic_input}
+                placeholder={'Topic to add (Press Enter Key to add...)'}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter' && !event.nativeEvent.isComposing) {
+                    changeValue(
+                      [...question.topics, event.target.value],
+                      'topics',
+                      true,
+                      index
+                    );
+
+                    event.target.value = '';
+                  }
+                }}
+              />
+
+              <div className={mStyles.topic_card_container}>
+                {question.topics.map((value, topicIndex) => (
+                  <Card
+                    propStyles={mStyles.topic_card}
+                    key={'T.' + value + '.' + topicIndex}
+                  >
+                    <div>{value}</div>
+                    <Cross
+                      size={24}
+                      line={5}
+                      onClick={() =>
+                        changeValue(
+                          question.topics.filter((topic) => topic !== value),
+                          'topics',
+                          true,
+                          index
+                        )
+                      }
+                    />
+                  </Card>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div>
+              {question.topics.map((value) => (
+                <div key={'t.' + value + '.' + index}>{value}</div>
+              ))}
+            </div>
+          )}
 
           {isModifying ? (
             <textarea

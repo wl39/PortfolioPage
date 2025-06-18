@@ -52,3 +52,24 @@
 .answer_label {
   margin: auto 0px
 }
+
+.topic_input {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.topic_card_container {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.topic_card {
+  display: flex;
+  height: 24px;
+  line-height: 24px;
+  padding: 2px 4px;
+  border: 1px solid black;
+  box-shadow: 2px 2px black;
+}

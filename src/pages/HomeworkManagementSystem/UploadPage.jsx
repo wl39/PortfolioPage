@@ -1,26 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
-import styles from "./UploadPage.module.css";
-import { Link } from "react-router-dom";
-import UploadForm from "../../components/UploadForm/UploadForm";
-import UploadFixer from "../../components/UploadFixer/UploadFixer";
-import DragAndDrop from "../../components/DragAndDrop/DragAndDrop";
-import { postQuestion } from "../../services/api/HMSService";
-import { formatToISO } from "../../utils/dateFormat";
+import styles from './UploadPage.module.css';
+import { Link } from 'react-router-dom';
+import UploadForm from '../../components/UploadForm/UploadForm';
+import UploadFixer from '../../components/UploadFixer/UploadFixer';
+import DragAndDrop from '../../components/DragAndDrop/DragAndDrop';
+import { postQuestion } from '../../services/api/HMSService';
+import { formatToISO } from '../../utils/dateFormat';
 
 function UploadPage() {
   const [questions, setQuestions] = useState({
-    title: "",
-    question: "",
-    type: "",
+    title: '',
+    question: '',
+    type: '',
     candidates: [],
-    hint: "",
+    hint: '',
     students: [],
-    studentsForString: "",
-    answer: "",
-    explanation: "",
+    studentsForString: '',
+    topics: [],
+    topcisForString: '',
+    answer: '',
+    explanation: '',
     generatedDate: formatToISO(Date.now()).sli,
-    targetDate: "",
+    targetDate: '',
   });
 
   const [fixed, setFixed] = useState({
@@ -31,12 +33,13 @@ function UploadPage() {
     candidates: false,
     hints: false,
     students: false,
+    topics: false,
     answer: false,
     explanation: false,
     target_date: false,
   });
 
-  const [question, setQuestion] = useState("");
+  const [question, setQuestion] = useState('');
   const [candidates, setCandidates] = useState([]);
   const [isAnswerCode, setIsAnswerCode] = useState(false);
 
@@ -51,45 +54,49 @@ function UploadPage() {
 
   const resetQuestions = () => {
     setQuestions({
-      title: "",
-      question: "",
-      type: "",
+      title: '',
+      question: '',
+      type: '',
       candidates: [],
-      hint: "",
+      hint: '',
       students: [],
-      studentsForString: "",
-      answer: "",
-      explanation: "",
+      studentsForString: '',
+      topics: [],
+      topcisForString: '',
+      answer: '',
+      explanation: '',
       generatedDate: formatToISO(Date.now()),
-      targetDate: "",
+      targetDate: '',
     });
   };
 
   const resetQuestionsOnSubmit = () => {
     setQuestions({
-      title: fixed.title ? questions.title : "",
-      question: fixed.question ? questions.question : "",
-      type: fixed.type ? questions.type : "",
-      candidates: fixed.type ? Array(questions.candidates.length).fill("") : [],
-      hint: fixed.hints ? questions.hint : "",
+      title: fixed.title ? questions.title : '',
+      question: fixed.question ? questions.question : '',
+      type: fixed.type ? questions.type : '',
+      candidates: fixed.type ? Array(questions.candidates.length).fill('') : [],
+      hint: fixed.hints ? questions.hint : '',
       students: fixed.students ? questions.students : [],
-      studentsForString: fixed.students ? questions.studentsForString : "",
-      answer: fixed.answer ? questions.answer : "",
-      explanation: fixed.explanation ? questions.explanation : "",
+      studentsForString: fixed.students ? questions.studentsForString : '',
+      topics: fixed.topics ? questions.topics : [],
+      topcisForString: fixed.topics ? questions.topcisForString : '',
+      answer: fixed.answer ? questions.answer : '',
+      explanation: fixed.explanation ? questions.explanation : '',
       generatedDate: formatToISO(Date.now()),
-      targetDate: fixed.target_date ? questions.targetDate : "",
+      targetDate: fixed.target_date ? questions.targetDate : '',
     });
   };
 
   const inputHandler = (event, type) => {
     switch (type) {
-      case "title":
+      case 'title':
         setQuestions({ ...questions, title: event.target.value });
         break;
-      case "question":
-        let code = "";
-        if (questions.question.includes("&code:")) {
-          code = "&code:" + questions.question.split("&code:")[1];
+      case 'question':
+        let code = '';
+        if (questions.question.includes('&code:')) {
+          code = '&code:' + questions.question.split('&code:')[1];
         }
         setQuestion(event.target.value);
         setQuestions({
@@ -97,7 +104,7 @@ function UploadPage() {
           question: event.target.value + code,
         });
         break;
-      case "code":
+      case 'code':
         if (!event.target.value) {
           setQuestions({
             ...questions,
@@ -106,26 +113,26 @@ function UploadPage() {
         } else {
           setQuestions({
             ...questions,
-            question: question + "&code:" + event.target.value,
+            question: question + '&code:' + event.target.value,
           });
         }
         break;
-      case "hint":
+      case 'hint':
         setQuestions({ ...questions, hint: event.target.value });
         break;
-      case "ans":
+      case 'ans':
         setQuestions({ ...questions, answer: event.target.value });
         break;
-      case "exp":
+      case 'exp':
         setQuestions({ ...questions, explanation: event.target.value });
         break;
-      case "target":
+      case 'target':
         setQuestions({ ...questions, targetDate: event.target.value });
         break;
-      case "can":
+      case 'can':
         const numCandidates = parseInt(event.target.value);
         if (numCandidates) {
-          let newCandidates = Array(numCandidates).fill("");
+          let newCandidates = Array(numCandidates).fill('');
           let candidates = Array(numCandidates).fill(false);
           setQuestions({
             ...questions,
@@ -143,21 +150,38 @@ function UploadPage() {
           });
         }
         break;
-      case "for":
+      case 'for':
         let pageStudents = [];
         let string = event.target.value;
 
         pageStudents = string
           .toLowerCase()
           .trimStart()
-          .replace(/,\s+/g, ",")
-          .split(",");
+          .replace(/,\s+/g, ',')
+          .split(',');
         pageStudents = pageStudents.filter((value) => value);
 
         setQuestions({
           ...questions,
           students: pageStudents,
           studentsForString: event.target.value,
+        });
+        break;
+      case 'topic':
+        let pageTopic = [];
+        let topicString = event.target.value;
+
+        pageTopic = topicString
+          .toLowerCase()
+          .trimStart()
+          .replace(/,\s+/g, ',')
+          .split(',');
+        pageTopic = pageTopic.filter((value) => value);
+
+        setQuestions({
+          ...questions,
+          topics: pageTopic,
+          topcisForString: event.target.value,
         });
         break;
       default:
@@ -176,9 +200,9 @@ function UploadPage() {
       const newCandidates = [...questions.candidates];
 
       if (updatedCandidates[index])
-        newCandidates[index] = "&code:" + newCandidates[index];
+        newCandidates[index] = '&code:' + newCandidates[index];
       else {
-        newCandidates[index] = newCandidates[index].replace("&code:", "");
+        newCandidates[index] = newCandidates[index].replace('&code:', '');
       }
 
       setQuestions({
@@ -196,49 +220,49 @@ function UploadPage() {
 
   const uploadQuestions = () => {
     if (!questions.answer) {
-      window.alert("Answer is missing.");
+      window.alert('Answer is missing.');
       return;
     }
 
     if (!questions.title) {
-      window.alert("Title is missing.");
+      window.alert('Title is missing.');
       return;
     }
 
     if (!questions.type) {
-      window.alert("Type is missing.");
+      window.alert('Type is missing.');
       return;
     }
 
     if (!questions.explanation) {
-      window.alert("Explanation is missing.");
+      window.alert('Explanation is missing.');
       return;
     }
 
     if (!questions.question) {
-      window.alert("Question is missing.");
+      window.alert('Question is missing.');
       return;
     }
 
     if (!questions.targetDate) {
-      window.alert("Target Date is missing.");
+      window.alert('Target Date is missing.');
       return;
     }
 
-    if (window.confirm("This will be the question info: " + questions)) {
+    if (window.confirm('This will be the question info: ' + questions)) {
       if (questions) {
         const fetchQuestion = async (questions) => {
           try {
             const response = await postQuestion(questions);
 
-            window.alert("Successfully uploaded!");
+            window.alert('Successfully uploaded!');
             if (questions.studentsForString) setStudents();
             console.log(response.data);
             resetQuestionsOnSubmit();
           } catch (error) {
             console.error(error);
 
-            window.alert("There is an issue...");
+            window.alert('There is an issue...');
           }
         };
 
@@ -248,18 +272,18 @@ function UploadPage() {
   };
 
   const setStudents = () => {
-    let storageStudents = localStorage.getItem("students");
+    let storageStudents = localStorage.getItem('students');
 
     let pageStudents = [];
 
     pageStudents = questions.studentsForString
       .toLowerCase()
       .trimStart()
-      .replace(/,\s+/g, ",")
-      .split(",");
+      .replace(/,\s+/g, ',')
+      .split(',');
 
     if (storageStudents) {
-      let array = storageStudents.split(",");
+      let array = storageStudents.split(',');
       pageStudents.forEach((element) => {
         if (!array.includes(element)) {
           array.push(element);
@@ -273,7 +297,7 @@ function UploadPage() {
     pageStudents = pageStudents.filter((value) => value);
     console.log(pageStudents);
 
-    localStorage.setItem("students", pageStudents);
+    localStorage.setItem('students', pageStudents);
   };
 
   const fixedHandler = (event) => {
@@ -287,10 +311,10 @@ function UploadPage() {
           TEMP
         </button>
         <div className={styles.linkContainer}>
-          <Link className={styles.linkButton} to={"/questions"}>
+          <Link className={styles.linkButton} to={'/questions'}>
             Archive
           </Link>
-          <Link className={styles.linkButton} to={"/teacher"}>
+          <Link className={styles.linkButton} to={'/teacher'}>
             Teacher
           </Link>
           <DragAndDrop x={350} y={40}>
