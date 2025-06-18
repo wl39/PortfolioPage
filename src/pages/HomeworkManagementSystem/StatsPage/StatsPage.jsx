@@ -84,38 +84,34 @@ function StatsPage() {
     getUserData();
   }, []);
 
-  return (
+  return userData.length ? (
     <div className={styles.container}>
-      {userData.length ? (
-        <Card>
-          <pre>Student Name: {studentName}</pre>
-          <pre>Latest Submissions: {userData[0].date.replaceAll('-', '.')}</pre>
-          {userData[3] ? (
-            <pre>Latest Assignments: {userData[3]}</pre>
-          ) : (
-            <pre>{studentName} solved all assigned questions.</pre>
-          )}
-        </Card>
-      ) : null}
-      <div>
+      <Card>
+        <pre>Student Name: {studentName}</pre>
+        <pre>Latest Submissions: {userData[0].date.replaceAll('-', '.')}</pre>
+        {userData[3] ? (
+          <pre>Latest Assignments: {userData[3]}</pre>
+        ) : (
+          <pre>{studentName} solved all assigned questions.</pre>
+        )}
+      </Card>
+
+      <div className={styles.cardContainer}>
         <Card>
           <div className={styles.pieChartContainer}>
-            {userData.length
-              ? generatePieChart(
-                  userData[0].correctCounts,
-                  userData[0].wrongCounts,
-                  userData[0].date.replaceAll('-', '.'),
-                  chartSize
-                )
-              : null}
-            {userData.length
-              ? generatePieChart(
-                  totalCorrectCounts,
-                  totalWrongCounts,
-                  dateFromTo,
-                  chartSize
-                )
-              : null}
+            {generatePieChart(
+              userData[0].correctCounts,
+              userData[0].wrongCounts,
+              userData[0].date.replaceAll('-', '.'),
+              chartSize
+            )}
+
+            {generatePieChart(
+              totalCorrectCounts,
+              totalWrongCounts,
+              dateFromTo,
+              chartSize
+            )}
           </div>
           <pre>
             {`${studentName} solved ${
@@ -139,29 +135,27 @@ function StatsPage() {
             %
           </pre>
         </Card>
-        {userData.length ? (
-          <RadarChartCard
-            size={windowWidth.current}
-            values={[
-              {
-                name: studentName,
-                data: userData[2].content.reduce((acc, value) => {
-                  acc.push({
-                    label: value.topic,
-                    value: value.correctCount / value.totalCount,
-                  });
+        <RadarChartCard
+          size={windowWidth.current}
+          values={[
+            {
+              name: studentName,
+              data: userData[2].content.reduce((acc, value) => {
+                acc.push({
+                  label: value.topic,
+                  value: value.correctCount / value.totalCount,
+                });
 
-                  return acc;
-                }, []),
-              },
-            ]}
-            fontSize={10}
-          />
-        ) : null}
+                return acc;
+              }, []),
+            },
+          ]}
+          fontSize={10}
+        />
       </div>
       {/* <footer>hi</footer> */}
     </div>
-  );
+  ) : null;
 }
 
 export default StatsPage;
