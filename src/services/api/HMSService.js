@@ -447,3 +447,13 @@ export const reloadCalendars = async (name) => {
     throw error;
   }
 };
+
+export const getLatestAssignmentDate = async (name) => {
+  try {
+    const response = await axios.get('assignments/latest/' + name);
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};

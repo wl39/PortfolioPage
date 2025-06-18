@@ -3,12 +3,13 @@ import styles from './StatsPage.module.css';
 import { useEffect, useRef, useState } from 'react';
 import {
   getAllSubmissionDayCountsByName,
+  getLatestAssignmentDate,
   getLatestSubmissionDayCountsByName,
   getSutdentTopicStats,
 } from '../../../services/api/HMSService';
 import { generatePieChart } from '../../../utils/generatePieChart';
-import RadarChart from '../../../components/RadarChart/RadarChart';
 import RadarChartCard from '../../../components/RadarChartCard/RadarChartCard';
+import Card from '../../../components/Card/Card';
 
 function StatsPage() {
   const pageParams = {
@@ -26,7 +27,7 @@ function StatsPage() {
     : (windowWidth.current - 200) / 2 + 40;
 
   const chartSize = isMobile
-    ? ((windowWidth.current - 60) / 5) * 2
+    ? (windowWidth.current - 60) / 2
     : (windowWidth.current - 200) / 4;
 
   const { studentName } = useParams();
@@ -34,6 +35,12 @@ function StatsPage() {
   const location = useLocation();
 
   const [userData, setUserData] = useState([]);
+
+  const [totalWrongCounts, setTotalWrongCounts] = useState(0);
+  const [totalCorrectCounts, setTotalCorrectCounts] = useState(0);
+  const [totalCounts, setTotalCounts] = useState(0);
+
+  const [dateFromTo, setDateFromTo] = useState('');
 
   useEffect(() => {
     windowWidth.current = window.innerWidth;
@@ -44,12 +51,32 @@ function StatsPage() {
           getLatestSubmissionDayCountsByName(studentName),
           getAllSubmissionDayCountsByName(studentName),
           getSutdentTopicStats(pageParams, studentName),
+          getLatestAssignmentDate(studentName),
         ]);
 
         setUserData(data);
+        console.log(data);
+
+        const totalWrong = data[1].reduce(
+          (acc, value) => acc + value.wrongCounts,
+          0
+        );
+        const totalCorrect = data[1].reduce(
+          (acc, value) => acc + value.correctCounts,
+          0
+        );
+
+        const date = `${data[1][0].date.replaceAll('-', '.')} - ${data[1][
+          data[1].length - 1
+        ].date.replaceAll('-', '.')}`;
+
+        setTotalWrongCounts(totalWrong);
+        setTotalCorrectCounts(totalCorrect);
+        setTotalCounts(totalWrong + totalCorrect);
+        setDateFromTo(date);
       } catch (error) {
         if (error && error.response && error.response.status === 401) {
-          navigate('/login', { state: { from: location }, replace: true });
+          navigate('/login');
         }
       }
     };
@@ -58,31 +85,60 @@ function StatsPage() {
   }, []);
 
   return (
-    <>
-      <h1 className={styles.title}>{studentName}</h1>
+    <div className={styles.container}>
+      {userData.length ? (
+        <Card>
+          <pre>Student Name: {studentName}</pre>
+          <pre>Latest Submissions: {userData[0].date.replaceAll('-', '.')}</pre>
+          {userData[3] ? (
+            <pre>Latest Assignments: {userData[3]}</pre>
+          ) : (
+            <pre>{studentName} solved all assigned questions.</pre>
+          )}
+        </Card>
+      ) : null}
       <div>
-        {userData.length
-          ? generatePieChart(
-              userData[0].correctCounts,
-              userData[0].wrongCounts,
-              userData[0].date.replaceAll('-', '.'),
-              chartSize
-            )
-          : null}
-        {userData.length
-          ? generatePieChart(
-              userData[1].reduce((acc, value) => {
-                return (acc += value.correctCounts);
-              }, 0),
-              userData[1].reduce((acc, value) => {
-                return (acc += value.wrongCounts);
-              }, 0),
-              `${userData[1][0].date.replaceAll('-', '.')} - ${userData[1][
-                userData[1].length - 1
-              ].date.replaceAll('-', '.')}`,
-              chartSize
-            )
-          : null}
+        <Card>
+          <div className={styles.pieChartContainer}>
+            {userData.length
+              ? generatePieChart(
+                  userData[0].correctCounts,
+                  userData[0].wrongCounts,
+                  userData[0].date.replaceAll('-', '.'),
+                  chartSize
+                )
+              : null}
+            {userData.length
+              ? generatePieChart(
+                  totalCorrectCounts,
+                  totalWrongCounts,
+                  dateFromTo,
+                  chartSize
+                )
+              : null}
+          </div>
+          <pre>
+            {`${studentName} solved ${
+              totalCorrectCounts + totalWrongCounts
+            } questions.`}
+          </pre>
+          <pre>
+            Latest Score: {userData[0].correctCounts} /{' '}
+            {userData[0].wrongCounts + userData[0].correctCounts}
+          </pre>
+          <pre>
+            Accumulated Score: {totalCorrectCounts} /{' '}
+            {totalCorrectCounts + totalWrongCounts}
+          </pre>
+          <pre>
+            Correct Rate:{' '}
+            {(
+              (totalCorrectCounts / (totalCorrectCounts + totalWrongCounts)) *
+              100
+            ).toFixed(2)}
+            %
+          </pre>
+        </Card>
         {userData.length ? (
           <RadarChartCard
             size={windowWidth.current}
@@ -103,7 +159,8 @@ function StatsPage() {
           />
         ) : null}
       </div>
-    </>
+      {/* <footer>hi</footer> */}
+    </div>
   );
 }
 
