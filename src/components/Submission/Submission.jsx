@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styles from './Submission.module.css';
 import SyntaxHighlight from '../SyntaxHighlight/SyntaxHighlight';
 import { dateOptions } from '../../utils/dateFormat';
+import Card from '../Card/Card';
 
 function Submission({
   question,
@@ -35,6 +36,17 @@ function Submission({
             ) : (
               <div key={index} className={styles.questionHeader}>
                 <h2 className={styles.question}>{value}</h2>
+                <div className={styles.topic_card_container}>
+                  {console.log(question)}
+                  {question.topics.map((topicValue, topicIndex) => (
+                    <Card
+                      propStyles={styles.topic_card}
+                      key={'t.' + value + '.' + topicIndex}
+                    >
+                      <div>{topicValue}</div>
+                    </Card>
+                  ))}
+                </div>
                 <div className={styles.dueDateContainer}>
                   <div>
                     {submitDate === ''

@@ -141,6 +141,22 @@
   padding-left: 10px;
 }
 
+.topic_card_container {
+  margin: 12px 0px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.topic_card {
+  display: flex;
+  height: 24px;
+  line-height: 24px;
+  padding: 2px 4px;
+  border: 1px solid black;
+  box-shadow: 2px 2px black;
+}
+
 @media (max-width: 480px) {
   .title {
     font-size: 24px;

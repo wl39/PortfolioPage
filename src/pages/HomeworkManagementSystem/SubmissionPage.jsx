@@ -21,6 +21,7 @@ function SubmissionPage() {
     candidates: [],
     hint: 'Remember to return after completing the questions!',
     studentsFor: [],
+    topics: [],
     answer: 'a',
     explanation: '',
     generatedDate: '',
