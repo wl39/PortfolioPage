@@ -405,9 +405,14 @@ function ModifiableSubmission({
               </div>
             </div>
           ) : (
-            <div>
-              {question.topics.map((value) => (
-                <div key={'t.' + value + '.' + index}>{value}</div>
+            <div className={mStyles.topic_card_container}>
+              {question.topics.map((value, topicIndex) => (
+                <Card
+                  propStyles={mStyles.topic_card}
+                  key={'t.' + value + '.' + topicIndex}
+                >
+                  <div>{value}</div>
+                </Card>
               ))}
             </div>
           )}

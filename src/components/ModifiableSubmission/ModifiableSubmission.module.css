@@ -59,7 +59,7 @@
 }
 
 .topic_card_container {
-  margin-top: 12px;
+  margin: 12px 0px;
   display: flex;
   flex-wrap: wrap;
   gap: 8px;

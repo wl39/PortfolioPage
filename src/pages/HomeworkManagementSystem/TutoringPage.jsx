@@ -20,6 +20,7 @@ const mockQuestion = {
   candidates: [],
   hint: "You've stumbled upon something interesting!",
   studentsFor: [],
+  topics: [],
   answer: 'a',
   explanation: '',
   generatedDate: '',
