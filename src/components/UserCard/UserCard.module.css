@@ -1,0 +1,114 @@
+.container {
+    font-family: monospace;
+    padding: 12px 8px;
+    display: flex;
+    position: relative;
+    font-size: 16px;
+}
+
+.containerModifing {
+    font-family: monospace;
+    padding: 12px 8px;
+    display: flex;
+    position: relative;
+    font-size: 16px;
+    border: 2px solid green;
+    box-shadow: 3px 3px green;
+}
+
+
+.isModifing {
+    position: absolute;
+    cursor: pointer;
+    right: 6px;
+    top: 6px;
+    width: 24px;
+    height: 24px;
+    border: 1px solid green;
+    box-shadow: 3px 3px green;
+    background-color: ivory;
+    z-index: 1;
+}
+
+.upload {
+    position: absolute;
+    cursor: pointer;
+    right: 6px;
+    top: 38px;
+    width: 24px;
+    height: 24px;
+    border: 1px solid black;
+    box-shadow: 3px 3px black;
+    background-color: ivory;
+    z-index: 1;
+}
+
+.uploadDisabled {
+    position: absolute;
+    cursor: not-allowed;
+    right: 6px;
+    top: 38px;
+    width: 24px;
+    height: 24px;
+    border: 1px solid darkgray;
+    box-shadow: 3px 3px darkgray;
+    background-color: ivory;
+    z-index: 1;
+}
+
+.delete {
+    position: absolute;
+    cursor: pointer;
+    right: 6px;
+    top: 70px;
+    width: 24px;
+    height: 24px;
+    border: 1px solid red;
+    box-shadow: 3px 3px red;
+    background-color: ivory;
+    z-index: 1;
+}
+
+.isNotModifing {
+    position: absolute;
+    cursor: pointer;
+    right: 6px;
+    top: 6px;
+    width: 24px;
+    height: 24px;
+    border: 1px solid black;
+    box-shadow: 3px 3px black;
+    z-index: 1;
+    background-color: ivory;
+}
+
+.servicesContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.text {
+    height: 20px;
+    line-height: 20px;
+    margin-bottom: 2px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: scroll;
+    margin-right: 30px;
+}
+
+.serviceCard {
+    padding: 2px 4px;
+    display: flex;
+}
+
+.input {
+    display: block;
+    height: 18px;
+    font-size: 16px;
+    padding: 0px;
+    margin-bottom: 2px;
+    font-family: monospace;
+}

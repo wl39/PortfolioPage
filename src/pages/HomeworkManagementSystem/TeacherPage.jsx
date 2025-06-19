@@ -1,23 +1,24 @@
-import React, { useState, useEffect, useCallback } from "react";
-import Calendar from "../../components/Calendar/Calendar";
+import React, { useState, useEffect, useCallback } from 'react';
+import Calendar from '../../components/Calendar/Calendar';
 
-import styles from "./TeacherPage.module.css";
-import { Link } from "react-router-dom";
+import styles from './TeacherPage.module.css';
+import { Link } from 'react-router-dom';
+import Button from '../../components/Button/Button';
 
 const TeacherPage = () => {
   const [studentComponents, setStudentComponents] = useState([]);
-  const [students, setStudents] = useState("");
-  const [newStudent, setStudent] = useState("");
+  const [students, setStudents] = useState('');
+  const [newStudent, setStudent] = useState('');
   const [updateFlag, setUpdateFlag] = useState(false); // State to trigger re-running useEffect
 
   const removeStudent = useCallback(
     (studentToRemove) => {
       // Step 1: Get the existing students from local storage
-      let storageStudents = localStorage.getItem("students");
+      let storageStudents = localStorage.getItem('students');
 
       if (storageStudents) {
         // Step 2: Convert the string back into an array
-        let studentsArray = storageStudents.split(",");
+        let studentsArray = storageStudents.split(',');
 
         // Step 3: Filter out the student to remove
         studentsArray = studentsArray.filter(
@@ -27,7 +28,7 @@ const TeacherPage = () => {
         );
 
         // Step 4: Update the local storage with the new array
-        localStorage.setItem("students", studentsArray.join(","));
+        localStorage.setItem('students', studentsArray.join(','));
       }
       setUpdateFlag(!updateFlag); // Toggle updateFlag to trigger useEffect
     },
@@ -35,18 +36,18 @@ const TeacherPage = () => {
   );
 
   const addNewStudents = () => {
-    let storageStudents = localStorage.getItem("students");
+    let storageStudents = localStorage.getItem('students');
 
     let pageStudents = [];
 
     pageStudents = newStudent
       .toLowerCase()
       .trimStart()
-      .replace(/,\s+/g, ",")
-      .split(",");
+      .replace(/,\s+/g, ',')
+      .split(',');
 
     if (storageStudents) {
-      let array = storageStudents.split(",");
+      let array = storageStudents.split(',');
       pageStudents.forEach((element) => {
         if (!array.includes(element)) {
           array.push(element);
@@ -57,27 +58,33 @@ const TeacherPage = () => {
     }
     pageStudents = pageStudents.filter((value) => value);
 
-    localStorage.setItem("students", pageStudents);
-    setStudent("");
+    localStorage.setItem('students', pageStudents);
+    setStudent('');
     setUpdateFlag(!updateFlag); // Toggle updateFlag to trigger useEffect
   };
 
   useEffect(() => {
-    let storage = localStorage.getItem("students");
-    let students = storage === null ? [] : storage.split(",");
+    let storage = localStorage.getItem('students');
+    let students = storage === null ? [] : storage.split(',');
     let studentComponents = [];
 
     students.forEach((value) => {
       studentComponents.push(
         <div className={styles.link} key={value}>
-          <Link
-            className={styles.studentLink}
-            to={"/submission/" + value}
-            key={value}
-          >
+          <Link className={styles.studentLink} to={'/submission/' + value}>
             {value}
           </Link>
-          <button onClick={() => removeStudent(value)}>REMOVE</button>
+          <div>
+            <Link to={'/stats/' + value}>
+              <Button propStyles={styles.removeButton}>Stats</Button>
+            </Link>
+            <Button
+              propStyles={styles.removeButton}
+              onclick={() => removeStudent(value)}
+            >
+              REMOVE
+            </Button>
+          </div>
         </div>
       );
     });
@@ -91,10 +98,10 @@ const TeacherPage = () => {
       <div className={styles.container}>
         <div className={styles.studentContainer}>
           <div className={styles.linkContainer}>
-            <Link className={styles.linkButton} to={"/questions"}>
+            <Link className={styles.linkButton} to={'/questions'}>
               Archive
             </Link>
-            <Link className={styles.linkButton} to={"/upload"}>
+            <Link className={styles.linkButton} to={'/upload'}>
               Upload
             </Link>
           </div>
@@ -104,7 +111,7 @@ const TeacherPage = () => {
               value={newStudent}
               onChange={(e) => setStudent(e.target.value)}
               onKeyDown={(e) => {
-                if (e.key === "Enter") {
+                if (e.key === 'Enter') {
                   // Check if Enter key is pressed
                   addNewStudents(); // Call the addNewStudents method
                 }

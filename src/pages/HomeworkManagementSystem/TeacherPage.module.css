@@ -84,3 +84,29 @@
   border: 2px solid black;
   background-color: #ffffe7;
 }
+
+.removeButton {
+  height: 100%;
+  margin-left: 20px;
+}
+
+@media (max-width: 480px) {
+  .container {
+    flex-direction: column;
+    padding: 8px 12px;
+  }
+
+  .studentContainer {
+    width: 100%;
+    margin-bottom: 12px;
+  }
+
+  .calendarContainer {
+    width: 100%;
+  }
+
+  .removeButton {
+    height: 100%;
+    margin-left: 4px;
+  }
+}

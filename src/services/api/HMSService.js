@@ -1,3 +1,4 @@
+import { isSimpleValidDate } from '../../utils/dateFormat';
 import axios from '../utils/axiosInstance';
 
 /* Login Page */
@@ -58,17 +59,18 @@ export const postQuestions = async (questions) => {
 };
 
 /* Tutoring Page - DONE */
-export const getQuestionsWithStudentName = async (name, pageParams) => {
+export const getQuestionsWithStudentName = async (name, pageParams, date) => {
   const sortQuery = pageParams.sortParams
     .map((value, index) => `sort=${value},${pageParams.sortTypes[index]}`)
     .join('&');
 
-  const pageParam =
-    '?page=' + pageParams.page + '&size=' + pageParams.size + '&' + sortQuery;
+  const pageQuery = `page=${pageParams.page}&size=${pageParams.size}&${sortQuery}`;
+  const dateQuery = isSimpleValidDate(date) ? `?date=${date}&` : '?';
 
   try {
-    const response = await axios.get(`/questions/student/${name}${pageParam}`);
-
+    const response = await axios.get(
+      `/questions/student/${name}${dateQuery}${pageQuery}`
+    );
     return response.data;
   } catch (error) {
     console.error('Error fetching questions : ', error);
@@ -451,6 +453,16 @@ export const reloadCalendars = async (name) => {
 export const getLatestAssignmentDate = async (name) => {
   try {
     const response = await axios.get('assignments/latest/' + name);
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const patchUser = async (user) => {
+  try {
+    const response = await axios.patch('users', user);
 
     return response.data;
   } catch (error) {

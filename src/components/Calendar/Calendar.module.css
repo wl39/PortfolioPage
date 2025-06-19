@@ -176,6 +176,12 @@
     font-size: 11px;
   }
 
+  .green {
+    font-size: 11px;
+    line-height: 10px;
+    height: 10px;
+  }
+
   .red {
     font-size: 11px;
     line-height: 10px;

@@ -1,5 +1,10 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import {
+  Link,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from 'react-router-dom';
 
 import styles from './TutoringPage.module.css';
 import TutoringQuestions from '../../components/TutoringQuestions/TutoringQuestions';
@@ -41,7 +46,11 @@ function TutoringPage() {
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState({});
 
+  const [searchParams] = useSearchParams();
+
   const navigate = useNavigate();
+
+  const date = searchParams.get('date');
 
   // Fetch questions on mount or when studentsName changes
   useEffect(() => {
@@ -49,7 +58,8 @@ function TutoringPage() {
       try {
         const questionData = await getQuestionsWithStudentName(
           studentsName,
-          pageParams
+          pageParams,
+          date
         );
 
         setQuestions(questionData.content || []);
@@ -78,7 +88,7 @@ function TutoringPage() {
     };
 
     fetchQuestions();
-  }, [studentsName, pageParams, setPageable, navigate]);
+  }, [studentsName, pageParams, setPageable, date, navigate]);
 
   // Update answers in state
   const selectAnswer = useCallback(

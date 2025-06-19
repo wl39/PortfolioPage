@@ -21,6 +21,7 @@ import QuestionTopicContainer from '../../../components/QuestionTopic/QuestionTo
 
 import styles from './AdminMainPage.module.css';
 import Reload from '../../../components/Reload/Reload';
+import UserCard from '../../../components/UserCard/UserCard';
 
 function AdminMainPage() {
   const [user, setUser] = useState({});
@@ -186,7 +187,17 @@ function AdminMainPage() {
             />
           </Accordion>
           <Accordion title={'Users'} onLoad={async () => getAllUsers()}>
-            {(data) => <div>{JSON.stringify(data)}</div>}
+            {(data, reload) => (
+              <div className={styles.userCardContainer}>
+                {data.map((value) => (
+                  <UserCard
+                    userData={value}
+                    key={'user' + value.email}
+                    onModified={reload}
+                  />
+                ))}
+              </div>
+            )}
           </Accordion>
           <Accordion title={'Topics'} isHidden={true}>
             <Pageable
