@@ -9,7 +9,6 @@ const RadarChart = ({ size = 300, values, colors, fontSize = 12 }) => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
 
-    // Adjust for Retina (high DPI) displays
     const dpr = window.devicePixelRatio || 1;
     canvas.width = size * dpr;
     canvas.height = size * dpr;
@@ -19,32 +18,17 @@ const RadarChart = ({ size = 300, values, colors, fontSize = 12 }) => {
 
     const width = size;
     const height = size;
-
-    if (!values || values.length === 0) return;
-
-    ctx.clearRect(0, 0, width, height);
-    ctx.fillStyle = 'ivory';
-    ctx.fillRect(0, 0, width, height);
-
     const padding = 40;
     const centerX = width / 2;
     const centerY = height / 2 + 10;
     const radius = Math.min(width, height) / 2 - padding;
-
-    const count = values[0].data.length;
+    const count = values?.[0]?.data.length || 0;
     const angleStep = (2 * Math.PI) / count;
-
     const maxValue =
       Math.max(...values.flatMap((user) => user.data.map((d) => d.value))) || 1;
 
-    ctx.strokeStyle = '#aaa';
-    ctx.fillStyle = 'black';
-    ctx.font = `${fontSize}px sans-serif`;
-    ctx.lineWidth = 0.5;
-
     const labelPositions = [];
 
-    // Helper: trim label with ellipsis if too wide
     const trimLabel = (text, maxWidth) => {
       let trimmed = text;
       while (ctx.measureText(trimmed).width > maxWidth && trimmed.length > 0) {
@@ -55,74 +39,95 @@ const RadarChart = ({ size = 300, values, colors, fontSize = 12 }) => {
         : trimmed;
     };
 
-    // Draw axes and labels
-    for (let i = 0; i < count; i++) {
-      const angle = i * angleStep - Math.PI / 2;
-      const x = centerX + Math.cos(angle) * radius;
-      const y = centerY + Math.sin(angle) * radius;
+    const drawChart = (progress = 1) => {
+      ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = 'ivory';
+      ctx.fillRect(0, 0, width, height);
 
-      ctx.beginPath();
-      ctx.moveTo(centerX, centerY);
-      ctx.lineTo(x, y);
-      ctx.stroke();
+      ctx.strokeStyle = '#aaa';
+      ctx.fillStyle = 'black';
+      ctx.font = `${fontSize}px sans-serif`;
+      ctx.lineWidth = 0.5;
 
-      const label = values[0].data[i].label;
-      const labelX = centerX + Math.cos(angle) * (radius + 10);
-      const labelY = centerY + Math.sin(angle) * (radius + 10);
-      labelPositions.push({ x: labelX, y: labelY, index: i });
-
-      const maxTextWidth = size * 0.2;
-      const trimmed = trimLabel(label, maxTextWidth);
-
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillText(trimmed, labelX, labelY);
-    }
-
-    // Draw grid
-    ctx.strokeStyle = '#ddd';
-    ctx.lineWidth = 0.8;
-
-    for (let step = 1; step <= 5; step++) {
-      const stepRadius = (radius * step) / 5;
-      ctx.beginPath();
-      if (step !== 5) ctx.setLineDash([5, 5]);
+      labelPositions.length = 0;
 
       for (let i = 0; i < count; i++) {
         const angle = i * angleStep - Math.PI / 2;
-        const x = centerX + Math.cos(angle) * stepRadius;
-        const y = centerY + Math.sin(angle) * stepRadius;
-        if (i === 0) ctx.moveTo(x, y);
-        else ctx.lineTo(x, y);
+        const x = centerX + Math.cos(angle) * radius;
+        const y = centerY + Math.sin(angle) * radius;
+
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY);
+        ctx.lineTo(x, y);
+        ctx.stroke();
+
+        const label = values[0].data[i].label;
+        const labelX = centerX + Math.cos(angle) * (radius + 10);
+        const labelY = centerY + Math.sin(angle) * (radius + 10);
+        labelPositions.push({ x: labelX, y: labelY, index: i });
+
+        const maxTextWidth = size * 0.2;
+        const trimmed = trimLabel(label, maxTextWidth);
+
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(trimmed, labelX, labelY);
       }
-      ctx.closePath();
-      ctx.stroke();
-      ctx.setLineDash([]);
-    }
 
-    // Draw polygons
-    values.forEach((user, userIndex) => {
-      const fillColor = colors?.[userIndex]?.fill || 'rgba(125,185,232,0.3)';
-      const strokeColor = colors?.[userIndex]?.stroke || '#7DB9E8';
+      ctx.strokeStyle = '#ddd';
+      ctx.lineWidth = 0.8;
+      for (let step = 1; step <= 5; step++) {
+        const stepRadius = (radius * step) / 5;
+        ctx.beginPath();
+        if (step !== 5) ctx.setLineDash([5, 5]);
 
-      ctx.beginPath();
-      user.data.forEach((point, i) => {
-        const angle = i * angleStep - Math.PI / 2;
-        const ratio = point.value / maxValue;
-        const x = centerX + Math.cos(angle) * radius * ratio;
-        const y = centerY + Math.sin(angle) * radius * ratio;
-        if (i === 0) ctx.moveTo(x, y);
-        else ctx.lineTo(x, y);
+        for (let i = 0; i < count; i++) {
+          const angle = i * angleStep - Math.PI / 2;
+          const x = centerX + Math.cos(angle) * stepRadius;
+          const y = centerY + Math.sin(angle) * stepRadius;
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.closePath();
+        ctx.stroke();
+        ctx.setLineDash([]);
+      }
+
+      values.forEach((user, userIndex) => {
+        const fillColor = colors?.[userIndex]?.fill || 'rgba(125,185,232,0.3)';
+        const strokeColor = colors?.[userIndex]?.stroke || '#7DB9E8';
+
+        ctx.beginPath();
+        user.data.forEach((point, i) => {
+          const angle = i * angleStep - Math.PI / 2;
+          const targetRatio = point.value / maxValue;
+          const effectiveProgress = Math.min(progress, targetRatio);
+          const x = centerX + Math.cos(angle) * radius * effectiveProgress;
+          const y = centerY + Math.sin(angle) * radius * effectiveProgress;
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        });
+        ctx.closePath();
+        ctx.fillStyle = fillColor;
+        ctx.fill();
+        ctx.strokeStyle = strokeColor;
+        ctx.lineWidth = userIndex === 0 && hoverIndex !== null ? 3 : 2;
+        ctx.stroke();
       });
-      ctx.closePath();
-      ctx.fillStyle = fillColor;
-      ctx.fill();
-      ctx.strokeStyle = strokeColor;
-      ctx.lineWidth = userIndex === 0 && hoverIndex !== null ? 3 : 2;
-      ctx.stroke();
-    });
+    };
 
-    // Hover logic
+    let startTime = null;
+    const duration = 1200;
+    const animate = (timestamp) => {
+      if (!startTime) startTime = timestamp;
+      const elapsed = timestamp - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      drawChart(progress);
+      if (progress < 1) requestAnimationFrame(animate);
+    };
+
+    requestAnimationFrame(animate);
+
     const handleMouseMove = (e) => {
       const rect = canvas.getBoundingClientRect();
       const mouseX = e.clientX - rect.left;
@@ -168,7 +173,7 @@ const RadarChart = ({ size = 300, values, colors, fontSize = 12 }) => {
       canvas.removeEventListener('mousemove', handleMouseMove);
       canvas.removeEventListener('mouseleave', handleMouseLeave);
     };
-  }, [values, size, colors, fontSize, hoverIndex]);
+  }, [values, size, colors, fontSize]);
 
   return (
     <div style={{ position: 'relative', width: size, height: size }}>

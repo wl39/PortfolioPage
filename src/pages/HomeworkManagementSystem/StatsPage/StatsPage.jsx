@@ -10,6 +10,8 @@ import {
 import { generatePieChart } from '../../../utils/generatePieChart';
 import RadarChartCard from '../../../components/RadarChartCard/RadarChartCard';
 import Card from '../../../components/Card/Card';
+import { monthDayYear } from '../../../utils/dateFormat';
+import RadarChart from '../../../components/RadarChart/RadarChart';
 
 function StatsPage() {
   const pageParams = {
@@ -55,7 +57,6 @@ function StatsPage() {
         ]);
 
         setUserData(data);
-        console.log(data);
 
         const totalWrong = data[1].reduce(
           (acc, value) => acc + value.wrongCounts,
@@ -86,18 +87,19 @@ function StatsPage() {
 
   return userData.length ? (
     <div className={styles.container}>
-      <Card>
-        <pre>Student Name: {studentName}</pre>
-        <pre>Latest Submissions: {userData[0].date.replaceAll('-', '.')}</pre>
+      <Card propStyles={styles.card}>
+        <p>Learner: {studentName}</p>
+        <p>Most Recent Submission: {monthDayYear(userData[0].date)}</p>
         {userData[3] ? (
-          <pre>Latest Assignments: {userData[3]}</pre>
+          <p>Last Assignment Assigned: {monthDayYear(userData[3])}</p>
         ) : (
-          <pre>{studentName} solved all assigned questions.</pre>
+          <p>All assigned tasks have been completed.</p>
         )}
       </Card>
 
       <div className={styles.cardContainer}>
-        <Card>
+        <Card propStyles={styles.card}>
+          <h2 className={styles.subTitle}>Performance Overview</h2>
           <div className={styles.pieChartContainer}>
             {generatePieChart(
               userData[0].correctCounts,
@@ -113,45 +115,59 @@ function StatsPage() {
               chartSize
             )}
           </div>
-          <pre>
+
+          <p>
             {`${studentName} solved ${
               totalCorrectCounts + totalWrongCounts
             } questions.`}
-          </pre>
-          <pre>
-            Latest Score: {userData[0].correctCounts} /{' '}
-            {userData[0].wrongCounts + userData[0].correctCounts}
-          </pre>
-          <pre>
-            Accumulated Score: {totalCorrectCounts} /{' '}
-            {totalCorrectCounts + totalWrongCounts}
-          </pre>
-          <pre>
-            Correct Rate:{' '}
+          </p>
+          <p>
+            Recent Score: {userData[0].correctCounts} correct /{' '}
+            {userData[0].wrongCounts + userData[0].correctCounts} attempts
+          </p>
+          <p>
+            Cumulative Score: {totalCorrectCounts} correct /{' '}
+            {totalCorrectCounts + totalWrongCounts} attempts
+          </p>
+          <p>
+            Overall Accuracy:{' '}
             {(
               (totalCorrectCounts / (totalCorrectCounts + totalWrongCounts)) *
               100
             ).toFixed(2)}
             %
-          </pre>
+          </p>
         </Card>
-        <RadarChartCard
-          size={windowWidth.current}
-          values={[
-            {
-              name: studentName,
-              data: userData[2].content.reduce((acc, value) => {
-                acc.push({
-                  label: value.topic,
-                  value: value.correctCount / value.totalCount,
-                });
+        <Card propStyles={styles.card}>
+          <h2 className={styles.subTitle}>Topic Mastery</h2>
+          <p>
+            Only the top six subjects with the highest accuracy are displayed.
+            You can click on each topic to view the exact percentage reflecting
+            the learner’s level of understanding.
+          </p>
+          <RadarChart
+            size={windowWidth.current - 30}
+            values={[
+              {
+                name: studentName,
+                data: userData[2].content.reduce((acc, value) => {
+                  acc.push({
+                    label: value.topic,
+                    value: value.correctCount / value.totalCount,
+                  });
 
-                return acc;
-              }, []),
-            },
-          ]}
-          fontSize={10}
-        />
+                  return acc;
+                }, []),
+              },
+            ]}
+            fontSize={10}
+          />
+
+          <p>
+            Each axis reflects the student's accuracy per subject area. Higher
+            values indicate stronger understanding.
+          </p>
+        </Card>
       </div>
       {/* <footer>hi</footer> */}
     </div>

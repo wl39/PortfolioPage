@@ -10,7 +10,7 @@ function RadarChartCard({ values, title, colors, size, fontSize }) {
       <RadarChart
         values={values}
         colors={colors}
-        size={(size / 5) * 4}
+        size={size}
         fontSize={fontSize}
       />
     </Card>

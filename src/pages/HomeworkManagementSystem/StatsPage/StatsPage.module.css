@@ -1,5 +1,6 @@
 .container {
     margin: 20px 12px;
+    font-family: monospace;
 }
 
 .title {
@@ -11,7 +12,7 @@
 }
 
 .card {
-    padding: 20px;
+    padding: 20px 12px;
 }
 
 .cardContainer {
@@ -38,11 +39,20 @@
         margin: 8px 8px 8px 6px;
     }
 
-
+    .card {
+        padding: 4px 8px 12px;
+        margin-bottom: 18px;
+    }
 
     .title {
         font-size: 40px;
         margin: 10px 5px 0px;
+    }
+
+    .subTitle {
+        margin-top: 0px;
+        font-size: 24px;
+        margin-bottom: 8px;
     }
 
     .link {
