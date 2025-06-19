@@ -174,9 +174,9 @@ function StatsPage() {
       <Card propStyles={styles.card}>
         <h2 className={styles.subTitle}>Assignment Calendar</h2>
         <p>
-          This calendar provides an overview of scheduled assignments and the
-          number of questions to be completed on each day. It helps learners
-          track their daily workload and manage time effectively.
+          Track your child’s homework completion by day. The numbers indicate
+          how many questions were assigned and how many have been completed —
+          not how many were answered correctly.
         </p>
         <Calendar
           propStyles={styles.calendar}

@@ -51,7 +51,11 @@ const Calendar = ({ propStyles, students, isStudent = false }) => {
                     : null
                 }
               >
-                <div>{name}</div>
+                {isStudent ? (
+                  <div style={{ height: '6px' }} />
+                ) : (
+                  <div>{name}</div>
+                )}
                 <div
                   className={
                     e[name]['solved'] / e[name]['questions'] >= 0.9
