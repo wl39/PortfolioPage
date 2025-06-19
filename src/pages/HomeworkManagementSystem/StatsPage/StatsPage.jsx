@@ -12,6 +12,8 @@ import RadarChartCard from '../../../components/RadarChartCard/RadarChartCard';
 import Card from '../../../components/Card/Card';
 import { monthDayYear } from '../../../utils/dateFormat';
 import RadarChart from '../../../components/RadarChart/RadarChart';
+import { capitalizeFirstLetter } from '../../../utils/textHelper';
+import Calendar from '../../../components/Calendar/Calendar';
 
 function StatsPage() {
   const pageParams = {
@@ -88,7 +90,7 @@ function StatsPage() {
   return userData.length ? (
     <div className={styles.container}>
       <Card propStyles={styles.card}>
-        <p>Learner: {studentName}</p>
+        <p>Learner: {capitalizeFirstLetter(studentName)}</p>
         <p>Most Recent Submission: {monthDayYear(userData[0].date)}</p>
         {userData[3] ? (
           <p>Last Assignment Assigned: {monthDayYear(userData[3])}</p>
@@ -117,7 +119,7 @@ function StatsPage() {
           </div>
 
           <p>
-            {`${studentName} solved ${
+            {`${capitalizeFirstLetter(studentName)} solved ${
               totalCorrectCounts + totalWrongCounts
             } questions.`}
           </p>
@@ -169,6 +171,19 @@ function StatsPage() {
           </p>
         </Card>
       </div>
+      <Card propStyles={styles.card}>
+        <h2 className={styles.subTitle}>Assignment Calendar</h2>
+        <p>
+          This calendar provides an overview of scheduled assignments and the
+          number of questions to be completed on each day. It helps learners
+          track their daily workload and manage time effectively.
+        </p>
+        <Calendar
+          propStyles={styles.calendar}
+          students={[studentName]}
+          isStudent={true}
+        />
+      </Card>
       {/* <footer>hi</footer> */}
     </div>
   ) : null;
