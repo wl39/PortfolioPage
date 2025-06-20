@@ -102,6 +102,8 @@ function AdminMainPage() {
       } catch (error) {
         if (error && error.response && error.response.status === 401) {
           navigate('/login', { state: { from: location }, replace: true });
+        } else if (error && error.response && error.response.status === 403) {
+          navigate('/login', { replace: true });
         } else {
           alert('There is an issue on the server...');
         }

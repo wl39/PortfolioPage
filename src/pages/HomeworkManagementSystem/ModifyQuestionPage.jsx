@@ -100,9 +100,16 @@ const ModifyQuestionPage = () => {
         setQuestionsJSON(data.content);
         setOriginalQuestionsJSON(data.content);
       } catch (error) {
-        if (error.response && error.response.status === 401) {
-          navigate('/login', { state: { from: location }, replace: true });
+        if (error.response) {
+          if (error.response.status === 401) {
+            navigate('/login', { state: { from: location }, replace: true });
+          }
+
+          if (error.response.status === 403) {
+            navigate('/login', { replace: true });
+          }
         }
+
         console.error(error);
       }
     };

@@ -8,7 +8,7 @@ import {
   getSutdentTopicStats,
 } from '../../../services/api/HMSService';
 import { generatePieChart } from '../../../utils/generatePieChart';
-import RadarChartCard from '../../../components/RadarChartCard/RadarChartCard';
+// import RadarChartCard from '../../../components/RadarChartCard/RadarChartCard';
 import Card from '../../../components/Card/Card';
 import { monthDayYear } from '../../../utils/dateFormat';
 import RadarChart from '../../../components/RadarChart/RadarChart';
@@ -79,7 +79,9 @@ function StatsPage() {
         setDateFromTo(date);
       } catch (error) {
         if (error && error.response && error.response.status === 401) {
-          navigate('/login');
+          navigate('/login', { state: { from: location }, replace: true });
+        } else if (error && error.response && error.response.status === 403) {
+          navigate('/login', { replace: true });
         }
       }
     };
@@ -147,23 +149,27 @@ function StatsPage() {
             You can click on each topic to view the exact percentage reflecting
             the learner’s level of understanding.
           </p>
-          <RadarChart
-            size={windowWidth.current - 30}
-            values={[
-              {
-                name: studentName,
-                data: userData[2].content.reduce((acc, value) => {
-                  acc.push({
-                    label: value.topic,
-                    value: value.correctCount / value.totalCount,
-                  });
+          <div className={styles.radarChartContainer}>
+            <RadarChart
+              size={
+                isMobile ? windowWidth.current - 30 : windowWidth.current - 150
+              }
+              values={[
+                {
+                  name: studentName,
+                  data: userData[2].content.reduce((acc, value) => {
+                    acc.push({
+                      label: value.topic,
+                      value: value.correctCount / value.totalCount,
+                    });
 
-                  return acc;
-                }, []),
-              },
-            ]}
-            fontSize={10}
-          />
+                    return acc;
+                  }, []),
+                },
+              ]}
+              fontSize={10}
+            />
+          </div>
 
           <p>
             Each axis reflects the student's accuracy per subject area. Higher

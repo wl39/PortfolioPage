@@ -3,6 +3,7 @@ export default function Cross({
   line = size * 0.1,
   color = 'black',
   onClick,
+  propStyles,
 }) {
   const lineWidth = line;
 
@@ -17,6 +18,7 @@ export default function Cross({
 
   return (
     <div
+      className={propStyles}
       onClick={onClick}
       style={{ position: 'relative', width: size, height: size }}
     >

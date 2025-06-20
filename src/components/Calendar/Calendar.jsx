@@ -35,6 +35,10 @@ const Calendar = ({ propStyles, students, isStudent = false }) => {
         );
 
         if (data[i]) {
+          const paddedMonth = String(month + 1).padStart(2, '0');
+          const paddedDay = String(i).padStart(2, '0');
+          const date = `${year}-${paddedMonth}-${paddedDay}`;
+
           data[i].forEach((e, j) => {
             const name = Object.keys(e)[0];
             dayContent.push(
@@ -57,6 +61,13 @@ const Calendar = ({ propStyles, students, isStudent = false }) => {
                   <div>{name}</div>
                 )}
                 <div
+                  onClick={() =>
+                    isStudent
+                      ? e[name]['solved'] === e[name]['questions']
+                        ? navigate(`/submission/${name}?date=${date}`)
+                        : navigate(`/tutoring/${name}?date=${date}`)
+                      : null
+                  }
                   className={
                     e[name]['solved'] / e[name]['questions'] >= 0.9
                       ? styles.green
@@ -195,7 +206,6 @@ const Calendar = ({ propStyles, students, isStudent = false }) => {
             <div className={styles.dayContainer}>{day || ''}</div>
           </div>
         ))}
-        {console.log('hi')}
       </div>
     </Card>
   );

@@ -53,6 +53,19 @@
   background-color: transparent;
 }
 
+.dateSelected {
+  display: flex;
+  border: 1px solid black;
+  box-shadow: 2px 2px black;
+  height: 20px;
+  padding: 2px 4px;
+}
+
+.cross {
+  margin: auto;
+  margin-left: 4px;
+}
+
 @media (max-width: 480px) {
   .page {
     width: calc(100vw - 16px);

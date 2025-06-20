@@ -124,7 +124,7 @@ function DragAndDrop({ children, x, y }) {
             )}
           </div>
         </div>
-        <div>{hide ? null : children}</div>
+        <div style={{ display: hide ? 'none' : 'block' }}>{children}</div>
       </div>
     </div>
   );

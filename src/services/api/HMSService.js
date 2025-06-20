@@ -13,6 +13,18 @@ export const login = async (loginForm) => {
   }
 };
 
+const logout = async () => {
+  try {
+    await axios.post('/api/logout', {
+      credentials: 'include', // 쿠키 포함 필수
+    });
+
+    window.location.href = '/login';
+  } catch (error) {
+    console.error('Logout failed', error);
+  }
+};
+
 export const refresh = async () => {
   try {
     const response = await axios.post('users/refresh');
@@ -184,16 +196,19 @@ export const getReviewQuestions = async (name, pageParams) => {
 };
 
 /* Submission Page - DONE */
-export const getAllSubmissions = async (name, pageParams) => {
+export const getAllSubmissions = async (name, pageParams, date) => {
   const sortQuery = pageParams.sortParams
     .map((value, index) => `sort=${value},${pageParams.sortTypes[index]}`)
     .join('&');
 
   const pageParam =
-    '?page=' + pageParams.page + '&size=' + pageParams.size + '&' + sortQuery;
+    'page=' + pageParams.page + '&size=' + pageParams.size + '&' + sortQuery;
+  const dateQuery = isSimpleValidDate(date) ? `?date=${date}&` : '?';
 
   try {
-    const response = await axios.get(`submissions/${name}${pageParam}`);
+    const response = await axios.get(
+      `submissions/${name}${dateQuery}${pageParam}`
+    );
     return response.data;
   } catch (error) {
     console.error('Error fetching submissions : ', error);

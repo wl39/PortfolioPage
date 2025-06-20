@@ -85,6 +85,8 @@ function TutoringArchivePage() {
         if (error.response && error.response.status === 401) {
           // 401 에러이면 로그인 페이지로 이동
           navigate('/login', { state: { from: location }, replace: true });
+        } else if (error && error.response && error.response.status === 403) {
+          navigate('/login', { replace: true });
         } else {
           console.error('Failed to fetch questions', error);
           alert('There is an issue on the server...!');

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {
   getAllSubmissionDayCountsByName,
@@ -31,7 +31,10 @@ const StudentPage = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
+
   const { studentName } = useParams();
+
+  const studentArray = useMemo(() => [studentName], [studentName]);
 
   const dispatch = useDispatch();
 
@@ -199,7 +202,7 @@ const StudentPage = () => {
 
                       <Calendar
                         propStyles={styles.calendar}
-                        students={[studentName]}
+                        students={studentArray}
                         isStudent={true}
                       />
                     </Card>

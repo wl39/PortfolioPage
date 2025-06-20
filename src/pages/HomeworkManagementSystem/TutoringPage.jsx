@@ -1,4 +1,10 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import {
   Link,
   useNavigate,
@@ -15,6 +21,10 @@ import {
 import { formatToISO } from '../../utils/dateFormat';
 import { PageableContext } from '../../layouts/Pageable/PageableContext';
 import Button from '../../components/Button/Button';
+import Calendar from '../../components/Calendar/Calendar';
+import DragAndDrop from '../../components/DragAndDrop/DragAndDrop';
+import Cross from '../../components/Cross/Cross';
+import Card from '../../components/Card/Card';
 
 const mockQuestion = {
   id: 0,
@@ -40,6 +50,7 @@ const mockQuestion = {
 
 function TutoringPage() {
   const { studentsName } = useParams();
+  const studentArray = useMemo(() => [studentsName], [studentsName]);
 
   const { pageParams, setPageable } = useContext(PageableContext);
 
@@ -140,6 +151,13 @@ function TutoringPage() {
 
   return (
     <div className={styles.page}>
+      <DragAndDrop x={100}>
+        <Calendar
+          propStyles={styles.calendar}
+          isStudent={true}
+          students={studentArray}
+        />
+      </DragAndDrop>
       <div className={styles.header}>
         <h1 className={styles.h1}>
           {studentsName[0].toUpperCase() + studentsName.slice(1)}
@@ -156,6 +174,16 @@ function TutoringPage() {
           </Link>
         </div>
       </div>
+      {date ? (
+        <div
+          style={{ display: 'flex', justifyContent: 'flex-end' }}
+          onClick={() => navigate('/tutoring/' + studentsName)}
+        >
+          <Card propStyles={styles.dateSelected}>
+            {date} <Cross propStyles={styles.cross} size={16} line={4} />
+          </Card>
+        </div>
+      ) : null}
 
       {/* Render questions */}
       {displayQuestions.map((question, idx) => (

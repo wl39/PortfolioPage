@@ -1,16 +1,33 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
+import {
+  Link,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from 'react-router-dom';
 
 import styles from './SubmissionPage.module.css';
 import Submission from '../../components/Submission/Submission';
 import { getAllSubmissions } from '../../services/api/HMSService';
 import { PageableContext } from '../../layouts/Pageable/PageableContext';
+import DragAndDrop from '../../components/DragAndDrop/DragAndDrop';
+import Calendar from '../../components/Calendar/Calendar';
 
 function SubmissionPage() {
   const { setPageable, pageParams } = useContext(PageableContext);
   const { studentsName } = useParams();
-  const [submissions, setSubmissions] = useState([]);
+  const studentArray = useMemo(() => [studentsName], [studentsName]);
 
+  const [submissions, setSubmissions] = useState([]);
+  const [searchParams] = useSearchParams();
+
+  const date = searchParams.get('date');
   const navigate = useNavigate();
 
   const emptyQuestion = {
@@ -79,8 +96,8 @@ function SubmissionPage() {
       try {
         const response = await getAllSubmissions(
           studentsName,
-
-          pageParams
+          pageParams,
+          date
         );
 
         setTotalQuestions(response.numberOfElements);
@@ -220,6 +237,13 @@ function SubmissionPage() {
 
   return (
     <div className={styles.page}>
+      <DragAndDrop x={100}>
+        <Calendar
+          propStyles={styles.calendar}
+          isStudent={true}
+          students={studentArray}
+        />
+      </DragAndDrop>
       <div className={styles.header}>
         <h1 className={styles.h1}>
           {studentsName[0].toUpperCase() + studentsName.slice(1)}
