@@ -484,3 +484,33 @@ export const patchUser = async (user) => {
     throw error;
   }
 };
+
+export const assignChild = async (student, parent) => {
+  try {
+    const response = await axios.post('users/children/' + parent, [student]);
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// export const getAllStudents = async (student, parent) => {
+//   try {
+//     const response = await axios.post('users/children/' + parent, [student]);
+
+//     return response.data;
+//   } catch (error) {
+//     throw error;
+//   }
+// };
+
+export const getAllParents = async () => {
+  try {
+    const response = await axios.get('users/parents');
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};

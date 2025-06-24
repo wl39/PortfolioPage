@@ -134,7 +134,6 @@ const Calendar = ({ propStyles, students, isStudent = false }) => {
         setCalendarDays(generateCalendarDays(year, month, transformedData));
       } catch (error) {
         console.error(error);
-        window.alert('There is an issue...');
       }
     };
 

@@ -22,6 +22,7 @@ import QuestionTopicContainer from '../../../components/QuestionTopic/QuestionTo
 import styles from './AdminMainPage.module.css';
 import Reload from '../../../components/Reload/Reload';
 import UserCard from '../../../components/UserCard/UserCard';
+import ParentStudentAssignment from '../../../module/ParentStudentAssignment/ParentStudentAssignment';
 
 function AdminMainPage() {
   const [user, setUser] = useState({});
@@ -212,6 +213,9 @@ function AdminMainPage() {
             >
               <QuestionTopicContainer />
             </Pageable>
+          </Accordion>
+          <Accordion title={'Assign Student to Parent'} isHidden={true}>
+            <ParentStudentAssignment />
           </Accordion>
         </div>
       ) : null}

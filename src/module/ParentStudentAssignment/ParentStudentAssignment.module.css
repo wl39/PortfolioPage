@@ -1,0 +1,74 @@
+.container {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.card {
+    background-color: white;
+    padding: 24px;
+}
+
+.header {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.dropdownContainer {
+    width: 100%;
+}
+
+.dropdown {
+    border: 2px solid black;
+    box-shadow: 3px 3px black;
+    background-color: ivory;
+    width: 100%;
+}
+
+.label {
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.cardButton {
+    background-color: rgb(34 197 94);
+    color: white;
+    margin-top: 16px;
+    padding: 8px 16px;
+    font-size: 16px;
+    text-align: center;
+
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+}
+
+.cardButton:hover {
+    box-shadow: 0px 0px;
+    transform: translate(3px, 3px);
+}
+
+.currentAssignmentsContainer {
+    display: flex;
+    padding: 12px;
+    justify-content: space-between;
+    border: 1px solid black;
+    background-color: ivory;
+}
+
+.delete {
+    border: 1px solid rgb(239 68 68) !important;
+    width: 32px;
+    height: 32px;
+    box-shadow: 2px 2px rgb(239 68 68) !important;
+
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+}
+
+.delete:hover {
+    border: 1px solid rgb(239 68 68) !important;
+    box-shadow: 0px 0px !important;
+    transform: translate(2px, 2px);
+}
