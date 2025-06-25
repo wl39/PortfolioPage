@@ -42,20 +42,20 @@ const StudentPage = () => {
 
   const [services, setServices] = useState([]);
 
-  useEffect(() => {
-    const savedUsername = sessionStorage.getItem('username');
-    if (savedUsername) {
-      userRef.current = savedUsername;
-      dispatch(setUsername(savedUsername));
-    }
+  // useEffect(() => {
+  //   const savedUsername = sessionStorage.getItem('username');
+  //   if (savedUsername) {
+  //     userRef.current = savedUsername;
+  //     dispatch(setUsername(savedUsername));
+  //   }
 
-    windowWidth.current = window.innerWidth;
-  }, [dispatch]);
+  //   windowWidth.current = window.innerWidth;
+  // }, [dispatch]);
 
   useEffect(() => {
     const fetchAllSubscriptions = async () => {
       try {
-        let localUsername = studentName || sessionStorage.getItem('username');
+        let localUsername = studentName;
 
         const result = await getAllSubscriptions(localUsername);
 

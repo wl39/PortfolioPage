@@ -42,7 +42,6 @@ const SignUpForm = () => {
       .then((res) => {
         login({ email: email, password: password }).then((response) => {
           dispatch(setUsername(response.data));
-          sessionStorage.setItem('username', response.data);
           navigate(`/tutoring/${response.data}`, {
             state: { name: response.data },
           });

@@ -90,7 +90,7 @@ function TutoringPage() {
           navigate('/login');
         } else if (error.response && error.response.status === 403) {
           alert('Access Denied!');
-          navigate('/tutoring/' + sessionStorage.getItem('username'));
+          navigate('/tutoring/' + studentsName);
         } else {
           console.error('Failed to fetch questions', error);
           alert('There is an issue on the server...!');
