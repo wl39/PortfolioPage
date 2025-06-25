@@ -123,9 +123,7 @@ const StudentPage = () => {
 
   return (
     <>
-      <h1 className={styles.title}>
-        {studentName || sessionStorage.getItem('username') || 'Login First'}
-      </h1>
+      <h1 className={styles.title}>{studentName || 'Login First'}</h1>
       {services.map((value, index) => {
         switch (value) {
           case 'Tutoring':

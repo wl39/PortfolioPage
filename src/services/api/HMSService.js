@@ -13,9 +13,9 @@ export const login = async (loginForm) => {
   }
 };
 
-const logout = async () => {
+export const logout = async () => {
   try {
-    await axios.post('/api/logout', {
+    await axios.post('/users/logout', {
       credentials: 'include', // 쿠키 포함 필수
     });
 

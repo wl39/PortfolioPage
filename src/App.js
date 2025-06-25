@@ -24,6 +24,7 @@ import StudentPage from './pages/HomeworkManagementSystem/StudentPage';
 import ModifyQuestionPage from './pages/HomeworkManagementSystem/ModifyQuestionPage';
 import AdminMainPage from './pages/HomeworkManagementSystem/AdminPage/AdminMainPage';
 import StatsPage from './pages/HomeworkManagementSystem/StatsPage/StatsPage';
+import LogoutPage from './pages/User/LogoutPage';
 
 function App() {
   return (
@@ -91,6 +92,7 @@ function App() {
             </Pageable>
           }
         />
+        <Route path="/logout" element={<LogoutPage />} />
         <Route
           path="/questions/modify"
           element={
