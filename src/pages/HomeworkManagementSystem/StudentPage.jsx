@@ -7,7 +7,6 @@ import {
   getLatestSubmissionDayCountsByName,
 } from '../../services/api/HMSService';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
-import { setUsername } from '../../features/user/userSlice';
 import Accordion from '../../components/Accordion/Accordion';
 import Button from '../../components/Button/Button';
 import Card from '../../components/Card/Card';
@@ -38,19 +37,11 @@ const StudentPage = () => {
 
   const dispatch = useDispatch();
 
-  const userRef = useRef();
-
   const [services, setServices] = useState([]);
 
-  // useEffect(() => {
-  //   const savedUsername = sessionStorage.getItem('username');
-  //   if (savedUsername) {
-  //     userRef.current = savedUsername;
-  //     dispatch(setUsername(savedUsername));
-  //   }
-
-  //   windowWidth.current = window.innerWidth;
-  // }, [dispatch]);
+  useEffect(() => {
+    windowWidth.current = window.innerWidth;
+  }, []);
 
   useEffect(() => {
     const fetchAllSubscriptions = async () => {
@@ -166,6 +157,7 @@ const StudentPage = () => {
                         styles.tutoringContainer,
                       ])}
                     >
+                      {console.log(containerWidth)}
                       <div
                         style={{
                           width: `${containerWidth}px`,

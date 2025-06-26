@@ -8,6 +8,23 @@ export const dateOptions = {
   hour12: false, // 24시간 형식
 };
 
+export const toUSFormatDate = (date) => {
+  return (
+    date
+      .toLocaleString('en-US', {
+        month: 'long', // December
+        day: 'numeric', // 23
+        year: 'numeric', // 2024
+        hour: 'numeric', // 10
+        minute: '2-digit', // 45
+        hour12: true, // PM
+      })
+      // .replace(',', '') // 'December 23 2024, 10:45 PM' → 'December 23 2024 10:45 PM'
+      .replace(' ', ', ')
+  ); // 'December 23, 2024 at 10:45 PM'
+  // .replace(' ', ' at ')
+};
+
 export const formatToISO = (date) => {
   const formatter = new Intl.DateTimeFormat('en-CA', {
     timeZone: 'Asia/Seoul',

@@ -10,15 +10,12 @@ function Submission({
   submitDate,
   isMarked,
   id,
-  unique,
+  unique = 'uniq',
 }) {
   const [showHint, setShowHint] = useState(false);
   return (
     <>
       <div>
-        <h1 className={styles.title}>
-          {question.id ? question.id : 0}. {question.title}
-        </h1>
         <fieldset
           className={
             isMarked
@@ -30,23 +27,27 @@ function Submission({
               : styles.unMarkedContainer
           }
         >
+          <h2 className={styles.title}>
+            {question.id ? question.id : 0}. {question.title}
+          </h2>
           {question.question.split('&code:').map((value, index) =>
             index === 1 ? (
               <SyntaxHighlight code={value} key={index} />
             ) : (
               <div key={index} className={styles.questionHeader}>
-                <h2 className={styles.question}>{value}</h2>
-                <div className={styles.topic_card_container}>
-                  {console.log(question)}
-                  {question.topics.map((topicValue, topicIndex) => (
-                    <Card
-                      propStyles={styles.topic_card}
-                      key={'t.' + value + '.' + topicIndex}
-                    >
-                      <div>{topicValue}</div>
-                    </Card>
-                  ))}
-                </div>
+                <p className={styles.question}>{value}</p>
+                {question.topics.length ? (
+                  <div className={styles.topic_card_container}>
+                    {question.topics.map((topicValue, topicIndex) => (
+                      <Card
+                        propStyles={styles.topic_card}
+                        key={'t.' + value + '.' + topicIndex}
+                      >
+                        <div>{topicValue}</div>
+                      </Card>
+                    ))}
+                  </div>
+                ) : null}
                 <div className={styles.dueDateContainer}>
                   <div>
                     {submitDate === ''
@@ -59,30 +60,27 @@ function Submission({
                   </div>
                   <div></div>
                 </div>
-                <hr
-                  style={{
-                    width: '100%',
-                    borderTop: '1px solid #cfcfcf',
-                  }}
-                />
-                <div style={{ marginBottom: '15px' }}>
-                  <div
-                    className={styles.hintButtonContainer}
-                    onClick={() => {
-                      setShowHint(!showHint);
-                    }}
-                  >
-                    <div>Hint </div>
+
+                {question.hint ? (
+                  <div style={{ marginBottom: '15px' }}>
+                    <div
+                      className={styles.hintButtonContainer}
+                      onClick={() => {
+                        setShowHint(!showHint);
+                      }}
+                    >
+                      <div>Hint </div>
+                      {showHint ? (
+                        <div className={styles.upArrow} />
+                      ) : (
+                        <div className={styles.downArrow} />
+                      )}
+                    </div>
                     {showHint ? (
-                      <div className={styles.upArrow} />
-                    ) : (
-                      <div className={styles.downArrow} />
-                    )}
+                      <div className={styles.hint}>{question.hint}</div>
+                    ) : null}
                   </div>
-                  {showHint ? (
-                    <div className={styles.hint}>{question.hint}</div>
-                  ) : null}
-                </div>
+                ) : null}
               </div>
             )
           )}
@@ -100,13 +98,18 @@ function Submission({
           ) : null}
           {question.candidates.map((element, index) =>
             element.id ? (
-              <div
+              <label
                 className={
                   element.value === question.answer
                     ? styles.answerContainer
                     : element.value === studentAnswer
                     ? styles.wrongAnswerContainer
                     : styles.inputContainer
+                }
+                htmlFor={
+                  id
+                    ? id + ':' + element.id + ':' + element.value + unique
+                    : 'test:' + element.id + ':' + element.value + unique
                 }
                 key={'D:' + element.id}
               >
@@ -123,26 +126,18 @@ function Submission({
                   value={element.value}
                   disabled={true}
                 />
-                <label
-                  className={styles.candidates}
-                  htmlFor={
-                    id
-                      ? id + ':' + element.id + ':' + element.value + unique
-                      : 'test:' + element.id + ':' + element.value + unique
-                  }
-                >
-                  {element.value.includes('&code:') ? (
-                    <SyntaxHighlight
-                      code={element.value.split('&code:')[1]}
-                      key={'syntax' + element.id}
-                    />
-                  ) : (
-                    <div key={element.value + ':' + element.id}>
-                      {element.value}
-                    </div>
-                  )}
-                </label>
-              </div>
+
+                {element.value.includes('&code:') ? (
+                  <SyntaxHighlight
+                    code={element.value.split('&code:')[1]}
+                    key={'syntax' + element.id}
+                  />
+                ) : (
+                  <div key={element.value + ':' + element.id}>
+                    {element.value}
+                  </div>
+                )}
+              </label>
             ) : (
               <div
                 className={

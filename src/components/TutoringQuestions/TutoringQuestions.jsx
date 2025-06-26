@@ -9,26 +9,28 @@ function TutoringQuestions({ question, selectAnswer }) {
   return (
     <>
       <div>
-        <h1 className={styles.title}>
-          {question.id ? question.id : 0}. {question.title}
-        </h1>
         <fieldset className={styles.questionContainer}>
+          <h2 className={styles.title}>
+            {question.id ? question.id : 0}. {question.title}
+          </h2>
           {question.question.split('&code:').map((value, index) =>
             index === 1 ? (
               <SyntaxHighlight code={value} key={index} />
             ) : (
               <div key={index} className={styles.questionHeader}>
-                <h2 className={styles.question}>{value}</h2>
-                <div className={styles.topic_card_container}>
-                  {question.topics.map((topicValue, topicIndex) => (
-                    <Card
-                      propStyles={styles.topic_card}
-                      key={'t.' + value + '.' + topicIndex}
-                    >
-                      <div>{topicValue}</div>
-                    </Card>
-                  ))}
-                </div>
+                <p className={styles.question}>{value}</p>
+                {question.topics.length ? (
+                  <div className={styles.topic_card_container}>
+                    {question.topics.map((topicValue, topicIndex) => (
+                      <Card
+                        propStyles={styles.topic_card}
+                        key={'t.' + value + '.' + topicIndex}
+                      >
+                        <div>{topicValue}</div>
+                      </Card>
+                    ))}
+                  </div>
+                ) : null}
                 <div className={styles.dueDateContainer}>
                   {!question.targetDate ? null : (
                     <div>
@@ -52,39 +54,43 @@ function TutoringQuestions({ question, selectAnswer }) {
                     </div>
                   )}
                 </div>
-                <hr
-                  style={{
-                    width: '100%',
-                    borderTop: '1px solid #cfcfcf',
-                  }}
-                />
-                <div style={{ marginBottom: '15px' }}>
-                  <div
-                    className={styles.hintButtonContainer}
-                    onClick={() => {
-                      setShowHint(!showHint);
-                    }}
-                  >
-                    <div>Hint </div>
+                {question.hint ? (
+                  <div style={{ marginBottom: '15px' }}>
+                    <div
+                      className={styles.hintButtonContainer}
+                      onClick={() => {
+                        setShowHint(!showHint);
+                      }}
+                    >
+                      <div>Hint </div>
+                      {showHint ? (
+                        <div className={styles.upArrow} />
+                      ) : (
+                        <div className={styles.downArrow} />
+                      )}
+                    </div>
                     {showHint ? (
-                      <div className={styles.upArrow} />
-                    ) : (
-                      <div className={styles.downArrow} />
-                    )}
+                      <div className={styles.hint}>{question.hint}</div>
+                    ) : null}
                   </div>
-                  {showHint ? (
-                    <div className={styles.hint}>{question.hint}</div>
-                  ) : null}
-                </div>
+                ) : null}
               </div>
             )
           )}
           {question.type === 'm' ? (
             question.candidates.map((element, index) =>
               element.id ? (
-                <div className={styles.inputContainer} key={'D:' + element.id}>
+                <label
+                  key={'D:' + element.id}
+                  className={styles.inputContainer}
+                  htmlFor={
+                    question.id
+                      ? question.id + ':' + element.id + ':' + element.value
+                      : 'test:' + element.id + ':' + element.value
+                  }
+                >
                   <input
-                    style={{ margin: 'auto 4px' }}
+                    style={{ margin: 'auto 12px auto 4px' }}
                     type="radio"
                     id={
                       question.id
@@ -95,26 +101,17 @@ function TutoringQuestions({ question, selectAnswer }) {
                     value={element.value}
                     onChange={() => selectAnswer(question.id, element.value)}
                   />
-                  <label
-                    className={styles.candidates}
-                    htmlFor={
-                      question.id
-                        ? question.id + ':' + element.id + ':' + element.value
-                        : 'test:' + element.id + ':' + element.value
-                    }
-                  >
-                    {element.value.includes('&code:') ? (
-                      <SyntaxHighlight
-                        code={element.value.split('&code:')[1]}
-                        key={'syntax' + element.id}
-                      />
-                    ) : (
-                      <div key={element.value + ':' + element.id}>
-                        {element.value}
-                      </div>
-                    )}
-                  </label>
-                </div>
+                  {element.value.includes('&code:') ? (
+                    <SyntaxHighlight
+                      code={element.value.split('&code:')[1]}
+                      key={'syntax' + element.id}
+                    />
+                  ) : (
+                    <div key={element.value + ':' + element.id}>
+                      {element.value}
+                    </div>
+                  )}
+                </label>
               ) : (
                 <div className={styles.inputContainer} key={'D:' + index}>
                   <input

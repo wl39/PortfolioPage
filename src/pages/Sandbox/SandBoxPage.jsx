@@ -8,6 +8,7 @@ import ScatterPlot from '../../components/ScatterPlot/ScatterPlot';
 import RadarChart from '../../components/RadarChart/RadarChart';
 import LineGraph from '../../components/LineGraph/LineGraph';
 import { getSutdentTopicStats } from '../../services/api/HMSService';
+import CardButton from '../../components/CardButton/CardButton';
 
 function SandBoxPage(props) {
   const [temp, setTemp] = useState(null);
@@ -111,6 +112,7 @@ function SandBoxPage(props) {
       <button onClick={halo}>temp!</button>
       <SnackbarContainer addSnackbar={setTemp} />*/}
 
+      <CardButton onClick={() => console.log('hi')}></CardButton>
       <button onClick={halo}>temp!</button>
       <button onClick={temp2}>temp!</button>
       <SnackbarContainer addSnackbar={setTemp} />

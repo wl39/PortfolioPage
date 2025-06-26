@@ -8,19 +8,26 @@
 
 .header {
   position: fixed;
-  height: 40px;
-  width: calc(100% - 30px);
   top: 0;
-  background-color: transparent;
-  color: white;
-  font-weight: 600;
-  font-size: 24px;
-  display: none;
-  padding: 20px 15px;
-  z-index: 20;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  padding: 16px 0;
+  background-color: ivory;
+  border-bottom: 2px solid black;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+  z-index: 999;
+}
+
+.innerHeader {
+  display: flex;
   justify-content: space-between;
-  /* opacity: 0; */
-  transition: background-color 0.2s;
+  width: 100%;
+  margin: 0px 80px;
 }
 
 .headerMoved {
@@ -40,4 +47,34 @@
   /* opacity: 1; */
   transition: background-color 0.2s;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  fill: black;
+  margin-left: 16px;
+  cursor: pointer;
+}
+
+.main {}
+
+.user {
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 480px) {
+  .innerHeader {
+    margin: 0px 12px;
+  }
+
+  .main {
+    display: none;
+  }
+
+  .user {
+    width: 100%;
+    justify-content: space-between;
+  }
 }

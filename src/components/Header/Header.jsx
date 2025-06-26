@@ -1,52 +1,58 @@
-import React from "react";
-// import { Button } from "@mui/material";
+import { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 
-import styles from "./Header.module.css";
-import CustomButton from "../CustomButton/CustomButton";
+import Logout from '../../Icons/Logout/Logout';
 
-import limLogo from "../../assets/logo512.png";
+import styles from './Header.module.css';
+import CardButton from '../CardButton/CardButton';
 
-class Header extends React.Component {
-  constructor(props) {
-    super(props);
+function Header() {
+  const [showHeader, setShowHeader] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const { studentsName } = useParams();
 
-    this.state = {
-      headerStyle: styles.header,
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY > lastScrollY && currentScrollY > 50) {
+        setShowHeader(false); // 스크롤 내림 → 숨김
+      } else {
+        setShowHeader(true); // 스크롤 올림 → 보임
+      }
+
+      setLastScrollY(currentScrollY);
     };
-  }
 
-  componentDidMount() {
-    let observer = new IntersectionObserver((e) => {
-      e.forEach((component) => {
-        if (component.isIntersecting) {
-          this.setState({
-            headerStyle: styles.header,
-          });
-        } else {
-          this.setState({
-            headerStyle: styles.headerMoved,
-          });
-        }
-      });
-    });
+    window.addEventListener('scroll', handleScroll);
 
-    let intersectionBox = document.getElementById("intersectionBox");
-    observer.observe(intersectionBox);
-  }
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [lastScrollY]);
 
-  render() {
-    return (
-      <div>
-        <div className={styles.intersectionBox} id="intersectionBox" />
-        <div className={this.state.headerStyle}>
-          <CustomButton logo={true} source={limLogo} />
+  return (
+    <header
+      className={styles.header}
+      style={{
+        transform: showHeader ? 'translateY(0)' : 'translateY(-100%)',
+      }}
+    >
+      <div className={styles.innerHeader}>
+        <div className={styles.main}></div>
+        <div className={styles.user}>
+          <Link to={`/user/${studentsName}`} style={{ textDecoration: 'none' }}>
+            <CardButton color={'blue'}>Dashboard</CardButton>
+          </Link>
           <div>
-            <CustomButton underline={true} text="Projects" />
+            <Link to={'/logout'}>
+              <Logout propStyles={styles.icon} />
+            </Link>
           </div>
         </div>
       </div>
-    );
-  }
+    </header>
+  );
 }
 
 export default Header;

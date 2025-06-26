@@ -260,7 +260,7 @@ const ReviewPage = () => {
         <h1 className={styles.h1}>
           {studentsName[0].toUpperCase() + studentsName.slice(1)}
         </h1>
-        <Link
+        {/* <Link
           to={'/tutoring/' + studentsName}
           style={{ marginTop: '22px', marginRight: '15px' }}
         >
@@ -268,10 +268,10 @@ const ReviewPage = () => {
         </Link>
         <Link to={'/submission/' + studentsName} style={{ marginTop: '22px' }}>
           <button className={styles.button}>Submissions</button>
-        </Link>
+        </Link> */}
       </div>
 
-      <div className={styles.searchContainer}>
+      {/* <div className={styles.searchContainer}>
         <input
           placeholder="Search"
           className={styles.input}
@@ -313,7 +313,7 @@ const ReviewPage = () => {
             </div>
           ) : null}
         </div>
-      </div>
+      </div> */}
 
       {submissions.length === 0 ? (
         <TutoringQuestions

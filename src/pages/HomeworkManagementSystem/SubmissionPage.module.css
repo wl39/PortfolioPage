@@ -6,6 +6,9 @@
 
 .header {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
 }
 
 .linkContainer {
@@ -15,10 +18,11 @@
 }
 
 .h1 {
-  width: calc(100% - 275px);
+  /* width: calc(100% - 275px); */
   margin: 0px;
-  height: 80px;
-  line-height: 80px;
+  height: 64px;
+  line-height: 64px;
+  font-size: 64px;
 }
 
 .buttonContainer {
@@ -84,7 +88,32 @@
 .score {
   margin-left: 5px;
   font-size: 24px;
-  font-weight: 200;
+  text-align: right;
+  font-weight: 400;
+}
+
+.scoreText {
+  font-size: 16px;
+  line-height: 16px;
+}
+
+.scoreValueGreen {
+  font-size: 32px;
+  line-height: 32px;
+  font-weight: 600;
+  color: rgb(34 197 94)
+}
+
+.scoreValueRed {
+  font-size: 32px;
+  line-height: 32px;
+  font-weight: 600;
+  color: rgb(239 68 68)
+}
+
+.scorePercent {
+  font-size: 12px;
+  line-height: 16px;
 }
 
 .searchContainer {
@@ -184,6 +213,10 @@
 }
 
 @media (max-width: 480px) {
+  .h1 {
+    font-size: 48px;
+  }
+
   .page {
     width: calc(100vw - 16px);
     padding-top: 10px;
@@ -191,11 +224,18 @@
   }
 
   .header {
-    flex-direction: column;
+    margin-bottom: 8px;
   }
 
   .linkContainer {
     width: 100%;
     margin-bottom: 8px;
   }
+}
+
+.headerCard {
+  border: 2px solid black;
+  box-shadow: 5px 5px black;
+  padding: 32px 16px;
+  margin-bottom: 20px;
 }

@@ -1,36 +1,44 @@
 .title {
-  font-size: 40px;
-  margin-bottom: 10px;
-  margin-top: 28px;
+  font-size: 20px;
   word-break: break-all;
+  margin: 0px;
 }
 
 .wrongQuestionContainer {
   border: 2px solid rgba(255, 0, 0, 0.58);
   box-shadow: 5px 5px rgba(255, 0, 0, 0.58);
+  padding: 32px;
   white-space: pre-wrap;
   word-break: break-word;
   background-color: ivory;
+  margin-top: 10px;
+  margin-bottom: 16px;
 }
 
 .correctQuestionContainer {
-  border: 2px solid green;
-  box-shadow: 5px 5px green;
+  border: 2px solid rgb(34 197 94);
+  box-shadow: 5px 5px rgb(34 197 94);
+  padding: 32px;
   white-space: pre-wrap;
   word-break: break-word;
   position: relative;
   background-color: ivory;
+  margin-top: 10px;
+  margin-bottom: 16px;
 }
 
 .unMarkedContainer {
   border: 2px dashed black;
   box-shadow: 5px 5px black;
+  padding: 32px;
+  margin-top: 10px;
+  margin-bottom: 16px;
 }
 
 .question {
   margin-top: 15px;
-  font-size: 30px;
-  font-weight: 700;
+  font-size: 18px;
+  font-weight: 600;
   width: 100%;
 }
 
@@ -40,9 +48,21 @@
 }
 
 .inputContainer {
-  margin: 10px;
+  border: 2px solid rgb(209 213 219 / var(--tw-border-opacity, 1));
   display: flex;
   min-height: 36px;
+  padding: 16px 6px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.inputContainer:hover {
+  background-color: transparent;
+  font-weight: normal;
+}
+
+.inputContainer:has(input:disabled):hover {
+  background-color: none;
 }
 
 .questionHeader {
@@ -101,24 +121,44 @@
 }
 
 .answerContainer {
-  margin: 10px 0px;
+  color: black;
+  border: 1px solid rgb(34 197 94 / var(--tw-border-opacity, 1));
+  box-shadow: 3px 3px rgba(34, 197, 94, 1);
+  background-color: rgb(240 253 244);
+  display: flex;
+  min-height: 36px;
+  padding: 16px 6px;
+  align-items: center;
+  margin-bottom: 16px;
+
+  /* margin: 10px 0px;
   padding-left: 10px;
   padding-right: 10px;
   display: flex;
   min-height: 36px;
   background-color: rgba(0, 128, 0, 0.58);
   color: white;
-  font-weight: 600;
+  font-weight: 600; */
 }
 
 .wrongAnswerContainer {
-  margin: 10px 0px;
+  border: 1px solid rgb(239 68 68);
+  box-shadow: 3px 3px rgba(239, 68, 68, 1);
+  background-color: rgb(254 242 242);
+  color: black;
+  display: flex;
+  min-height: 36px;
+  padding: 16px 6px;
+  align-items: center;
+  margin-bottom: 16px;
+
+  /* margin: 10px 0px;
   padding-left: 10px;
   padding-right: 10px;
   display: flex;
   min-height: 36px;
   background-color: rgba(255, 0, 0, 0.58);
-  color: white;
+  color: white; */
 }
 
 .explanationContainer {
@@ -174,6 +214,20 @@
   }
 
   .inputContainer {
+    margin-left: 4px;
+    padding: 12px 0px;
+    line-height: 18px;
+    font-size: 12px;
+  }
+
+  .wrongAnswerContainer {
+    margin-left: 4px;
+    padding: 12px 0px;
+    line-height: 18px;
+    font-size: 12px;
+  }
+
+  .answerContainer {
     margin-left: 4px;
     padding: 12px 0px;
     line-height: 18px;

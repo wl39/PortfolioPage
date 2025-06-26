@@ -1,0 +1,58 @@
+.button {
+    padding: 12px 24px;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+    border: 2px solid black;
+    box-shadow: 3px 3px black;
+    text-align: center;
+    font-weight: 500;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.button:hover {
+    box-shadow: 0px 0px;
+    transform: translate(3px, 3px);
+}
+
+.button:disabled {
+    background-color: rgb(193, 193, 193);
+    border: 2px solid rgb(130, 130, 130);
+    box-shadow: 3px 3px rgb(130, 130, 130);
+    cursor: not-allowed;
+}
+
+
+.button:disabled:hover {
+    box-shadow: 3px 3px rgb(130, 130, 130);
+    transform: translate(0px, 0px);
+}
+
+
+.red {
+    color: white;
+    background-color: rgb(239 68 68)
+}
+
+.blue {
+    color: white;
+    background-color: rgb(59 130 246);
+}
+
+.yellow {
+    color: black;
+    background-color: rgb(250 204 21);
+}
+
+.green {
+    color: white;
+    background-color: rgb(34 197 94);
+}
+
+.gray {
+    color: black;
+    background-color: rgb(229 231 235);
+}
+
+/* .disabled {} */

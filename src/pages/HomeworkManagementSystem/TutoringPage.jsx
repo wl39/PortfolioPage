@@ -25,6 +25,7 @@ import Calendar from '../../components/Calendar/Calendar';
 import DragAndDrop from '../../components/DragAndDrop/DragAndDrop';
 import Cross from '../../components/Cross/Cross';
 import Card from '../../components/Card/Card';
+import CardButton from '../../components/CardButton/CardButton';
 
 const mockQuestion = {
   id: 0,
@@ -162,7 +163,7 @@ function TutoringPage() {
         <h1 className={styles.h1}>
           {studentsName[0].toUpperCase() + studentsName.slice(1)}
         </h1>
-        <div className={styles.linkContainer}>
+        {/* <div className={styles.linkContainer}>
           <Link to={`/user/${studentsName}`} style={{ marginTop: '22px' }}>
             <button className={styles.button}>Details...</button>
           </Link>
@@ -172,7 +173,7 @@ function TutoringPage() {
           >
             <button className={styles.button}>Submissions</button>
           </Link>
-        </div>
+        </div> */}
       </div>
       {date ? (
         <div
@@ -195,9 +196,9 @@ function TutoringPage() {
       ))}
 
       <div className={styles.buttonContainer}>
-        <Button onclick={handleSubmit} disabled={questions.length === 0}>
+        <CardButton onClick={handleSubmit} disabled={questions.length === 0}>
           Submit
-        </Button>
+        </CardButton>
       </div>
     </div>
   );

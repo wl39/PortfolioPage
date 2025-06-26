@@ -18,6 +18,7 @@ import { getAllSubmissions } from '../../services/api/HMSService';
 import { PageableContext } from '../../layouts/Pageable/PageableContext';
 import DragAndDrop from '../../components/DragAndDrop/DragAndDrop';
 import Calendar from '../../components/Calendar/Calendar';
+import { toUSFormatDate } from '../../utils/dateFormat';
 
 function SubmissionPage() {
   const { setPageable, pageParams } = useContext(PageableContext);
@@ -56,6 +57,7 @@ function SubmissionPage() {
   const [questionsData, setQuestionsData] = useState([]);
   const [totalQuestions, setTotalQuestions] = useState(1);
   const [totalCorrectQuestions, setTotalCorrectQuestions] = useState(1);
+  const [targetDates, setTargetDates] = useState([]);
 
   const setSubmissionComponents = useCallback((data, searched) => {
     let submissionComponents = [];
@@ -63,11 +65,24 @@ function SubmissionPage() {
     let correctQuestions = 0;
     let localQuestions = [];
 
+    let oldestDate = null;
+    let newestDate = null;
+
     data.map((value, index) => {
+      const currentDate = new Date(value.targetDate);
+
+      if (!oldestDate || currentDate < oldestDate) {
+        oldestDate = currentDate;
+      }
+      if (!newestDate || currentDate > newestDate) {
+        newestDate = currentDate;
+      }
+
       totalQuestions++;
       localQuestions = [...localQuestions, value];
 
       if (value.marked === 1) correctQuestions++;
+
       submissionComponents = [
         ...submissionComponents,
         <Submission
@@ -86,8 +101,14 @@ function SubmissionPage() {
       setQuestionsData(localQuestions);
     }
 
+    const uniqueDates =
+      oldestDate.getTime() === newestDate.getTime()
+        ? [oldestDate]
+        : [oldestDate, newestDate];
+
     setTotalQuestions(totalQuestions);
     setTotalCorrectQuestions(correctQuestions);
+    setTargetDates(uniqueDates);
     setSubmissions(submissionComponents);
   }, []);
 
@@ -244,27 +265,48 @@ function SubmissionPage() {
           students={studentArray}
         />
       </DragAndDrop>
-      <div className={styles.header}>
-        <h1 className={styles.h1}>
-          {studentsName[0].toUpperCase() + studentsName.slice(1)}
-        </h1>
-        <div className={styles.linkContainer}>
-          <Link to={'/user/' + studentsName} style={{ marginTop: '22px' }}>
-            <button className={styles.button}>Details...</button>
-          </Link>
-          <Link to={'/tutoring/' + studentsName} style={{ marginTop: '22px' }}>
-            <button className={styles.button}>Questions</button>
-          </Link>
+      <div className={styles.headerCard}>
+        <div className={styles.header}>
+          <h1 className={styles.h1}>Results</h1>
+          {!totalQuestions ? null : (
+            <div className={styles.score}>
+              <div className={styles.scoreText}>Score</div>
+              <div
+                className={
+                  totalCorrectQuestions / totalQuestions > 0.5
+                    ? styles.scoreValueGreen
+                    : styles.scoreValueRed
+                }
+              >
+                {totalCorrectQuestions} / {totalQuestions}{' '}
+              </div>
+              <div className={styles.scorePercent}>
+                {((totalCorrectQuestions / totalQuestions) * 100).toFixed(2)}%
+              </div>
+            </div>
+          )}
+          {/* <div className={styles.linkContainer}>
+            <Link to={'/user/' + studentsName} style={{ marginTop: '22px' }}>
+              <button className={styles.button}>Details...</button>
+            </Link>
+            <Link
+              to={'/tutoring/' + studentsName}
+              style={{ marginTop: '22px' }}
+            >
+              <button className={styles.button}>Questions</button>
+            </Link>
+          </div> */}
+        </div>
+        <div>
+          Target Date:{' '}
+          {targetDates.length > 1
+            ? `${toUSFormatDate(targetDates[0])} - ${toUSFormatDate(
+                targetDates[1]
+              )}`
+            : targetDates[0]}
         </div>
       </div>
-      {!totalQuestions ? null : (
-        <div className={styles.score}>
-          Score{': '}
-          {((totalCorrectQuestions / totalQuestions) * 100).toFixed(2)}% (
-          {totalCorrectQuestions} / {totalQuestions}){' '}
-        </div>
-      )}
-      <div className={styles.searchContainer}>
+      {/* <div className={styles.searchContainer}>
         <input
           placeholder="Search"
           className={styles.input}
@@ -306,7 +348,7 @@ function SubmissionPage() {
             </div>
           ) : null}
         </div>
-      </div>
+      </div> */}
 
       {submissions.length === 0 ? (
         <Submission

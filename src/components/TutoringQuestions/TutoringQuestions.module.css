@@ -1,25 +1,27 @@
 .title {
-  font-size: 40px;
-  margin-bottom: 10px;
-  margin-top: 28px;
+  font-size: 30px;
   word-break: break-all;
+  margin: 0px;
 }
 
 .questionContainer {
   border: 2px solid black;
   box-shadow: 5px 5px black;
+  padding: 32px;
   white-space: pre-wrap;
   word-break: break-word;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 .questionContainer .inputContainer:not(:last-child) {
-  border-bottom: 1px solid lightgray;
+  margin-bottom: 20px;
 }
 
 .question {
   margin-top: 15px;
-  font-size: 30px;
-  font-weight: 700;
+  font-size: 18px;
+  font-weight: 600;
   width: 100%;
 }
 
@@ -28,15 +30,18 @@
   width: 100%;
 }
 
-.candidates:hover {
-  font-weight: 700;
-}
-
 .inputContainer {
-  margin-left: 10px;
+  border: 2px solid black;
+  box-shadow: 3px 3px black;
   display: flex;
   min-height: 36px;
-  padding: 18px 0px;
+  padding: 16px 6px;
+  align-items: center;
+}
+
+.inputContainer:hover {
+  background-color: aliceblue;
+  font-weight: 700;
 }
 
 .questionHeader {

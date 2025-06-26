@@ -25,6 +25,7 @@ import ModifyQuestionPage from './pages/HomeworkManagementSystem/ModifyQuestionP
 import AdminMainPage from './pages/HomeworkManagementSystem/AdminPage/AdminMainPage';
 import StatsPage from './pages/HomeworkManagementSystem/StatsPage/StatsPage';
 import LogoutPage from './pages/User/LogoutPage';
+import HMSPage from './layouts/HMSPage/HMSPage';
 
 function App() {
   return (
@@ -49,29 +50,35 @@ function App() {
         <Route
           path="/review/:studentsName"
           element={
-            <Pageable key={'tutoring'} sortTypes={[]} sortParams={[]}>
-              <ReviewPage />{' '}
-            </Pageable>
+            <HMSPage>
+              <Pageable key={'tutoring'} sortTypes={[]} sortParams={[]}>
+                <ReviewPage />{' '}
+              </Pageable>
+            </HMSPage>
           }
         />
         <Route
           path="/submission/:studentsName"
           element={
-            <Pageable
-              key={'submission'}
-              sortTypes={['desc']}
-              sortParams={['question.generatedDate']}
-            >
-              <SubmissionPage />
-            </Pageable>
+            <HMSPage>
+              <Pageable
+                key={'submission'}
+                sortTypes={['desc']}
+                sortParams={['question.generatedDate']}
+              >
+                <SubmissionPage />
+              </Pageable>
+            </HMSPage>
           }
         />
         <Route
           path="/tutoring/:studentsName"
           element={
-            <Pageable key={'tutoring'} sortTypes={[]} sortParams={[]}>
-              <TutoringPage />
-            </Pageable>
+            <HMSPage>
+              <Pageable key={'tutoring'} sortTypes={[]} sortParams={[]}>
+                <TutoringPage />
+              </Pageable>
+            </HMSPage>
           }
         />
         <Route path="/teacher" element={<TeacherPage />} />
