@@ -303,7 +303,9 @@ function SubmissionPage() {
             ? `${toUSFormatDate(targetDates[0])} - ${toUSFormatDate(
                 targetDates[1]
               )}`
-            : targetDates[0]}
+            : targetDates.length === 1
+            ? toUSFormatDate(targetDates[0])
+            : ''}
         </div>
       </div>
       {/* <div className={styles.searchContainer}>
