@@ -26,6 +26,7 @@ import AdminMainPage from './pages/HomeworkManagementSystem/AdminPage/AdminMainP
 import StatsPage from './pages/HomeworkManagementSystem/StatsPage/StatsPage';
 import LogoutPage from './pages/User/LogoutPage';
 import HMSPage from './layouts/HMSPage/HMSPage';
+import WithHeaderPageable from './layouts/Pageable/WithHeaderPageable';
 
 function App() {
   return (
@@ -75,9 +76,14 @@ function App() {
           path="/tutoring/:studentsName"
           element={
             <HMSPage>
-              <Pageable key={'tutoring'} sortTypes={[]} sortParams={[]}>
+              <WithHeaderPageable
+                key={'tutoring'}
+                title={'Questions'}
+                sortTypes={[]}
+                sortParams={[]}
+              >
                 <TutoringPage />
-              </Pageable>
+              </WithHeaderPageable>
             </HMSPage>
           }
         />

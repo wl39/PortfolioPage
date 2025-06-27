@@ -284,6 +284,11 @@ input:has(div) {
   background-color: red;
 }
 
+fieldset {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
 /* Extra Small Devices (phones) */
 @media (max-width: 575.98px) {
   body {

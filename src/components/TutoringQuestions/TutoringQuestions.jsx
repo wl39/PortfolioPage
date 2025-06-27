@@ -4,20 +4,27 @@ import SyntaxHighlight from '../SyntaxHighlight/SyntaxHighlight';
 import { dateOptions } from '../../utils/dateFormat';
 import Card from '../Card/Card';
 
-function TutoringQuestions({ question, selectAnswer }) {
+function TutoringQuestions({
+  question,
+  selectAnswer,
+  selectIndexAnswer,
+  contextAnswer,
+  index,
+  localIndex,
+}) {
   const [showHint, setShowHint] = useState(false);
   return (
     <>
-      <div>
+      <div id={'scroll-' + localIndex}>
         <fieldset className={styles.questionContainer}>
           <h2 className={styles.title}>
-            {question.id ? question.id : 0}. {question.title}
+            {index ? index : question.id ? question.id : 0}. {question.title}
           </h2>
-          {question.question.split('&code:').map((value, index) =>
-            index === 1 ? (
-              <SyntaxHighlight code={value} key={index} />
+          {question.question.split('&code:').map((value, qIndex) =>
+            qIndex === 1 ? (
+              <SyntaxHighlight code={value} key={qIndex} />
             ) : (
-              <div key={index} className={styles.questionHeader}>
+              <div key={qIndex} className={styles.questionHeader}>
                 <p className={styles.question}>{value}</p>
                 {question.topics.length ? (
                   <div className={styles.topic_card_container}>
@@ -78,7 +85,7 @@ function TutoringQuestions({ question, selectAnswer }) {
             )
           )}
           {question.type === 'm' ? (
-            question.candidates.map((element, index) =>
+            question.candidates.map((element, cIndex) =>
               element.id ? (
                 <label
                   key={'D:' + element.id}
@@ -99,7 +106,11 @@ function TutoringQuestions({ question, selectAnswer }) {
                     }
                     name={question.id ? question.id : 'test'}
                     value={element.value}
-                    onChange={() => selectAnswer(question.id, element.value)}
+                    checked={element.value === contextAnswer}
+                    onChange={() => {
+                      selectAnswer(question.id, element.value);
+                      selectIndexAnswer(index);
+                    }}
                   />
                   {element.value.includes('&code:') ? (
                     <SyntaxHighlight
@@ -113,17 +124,21 @@ function TutoringQuestions({ question, selectAnswer }) {
                   )}
                 </label>
               ) : (
-                <div className={styles.inputContainer} key={'D:' + index}>
+                <div className={styles.inputContainer} key={'D:' + cIndex}>
                   <input
                     style={{ margin: 'auto 4px' }}
                     type="radio"
-                    id={index + ':' + element}
+                    id={cIndex + ':' + element}
                     value={element}
-                    onChange={() => selectAnswer(question.id, element)}
+                    onChange={() => {
+                      selectAnswer(question.id, element);
+                      selectIndexAnswer(index);
+                    }}
+                    checked={element.value === contextAnswer}
                   />
                   <label
                     className={styles.candidates}
-                    htmlFor={index + ':' + element}
+                    htmlFor={cIndex + ':' + element}
                   >
                     {element.includes('&code:') ? (
                       <SyntaxHighlight
@@ -131,7 +146,7 @@ function TutoringQuestions({ question, selectAnswer }) {
                         key={'syntax' + element.id}
                       />
                     ) : (
-                      <div key={element + ':' + index}>{element}</div>
+                      <div key={element + ':' + cIndex}>{element}</div>
                     )}
                   </label>
                 </div>
@@ -140,7 +155,11 @@ function TutoringQuestions({ question, selectAnswer }) {
           ) : question.type === 's' ? (
             <div>
               <textarea
-                onChange={(e) => selectAnswer(question.id, e.target.value)}
+                value={contextAnswer ? contextAnswer : ''}
+                onChange={(e) => {
+                  selectAnswer(question.id, e.target.value);
+                  selectIndexAnswer(index);
+                }}
               />
             </div>
           ) : null}

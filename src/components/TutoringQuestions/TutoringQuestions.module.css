@@ -10,8 +10,7 @@
   padding: 32px;
   white-space: pre-wrap;
   word-break: break-word;
-  margin-top: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .questionContainer .inputContainer:not(:last-child) {

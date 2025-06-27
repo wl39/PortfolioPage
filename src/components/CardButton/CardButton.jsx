@@ -1,6 +1,6 @@
 import { classnames } from '../../utils/classnames';
 import styles from './CardButton.module.css';
-const CardButton = ({ children, color, disabled, onClick }) => {
+const CardButton = ({ children, color, disabled, onClick, propStyles }) => {
   const colorMap = {
     green: styles.green,
     blue: styles.blue,
@@ -15,7 +15,7 @@ const CardButton = ({ children, color, disabled, onClick }) => {
     <button
       disabled={disabled}
       onClick={onClick}
-      className={classnames([styles.button, propColor])}
+      className={classnames([styles.button, propColor, propStyles])}
     >
       {children}
     </button>

@@ -26,6 +26,7 @@ import DragAndDrop from '../../components/DragAndDrop/DragAndDrop';
 import Cross from '../../components/Cross/Cross';
 import Card from '../../components/Card/Card';
 import CardButton from '../../components/CardButton/CardButton';
+import { AnswerCheckerContext } from '../../context/AnswerCheckerContext';
 
 const mockQuestion = {
   id: 0,
@@ -54,6 +55,8 @@ function TutoringPage() {
   const studentArray = useMemo(() => [studentsName], [studentsName]);
 
   const { pageParams, setPageable } = useContext(PageableContext);
+  const { contextAnswers, setContextAnswers, setIndexAnswers, setNoQuestion } =
+    useContext(AnswerCheckerContext);
 
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState({});
@@ -75,7 +78,7 @@ function TutoringPage() {
         );
 
         setQuestions(questionData.content || []);
-
+        setNoQuestion(!questionData.content);
         setPageable({
           numberOfElements: questionData.numberOfElements || 1,
           size: questionData.size || 1,
@@ -117,34 +120,47 @@ function TutoringPage() {
     [studentsName]
   );
 
+  useEffect(() => {
+    setContextAnswers(answers);
+  }, [setContextAnswers, answers]);
+
   // Submit answers
-  const handleSubmit = () => {
-    if (!window.confirm('Are you sure to submit?')) {
-      return;
-    }
+  // const handleSubmit = () => {
+  //   if (!window.confirm('Are you sure to submit?')) {
+  //     console.log(answers);
+  //     return;
+  //   }
 
-    const finalizedAnswers = Object.entries(answers).map(
-      ([questionId, data]) => ({
-        questionId,
-        studentAnswer: data.answer,
-        studentName: data.studentName.toLowerCase(),
-        submitDate: data.submitDate,
-      })
+  //   const finalizedAnswers = Object.entries(answers).map(
+  //     ([questionId, data]) => ({
+  //       questionId,
+  //       studentAnswer: data.answer,
+  //       studentName: data.studentName.toLowerCase(),
+  //       submitDate: data.submitDate,
+  //     })
+  //   );
+
+  //   const sendAnswers = async () => {
+  //     try {
+  //       const response = await postAnswers(finalizedAnswers);
+  //       console.log(response);
+  //     } catch (error) {
+  //       console.error(error);
+  //       window.alert('There is an issue...');
+  //     } finally {
+  //       window.location.reload();
+  //     }
+  //   };
+
+  //   sendAnswers();
+  // };
+
+  const selectIndexAnswer = (index) => {
+    setIndexAnswers((prevIndexAnswers) =>
+      prevIndexAnswers.includes(index)
+        ? prevIndexAnswers
+        : [...prevIndexAnswers, index]
     );
-
-    const sendAnswers = async () => {
-      try {
-        const response = await postAnswers(finalizedAnswers);
-        console.log(response);
-      } catch (error) {
-        console.error(error);
-        window.alert('There is an issue...');
-      } finally {
-        window.location.reload();
-      }
-    };
-
-    sendAnswers();
   };
 
   // Use `mockQuestion` if no actual questions are returned
@@ -152,17 +168,17 @@ function TutoringPage() {
 
   return (
     <div className={styles.page}>
-      <DragAndDrop x={100}>
+      {/* <DragAndDrop x={100}>
         <Calendar
           propStyles={styles.calendar}
           isStudent={true}
           students={studentArray}
         />
-      </DragAndDrop>
+      </DragAndDrop> */}
       <div className={styles.header}>
-        <h1 className={styles.h1}>
+        {/* <h1 className={styles.h1}>
           {studentsName[0].toUpperCase() + studentsName.slice(1)}
-        </h1>
+        </h1> */}
         {/* <div className={styles.linkContainer}>
           <Link to={`/user/${studentsName}`} style={{ marginTop: '22px' }}>
             <button className={styles.button}>Details...</button>
@@ -192,13 +208,21 @@ function TutoringPage() {
           key={question.id || idx}
           question={question}
           selectAnswer={selectAnswer}
+          selectIndexAnswer={selectIndexAnswer}
+          index={pageParams.size * pageParams.page + idx + 1}
+          localIndex={idx}
+          contextAnswer={
+            contextAnswers[question.id]
+              ? contextAnswers[question.id].answer
+              : null
+          }
         />
       ))}
 
       <div className={styles.buttonContainer}>
-        <CardButton onClick={handleSubmit} disabled={questions.length === 0}>
+        {/* <CardButton onClick={handleSubmit} disabled={questions.length === 0}>
           Submit
-        </CardButton>
+        </CardButton> */}
       </div>
     </div>
   );

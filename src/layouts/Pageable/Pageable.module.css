@@ -1,6 +1,5 @@
 .main {
   margin: auto;
-  padding-top: 60px;
   width: 50vw;
 }
 
@@ -14,6 +13,48 @@
   right: 100px;
   z-index: 2;
   background-color: ivory;
+}
+
+.headerContainer {
+  margin-top: 108px;
+}
+
+.header {
+  display: flex;
+  width: 100%
+}
+
+.contentContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  display: flex;
+  margin: 0px auto;
+  width: calc(70vw + 20px);
+  padding: 24px;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.perPageContainer {
+  display: flex;
+  align-items: center;
+}
+
+.indexController {
+  width: 20vw;
+  margin-left: 20px;
+  box-sizing: border-box;
+  margin-top: 24px;
+  padding: 24px 12px;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 800;
 }
 
 @media (max-width: 480px) {

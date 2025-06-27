@@ -285,20 +285,8 @@ function SubmissionPage() {
               </div>
             </div>
           )}
-          {/* <div className={styles.linkContainer}>
-            <Link to={'/user/' + studentsName} style={{ marginTop: '22px' }}>
-              <button className={styles.button}>Details...</button>
-            </Link>
-            <Link
-              to={'/tutoring/' + studentsName}
-              style={{ marginTop: '22px' }}
-            >
-              <button className={styles.button}>Questions</button>
-            </Link>
-          </div> */}
         </div>
         <div>
-          Target Date:{' '}
           {targetDates.length > 1
             ? `${toUSFormatDate(targetDates[0])} - ${toUSFormatDate(
                 targetDates[1]

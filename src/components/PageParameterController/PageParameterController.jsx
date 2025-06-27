@@ -1,9 +1,9 @@
-import React from "react";
-import Dropdown from "../Dropdown/Dropdown";
+import React from 'react';
+import Dropdown from '../Dropdown/Dropdown';
 
 const PageParameterController = ({ pageParams, setPageParams }) => {
   const changeSize = (value) => {
-    let newPageParams = { ...pageParams, size: value };
+    let newPageParams = { ...pageParams, size: value, page: 0 };
 
     setPageParams(newPageParams);
   };
@@ -11,7 +11,7 @@ const PageParameterController = ({ pageParams, setPageParams }) => {
   return (
     <>
       <Dropdown
-        list={[5, 10, 25, 50, 100]}
+        list={[1, 2, 5, 10, 25, 50, 100]}
         select={changeSize}
         value={pageParams.size}
       />
