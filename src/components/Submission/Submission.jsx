@@ -10,12 +10,14 @@ function Submission({
   submitDate,
   isMarked,
   id,
+  index,
+  localIndex,
   unique = 'uniq',
 }) {
   const [showHint, setShowHint] = useState(false);
   return (
     <>
-      <div>
+      <div id={'scroll-' + localIndex}>
         <fieldset
           className={
             isMarked
@@ -28,7 +30,12 @@ function Submission({
           }
         >
           <h2 className={styles.title}>
-            {question.id ? question.id : 0}. {question.title}
+            {index
+              ? index + '' + (question.id ? ` (${question.id})` : 0)
+              : question.id
+              ? question.id
+              : 0}
+            . {question.title}
           </h2>
           {question.question.split('&code:').map((value, index) =>
             index === 1 ? (

@@ -19,6 +19,7 @@ import { PageableContext } from '../../layouts/Pageable/PageableContext';
 import DragAndDrop from '../../components/DragAndDrop/DragAndDrop';
 import Calendar from '../../components/Calendar/Calendar';
 import { toUSFormatDate } from '../../utils/dateFormat';
+import { AnswerCheckerContext } from '../../context/AnswerCheckerContext';
 
 function SubmissionPage() {
   const { setPageable, pageParams } = useContext(PageableContext);
@@ -59,7 +60,9 @@ function SubmissionPage() {
   const [totalCorrectQuestions, setTotalCorrectQuestions] = useState(1);
   const [targetDates, setTargetDates] = useState([]);
 
-  const setSubmissionComponents = useCallback((data, searched) => {
+  const { setContextAnswers, setNoQuestion } = useContext(AnswerCheckerContext);
+
+  const setSubmissionComponents = useCallback((data, pageParams, searched) => {
     let submissionComponents = [];
     let totalQuestions = 0;
     let correctQuestions = 0;
@@ -82,7 +85,6 @@ function SubmissionPage() {
       localQuestions = [...localQuestions, value];
 
       if (value.marked === 1) correctQuestions++;
-
       submissionComponents = [
         ...submissionComponents,
         <Submission
@@ -92,6 +94,8 @@ function SubmissionPage() {
           submitDate={value.submitDate}
           isMarked={value.marked}
           id={value.id}
+          index={pageParams.size * pageParams.pageable.pageNumber + index + 1}
+          localIndex={index}
         />,
       ];
       return null;
@@ -101,11 +105,11 @@ function SubmissionPage() {
       setQuestionsData(localQuestions);
     }
 
-    const uniqueDates =
-      oldestDate.getTime() === newestDate.getTime()
-        ? [oldestDate]
-        : [oldestDate, newestDate];
-
+    const uniqueDates = !oldestDate
+      ? []
+      : oldestDate.getTime() === newestDate.getTime()
+      ? [oldestDate]
+      : [oldestDate, newestDate];
     setTotalQuestions(totalQuestions);
     setTotalCorrectQuestions(correctQuestions);
     setTargetDates(uniqueDates);
@@ -122,7 +126,9 @@ function SubmissionPage() {
         );
 
         setTotalQuestions(response.numberOfElements);
-        setSubmissionComponents(response.content, false);
+        setNoQuestion(!response.content);
+        setContextAnswers(response.content);
+        setSubmissionComponents(response.content, response, false);
         setPageable({
           numberOfElements: response.numberOfElements,
           size: response.size,

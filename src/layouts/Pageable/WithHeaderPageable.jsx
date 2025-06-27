@@ -10,9 +10,7 @@ import { AnswerCheckerContext } from '../../context/AnswerCheckerContext';
 function WithHeaderPageable({
   children,
   title,
-  propStyles,
-  isFixed = true,
-  hasScroll = true,
+  isSubmission = false,
   sortTypes,
   sortParams,
 }) {
@@ -73,6 +71,7 @@ function WithHeaderPageable({
               pageable={pageable}
               pageParams={pageParams}
               setPageParams={setPageParams}
+              isSubmission={isSubmission}
             />
           </AnswerCheckerContext.Provider>
         </div>

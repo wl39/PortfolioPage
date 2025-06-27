@@ -62,13 +62,15 @@ function App() {
           path="/submission/:studentsName"
           element={
             <HMSPage>
-              <Pageable
+              <WithHeaderPageable
+                title="Submissions"
                 key={'submission'}
                 sortTypes={['desc']}
                 sortParams={['question.generatedDate']}
+                isSubmission={true}
               >
                 <SubmissionPage />
-              </Pageable>
+              </WithHeaderPageable>
             </HMSPage>
           }
         />
