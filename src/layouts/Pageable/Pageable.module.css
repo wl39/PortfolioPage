@@ -57,6 +57,16 @@
   font-weight: 800;
 }
 
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px;
+  width: calc(70vw + 20px);
+  margin: 0px auto;
+  box-sizing: border-box;
+}
+
 @media (max-width: 480px) {
   .main {
     margin: 0px;

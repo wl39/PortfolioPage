@@ -514,3 +514,23 @@ export const getAllParents = async () => {
     throw error;
   }
 };
+
+export const getUserByName = async (name) => {
+  try {
+    const response = await axios.get('users/' + name);
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getTotalAssignmentCountsByName = async (name) => {
+  try {
+    const response = await axios.get('assignments/count/' + name);
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};

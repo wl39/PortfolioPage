@@ -20,6 +20,7 @@
     background-color: rgb(193, 193, 193);
     border: 2px solid rgb(130, 130, 130);
     box-shadow: 3px 3px rgb(130, 130, 130);
+    color: white;
     cursor: not-allowed;
 }
 

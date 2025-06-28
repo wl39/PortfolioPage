@@ -15,6 +15,7 @@ import PieCahrtCard from '../../components/PieChartCard/PieChartCard';
 import styles from './StudentPage.module.css';
 import Calendar from '../../components/Calendar/Calendar';
 import { classnames } from '../../utils/classnames';
+import UserPageCard from '../../components/UserPageCard/UserPageCard';
 
 const StudentPage = () => {
   const windowWidth = useRef(0);
@@ -114,6 +115,7 @@ const StudentPage = () => {
 
   return (
     <>
+      {/* <UserPageCard username={studentName} /> */}
       <h1 className={styles.title}>{studentName || 'Login First'}</h1>
       {services.map((value, index) => {
         switch (value) {

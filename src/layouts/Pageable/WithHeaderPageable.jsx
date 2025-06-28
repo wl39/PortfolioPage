@@ -6,6 +6,7 @@ import Card from '../../components/Card/Card';
 import PageParameterControllerWithHeader from '../../components/PageParameterController/PageParameterControllerWithHeader';
 import IndexController from '../../components/IndexController/IndexController';
 import { AnswerCheckerContext } from '../../context/AnswerCheckerContext';
+import CardButton from '../../components/CardButton/CardButton';
 
 function WithHeaderPageable({
   children,
@@ -42,29 +43,29 @@ function WithHeaderPageable({
       }}
     >
       <div className={styles.headerContainer}>
-        <Card propStyles={styles.card}>
-          <div className={styles.title}>{title}</div>
-          <div className={styles.perPageContainer}>
-            <PageParameterControllerWithHeader
-              pageParams={pageParams}
-              setPageParams={setPageParams}
-              header={'Questions per page:'}
-            />
-          </div>
-        </Card>
-        {/* <br /> */}
-        {/* <PageHandler pageable={pageable} changePage={changePage} /> */}
-        <div className={styles.contentContainer}>
-          <AnswerCheckerContext.Provider
-            value={{
-              contextAnswers,
-              setContextAnswers,
-              indexAnswers,
-              setIndexAnswers,
-              noQuestion,
-              setNoQuestion,
-            }}
-          >
+        <AnswerCheckerContext.Provider
+          value={{
+            contextAnswers,
+            setContextAnswers,
+            indexAnswers,
+            setIndexAnswers,
+            noQuestion,
+            setNoQuestion,
+          }}
+        >
+          <Card propStyles={styles.card}>
+            <div className={styles.title}>{title}</div>
+            <div className={styles.perPageContainer}>
+              <PageParameterControllerWithHeader
+                pageParams={pageParams}
+                setPageParams={setPageParams}
+                header={'Questions per page:'}
+              />
+            </div>
+          </Card>
+          {/* <br /> */}
+          {/* <PageHandler pageable={pageable} changePage={changePage} /> */}
+          <div className={styles.contentContainer}>
             {children}
             <IndexController
               propStyles={styles.indexController}
@@ -73,8 +74,45 @@ function WithHeaderPageable({
               setPageParams={setPageParams}
               isSubmission={isSubmission}
             />
-          </AnswerCheckerContext.Provider>
-        </div>
+          </div>
+          <Card propStyles={styles.footer}>
+            <CardButton
+              disabled={!pageable.pageNumber}
+              color={'gray'}
+              onClick={() => {
+                if (pageable.pageNumber >= 0) {
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                  setPageParams((prev) => ({
+                    ...prev,
+                    page: prev.page - 1,
+                  }));
+                }
+              }}
+            >
+              Previous
+            </CardButton>
+            <div>{`Page ${pageable.pageNumber + 1} of ${
+              pageable.totalPages
+            }`}</div>
+            <CardButton
+              disabled={pageable.pageNumber + 1 >= pageable.totalPages}
+              color={'green'}
+              onClick={() => {
+                if (pageable.pageNumber < pageable.totalPages) {
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                  setPageParams((prev) => ({
+                    ...prev,
+                    page: prev.page + 1,
+                  }));
+                }
+              }}
+            >
+              Next
+            </CardButton>
+          </Card>
+        </AnswerCheckerContext.Provider>
       </div>
     </PageableContext.Provider>
   );
