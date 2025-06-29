@@ -5,28 +5,20 @@ import React, {
   useMemo,
   useState,
 } from 'react';
-import {
-  Link,
-  useNavigate,
-  useParams,
-  useSearchParams,
-} from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
 import styles from './TutoringPage.module.css';
 import TutoringQuestions from '../../components/TutoringQuestions/TutoringQuestions';
 import {
+  getAllQuestionIdsByStudentName,
   getQuestionsWithStudentName,
-  postAnswers,
 } from '../../services/api/HMSService';
 import { formatToISO } from '../../utils/dateFormat';
 import { PageableContext } from '../../layouts/Pageable/PageableContext';
-import Button from '../../components/Button/Button';
-import Calendar from '../../components/Calendar/Calendar';
-import DragAndDrop from '../../components/DragAndDrop/DragAndDrop';
 import Cross from '../../components/Cross/Cross';
 import Card from '../../components/Card/Card';
-import CardButton from '../../components/CardButton/CardButton';
 import { AnswerCheckerContext } from '../../context/AnswerCheckerContext';
+import { isNonEmptyObject } from '../../utils/emptyObjectChecker';
 
 const mockQuestion = {
   id: 0,
@@ -51,179 +43,156 @@ const mockQuestion = {
 };
 
 function TutoringPage() {
+  // Params, Router, Context
   const { studentsName } = useParams();
-  const studentArray = useMemo(() => [studentsName], [studentsName]);
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const date = searchParams.get('date');
 
+  const studentArray = useMemo(() => [studentsName], [studentsName]);
   const { pageParams, setPageable } = useContext(PageableContext);
-  const { contextAnswers, setContextAnswers, setIndexAnswers, setNoQuestion } =
+  const { contextAnswers, setContextAnswers, setNoQuestion, setIndices } =
     useContext(AnswerCheckerContext);
 
+  // Local State
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState({});
 
-  const [searchParams] = useSearchParams();
+  // Helpers
+  const getParsedItem = (key) => {
+    try {
+      const item = localStorage.getItem(key);
+      return item ? JSON.parse(item) : null;
+    } catch {
+      return null;
+    }
+  };
 
-  const navigate = useNavigate();
+  const filterValidAnswers = (answers, validIds) => {
+    const result = { ...answers };
+    for (const key in result) {
+      if (!validIds.includes(Number(key))) delete result[key];
+    }
+    return result;
+  };
 
-  const date = searchParams.get('date');
+  // 1. 초기 로딩: 로컬스토리지에 저장된 답변 가져오기
+  useEffect(() => {
+    const rawAnswers = getParsedItem('answers');
+    if (isNonEmptyObject(rawAnswers)) {
+      setAnswers(rawAnswers);
+      setContextAnswers(rawAnswers);
+    }
+  }, [setContextAnswers]);
 
-  // Fetch questions on mount or when studentsName changes
+  // 2. 문제 ID와 유효한 답변 필터링
+  useEffect(() => {
+    const fetchAndCleanAnswers = async () => {
+      const ids = await getAllQuestionIdsByStudentName(studentsName);
+      setIndices(ids);
+
+      const rawAnswers = getParsedItem('answers');
+
+      if (isNonEmptyObject(rawAnswers)) {
+        const cleanedAnswers = filterValidAnswers(rawAnswers, ids);
+
+        setAnswers(cleanedAnswers);
+        setContextAnswers(cleanedAnswers);
+
+        localStorage.setItem('answers', JSON.stringify(cleanedAnswers));
+      }
+    };
+
+    fetchAndCleanAnswers();
+  }, [setContextAnswers, setIndices, studentsName]);
+
+  // 3. 문제 가져오기
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        const questionData = await getQuestionsWithStudentName(
+        const data = await getQuestionsWithStudentName(
           studentsName,
           pageParams,
           date
         );
+        const contents = data.content || [];
 
-        setQuestions(questionData.content || []);
-        setNoQuestion(!questionData.content);
+        setQuestions(contents);
+        setNoQuestion(contents.length === 0);
         setPageable({
-          numberOfElements: questionData.numberOfElements || 1,
-          size: questionData.size || 1,
-          totalElements: questionData.totalElements || 1,
-          totalPages: questionData.totalPages || 1,
-          pageNumber: questionData.pageable
-            ? questionData.pageable.pageNumber
-            : 1,
+          numberOfElements: data.numberOfElements ?? 1,
+          size: data.size ?? 1,
+          totalElements: data.totalElements ?? 1,
+          totalPages: data.totalPages ?? 1,
+          pageNumber: data.pageable?.pageNumber ?? 1,
         });
       } catch (error) {
-        if (error.response && error.response.status === 401) {
-          // 401 에러이면 로그인 페이지로 이동
-          navigate('/login');
-        } else if (error.response && error.response.status === 403) {
+        const status = error.response?.status;
+        if (status === 401) return navigate('/login');
+        if (status === 403) {
           alert('Access Denied!');
-          navigate('/tutoring/' + studentsName);
-        } else {
-          console.error('Failed to fetch questions', error);
-          alert('There is an issue on the server...!');
+          return navigate(`/tutoring/${studentsName}`);
         }
+        console.error('Failed to fetch questions', error);
+        alert('There is an issue on the server...!');
       }
     };
 
     fetchQuestions();
-  }, [studentsName, pageParams, setPageable, date, navigate]);
+  }, [studentsName, pageParams, date, navigate, setNoQuestion, setPageable]);
 
-  // Update answers in state
+  // 4. 답변 선택 핸들러
   const selectAnswer = useCallback(
     (questionID, answerValue) => {
-      setAnswers((prevAnswers) => ({
-        ...prevAnswers,
+      const updated = {
+        ...answers,
         [questionID]: {
           answer: answerValue,
           studentName: studentsName,
           submitDate: formatToISO(Date.now()),
         },
-      }));
+      };
+      setAnswers(updated);
     },
-    [studentsName]
+    [answers, studentsName]
   );
 
+  // 6. 답변 상태 저장
   useEffect(() => {
     setContextAnswers(answers);
-  }, [setContextAnswers, answers]);
+    localStorage.setItem('answers', JSON.stringify(answers));
+  }, [answers, setContextAnswers]);
 
-  // Submit answers
-  // const handleSubmit = () => {
-  //   if (!window.confirm('Are you sure to submit?')) {
-  //     console.log(answers);
-  //     return;
-  //   }
-
-  //   const finalizedAnswers = Object.entries(answers).map(
-  //     ([questionId, data]) => ({
-  //       questionId,
-  //       studentAnswer: data.answer,
-  //       studentName: data.studentName.toLowerCase(),
-  //       submitDate: data.submitDate,
-  //     })
-  //   );
-
-  //   const sendAnswers = async () => {
-  //     try {
-  //       const response = await postAnswers(finalizedAnswers);
-  //       console.log(response);
-  //     } catch (error) {
-  //       console.error(error);
-  //       window.alert('There is an issue...');
-  //     } finally {
-  //       window.location.reload();
-  //     }
-  //   };
-
-  //   sendAnswers();
-  // };
-
-  const selectIndexAnswer = (index) => {
-    setIndexAnswers((prevIndexAnswers) =>
-      prevIndexAnswers.includes(index)
-        ? prevIndexAnswers
-        : [...prevIndexAnswers, index]
-    );
-  };
-
-  // Use `mockQuestion` if no actual questions are returned
   const displayQuestions = questions.length > 0 ? questions : [mockQuestion];
 
+  // Render
   return (
     <div className={styles.page}>
-      {/* <DragAndDrop x={100}>
-        <Calendar
-          propStyles={styles.calendar}
-          isStudent={true}
-          students={studentArray}
-        />
-      </DragAndDrop> */}
-      <div className={styles.header}>
-        {/* <h1 className={styles.h1}>
-          {studentsName[0].toUpperCase() + studentsName.slice(1)}
-        </h1> */}
-        {/* <div className={styles.linkContainer}>
-          <Link to={`/user/${studentsName}`} style={{ marginTop: '22px' }}>
-            <button className={styles.button}>Details...</button>
-          </Link>
-          <Link
-            to={`/submission/${studentsName}`}
-            style={{ marginTop: '22px' }}
-          >
-            <button className={styles.button}>Submissions</button>
-          </Link>
-        </div> */}
-      </div>
-      {date ? (
+      <div className={styles.header}></div>
+
+      {date && (
         <div
           style={{ display: 'flex', justifyContent: 'flex-end' }}
-          onClick={() => navigate('/tutoring/' + studentsName)}
+          onClick={() => navigate(`/tutoring/${studentsName}`)}
         >
           <Card propStyles={styles.dateSelected}>
             {date} <Cross propStyles={styles.cross} size={16} line={4} />
           </Card>
         </div>
-      ) : null}
+      )}
 
-      {/* Render questions */}
       {displayQuestions.map((question, idx) => (
         <TutoringQuestions
           key={question.id || idx}
           question={question}
           selectAnswer={selectAnswer}
-          selectIndexAnswer={selectIndexAnswer}
           index={pageParams.size * pageParams.page + idx + 1}
           localIndex={idx}
-          contextAnswer={
-            contextAnswers[question.id]
-              ? contextAnswers[question.id].answer
-              : null
-          }
+          contextAnswer={contextAnswers[question.id]?.answer || null}
         />
       ))}
 
-      <div className={styles.buttonContainer}>
-        {/* <CardButton onClick={handleSubmit} disabled={questions.length === 0}>
-          Submit
-        </CardButton> */}
-      </div>
+      <div className={styles.buttonContainer}>{/* Submit 버튼 */}</div>
     </div>
   );
 }

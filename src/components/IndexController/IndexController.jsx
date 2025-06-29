@@ -5,6 +5,7 @@ import styles from './IndexController.module.css';
 import { AnswerCheckerContext } from '../../context/AnswerCheckerContext';
 import CardButton from '../CardButton/CardButton';
 import { postAnswers } from '../../services/api/HMSService';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function IndexController({
   propStyles,
@@ -15,8 +16,11 @@ function IndexController({
 }) {
   const [showHeader, setShowHeader] = useState(true);
 
-  const { contextAnswers, indexAnswers, noQuestion } =
+  const { contextAnswers, noQuestion, indices } =
     useContext(AnswerCheckerContext);
+
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const scrollToQuestionById = (index) => {
     const element = document.getElementById(`scroll-${index}`);
@@ -43,7 +47,6 @@ function IndexController({
 
   const items = useMemo(() => {
     const list = [];
-    // console.log(contextAnswers);
 
     for (let i = 1; i <= pageable.totalElements; i++) {
       list.push(
@@ -59,7 +62,7 @@ function IndexController({
                   ? styles.solved
                   : styles.wrong
                 : styles.item
-              : indexAnswers.includes(i)
+              : contextAnswers[indices[i - 1]]
               ? styles.solved
               : styles.item
           }
@@ -70,17 +73,12 @@ function IndexController({
     }
 
     return list;
-  }, [
-    pageable,
-    changePage,
-    contextAnswers,
-    indexAnswers,
-    isSubmission,
-    pageParams,
-  ]);
+  }, [pageable, changePage, contextAnswers, isSubmission, pageParams]);
+
+  useEffect(() => {}, [contextAnswers]);
 
   const handleSubmit = () => {
-    if (indexAnswers.length === 0) {
+    if (Object.keys(contextAnswers).length === 0) {
       return;
     }
     if (!window.confirm('Are you sure to submit?')) {
@@ -99,10 +97,23 @@ function IndexController({
     const sendAnswers = async () => {
       try {
         const response = await postAnswers(finalizedAnswers);
+
+        localStorage.setItem('answers', '');
+        localStorage.setItem('indexAnswers', '');
         console.log(response);
       } catch (error) {
         console.error(error);
-        window.alert('There is an issue...');
+        if (
+          error.response &&
+          error.response.status &&
+          error.response.status === 401
+        ) {
+          alert('Your seession is expired. You have to login first.');
+
+          navigate('/login', { state: { from: location }, replace: true });
+        } else {
+          window.alert('There is an issue...');
+        }
       } finally {
         window.location.reload();
       }
@@ -175,9 +186,9 @@ function IndexController({
                 </div>
                 <div className={styles.progress}>
                   <div className={styles.progressText}>Progress</div>
-                  <div
-                    className={styles.progressStat}
-                  >{`${indexAnswers.length}/${pageable.totalElements}`}</div>
+                  <div className={styles.progressStat}>{`${
+                    Object.keys(contextAnswers).length
+                  }/${pageable.totalElements}`}</div>
                   <div className={styles.progressText}>Questions Answered</div>
                 </div>
               </>
@@ -188,7 +199,7 @@ function IndexController({
         {isSubmission ? null : (
           <CardButton
             propStyles={styles.button}
-            disabled={indexAnswers.length === 0}
+            disabled={Object.keys(contextAnswers).length === 0}
             color={'green'}
             onClick={handleSubmit}
           >

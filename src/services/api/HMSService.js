@@ -534,3 +534,12 @@ export const getTotalAssignmentCountsByName = async (name) => {
     throw error;
   }
 };
+
+export const getAllQuestionIdsByStudentName = async (name) => {
+  try {
+    const response = await axios.get('assignments/ids/' + name);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};

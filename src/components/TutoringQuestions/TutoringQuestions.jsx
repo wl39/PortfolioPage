@@ -7,7 +7,6 @@ import Card from '../Card/Card';
 function TutoringQuestions({
   question,
   selectAnswer,
-  selectIndexAnswer,
   contextAnswer,
   index,
   localIndex,
@@ -109,7 +108,6 @@ function TutoringQuestions({
                     checked={element.value === contextAnswer}
                     onChange={() => {
                       selectAnswer(question.id, element.value);
-                      selectIndexAnswer(index);
                     }}
                   />
                   {element.value.includes('&code:') ? (
@@ -132,7 +130,6 @@ function TutoringQuestions({
                     value={element}
                     onChange={() => {
                       selectAnswer(question.id, element);
-                      selectIndexAnswer(index);
                     }}
                     checked={element.value === contextAnswer}
                   />
@@ -158,7 +155,6 @@ function TutoringQuestions({
                 value={contextAnswer ? contextAnswer : ''}
                 onChange={(e) => {
                   selectAnswer(question.id, e.target.value);
-                  selectIndexAnswer(index);
                 }}
               />
             </div>

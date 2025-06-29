@@ -31,6 +31,7 @@ function WithHeaderPageable({
 
   const [contextAnswers, setContextAnswers] = useState({});
   const [indexAnswers, setIndexAnswers] = useState([]);
+  const [indices, setIndices] = useState([]);
   const [noQuestion, setNoQuestion] = useState(true);
 
   return (
@@ -51,6 +52,8 @@ function WithHeaderPageable({
             setIndexAnswers,
             noQuestion,
             setNoQuestion,
+            indices,
+            setIndices,
           }}
         >
           <Card propStyles={styles.card}>
