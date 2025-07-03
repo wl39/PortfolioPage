@@ -104,8 +104,46 @@ function SandBoxPage(props) {
     temp();
   };
 
+  const [file, setFile] = useState(null);
+
+  const handleChange = (e) => {
+    setFile(e.target.files[0]);
+  };
+
+  const handleUpload = () => {
+    if (!file) {
+      alert('파일을 선택하세요.');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('username', 'wl39');
+    formData.append('image', file);
+
+    // 예시용 fetch (실제 서버 주소로 변경해야 함)
+    fetch('https://img.91b.co.uk/upload', {
+      method: 'POST',
+      body: formData,
+      credentials: 'include', // JWT 쿠키 자동 포함
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+        return res.json(); // JSON 파싱
+      })
+      .then((data) => {
+        alert('업로드 성공');
+        console.log(data);
+      })
+      .catch((err) => {
+        alert('업로드 실패');
+        console.error(err);
+      });
+  };
+
   return (
     <>
+      <input type="file" onChange={handleChange} />
+      <button onClick={handleUpload}>submit</button>
       {/* <div>Hello</div>
       <AutoComplete data={data} />
       <SeamCarving />

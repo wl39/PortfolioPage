@@ -88,18 +88,29 @@ function TutoringPage() {
   // 2. 문제 ID와 유효한 답변 필터링
   useEffect(() => {
     const fetchAndCleanAnswers = async () => {
-      const ids = await getAllQuestionIdsByStudentName(studentsName);
-      setIndices(ids);
+      try {
+        const ids = await getAllQuestionIdsByStudentName(studentsName);
+        setIndices(ids);
 
-      const rawAnswers = getParsedItem('answers');
+        const rawAnswers = getParsedItem('answers');
 
-      if (isNonEmptyObject(rawAnswers)) {
-        const cleanedAnswers = filterValidAnswers(rawAnswers, ids);
+        if (isNonEmptyObject(rawAnswers)) {
+          const cleanedAnswers = filterValidAnswers(rawAnswers, ids);
 
-        setAnswers(cleanedAnswers);
-        setContextAnswers(cleanedAnswers);
+          setAnswers(cleanedAnswers);
+          setContextAnswers(cleanedAnswers);
 
-        localStorage.setItem('answers', JSON.stringify(cleanedAnswers));
+          localStorage.setItem('answers', JSON.stringify(cleanedAnswers));
+        }
+      } catch (error) {
+        const status = error.response?.status;
+        if (status === 401) return navigate('/login');
+        if (status === 403) {
+          alert('Access Denied!');
+          return navigate(`/tutoring/${studentsName}`);
+        }
+        console.error('Failed to fetch questions', error);
+        alert('There is an issue on the server...!');
       }
     };
 

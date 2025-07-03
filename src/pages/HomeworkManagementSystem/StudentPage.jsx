@@ -3,6 +3,8 @@ import { useDispatch } from 'react-redux';
 import {
   getAllSubmissionDayCountsByName,
   getAllSubscriptions,
+  getTotalAssignmentCountsByName,
+  getTotalSubmissionCountsByName,
   getLatestSimpleMathSubmissionDayCountsByName,
   getLatestSubmissionDayCountsByName,
 } from '../../services/api/HMSService';
@@ -40,6 +42,13 @@ const StudentPage = () => {
 
   const [services, setServices] = useState([]);
 
+  const [userDate, setUserData] = useState({
+    totalQuestions: 0,
+    totalSubmissions: 0,
+    toSolve: 0,
+    averageScore: 0,
+  });
+
   useEffect(() => {
     windowWidth.current = window.innerWidth;
   }, []);
@@ -47,11 +56,20 @@ const StudentPage = () => {
   useEffect(() => {
     const fetchAllSubscriptions = async () => {
       try {
-        let localUsername = studentName;
+        const result = await Promise.all([
+          getAllSubscriptions(studentName),
+          getTotalAssignmentCountsByName(studentName),
+          getTotalSubmissionCountsByName(studentName),
+        ]);
 
-        const result = await getAllSubscriptions(localUsername);
+        setServices(result[0]);
 
-        setServices(result);
+        setUserData((prevData) => ({
+          ...prevData,
+          totalQuestions: result[1] + result[2],
+          totalSubmissions: result[2],
+          toSolve: result[1],
+        }));
       } catch (error) {
         if (error && error.response && error.response.status === 401) {
           navigate('/login', { state: { from: location }, replace: true });
@@ -115,7 +133,7 @@ const StudentPage = () => {
 
   return (
     <>
-      {/* <UserPageCard username={studentName} /> */}
+      {/* <UserPageCard username={studentName} userData={userDate} /> */}
       <h1 className={styles.title}>{studentName || 'Login First'}</h1>
       {services.map((value, index) => {
         switch (value) {

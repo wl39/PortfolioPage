@@ -543,3 +543,13 @@ export const getAllQuestionIdsByStudentName = async (name) => {
     throw error;
   }
 };
+
+export const getTotalSubmissionCountsByName = async (name) => {
+  try {
+    const response = await axios.get('submissions/count/' + name);
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
