@@ -7,6 +7,7 @@ import {
   getTotalSubmissionCountsByName,
   getLatestSimpleMathSubmissionDayCountsByName,
   getLatestSubmissionDayCountsByName,
+  getUserByName,
 } from '../../services/api/HMSService';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import Accordion from '../../components/Accordion/Accordion';
@@ -60,6 +61,7 @@ const StudentPage = () => {
           getAllSubscriptions(studentName),
           getTotalAssignmentCountsByName(studentName),
           getTotalSubmissionCountsByName(studentName),
+          getUserByName(studentName),
         ]);
 
         setServices(result[0]);
@@ -69,6 +71,7 @@ const StudentPage = () => {
           totalQuestions: result[1] + result[2],
           totalSubmissions: result[2],
           toSolve: result[1],
+          ...result[3],
         }));
       } catch (error) {
         if (error && error.response && error.response.status === 401) {

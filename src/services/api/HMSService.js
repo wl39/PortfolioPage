@@ -552,3 +552,34 @@ export const getTotalSubmissionCountsByName = async (name) => {
     throw error;
   }
 };
+
+
+// IMAGE UPLOAD
+// fetch('https://img.91b.co.uk/upload', {
+//   method: 'POST',
+//   body: formData,
+//   credentials: 'include', // JWT 쿠키 자동 포함
+// })
+//   .then((res) => {
+//     if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+//     return res.json(); // JSON 파싱
+//   })
+//   .then((data) => {
+//     alert('업로드 성공');
+//     console.log(data);
+//   })
+//   .catch((err) => {
+//     alert('업로드 실패');
+//     console.error(err);
+//   });
+
+
+export const postNewImage = async (formData) => {
+  try {
+    const response = await axios.post('https://img.91b.co.uk/upload', formData);
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};

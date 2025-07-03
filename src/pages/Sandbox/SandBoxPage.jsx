@@ -7,7 +7,10 @@ import Bar from '../../components/Bar/Bar';
 import ScatterPlot from '../../components/ScatterPlot/ScatterPlot';
 import RadarChart from '../../components/RadarChart/RadarChart';
 import LineGraph from '../../components/LineGraph/LineGraph';
-import { getSutdentTopicStats } from '../../services/api/HMSService';
+import {
+  getSutdentTopicStats,
+  postNewImage,
+} from '../../services/api/HMSService';
 import CardButton from '../../components/CardButton/CardButton';
 
 function SandBoxPage(props) {
@@ -121,23 +124,24 @@ function SandBoxPage(props) {
     formData.append('image', file);
 
     // 예시용 fetch (실제 서버 주소로 변경해야 함)
-    fetch('https://img.91b.co.uk/upload', {
-      method: 'POST',
-      body: formData,
-      credentials: 'include', // JWT 쿠키 자동 포함
-    })
-      .then((res) => {
-        if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
-        return res.json(); // JSON 파싱
-      })
-      .then((data) => {
-        alert('업로드 성공');
-        console.log(data);
-      })
-      .catch((err) => {
-        alert('업로드 실패');
-        console.error(err);
-      });
+    // fetch('https://img.91b.co.uk/upload', {
+    //   method: 'POST',
+    //   body: formData,
+    //   credentials: 'include', // JWT 쿠키 자동 포함
+    // })
+    //   .then((res) => {
+    //     if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+    //     return res.json(); // JSON 파싱
+    //   })
+    //   .then((data) => {
+    //     alert('업로드 성공');
+    //     console.log(data);
+    //   })
+    //   .catch((err) => {
+    //     alert('업로드 실패');
+    //     console.error(err);
+    //   });
+    postNewImage(formData);
   };
 
   return (
