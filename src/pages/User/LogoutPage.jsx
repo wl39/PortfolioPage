@@ -4,7 +4,15 @@ import { logout } from '../../services/api/HMSService';
 function LogoutPage() {
   useEffect(() => {
     const localLogout = async () => {
-      const data = await logout();
+      try {
+        const data = await logout();
+
+        if (data) {
+          window.location.href = '/login';
+        }
+      } catch (error) {
+        console.error(error);
+      }
     };
 
     localLogout();

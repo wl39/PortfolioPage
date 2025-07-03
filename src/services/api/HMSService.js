@@ -15,11 +15,11 @@ export const login = async (loginForm) => {
 
 export const logout = async () => {
   try {
-    await axios.post('/users/logout', {
+    const data = await axios.post('/users/logout', {
       credentials: 'include', // 쿠키 포함 필수
     });
 
-    window.location.href = '/login';
+    return data;
   } catch (error) {
     console.error('Logout failed', error);
   }
@@ -380,9 +380,8 @@ export const getSimpleQuestionsWithTopics = async (pageParams, searchTitle) => {
       ? '/search?title=' + encodeURIComponent(searchTitle)
       : '';
     const pageQuery = `page=${pageParams.page}&size=${pageParams.size}&${sortQuery}`;
-    const fullUrl = `questions/topics${
-      basePath ? basePath + '&' + pageQuery : '?' + pageQuery
-    }`;
+    const fullUrl = `questions/topics${basePath ? basePath + '&' + pageQuery : '?' + pageQuery
+      }`;
 
     const response = await axios.get(fullUrl);
     return response.data;
