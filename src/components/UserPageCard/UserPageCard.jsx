@@ -38,7 +38,7 @@ const UserPageCard = ({
     }
 
     const formData = new FormData();
-    formData.append('username', username);
+    formData.append('username', userData.username);
     formData.append('image', file);
 
     setIsLoading(true);
