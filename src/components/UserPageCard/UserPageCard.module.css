@@ -24,3 +24,47 @@
     font-weight: 700;
     color: rgb(34 197 94)
 }
+
+.img {
+    margin: auto;
+    width: 6rem;
+    height: 6rem;
+    border: 2px solid black;
+    box-shadow: 3px 3px black;
+    margin-bottom: 1rem;
+}
+
+.editButton {
+    margin-top: 24px
+}
+
+.inputContainer {
+    margin-top: 16px;
+}
+
+.buttonContainer {
+    display: flex;
+    gap: 15px;
+}
+
+.button {
+    flex: 1
+}
+
+.fileInput {
+    display: flex;
+    /* text-align: center; */
+    justify-content: center;
+    /* width: 100%; */
+    height: 50px;
+    align-items: center;
+    border: 3px dashed;
+    margin: 12px 0px;
+}
+
+.span {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding: 24px;
+}

@@ -4,6 +4,7 @@ export default function Cross({
   color = 'black',
   onClick,
   propStyles,
+  propLineStyles,
 }) {
   const lineWidth = line;
 
@@ -20,10 +21,21 @@ export default function Cross({
     <div
       className={propStyles}
       onClick={onClick}
-      style={{ position: 'relative', width: size, height: size }}
+      style={{
+        position: 'relative',
+        width: size,
+        height: size,
+        cursor: 'pointer',
+      }}
     >
-      <div style={{ ...lineStyle, transform: 'rotate(45deg)' }} />
-      <div style={{ ...lineStyle, transform: 'rotate(-45deg)' }} />
+      <div
+        className={propLineStyles}
+        style={{ ...lineStyle, transform: 'rotate(45deg)' }}
+      />
+      <div
+        className={propLineStyles}
+        style={{ ...lineStyle, transform: 'rotate(-45deg)' }}
+      />
     </div>
   );
 }

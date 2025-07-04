@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // import AutoComplete from "../../components/AutoComplete/AutoComplete";
 // import data from "../../data/countries.txt";
 // import SeamCarving from "../../components/SeamCarving/SeamCarving";
@@ -9,11 +9,21 @@ import RadarChart from '../../components/RadarChart/RadarChart';
 import LineGraph from '../../components/LineGraph/LineGraph';
 import {
   getSutdentTopicStats,
+  getUserByName,
   postNewImage,
 } from '../../services/api/HMSService';
 import CardButton from '../../components/CardButton/CardButton';
+import UserPageCard from '../../components/UserPageCard/UserPageCard';
 
 function SandBoxPage(props) {
+  const [userDate, setUserData] = useState({
+    username: '',
+    totalQuestions: 0,
+    totalSubmissions: 0,
+    toSolve: 0,
+    averageScore: 0,
+  });
+
   const [temp, setTemp] = useState(null);
   const [radarData, setRadarData] = useState([
     {
@@ -144,8 +154,24 @@ function SandBoxPage(props) {
     postNewImage(formData);
   };
 
+  useEffect(() => {
+    const fetchAllSubscriptions = async () => {
+      try {
+        const result = await getUserByName('wl39');
+
+        setUserData((prevData) => ({
+          ...prevData,
+          ...result,
+        }));
+      } catch (error) {}
+    };
+
+    fetchAllSubscriptions();
+  }, []);
+
   return (
     <>
+      <UserPageCard username={userData.username} userData={userDate} />
       <input type="file" onChange={handleChange} />
       <button onClick={handleUpload}>submit</button>
       {/* <div>Hello</div>

@@ -3,10 +3,16 @@ import { useEffect, useState } from 'react';
 import Card from '../Card/Card';
 import styles from './UserPageCard.module.css';
 import { postNewImage } from '../../services/api/HMSService';
+import CardButton from '../CardButton/CardButton';
+import Modal from '../Modal/Modal';
+import Input from '../Input/Input';
+import CardInput from '../CardInput/CardInput';
 
 const UserPageCard = ({
   username = 'Jane Doe',
   userData = {
+    email: '',
+    username: '',
     totalQuestions: 0,
     totalSubmissions: 0,
     toSolve: 0,
@@ -16,6 +22,10 @@ const UserPageCard = ({
   },
 }) => {
   const [file, setFile] = useState(null);
+  const [hide, setHide] = useState(true);
+  const [userEmail, setUserEmail] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     setFile(e.target.files[0]);
@@ -23,45 +33,38 @@ const UserPageCard = ({
 
   const handleUpload = () => {
     if (!file) {
-      alert('파일을 선택하세요.');
+      alert('Select a File');
       return;
     }
 
     const formData = new FormData();
-    formData.append('username', 'wl39');
+    formData.append('username', username);
     formData.append('image', file);
 
-    postNewImage(formData);
+    setIsLoading(true);
+    const changeImage = async () => {
+      try {
+        const response = await postNewImage(formData);
+        alert('DONE!');
+      } catch (error) {
+        alert('There is an issue on the server!');
+        console.error(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-    // 예시용 fetch (실제 서버 주소로 변경해야 함)
-    // fetch('https://img.91b.co.uk/upload', {
-    //   method: 'POST',
-    //   body: formData,
-    //   credentials: 'include', // JWT 쿠키 자동 포함
-    // })
-    //   .then((res) => {
-    //     if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
-    //     return res.json(); // JSON 파싱
-    //   })
-    //   .then((data) => {
-    //     alert('업로드 성공');
-    //     console.log(data);
-    //   })
-    //   .catch((err) => {
-    //     alert('업로드 실패');
-    //     console.error(err);
-    //   });
+    changeImage();
   };
 
   //   const user = use(getAssignmentCounts(username));
   useEffect(() => {
-    console.log(userData);
-    // const getAssignmentCounts = async () => {
-    //   //   const data = await getAssignmentCounts(user.username);
-    // };
+    setFirstName(userData.username);
+    setUserEmail(userData.email);
   }, [username, userData]);
   return (
     <Card propStyles={styles.container}>
+      <img className={styles.img} src={userData.imageURL} alt="user" />
       <div className={styles.username}>{username}</div>
       <Card propStyles={styles.statsCard}>
         <div>Total Questions</div>
@@ -82,8 +85,65 @@ const UserPageCard = ({
         <div>To Solve</div>
         <div className={styles.stats}>{userData.toSolve}</div>
       </Card>
-      <input type="file" onChange={handleChange} />
-      <button onClick={handleUpload}>submit</button>
+      <CardButton
+        onClick={() => setHide(false)}
+        propStyles={styles.editButton}
+        color={'green'}
+      >
+        Edit Profile
+      </CardButton>
+      <Modal hide={hide} close={() => setHide(true)}>
+        <div className={styles.inputContainer}>
+          <CardInput
+            value={firstName}
+            label={'Name'}
+            onChange={(e) => {
+              setFirstName(e.target.value);
+            }}
+          />
+        </div>
+        <div className={styles.inputContainer}>
+          <CardInput
+            value={userEmail}
+            label={'Email'}
+            onChange={(e) => {
+              setUserEmail(e.target.value);
+            }}
+          />
+        </div>
+        <input
+          accept="image/*"
+          onChange={handleChange}
+          id="userImage"
+          type="file"
+          hidden
+        />
+        <label className={styles.fileInput} htmlFor="userImage">
+          <span className={styles.span}>
+            {file ? file.name : 'Select a File'}
+          </span>
+        </label>
+        <div className={styles.buttonContainer}>
+          <CardButton
+            disabled={isLoading}
+            propStyles={styles.button}
+            onClick={() => setHide(true)}
+            color={'gray'}
+          >
+            Cancel
+          </CardButton>
+          <CardButton
+            disabled={isLoading}
+            onClick={handleUpload}
+            propStyles={styles.button}
+            color={'green'}
+          >
+            Save Changes
+          </CardButton>
+        </div>
+      </Modal>
+      {/* <input type="file" onChange={handleChange} />
+      <button onClick={handleUpload}>submit</button> */}
     </Card>
   );
 };
