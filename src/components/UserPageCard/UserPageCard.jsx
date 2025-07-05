@@ -47,10 +47,10 @@ const UserPageCard = ({
       try {
         const response = await postNewImage(formData);
         alert('DONE!');
-
+        console.log(response);
         setUserData((prevUserData) => ({
           ...prevUserData,
-          imageURL: response.data.url,
+          imageURL: response.url,
         }));
       } catch (error) {
         alert('There is an issue on the server!');
