@@ -26,11 +26,11 @@ const StudentPage = () => {
 
   const containerWidth = isMobile
     ? windowWidth.current - 40
-    : (windowWidth.current - 200) / 2 + 40;
+    : (windowWidth.current - 640) / 2 + 40;
 
   const pieChartSize = isMobile
     ? (windowWidth.current - 60) / 2
-    : (windowWidth.current - 200) / 4;
+    : (windowWidth.current - 640) / 4;
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -136,138 +136,147 @@ const StudentPage = () => {
 
   return (
     <>
-      {/* <UserPageCard username={studentName} userData={userDate} /> */}
-      <h1 className={styles.title}>{studentName || 'Login First'}</h1>
-      {services.map((value, index) => {
-        switch (value) {
-          case 'Tutoring':
-            return (
-              <Accordion
-                key={value + '.' + index}
-                title={value}
-                rightHeader={
-                  <>
-                    <Link
-                      to={'/tutoring/' + studentName}
-                      className={styles.link}
-                    >
-                      <Button>Questions</Button>
-                    </Link>
+      <div className={styles.container}>
+        <div className={styles.userCard}>
+          <UserPageCard prop username={studentName} userData={userDate} />
+        </div>
+        {/* <h1 className={styles.title}>{studentName || 'Login First'}</h1> */}
+        <div className={styles.accordionContainer}>
+          {services.map((value, index) => {
+            switch (value) {
+              case 'Tutoring':
+                return (
+                  <Accordion
+                    key={value + '.' + index}
+                    title={value}
+                    rightHeader={
+                      <>
+                        <Link
+                          to={'/tutoring/' + studentName}
+                          className={styles.link}
+                        >
+                          <Button>Questions</Button>
+                        </Link>
 
-                    <Link to={'/review/' + studentName} className={styles.link}>
-                      <Button>Review</Button>
-                    </Link>
-                    <Link
-                      to={'/submission/' + studentName}
-                      className={styles.link}
-                    >
-                      <Button>Submissions</Button>
-                    </Link>
-                  </>
-                }
-                onLoad={async () =>
-                  Promise.all([
-                    getLatestSubmissionDayCountsByName(studentName),
-                    getAllSubmissionDayCountsByName(studentName),
-                  ])
-                }
-              >
-                {(data) => (
-                  <>
-                    <Card
-                      propStyles={classnames([
-                        styles.card,
-                        styles.tutoringContainer,
-                      ])}
-                    >
-                      {console.log(containerWidth)}
-                      <div
-                        style={{
-                          width: `${containerWidth}px`,
-                          display: 'flex',
-                          justifyContent: 'space-between',
-                        }}
-                      >
-                        {generatePieChart(
-                          data[0].correctCounts,
-                          data[0].wrongCounts,
-                          data[0].date.replaceAll('-', '.'),
-                          pieChartSize
-                        )}
-                        {generatePieChart(
-                          data[1].reduce(
-                            (acc, value) => (acc += value.correctCounts),
-                            0
-                          ),
-                          data[1].reduce(
-                            (acc, value) => (acc += value.wrongCounts),
-                            0
-                          ),
-                          `${data[1][0].date.replaceAll('-', '.')}
+                        <Link
+                          to={'/review/' + studentName}
+                          className={styles.link}
+                        >
+                          <Button>Review</Button>
+                        </Link>
+                        <Link
+                          to={'/submission/' + studentName}
+                          className={styles.link}
+                        >
+                          <Button>Submissions</Button>
+                        </Link>
+                      </>
+                    }
+                    onLoad={async () =>
+                      Promise.all([
+                        getLatestSubmissionDayCountsByName(studentName),
+                        getAllSubmissionDayCountsByName(studentName),
+                      ])
+                    }
+                  >
+                    {(data) => (
+                      <>
+                        <Card
+                          propStyles={classnames([
+                            styles.card,
+                            styles.tutoringContainer,
+                          ])}
+                        >
+                          {console.log(containerWidth)}
+                          <div
+                            style={{
+                              width: `${containerWidth}px`,
+                              display: 'flex',
+                              justifyContent: 'space-between',
+                            }}
+                          >
+                            {generatePieChart(
+                              data[0].correctCounts,
+                              data[0].wrongCounts,
+                              data[0].date.replaceAll('-', '.'),
+                              pieChartSize
+                            )}
+                            {generatePieChart(
+                              data[1].reduce(
+                                (acc, value) => (acc += value.correctCounts),
+                                0
+                              ),
+                              data[1].reduce(
+                                (acc, value) => (acc += value.wrongCounts),
+                                0
+                              ),
+                              `${data[1][0].date.replaceAll('-', '.')}
                            - 
                           ${data[1][data[1].length - 1].date.replaceAll(
                             '-',
                             '.'
                           )}`,
-                          pieChartSize
-                        )}
-                      </div>
+                              pieChartSize
+                            )}
+                          </div>
 
-                      <Calendar
-                        propStyles={styles.calendar}
-                        students={studentArray}
-                        isStudent={true}
-                      />
-                    </Card>
-                  </>
-                )}
-              </Accordion>
-            );
-          case 'Simple Math Question':
-            return (
-              <Accordion
-                key={value + '.' + index}
-                title={value}
-                rightHeader={
-                  <>
-                    <Link
-                      to={'/math/start'}
-                      state={{ name: studentName }}
-                      style={{ marginRight: '8px' }}
-                    >
-                      <Button>Start</Button>
-                    </Link>
+                          <Calendar
+                            propStyles={styles.calendar}
+                            students={studentArray}
+                            isStudent={true}
+                          />
+                        </Card>
+                      </>
+                    )}
+                  </Accordion>
+                );
+              case 'Simple Math Question':
+                return (
+                  <Accordion
+                    key={value + '.' + index}
+                    title={value}
+                    rightHeader={
+                      <>
+                        <Link
+                          to={'/math/start'}
+                          state={{ name: studentName }}
+                          style={{ marginRight: '8px' }}
+                        >
+                          <Button>Start</Button>
+                        </Link>
 
-                    <Link
-                      to={'/math/result/' + studentName}
-                      style={{ marginRight: '8px' }}
-                    >
-                      <Button>Result</Button>
-                    </Link>
-                  </>
-                }
-                onLoad={async () =>
-                  getLatestSimpleMathSubmissionDayCountsByName(studentName)
-                }
-              >
-                {(data) => (
-                  <Card propStyles={styles.card}>
-                    <div style={{ width: '300px' }}>
-                      {generatePieChart(
-                        data.correctCounts,
-                        data.wrongCounts,
-                        data.date.replaceAll('-', '.'),
-                        300
-                      )}
-                    </div>
-                  </Card>
-                )}
-              </Accordion>
-            );
-          default:
-            return null;
-        }
-      })}
+                        <Link
+                          to={'/math/result/' + studentName}
+                          style={{ marginRight: '8px' }}
+                        >
+                          <Button>Result</Button>
+                        </Link>
+                      </>
+                    }
+                    onLoad={async () =>
+                      getLatestSimpleMathSubmissionDayCountsByName(studentName)
+                    }
+                  >
+                    {(data) => (
+                      <Card propStyles={styles.card}>
+                        <div style={{ width: '300px' }}>
+                          {generatePieChart(
+                            data.correctCounts,
+                            data.wrongCounts,
+                            data.date.replaceAll('-', '.'),
+                            300
+                          )}
+                        </div>
+                      </Card>
+                    )}
+                  </Accordion>
+                );
+              default:
+                return null;
+            }
+          })}
+        </div>
+      </div>
     </>
   );
 };

@@ -10,13 +10,26 @@
     padding: 20px;
 }
 
+.container {
+    display: flex;
+    gap: 20px
+}
+
 .tutoringContainer {
     display: flex;
     justify-content: space-between;
 }
 
 .calendar {
-    width: calc(50vw - 110px) !important;
+    width: calc(50vw - 300px) !important;
+}
+
+.userCard {
+    width: 385px
+}
+
+.accordionContainer {
+    flex: 1
 }
 
 @media (max-width: 480px) {
