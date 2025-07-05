@@ -112,3 +112,30 @@
     font-size: 24px;
     font-weight: 700;
 }
+
+.opener {
+    height: 40px;
+    border-top: 2px solid black;
+    background-color: ivory;
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    padding-right: 10px;
+}
+
+.closer {
+    left: 0px;
+    display: flex;
+    position: absolute;
+    width: calc(100% - 20px);
+    flex-direction: row-reverse;
+    height: 28px;
+    align-items: center;
+}
+
+@media (max-width: 480px) {
+    .container {
+        position: fixed;
+        width: 100%;
+    }
+}

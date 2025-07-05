@@ -77,4 +77,34 @@
     right: 10px;
     top: 0px;
   }
+
+  .contentContainer {
+    flex-direction: column;
+  }
+
+  .indexController {
+    width: auto;
+    margin: 0px 5px
+  }
+
+  .card {
+    width: auto;
+    margin: 0px 8px
+  }
+
+  .title {
+    display: none;
+  }
+
+  .perPageContainer {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .footer {
+    width: auto;
+    margin: 0px 8px;
+    padding: 12px;
+    margin-bottom: 68px;
+  }
 }

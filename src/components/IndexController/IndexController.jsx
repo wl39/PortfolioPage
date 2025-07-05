@@ -6,6 +6,7 @@ import { AnswerCheckerContext } from '../../context/AnswerCheckerContext';
 import CardButton from '../CardButton/CardButton';
 import { postAnswers } from '../../services/api/HMSService';
 import { useLocation, useNavigate } from 'react-router-dom';
+import Triangle from '../Triganle/Triangle';
 
 function IndexController({
   propStyles,
@@ -14,6 +15,7 @@ function IndexController({
   pageParams,
   setPageParams,
 }) {
+  const [hide, setHide] = useState(true);
   const [showHeader, setShowHeader] = useState(true);
 
   const { contextAnswers, noQuestion, indices } =
@@ -146,67 +148,83 @@ function IndexController({
   return (
     <div
       style={{
-        top: showHeader ? '84px' : '10px',
+        top: window.innerWidth <= 480 ? 'none' : showHeader ? '84px' : '10px',
+        bottom: window.innerWidth <= 480 ? '0px' : 0,
       }}
       className={styles.container}
     >
-      <Card propStyles={classnames([propStyles])}>
-        <div className={styles.header}>
-          {isSubmission ? 'Check' : ''} Your Answers
+      {hide ? (
+        <div className={styles.opener} onClick={() => setHide(false)}>
+          <Triangle direction={'up'} onClick={() => setHide(false)} />
         </div>
-        <div className={styles.jump}>Jump to Question</div>
-        {noQuestion ? (
-          <div>Hello, there</div>
-        ) : (
-          <>
-            <div className={styles.itemContainer}>{items}</div>
+      ) : (
+        <Card propStyles={classnames([propStyles])}>
+          {window.innerWidth <= 480 ? (
+            <div className={styles.closer} onClick={() => setHide(true)}>
+              <Triangle direction={'down'} onClick={() => setHide(true)} />
+            </div>
+          ) : null}
+          <div className={styles.header}>
+            {isSubmission ? 'Check' : ''} Your Answers
+          </div>
+          <div className={styles.jump}>Jump to Question</div>
+          {noQuestion ? (
+            <div>Hello, there</div>
+          ) : (
+            <>
+              <div className={styles.itemContainer}>{items}</div>
 
-            {isSubmission ? (
-              <div className={styles.colorContainer}>
-                <div className={styles.color}>
-                  <div className={classnames([styles.box, styles.solved])} />
-                  <div>Correct</div>
-                </div>
-                <div className={styles.color}>
-                  <div className={classnames([styles.box, styles.wrong])} />
-                  <div>Wrong</div>
-                </div>
-              </div>
-            ) : (
-              <>
+              {isSubmission ? (
                 <div className={styles.colorContainer}>
                   <div className={styles.color}>
                     <div className={classnames([styles.box, styles.solved])} />
-                    <div>Answered</div>
+                    <div>Correct</div>
                   </div>
                   <div className={styles.color}>
-                    <div className={classnames([styles.box])} />
-                    <div>Unanswered</div>
+                    <div className={classnames([styles.box, styles.wrong])} />
+                    <div>Wrong</div>
                   </div>
                 </div>
-                <div className={styles.progress}>
-                  <div className={styles.progressText}>Progress</div>
-                  <div className={styles.progressStat}>{`${
-                    Object.keys(contextAnswers).length
-                  }/${pageable.totalElements}`}</div>
-                  <div className={styles.progressText}>Questions Answered</div>
-                </div>
-              </>
-            )}
-          </>
-        )}
+              ) : (
+                <>
+                  <div className={styles.colorContainer}>
+                    <div className={styles.color}>
+                      <div
+                        className={classnames([styles.box, styles.solved])}
+                      />
+                      <div>Answered</div>
+                    </div>
+                    <div className={styles.color}>
+                      <div className={classnames([styles.box])} />
+                      <div>Unanswered</div>
+                    </div>
+                  </div>
+                  <div className={styles.progress}>
+                    <div className={styles.progressText}>Progress</div>
+                    <div className={styles.progressStat}>{`${
+                      Object.keys(contextAnswers).length
+                    }/${pageable.totalElements}`}</div>
+                    <div className={styles.progressText}>
+                      Questions Answered
+                    </div>
+                  </div>
+                </>
+              )}
+            </>
+          )}
 
-        {isSubmission ? null : (
-          <CardButton
-            propStyles={styles.button}
-            disabled={Object.keys(contextAnswers).length === 0}
-            color={'green'}
-            onClick={handleSubmit}
-          >
-            Submit All
-          </CardButton>
-        )}
-      </Card>
+          {isSubmission ? null : (
+            <CardButton
+              propStyles={styles.button}
+              disabled={Object.keys(contextAnswers).length === 0}
+              color={'green'}
+              onClick={handleSubmit}
+            >
+              Submit All
+            </CardButton>
+          )}
+        </Card>
+      )}
     </div>
   );
 }
