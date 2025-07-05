@@ -20,6 +20,7 @@ const UserPageCard = ({
     id: 0,
     imageURL: 'https://img.91b.co.uk/73cfba62-a3fb-474d-a466-befca9268af4.webp',
   },
+  setUserData,
 }) => {
   const [file, setFile] = useState(null);
   const [hide, setHide] = useState(true);
@@ -46,6 +47,11 @@ const UserPageCard = ({
       try {
         const response = await postNewImage(formData);
         alert('DONE!');
+
+        setUserData((prevUserData) => ({
+          ...prevUserData,
+          imageURL: response.data.url,
+        }));
       } catch (error) {
         alert('There is an issue on the server!');
         console.error(error);
