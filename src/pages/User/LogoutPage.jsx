@@ -8,6 +8,7 @@ function LogoutPage() {
         const data = await logout();
 
         if (data) {
+          console.log(data);
           window.location.href = '/login';
         }
       } catch (error) {

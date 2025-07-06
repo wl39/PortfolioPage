@@ -16,8 +16,8 @@ export const login = async (loginForm) => {
 export const logout = async () => {
   try {
     const data = await axios.post('/users/logout', {
-      credentials: 'include', // 쿠키 포함 필수
-    });
+
+    }, { withCredentials: true });
 
     return data;
   } catch (error) {
