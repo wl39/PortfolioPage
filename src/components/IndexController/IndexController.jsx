@@ -17,6 +17,7 @@ function IndexController({
 }) {
   const [hide, setHide] = useState(true);
   const [showHeader, setShowHeader] = useState(true);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
 
   const { contextAnswers, noQuestion, indices } =
     useContext(AnswerCheckerContext);
@@ -127,6 +128,8 @@ function IndexController({
   useEffect(() => {
     let lastY = window.scrollY;
 
+    const handleResize = () => setIsMobile(window.innerWidth <= 480);
+
     const handleScroll = () => {
       const currentY = window.scrollY;
 
@@ -139,8 +142,10 @@ function IndexController({
       lastY = currentY;
     };
 
+    window.addEventListener('resize', handleResize);
     window.addEventListener('scroll', handleScroll);
     return () => {
+      window.removeEventListener('resize', handleResize);
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
@@ -148,12 +153,12 @@ function IndexController({
   return (
     <div
       style={{
-        top: window.innerWidth <= 480 ? 'none' : showHeader ? '84px' : '10px',
-        bottom: window.innerWidth <= 480 ? '0px' : 0,
+        top: isMobile ? undefined : showHeader ? '84px' : '10px',
+        bottom: isMobile ? '0px' : 0,
       }}
       className={styles.container}
     >
-      {hide ? (
+      {isMobile && hide ? (
         <div className={styles.opener} onClick={() => setHide(false)}>
           <Triangle direction={'up'} onClick={() => setHide(false)} />
         </div>
