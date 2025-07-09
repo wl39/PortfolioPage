@@ -583,3 +583,13 @@ export const postNewImage = async (formData) => {
     throw error;
   }
 };
+
+export const getTeacherAllStudents = async (name) => {
+  try {
+    const response = await axios.get(`teacher/${name}/students`);
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}

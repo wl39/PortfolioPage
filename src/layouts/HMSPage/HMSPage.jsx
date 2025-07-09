@@ -1,15 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '../../components/Header/Header';
-
+import { UsernameContext } from '../../context/UsernameContext';
 const HMSPage = ({ children }) => {
+  const [username, setUsername] = useState('');
   return (
     <>
-      <Header />
-      <div
-      //  style={{ paddingTop: '60px' }}
-      >
-        {children}
-      </div>
+      <UsernameContext.Provider value={{ username, setUsername }}>
+        <Header />
+        <div style={{ paddingTop: '68px' }}>{children}</div>
+      </UsernameContext.Provider>
     </>
   );
 };

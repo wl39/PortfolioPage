@@ -1,12 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
 import styles from './UploadPage.module.css';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import UploadForm from '../../components/UploadForm/UploadForm';
 import UploadFixer from '../../components/UploadFixer/UploadFixer';
 import DragAndDrop from '../../components/DragAndDrop/DragAndDrop';
-import { postQuestion } from '../../services/api/HMSService';
+import {
+  getTeacherAllStudents,
+  postQuestion,
+} from '../../services/api/HMSService';
 import { formatToISO } from '../../utils/dateFormat';
+import { UsernameContext } from '../../context/UsernameContext';
 
 function UploadPage() {
   const [questions, setQuestions] = useState({
@@ -41,16 +45,73 @@ function UploadPage() {
 
   const [question, setQuestion] = useState('');
   const [candidates, setCandidates] = useState([]);
+  const [availableStudents, setAvailableStudents] = useState([]);
   const [isAnswerCode, setIsAnswerCode] = useState(false);
+  const [hide, setHide] = useState(true);
 
   const today = new Date(Date.now());
   today.setDate(today.getDate() + 14);
   const target = today.toISOString().slice(0, 19);
 
+  const { username } = useContext(UsernameContext);
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const addStudent = (event) => {
+    const id = event.target.id;
+    const isChecked = event.target.checked;
+
+    setQuestions((prev) => {
+      const currentStudents = prev.students || [];
+
+      // true면 추가, false면 제거
+      const updatedStudents = isChecked
+        ? [...new Set([...currentStudents, id])] // 중복 방지
+        : currentStudents.filter((studentId) => studentId !== id);
+
+      console.log(questions);
+      return {
+        ...prev,
+        students: updatedStudents,
+      };
+    });
+  };
+
+  const selectAllStudents = (checked) => {
+    setQuestions((prev) => {
+      const updatedStudents = checked
+        ? availableStudents.map((value) => {
+            return value.name;
+          })
+        : [];
+
+      return {
+        ...prev,
+        students: updatedStudents,
+      };
+    });
+  };
+
   useEffect(() => {
     // Reset input value when component mounts
+    const checkAuthThenStudents = async () => {
+      try {
+        const value = await getTeacherAllStudents(username);
+
+        setAvailableStudents(value);
+      } catch (error) {
+        if (error)
+          navigate('/login', {
+            state: { from: 'user/' + username },
+            replace: true,
+          });
+      }
+    };
+
+    if (username) checkAuthThenStudents();
     resetQuestions();
-  }, []); // The empty array ensures this only runs once when the component mounts
+  }, [username]); // The empty array ensures this only runs once when the component mounts
 
   const resetQuestions = () => {
     setQuestions({
@@ -89,101 +150,111 @@ function UploadPage() {
   };
 
   const inputHandler = (event, type) => {
+    const { value } = event.target;
+
     switch (type) {
       case 'title':
-        setQuestions({ ...questions, title: event.target.value });
+        setQuestions((prev) => ({
+          ...prev,
+          title: value,
+        }));
         break;
-      case 'question':
-        let code = '';
-        if (questions.question.includes('&code:')) {
-          code = '&code:' + questions.question.split('&code:')[1];
-        }
-        setQuestion(event.target.value);
-        setQuestions({
-          ...questions,
-          question: event.target.value + code,
+
+      case 'question': {
+        setQuestions((prev) => {
+          // preserve any existing code suffix
+          const [, existingCode = ''] = prev.question.split('&code:');
+          return {
+            ...prev,
+            question: value + (existingCode ? `&code:${existingCode}` : ''),
+          };
         });
+        setQuestion(value);
         break;
+      }
+
       case 'code':
-        if (!event.target.value) {
-          setQuestions({
-            ...questions,
-            question: question,
-          });
-        } else {
-          setQuestions({
-            ...questions,
-            question: question + '&code:' + event.target.value,
-          });
-        }
+        setQuestions((prev) => {
+          if (!value) {
+            // drop code suffix entirely
+            const [textOnly] = prev.question.split('&code:');
+            return { ...prev, question: textOnly };
+          }
+          return {
+            ...prev,
+            question: question + `&code:${value}`,
+          };
+        });
         break;
+
       case 'hint':
-        setQuestions({ ...questions, hint: event.target.value });
+        setQuestions((prev) => ({
+          ...prev,
+          hint: value,
+        }));
         break;
+
       case 'ans':
-        setQuestions({ ...questions, answer: event.target.value });
+        setQuestions((prev) => ({
+          ...prev,
+          answer: value,
+        }));
         break;
+
       case 'exp':
-        setQuestions({ ...questions, explanation: event.target.value });
+        setQuestions((prev) => ({
+          ...prev,
+          explanation: value,
+        }));
         break;
+
       case 'target':
-        setQuestions({ ...questions, targetDate: event.target.value });
+        setQuestions((prev) => ({
+          ...prev,
+          targetDate: value,
+        }));
         break;
-      case 'can':
-        const numCandidates = parseInt(event.target.value);
-        if (numCandidates) {
-          let newCandidates = Array(numCandidates).fill('');
-          let candidates = Array(numCandidates).fill(false);
-          setQuestions({
-            ...questions,
-            candidates: newCandidates,
-          });
 
-          setCandidates(candidates);
-        } else {
-          setQuestions({
-            ...questions,
-            candidates: [],
-          });
-          setCandidates({
-            candidates: [],
-          });
-        }
+      case 'can': {
+        const num = parseInt(value, 10) || 0;
+        setQuestions((prev) => ({
+          ...prev,
+          candidates: num > 0 ? Array(num).fill('') : [],
+        }));
+        setCandidates(() => (num > 0 ? Array(num).fill(false) : []));
         break;
-      case 'for':
-        let pageStudents = [];
-        let string = event.target.value;
+      }
 
-        pageStudents = string
+      case 'for': {
+        const list = value
           .toLowerCase()
           .trimStart()
           .replace(/,\s+/g, ',')
-          .split(',');
-        pageStudents = pageStudents.filter((value) => value);
-
-        setQuestions({
-          ...questions,
-          students: pageStudents,
-          studentsForString: event.target.value,
-        });
+          .split(',')
+          .filter((v) => v);
+        setQuestions((prev) => ({
+          ...prev,
+          students: list,
+          studentsForString: value,
+        }));
         break;
-      case 'topic':
-        let pageTopic = [];
-        let topicString = event.target.value;
+      }
 
-        pageTopic = topicString
+      case 'topic': {
+        const list = value
           .toLowerCase()
           .trimStart()
           .replace(/,\s+/g, ',')
-          .split(',');
-        pageTopic = pageTopic.filter((value) => value);
-
-        setQuestions({
-          ...questions,
-          topics: pageTopic,
-          topcisForString: event.target.value,
-        });
+          .split(',')
+          .filter((v) => v);
+        setQuestions((prev) => ({
+          ...prev,
+          topics: list,
+          topcisForString: value,
+        }));
         break;
+      }
+
       default:
         break;
     }
@@ -208,6 +279,10 @@ function UploadPage() {
       setQuestions({
         ...questions,
         candidates: newCandidates,
+        answer:
+          questions.answer === questions.candidates[index]
+            ? newCandidates[index]
+            : questions.answer,
       });
     }
   };
@@ -249,7 +324,12 @@ function UploadPage() {
       return;
     }
 
-    if (window.confirm('This will be the question info: ' + questions)) {
+    const result = `Assignment Title: ${questions.title}
+    Question: ${questions.question}
+    Answer: ${questions.answer}
+    Students: ${questions.students}`;
+
+    if (window.confirm('This will be the question info: ' + result)) {
       if (questions) {
         const fetchQuestion = async (questions) => {
           try {
@@ -306,11 +386,11 @@ function UploadPage() {
 
   return (
     <>
-      <div>
-        <button className={styles.input} onClick={resetQuestionsOnSubmit}>
+      <div className={styles.main}>
+        {/* <button className={styles.input} onClick={resetQuestionsOnSubmit}>
           TEMP
-        </button>
-        <div className={styles.linkContainer}>
+        </button> */}
+        {/* <div className={styles.linkContainer}>
           <Link className={styles.linkButton} to={'/questions'}>
             Archive
           </Link>
@@ -320,8 +400,18 @@ function UploadPage() {
           <DragAndDrop x={350} y={40}>
             <UploadFixer fixedHandler={fixedHandler} fixed={fixed} />
           </DragAndDrop>
-        </div>
+        </div> */}
+        <h1 className={styles.pageTitle}>Upload New Assignment</h1>
+        <p className={styles.pageDescription}>
+          Create and assign homework questions to your students or assign your
+          own questions.
+        </p>
         <UploadForm
+          availableStudents={availableStudents}
+          addStudent={addStudent}
+          selectAllStudents={selectAllStudents}
+          fixed={fixed}
+          setFixed={setFixed}
           inputHandler={inputHandler}
           select={select}
           questions={questions}
@@ -331,10 +421,13 @@ function UploadPage() {
           isAnswerCode={isAnswerCode}
           setIsAnswerCode={setIsAnswerCode}
           target={target}
+          uploadQuestions={uploadQuestions}
+          hide={hide}
+          setHide={setHide}
         />
-        <button className={styles.input} onClick={uploadQuestions}>
+        {/* <button className={styles.input} onClick={uploadQuestions}>
           SUBMIT
-        </button>
+        </button> */}
 
         <button className={styles.input} onClick={resetQuestions}>
           Remove all

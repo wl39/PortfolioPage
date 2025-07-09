@@ -33,6 +33,14 @@
 }
 
 @media (max-width: 480px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .userCard {
+        width: 100%;
+    }
+
     .title {
         font-size: 40px;
         margin: 10px 5px 0px;

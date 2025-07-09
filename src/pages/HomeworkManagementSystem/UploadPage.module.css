@@ -1,9 +1,25 @@
+.main {
+  /* margin: 0px 60px */
+}
+
 .container {
   display: flex;
   flex-direction: column;
   width: 100%;
   padding-right: 10px;
+
 }
+
+.pageTitle {
+  font-size: 30px;
+  line-height: 26px;
+  margin-bottom: 8px;
+}
+
+.pageDescription {
+  font-size: 16px;
+}
+
 .titleContainer {
   display: flex;
   justify-content: space-between;
@@ -13,6 +29,7 @@
   margin-top: auto;
   width: 40px;
 }
+
 .title {
   height: 48px;
   font-size: 36px;

@@ -1,21 +1,87 @@
+.main {
+  display: flex;
+  gap: 32px;
+}
+
 .container {
   display: flex;
   flex-direction: column;
   width: 100%;
   padding-right: 10px;
 }
+
 .titleContainer {
   display: flex;
   justify-content: space-between;
 }
+
+.questionFormCard {
+  flex: 2;
+  padding: 24px
+}
+
+.inputLockContainer {
+  display: flex;
+}
+
+.inputContainer {
+  flex: 1
+}
+
+.dueDateContainer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.textareaLockContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.lockButton {
+  width: 24px;
+  height: 24px;
+  margin-top: auto;
+  margin-left: 8px;
+  padding: 12px;
+  box-sizing: content-box;
+}
+
+.lockButtonLocked {
+  box-shadow: 0px 0px;
+  transform: translate(3px, 3px);
+}
+
+.formHeader {
+  font-size: 20px;
+  margin-bottom: 18px;
+  font-weight: 600;
+}
+
+.labelText {
+  font-size: 14px;
+  margin-top: auto;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
 .title {
   height: 48px;
   font-size: 36px;
 }
 
+.border {
+  border: 2px solid black;
+  padding: 12px;
+  flex: 1
+}
+
 .textfield {
   height: 400px;
   margin: 8px 0px;
+  padding: 12px;
+  resize: vertical;
 }
 
 .input {
@@ -24,6 +90,12 @@
 
 .candidateContainer {
   display: flex;
+  align-items: center;
+}
+
+.codeButton {
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .checkbox {
@@ -39,14 +111,107 @@
   font-weight: 700;
 }
 
+.numberInput {
+  border: 2px solid black;
+  box-shadow: 3px 3px black;
+  background-color: ivory;
+  padding: 12px;
+  line-height: 24px;
+  height: 24px;
+}
+
 .candidateInput {
   resize: vertical;
-  width: 100%;
+  width: calc(100% - 120px);
   margin: 8px 0px;
+  padding: 12px;
+  height: 24px;
+  line-height: 24px;
+  box-sizing: content-box;
+}
+
+.candidateInputAnswer {
+  margin: 0px
 }
 
 .radioContainer {
   display: flex;
-  margin: 32px 0px 12px;
+  margin: 0px 0px 12px;
   justify-content: space-between;
+  gap: 10px
+}
+
+.rightPanel {
+  display: flex;
+  flex-direction: column;
+  flex: 1
+}
+
+.studentCard {
+  padding: 24px
+}
+
+.studentsContainer {
+  height: 400px;
+  overflow: scroll;
+  padding: 12px;
+  margin-top: 12px;
+}
+
+.studentContainer {
+  display: flex;
+  padding: 12px;
+  border: 1px solid rgb(175, 175, 175);
+  margin-bottom: 12px;
+  background-color: #fafafa;
+}
+
+.studentImage {
+  border: 1px solid black;
+  box-shadow: 2px 2px black;
+}
+
+.checkbox {
+  margin: auto 0px !important;
+  margin-right: 12px !important;
+}
+
+.check {
+  font-weight: 600;
+  margin-top: 12px;
+  width: 100%;
+  text-align: center;
+}
+
+.studentDetailsContainer {
+  margin-left: 12px;
+  display: flex;
+  text-transform: capitalize;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.name {
+  font-weight: 600;
+}
+
+.email {
+  font-size: 12px;
+  font-weight: 400;
+  text-transform: none;
+}
+
+.submitButton {
+  margin-top: 12px;
+  font-weight: 600;
+}
+
+.visibilityButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cardStyle {
+  width: 80vw;
 }

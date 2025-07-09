@@ -43,9 +43,11 @@ function App() {
         <Route
           path="/questions"
           element={
-            <Pageable key={'archive'} sortTypes={[]} sortParams={[]}>
-              <TutoringArchivePage />
-            </Pageable>
+            <HMSPage>
+              <Pageable key={'archive'} sortTypes={[]} sortParams={[]}>
+                <TutoringArchivePage />
+              </Pageable>
+            </HMSPage>
           }
         />
         <Route
@@ -89,13 +91,26 @@ function App() {
             </HMSPage>
           }
         />
-        <Route path="/teacher" element={<TeacherPage />} />
+        <Route path="/teacher" element={<HMSPage>
+          <TeacherPage />
+        </HMSPage>
+        } />
         <Route path="/marking/:studentName" element={<MarkingPage />} />
-        <Route path="/user/:studentName" element={<StudentPage />} />
+        <Route path="/user/:studentName" element={<HMSPage>
+          <StudentPage />
+        </HMSPage>
+        } />
         <Route path="/stats/:studentName" element={<StatsPage />} />
-        <Route path="/91b-admin" element={<AdminMainPage />} />
+        <Route path="/91b-admin" element={<HMSPage>
+          <AdminMainPage />
+        </HMSPage>
+        } />
 
-        <Route path="/upload" element={<UploadPage />} />
+        <Route path="/upload" element={
+          <HMSPage>
+            <UploadPage />
+          </HMSPage>
+        } />
         <Route path="/upload/multiples" element={<UploadMultiplePage />} />
         <Route path="/math" element={<MathSolveMainPage />} />
         <Route path="/math/start" element={<MathSolvePage />} />

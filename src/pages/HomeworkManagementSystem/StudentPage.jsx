@@ -159,6 +159,7 @@ const StudentPage = () => {
                         <Link
                           to={'/tutoring/' + studentName}
                           className={styles.link}
+                          onClick={(e) => e.stopPropagation()}
                         >
                           <Button>Questions</Button>
                         </Link>
@@ -166,12 +167,14 @@ const StudentPage = () => {
                         <Link
                           to={'/review/' + studentName}
                           className={styles.link}
+                          onClick={(e) => e.stopPropagation()}
                         >
                           <Button>Review</Button>
                         </Link>
                         <Link
                           to={'/submission/' + studentName}
                           className={styles.link}
+                          onClick={(e) => e.stopPropagation()}
                         >
                           <Button>Submissions</Button>
                         </Link>
@@ -246,6 +249,7 @@ const StudentPage = () => {
                           to={'/math/start'}
                           state={{ name: studentName }}
                           style={{ marginRight: '8px' }}
+                          onClick={(e) => e.stopPropagation()}
                         >
                           <Button>Start</Button>
                         </Link>
@@ -253,6 +257,7 @@ const StudentPage = () => {
                         <Link
                           to={'/math/result/' + studentName}
                           style={{ marginRight: '8px' }}
+                          onClick={(e) => e.stopPropagation()}
                         >
                           <Button>Result</Button>
                         </Link>

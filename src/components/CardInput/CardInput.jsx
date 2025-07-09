@@ -1,8 +1,15 @@
+import { classnames } from '../../utils/classnames';
 import styles from './CardInput.module.css';
 
-const CardInput = ({ value, placeholder, onChange, label }) => {
+const CardInput = ({
+  containerStyles,
+  value,
+  placeholder,
+  onChange,
+  label,
+}) => {
   return (
-    <div className={styles.container}>
+    <div className={classnames([containerStyles, styles.container])}>
       <label className={styles.label} htmlFor={label}>
         {label}
       </label>

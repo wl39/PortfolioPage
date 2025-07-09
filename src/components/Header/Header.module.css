@@ -57,7 +57,10 @@
   cursor: pointer;
 }
 
-.main {}
+.main {
+  display: flex;
+  gap: 24px;
+}
 
 .user {
   display: flex;
