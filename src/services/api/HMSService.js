@@ -593,3 +593,15 @@ export const getTeacherAllStudents = async (name) => {
     throw error;
   }
 }
+
+export const registerOauth2User = async (token) => {
+  try {
+    const response = await axios.post(`users/oauth/register`, {
+      token: token
+    });
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}

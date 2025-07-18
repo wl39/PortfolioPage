@@ -14,6 +14,7 @@ import {
 } from '../../services/api/HMSService';
 import CardButton from '../../components/CardButton/CardButton';
 import UserPageCard from '../../components/UserPageCard/UserPageCard';
+import OauthButton from '../../components/OauthButton/OauthButton';
 
 function SandBoxPage(props) {
   const [userDate, setUserData] = useState({
@@ -171,6 +172,9 @@ function SandBoxPage(props) {
 
   return (
     <>
+      <OauthButton provider={'google'} />
+      <OauthButton provider={'naver'} />
+      <OauthButton provider={'kakao'} />
       <UserPageCard username={userData.username} userData={userDate} />
       <input type="file" onChange={handleChange} />
       <button onClick={handleUpload}>submit</button>

@@ -27,6 +27,7 @@ import StatsPage from './pages/HomeworkManagementSystem/StatsPage/StatsPage';
 import LogoutPage from './pages/User/LogoutPage';
 import HMSPage from './layouts/HMSPage/HMSPage';
 import WithHeaderPageable from './layouts/Pageable/WithHeaderPageable';
+import OauthRegisterPage from './pages/HomeworkManagementSystem/OauthPage/OauthRegisterPage';
 
 function App() {
   return (
@@ -123,6 +124,7 @@ function App() {
           }
         />
         <Route path="/logout" element={<LogoutPage />} />
+        <Route path="/oauth2/register" element={<OauthRegisterPage />} />
         <Route
           path="/questions/modify"
           element={

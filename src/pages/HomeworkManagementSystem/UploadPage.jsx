@@ -1,18 +1,19 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 
 import styles from './UploadPage.module.css';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import UploadForm from '../../components/UploadForm/UploadForm';
-import UploadFixer from '../../components/UploadFixer/UploadFixer';
-import DragAndDrop from '../../components/DragAndDrop/DragAndDrop';
 import {
   getTeacherAllStudents,
   postQuestion,
 } from '../../services/api/HMSService';
 import { formatToISO } from '../../utils/dateFormat';
 import { UsernameContext } from '../../context/UsernameContext';
+import CardButton from '../../components/CardButton/CardButton';
 
 function UploadPage() {
+  const [questionList, setQuestionList] = useState([]);
+  const [showingIndex, setShowingIndex] = useState(0);
   const [questions, setQuestions] = useState({
     title: '',
     question: '',
@@ -70,7 +71,6 @@ function UploadPage() {
         ? [...new Set([...currentStudents, id])] // 중복 방지
         : currentStudents.filter((studentId) => studentId !== id);
 
-      console.log(questions);
       return {
         ...prev,
         students: updatedStudents,
@@ -149,7 +149,7 @@ function UploadPage() {
     });
   };
 
-  const inputHandler = (event, type) => {
+  const inputHandler = useCallback((event, type) => {
     const { value } = event.target;
 
     switch (type) {
@@ -258,7 +258,7 @@ function UploadPage() {
       default:
         break;
     }
-  };
+  });
 
   const updateCandidates = (index) => {
     const updatedCandidates = [...candidates];
@@ -380,32 +380,89 @@ function UploadPage() {
     localStorage.setItem('students', pageStudents);
   };
 
-  const fixedHandler = (event) => {
-    setFixed({ ...fixed, [event.target.id]: !fixed[event.target.id] });
+  const addNewQuestion = () => {
+    console.log(showingIndex);
+    console.log(questionList.length);
+    if (showingIndex === questionList.length) {
+      setQuestionList([...questionList, { ...questions }]);
+      setShowingIndex(showingIndex + 1);
+    } else {
+      setQuestionList((prev) => {
+        prev[showingIndex] = { ...questions };
+
+        return prev;
+      });
+      setShowingIndex(questionList.length);
+    }
+
+    resetQuestionsOnSubmit();
+  };
+
+  const setShowingQuestion = (index) => {
+    if (showingIndex === questionList.length) {
+      setQuestionList([...questionList, { ...questions }]);
+    } else {
+      setQuestionList((prev) => {
+        prev[showingIndex] = { ...questions };
+
+        return prev;
+      });
+    }
+    setShowingIndex(index);
+    setQuestions({ ...questionList[index] });
+  };
+
+  const duplicateQuestion = () => {
+    if (showingIndex === questionList.length) {
+      setQuestionList([...questionList, { ...questions }]);
+      setShowingIndex(showingIndex + 1);
+    } else {
+      setQuestionList((prev) => {
+        prev[showingIndex] = { ...questions };
+
+        return prev;
+      });
+      setShowingIndex(questionList.length);
+    }
   };
 
   return (
     <>
       <div className={styles.main}>
-        {/* <button className={styles.input} onClick={resetQuestionsOnSubmit}>
-          TEMP
-        </button> */}
-        {/* <div className={styles.linkContainer}>
-          <Link className={styles.linkButton} to={'/questions'}>
-            Archive
-          </Link>
-          <Link className={styles.linkButton} to={'/teacher'}>
-            Teacher
-          </Link>
-          <DragAndDrop x={350} y={40}>
-            <UploadFixer fixedHandler={fixedHandler} fixed={fixed} />
-          </DragAndDrop>
-        </div> */}
         <h1 className={styles.pageTitle}>Upload New Assignment</h1>
         <p className={styles.pageDescription}>
           Create and assign homework questions to your students or assign your
           own questions.
         </p>
+        <div className={styles.questionAddContainer}>
+          {questionList.map((value, index) => {
+            return (
+              <CardButton
+                key={'question.' + index}
+                onClick={() =>
+                  index === showingIndex ? null : setShowingQuestion(index)
+                }
+                color={index === showingIndex ? 'yellow' : 'gray'}
+              >
+                Question {index + 1}
+              </CardButton>
+            );
+          })}
+
+          {questionList.length === showingIndex ? (
+            <CardButton
+              onClick={() =>
+                questionList.length === showingIndex
+                  ? null
+                  : setShowingQuestion(questionList.length - 1)
+              }
+              color={questionList.length === showingIndex ? 'yellow' : 'gray'}
+            >
+              Question {questionList.length + 1}
+            </CardButton>
+          ) : null}
+          <CardButton onClick={() => addNewQuestion()}>Question +</CardButton>
+        </div>
         <UploadForm
           availableStudents={availableStudents}
           addStudent={addStudent}
@@ -424,11 +481,8 @@ function UploadPage() {
           uploadQuestions={uploadQuestions}
           hide={hide}
           setHide={setHide}
+          duplicateQuestion={duplicateQuestion}
         />
-        {/* <button className={styles.input} onClick={uploadQuestions}>
-          SUBMIT
-        </button> */}
-
         <button className={styles.input} onClick={resetQuestions}>
           Remove all
         </button>

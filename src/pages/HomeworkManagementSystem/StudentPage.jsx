@@ -138,12 +138,7 @@ const StudentPage = () => {
     <>
       <div className={styles.container}>
         <div className={styles.userCard}>
-          <UserPageCard
-            prop
-            username={studentName}
-            userData={userDate}
-            setUserData={setUserData}
-          />
+          <UserPageCard userData={userDate} setUserData={setUserData} />
         </div>
         {/* <h1 className={styles.title}>{studentName || 'Login First'}</h1> */}
         <div className={styles.accordionContainer}>

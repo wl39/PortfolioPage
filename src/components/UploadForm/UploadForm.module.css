@@ -215,3 +215,7 @@
 .cardStyle {
   width: 80vw;
 }
+
+.questionContainer {
+  height: calc(100% - 74px);
+}

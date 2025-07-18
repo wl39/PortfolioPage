@@ -9,7 +9,6 @@ import Input from '../Input/Input';
 import CardInput from '../CardInput/CardInput';
 
 const UserPageCard = ({
-  username = 'Jane Doe',
   userData = {
     email: '',
     username: '',
@@ -63,15 +62,17 @@ const UserPageCard = ({
     changeImage();
   };
 
-  //   const user = use(getAssignmentCounts(username));
-  useEffect(() => {
-    setFirstName(userData.username);
-    setUserEmail(userData.email);
-  }, [username, userData]);
   return (
     <Card propStyles={styles.container}>
-      <img className={styles.img} src={userData.imageURL} alt="user" />
-      <div className={styles.username}>{username}</div>
+      <img
+        className={styles.img}
+        src={
+          userData.imageURL ||
+          'https://img.91b.co.uk/73cfba62-a3fb-474d-a466-befca9268af4.webp'
+        }
+        alt="user"
+      />
+      <div className={styles.username}>{userData.username}</div>
       <Card propStyles={styles.statsCard}>
         <div>Total Questions</div>
         <div className={styles.stats}> {userData.totalQuestions}</div>
@@ -102,6 +103,7 @@ const UserPageCard = ({
         <div className={styles.inputContainer}>
           <CardInput
             value={firstName}
+            placeholder={userData.username}
             label={'Name'}
             onChange={(e) => {
               setFirstName(e.target.value);
@@ -111,6 +113,7 @@ const UserPageCard = ({
         <div className={styles.inputContainer}>
           <CardInput
             value={userEmail}
+            placeholder={userData.email}
             label={'Email'}
             onChange={(e) => {
               setUserEmail(e.target.value);
