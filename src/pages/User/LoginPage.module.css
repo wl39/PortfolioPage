@@ -5,3 +5,17 @@
   height: 200px;
   justify-content: space-evenly;
 }
+
+.container {
+  margin-top: 80px;
+}
+
+.loginTitle {
+  text-align: center;
+  font-size: 40px;
+  margin-bottom: 12px;
+}
+
+.loginSubTitle {
+  text-align: center;
+}

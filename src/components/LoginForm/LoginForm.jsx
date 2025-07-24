@@ -13,6 +13,13 @@ import { login, refresh } from '../../services/api/HMSService';
 import Button from '../Button/Button';
 import { useDispatch } from 'react-redux';
 import { setUsername } from '../../features/user/userSlice';
+import CardInput from '../CardInput/CardInput';
+import CardButton from '../CardButton/CardButton';
+import OauthButton from '../OauthButton/OauthButton';
+
+import { ReactComponent as Naver } from '../../Icons/sns_naver_large_logo.svg';
+import { ReactComponent as Kakao } from '../../Icons/sns_kakao_large_logo.svg';
+import { ReactComponent as Google } from '../../Icons/sns_google_large.svg';
 
 const LoginForm = ({ directTo, addParam }) => {
   const dispatch = useDispatch();
@@ -78,9 +85,13 @@ const LoginForm = ({ directTo, addParam }) => {
   return (
     <>
       <Card propStyles={styles.inputContainer}>
-        <h1 className={styles.title}>Login</h1>
-        <Input
-          placeholder="Email"
+        <div className={styles.title}>Sign In</div>
+        <div className={styles.subtitle}>
+          Enter your credentials to continue
+        </div>
+        <CardInput
+          label={'Email Address'}
+          placeholder="Enter your email"
           type="text"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -88,8 +99,10 @@ const LoginForm = ({ directTo, addParam }) => {
             if (event.key === 'Enter') userLogin();
           }}
         />
-        <Input
-          placeholder="Password"
+        <br />
+        <CardInput
+          label={'Password'}
+          placeholder="Enter your password"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -97,14 +110,15 @@ const LoginForm = ({ directTo, addParam }) => {
             if (event.key === 'Enter') userLogin();
           }}
         />
-        <Button
-          type="button"
+        <br />
+        <CardButton
+          color="blue"
           disabled={!(email && password)}
           propStyles={styles.loginButton}
-          onclick={userLogin}
+          onClick={userLogin}
         >
-          Login
-        </Button>
+          Sign in
+        </CardButton>
 
         {/* <button className={styles.oauthButton}>
                     <img className={styles.oauthImage} src={naver} alt="naver_sign_in" />
@@ -115,7 +129,44 @@ const LoginForm = ({ directTo, addParam }) => {
                 <button className={styles.oauthButton}>
                     <img className={styles.oauthImage} src={goolge} alt="google_sign_in" />
                 </button> */}
-        <Link to="/signup">Sign Up</Link>
+        <br />
+        <div className={styles.orContainer}>
+          <div className={styles.lineContainer}>
+            <div className={styles.line} />
+          </div>
+          <div className={styles.textContainer}>
+            <span className={styles.orText}>Or continue with</span>
+          </div>
+        </div>
+        <br />
+
+        <OauthButton
+          provider={'google'}
+          svg={<Google width={20} height={20} style={{ padding: 10 }} />}
+          color={'white'}
+          textColor={'black'}
+          text={'Continue with Google'}
+        />
+        <br />
+        <OauthButton
+          provider={'naver'}
+          svg={<Naver width={40} height={40} />}
+          color={'#03C75A'}
+          textColor={'white'}
+          text={'Continue with Naver'}
+        />
+        <br />
+        <OauthButton
+          provider={'kakao'}
+          svg={<Kakao width={40} height={40} />}
+          color={'#FEE500'}
+          textColor={'#191919'}
+          text={'Continue with Kakao'}
+        />
+        <br />
+        <p className={styles.signupText}>
+          Don't you have an account? <Link to="/signup">Sign Up here</Link>
+        </p>
       </Card>
       {/* </form> */}
     </>

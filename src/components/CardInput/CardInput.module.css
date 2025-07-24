@@ -1,6 +1,7 @@
 .container {
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 .label {
@@ -16,4 +17,11 @@
     padding: 12px;
     line-height: 24px;
     height: 24px;
+}
+
+.visibilityButton {
+    position: absolute;
+    right: 12px;
+    top: 40px;
+    cursor: pointer;
 }

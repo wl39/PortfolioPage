@@ -1,0 +1,21 @@
+.container {
+    height: 52px;
+    line-height: 52px;
+    border: 1px solid gray;
+    box-sizing: content-box;
+    justify-content: center;
+    display: flex;
+    padding: 0px 10px;
+    cursor: pointer;
+}
+
+.icon {
+    display: flex;
+    align-items: center;
+    margin-right: 8px;
+}
+
+
+.text {
+    font-size: 16px;
+}
